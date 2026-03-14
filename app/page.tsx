@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
 import { diagnose } from "@/lib/calculator";
@@ -12,6 +13,11 @@ export default function Home() {
   const handleSubmit = (input: DiagnosisInput) => {
     const diagnosis = diagnose(input);
     setResult(diagnosis);
+    sendGAEvent("event", "diagnosis_run", {
+      level: diagnosis.level,
+      burden_rate: Math.round(diagnosis.burdenRate * 10) / 10,
+      safe_price: diagnosis.safePrice,
+    });
     // スムーズスクロールで結果へ移動
     setTimeout(() => {
       document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" });
