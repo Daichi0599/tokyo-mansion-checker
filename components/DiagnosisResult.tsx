@@ -171,11 +171,24 @@ export default function DiagnosisResultCard({ result }: Props) {
           <p className="text-sm text-gray-700 leading-relaxed">{comment}</p>
         </div>
 
-        {/* 注意書き */}
-        <p className="text-xs text-gray-400 leading-relaxed">
-          ※ 本診断は参考情報です。住宅ローンの審査条件・借入限度額・税金・修繕積立金などは考慮していません。
-          実際の購入計画にはFPや金融機関への相談をお勧めします。
-        </p>
+        {/* 免責事項 */}
+        <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-2">
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">免責事項</p>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            本ツールの診断結果は、入力された年収・頭金・金利・返済期間をもとにした
+            <strong className="text-gray-700">参考情報</strong>
+            であり、住宅購入の可否や融資額を保証するものではありません。
+          </p>
+          <ul className="text-xs text-gray-500 leading-relaxed space-y-1 list-disc list-inside">
+            <li>住宅ローン審査の結果は金融機関の判断によります。</li>
+            <li>管理費・修繕積立金・固定資産税・仲介手数料等の諸費用は含まれていません。</li>
+            <li>金利は将来変動する可能性があり、変動金利の場合は返済額が増加することがあります。</li>
+            <li>実際の購入計画はファイナンシャルプランナーや金融機関にご相談ください。</li>
+          </ul>
+          <p className="text-xs text-gray-400">
+            本診断の利用により生じた損害について、当サイトは一切の責任を負いません。
+          </p>
+        </div>
       </div>
     </div>
   );
