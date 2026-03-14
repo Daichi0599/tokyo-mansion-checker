@@ -59,6 +59,28 @@ export default function Home() {
         {result && diagnosisInput && (
           <div id="result" className="scroll-mt-6 space-y-4">
             <DiagnosisResultCard result={result} />
+
+            {/* アフィリエイト：新築マンション購入者アンケート */}
+            <div className="rounded-2xl border border-yellow-300 bg-yellow-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="flex-1 space-y-0.5">
+                <p className="text-xs font-bold text-yellow-700 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-800">新築マンション購入者アンケート — 回答者全員に5,000円</p>
+                <p className="text-xs text-gray-500">新築マンションを購入された方・検討中の方が対象です。</p>
+              </div>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FN831U+136+1BQYPU"
+                rel="nofollow noopener"
+                target="_blank"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "新築マンション購入者アンケート" })}
+                className="shrink-0 inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+              >
+                アンケートに答える →
+              </a>
+              {/* A8 tracking pixel */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img width={1} height={1} src="https://www11.a8.net/0.gif?a8mat=4AZGC3+FN831U+136+1BQYPU" alt="" style={{ display: "block" }} />
+            </div>
+
             <PriceComparison
               input={diagnosisInput}
               defaultPrices={[result.safePrice, result.aggressivePrice, result.dangerPrice]}
