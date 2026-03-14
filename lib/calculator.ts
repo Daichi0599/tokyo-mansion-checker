@@ -1,4 +1,4 @@
-import { DiagnosisInput, DiagnosisResult } from "@/types";
+import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics } from "@/types";
 
 /**
  * 元利均等返済で「月返済額」から「最大借入可能額」を逆算する
@@ -69,6 +69,30 @@ function getComment(
       comment: `住居費負担率 ${burdenRate.toFixed(1)}% は危険ゾーンです。この水準では住宅ローン審査が通らない可能性もあります。安全購入価格（${safePrice.toLocaleString()} 万円）を目安に計画を見直してください。${ageNote}`,
     };
   }
+}
+
+function getBurdenLevel(burdenRate: number): DiagnosisLevel {
+  if (burdenRate < 20) return "safe";
+  if (burdenRate < 25) return "caution";
+  if (burdenRate < 30) return "warning";
+  if (burdenRate < 35) return "danger";
+  return "critical";
+}
+
+export function calcPriceMetrics(price: number, input: DiagnosisInput): PriceMetrics {
+  const { downPayment, interestRate, repaymentYears, annualIncome } = input;
+  const loanAmount = Math.max(0, price - downPayment);
+  const monthlyPayment = loanAmount > 0
+    ? Math.round(calcMonthlyPayment(loanAmount, interestRate, repaymentYears) * 10) / 10
+    : 0;
+  const burdenRate = (monthlyPayment * 12 / annualIncome) * 100;
+  return {
+    price,
+    loanAmount,
+    monthlyPayment,
+    burdenRate,
+    level: getBurdenLevel(burdenRate),
+  };
 }
 
 export function diagnose(input: DiagnosisInput): DiagnosisResult {

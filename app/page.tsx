@@ -4,15 +4,18 @@ import { useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
+import PriceComparison from "@/components/PriceComparison";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 export default function Home() {
   const [result, setResult] = useState<DiagnosisResult | null>(null);
+  const [diagnosisInput, setDiagnosisInput] = useState<DiagnosisInput | null>(null);
 
   const handleSubmit = (input: DiagnosisInput) => {
     const diagnosis = diagnose(input);
     setResult(diagnosis);
+    setDiagnosisInput(input);
     sendGAEvent("event", "diagnosis_run", {
       level: diagnosis.level,
       burden_rate: Math.round(diagnosis.burdenRate * 10) / 10,
@@ -53,9 +56,13 @@ export default function Home() {
         <DiagnosisForm onSubmit={handleSubmit} />
 
         {/* 診断結果 */}
-        {result && (
-          <div id="result" className="scroll-mt-6">
+        {result && diagnosisInput && (
+          <div id="result" className="scroll-mt-6 space-y-4">
             <DiagnosisResultCard result={result} />
+            <PriceComparison
+              input={diagnosisInput}
+              defaultPrices={[result.safePrice, result.aggressivePrice, result.dangerPrice]}
+            />
           </div>
         )}
 

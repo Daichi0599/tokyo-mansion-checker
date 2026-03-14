@@ -7,6 +7,8 @@ export interface DiagnosisInput {
   monthlyLiving: number;  // 月の生活費（万円）
 }
 
+export type DiagnosisLevel = "safe" | "caution" | "warning" | "danger" | "critical";
+
 export interface DiagnosisResult {
   safePrice: number;          // 安全購入価格（万円）
   aggressivePrice: number;    // やや攻めの価格（万円）
@@ -14,5 +16,13 @@ export interface DiagnosisResult {
   burdenRate: number;         // 住居費負担率（%）：安全購入価格ベース
   monthlyPayment: number;     // 月々の返済額（万円）：安全購入価格ベース
   comment: string;            // 診断コメント
-  level: "safe" | "caution" | "warning" | "danger" | "critical";
+  level: DiagnosisLevel;
+}
+
+export interface PriceMetrics {
+  price: number;          // 購入価格（万円）
+  loanAmount: number;     // 借入額（万円）
+  monthlyPayment: number; // 月返済額（万円）
+  burdenRate: number;     // 住居費負担率（%）
+  level: DiagnosisLevel;
 }
