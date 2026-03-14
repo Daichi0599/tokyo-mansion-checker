@@ -5,6 +5,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
 import PriceComparison from "@/components/PriceComparison";
+import RateComparison from "@/components/RateComparison";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
@@ -81,6 +82,7 @@ export default function Home() {
               <img width={1} height={1} src="https://www11.a8.net/0.gif?a8mat=4AZGC3+FN831U+136+1BQYPU" alt="" style={{ display: "block" }} />
             </div>
 
+            <RateComparison input={diagnosisInput} safePrice={result.safePrice} />
             <PriceComparison
               input={diagnosisInput}
               defaultPrices={[result.safePrice, result.aggressivePrice, result.dangerPrice]}
