@@ -59,7 +59,7 @@ export default function Home() {
         {/* 診断結果 */}
         {result && diagnosisInput && (
           <div id="result" className="scroll-mt-6 space-y-4">
-            <DiagnosisResultCard result={result} />
+            <DiagnosisResultCard result={result} input={diagnosisInput} />
 
             {/* アフィリエイト：新築マンション購入者アンケート */}
             <div className="rounded-2xl border border-yellow-300 bg-yellow-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">

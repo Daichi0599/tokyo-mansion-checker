@@ -1,9 +1,11 @@
 "use client";
 
-import { DiagnosisResult } from "@/types";
+import { sendGAEvent } from "@next/third-parties/google";
+import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 interface Props {
   result: DiagnosisResult;
+  input?: DiagnosisInput;
 }
 
 const levelConfig = {
@@ -80,22 +82,33 @@ function PriceCard({ title, price, cardStyle, titleStyle, badge, badgeStyle }: P
   );
 }
 
-export default function DiagnosisResultCard({ result }: Props) {
+export default function DiagnosisResultCard({ result, input }: Props) {
   const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, comment, level } = result;
   const config = levelConfig[level];
 
   // ゲージの幅：負担率 0% → 0%, 50%以上 → 100% でクリップ
   const gaugeWidth = Math.min((burdenRate / 50) * 100, 100);
 
+  // Xシェアテキスト
+  const shareText = input
+    ? `年収${input.annualIncome}万で都内マンション診断してみた！\n\n${config.icon} 診断結果：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン`
+    : "";
+
   return (
     <div className={`rounded-2xl border-2 shadow-md overflow-hidden ${config.border}`}>
-      {/* ヘッダー */}
-      <div className={`px-6 py-4 flex items-center gap-3 ${config.bg}`}>
-        <span className="text-2xl">{config.icon}</span>
-        <div>
-          <p className="text-xs text-gray-500">診断結果</p>
-          <p className={`text-xl font-extrabold ${config.text}`}>{config.label}</p>
-        </div>
+      {/* ヒーローヘッダー */}
+      <div className={`px-6 py-8 flex flex-col items-center text-center gap-2 ${config.bg}`}>
+        <span className={`text-3xl font-black ${config.text}`}>
+          {config.icon} {config.label}
+        </span>
+        <p className="text-sm text-gray-500 mt-1">あなたの安全購入価格は</p>
+        <p className="text-5xl sm:text-6xl font-black text-gray-900 leading-none">
+          {safePrice.toLocaleString()}
+          <span className="text-2xl font-normal text-gray-500 ml-2">万円</span>
+        </p>
+        <p className={`text-sm font-semibold mt-1 ${config.text}`}>
+          住居費負担率 {burdenRate.toFixed(1)}%
+        </p>
       </div>
 
       <div className="bg-white px-6 py-5 space-y-6">
@@ -170,6 +183,20 @@ export default function DiagnosisResultCard({ result }: Props) {
           <p className={`text-sm font-semibold mb-1 ${config.text}`}>診断コメント</p>
           <p className="text-sm text-gray-700 leading-relaxed">{comment}</p>
         </div>
+
+        {/* Xシェアボタン */}
+        {input && (
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent("https://tokyo-mansion-checker.vercel.app")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sendGAEvent("event", "share_click", { level })}
+            className="flex items-center justify-center gap-2 w-full bg-black hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors"
+          >
+            <span className="text-base font-bold">𝕏</span>
+            <span>この結果をXでシェア</span>
+          </a>
+        )}
 
         {/* 免責事項 */}
         <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-2">
