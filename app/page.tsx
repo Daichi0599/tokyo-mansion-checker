@@ -2,19 +2,16 @@
 
 import { useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
-import DiagnosisForm from "@/components/DiagnosisForm";
+import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
-import RateTypeSimulator from "@/components/RateTypeSimulator";
-import AreaComparison from "@/components/AreaComparison";
-import PropertyDiagnosis from "@/components/PropertyDiagnosis";
-import PriceComparison from "@/components/PriceComparison";
+import ResultTabs          from "@/components/ResultTabs";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 export default function Home() {
-  const [result, setResult]               = useState<DiagnosisResult | null>(null);
+  const [result, setResult]                 = useState<DiagnosisResult | null>(null);
   const [diagnosisInput, setDiagnosisInput] = useState<DiagnosisInput | null>(null);
-  const [isLoading, setIsLoading]         = useState(false);
+  const [isLoading, setIsLoading]           = useState(false);
 
   const handleSubmit = (input: DiagnosisInput) => {
     setIsLoading(true);
@@ -68,7 +65,7 @@ export default function Home() {
         {result && diagnosisInput && (
           <div id="result" className="scroll-mt-6 space-y-4">
 
-            {/* ① 診断結果カード */}
+            {/* ① 診断結果カード（常時表示） */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
 
             {/* ② アフィリエイト */}
@@ -91,24 +88,8 @@ export default function Home() {
               <img width={1} height={1} src="https://www11.a8.net/0.gif?a8mat=4AZGC3+FN831U+136+1BQYPU" alt="" style={{ display: "block" }} />
             </div>
 
-            {/* ③ 変動 vs 固定シミュレーター */}
-            <RateTypeSimulator
-              loanAmount={Math.max(0, result.safePrice - diagnosisInput.downPayment)}
-              repaymentYears={diagnosisInput.repaymentYears}
-              defaultRate={diagnosisInput.interestRate}
-            />
-
-            {/* ④ エリア別相場比較 */}
-            <AreaComparison safePrice={result.safePrice} />
-
-            {/* ⑤ 気になる物件を診断（資産性スコア付き） */}
-            <PropertyDiagnosis input={diagnosisInput} safePrice={result.safePrice} />
-
-            {/* ⑥ 購入価格シミュレーター */}
-            <PriceComparison
-              input={diagnosisInput}
-              defaultPrices={[result.safePrice, result.aggressivePrice, result.dangerPrice]}
-            />
+            {/* ③ タブ式ツール群 */}
+            <ResultTabs result={result} input={diagnosisInput} />
 
           </div>
         )}
