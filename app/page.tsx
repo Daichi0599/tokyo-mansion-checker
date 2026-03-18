@@ -4,29 +4,30 @@ import { useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
+import RateTypeSimulator from "@/components/RateTypeSimulator";
+import AreaComparison from "@/components/AreaComparison";
+import PropertyDiagnosis from "@/components/PropertyDiagnosis";
 import PriceComparison from "@/components/PriceComparison";
-import RateComparison from "@/components/RateComparison";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 export default function Home() {
-  const [result, setResult] = useState<DiagnosisResult | null>(null);
+  const [result, setResult]               = useState<DiagnosisResult | null>(null);
   const [diagnosisInput, setDiagnosisInput] = useState<DiagnosisInput | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading]         = useState(false);
 
   const handleSubmit = (input: DiagnosisInput) => {
     setIsLoading(true);
     setResult(null);
-    // 診断中アニメーションを見せるため少し遅延
     setTimeout(() => {
       const diagnosis = diagnose(input);
       setResult(diagnosis);
       setDiagnosisInput(input);
       setIsLoading(false);
       sendGAEvent("event", "diagnosis_run", {
-        level: diagnosis.level,
+        level:       diagnosis.level,
         burden_rate: Math.round(diagnosis.burdenRate * 10) / 10,
-        safe_price: diagnosis.safePrice,
+        safe_price:  diagnosis.safePrice,
       });
       setTimeout(() => {
         document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -37,6 +38,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
+
         {/* ヘッダー */}
         <header className="text-center space-y-2">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
@@ -65,9 +67,11 @@ export default function Home() {
         {/* 診断結果 */}
         {result && diagnosisInput && (
           <div id="result" className="scroll-mt-6 space-y-4">
+
+            {/* ① 診断結果カード */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
 
-            {/* アフィリエイト：新築マンション購入者アンケート */}
+            {/* ② アフィリエイト */}
             <div className="rounded-2xl border border-yellow-300 bg-yellow-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
               <div className="flex-1 space-y-0.5">
                 <p className="text-xs font-bold text-yellow-700 uppercase tracking-wide">PR</p>
@@ -83,16 +87,29 @@ export default function Home() {
               >
                 アンケートに答える →
               </a>
-              {/* A8 tracking pixel */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img width={1} height={1} src="https://www11.a8.net/0.gif?a8mat=4AZGC3+FN831U+136+1BQYPU" alt="" style={{ display: "block" }} />
             </div>
 
-            <RateComparison input={diagnosisInput} safePrice={result.safePrice} />
+            {/* ③ 変動 vs 固定シミュレーター */}
+            <RateTypeSimulator
+              loanAmount={Math.max(0, result.safePrice - diagnosisInput.downPayment)}
+              repaymentYears={diagnosisInput.repaymentYears}
+              defaultRate={diagnosisInput.interestRate}
+            />
+
+            {/* ④ エリア別相場比較 */}
+            <AreaComparison safePrice={result.safePrice} />
+
+            {/* ⑤ 気になる物件を診断（資産性スコア付き） */}
+            <PropertyDiagnosis input={diagnosisInput} safePrice={result.safePrice} />
+
+            {/* ⑥ 購入価格シミュレーター */}
             <PriceComparison
               input={diagnosisInput}
               defaultPrices={[result.safePrice, result.aggressivePrice, result.dangerPrice]}
             />
+
           </div>
         )}
 
