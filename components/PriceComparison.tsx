@@ -92,7 +92,7 @@ export default function PriceComparison({ input, defaultPrices }: Props) {
               {prices.length > 1 && (
                 <button
                   onClick={() => removePrice(i)}
-                  className="text-gray-400 hover:text-red-400 transition-colors text-lg leading-none px-1"
+                  className="text-gray-400 hover:text-red-400 transition-colors text-lg w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
                   aria-label="削除"
                 >
                   ×
@@ -105,7 +105,7 @@ export default function PriceComparison({ input, defaultPrices }: Props) {
         {prices.length < 4 && (
           <button
             onClick={addPrice}
-            className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1 transition-colors"
+            className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1 transition-colors py-3 px-1"
           >
             <span className="text-base leading-none">+</span> 価格を追加
           </button>

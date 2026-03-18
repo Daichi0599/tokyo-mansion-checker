@@ -12,20 +12,26 @@ import { DiagnosisInput, DiagnosisResult } from "@/types";
 export default function Home() {
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [diagnosisInput, setDiagnosisInput] = useState<DiagnosisInput | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (input: DiagnosisInput) => {
-    const diagnosis = diagnose(input);
-    setResult(diagnosis);
-    setDiagnosisInput(input);
-    sendGAEvent("event", "diagnosis_run", {
-      level: diagnosis.level,
-      burden_rate: Math.round(diagnosis.burdenRate * 10) / 10,
-      safe_price: diagnosis.safePrice,
-    });
-    // スムーズスクロールで結果へ移動
+    setIsLoading(true);
+    setResult(null);
+    // 診断中アニメーションを見せるため少し遅延
     setTimeout(() => {
-      document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
+      const diagnosis = diagnose(input);
+      setResult(diagnosis);
+      setDiagnosisInput(input);
+      setIsLoading(false);
+      sendGAEvent("event", "diagnosis_run", {
+        level: diagnosis.level,
+        burden_rate: Math.round(diagnosis.burdenRate * 10) / 10,
+        safe_price: diagnosis.safePrice,
+      });
+      setTimeout(() => {
+        document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }, 600);
   };
 
   return (
@@ -54,7 +60,7 @@ export default function Home() {
         </header>
 
         {/* 入力フォーム */}
-        <DiagnosisForm onSubmit={handleSubmit} />
+        <DiagnosisForm onSubmit={handleSubmit} isLoading={isLoading} />
 
         {/* 診断結果 */}
         {result && diagnosisInput && (

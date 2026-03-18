@@ -89,7 +89,7 @@ export default function RateComparison({ input, safePrice }: Props) {
               <select
                 value={rate}
                 onChange={(e) => handleRateChange(i, e.target.value)}
-                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 {RATE_OPTIONS.map((opt) => (
                   <option key={opt} value={opt}>
@@ -100,7 +100,7 @@ export default function RateComparison({ input, safePrice }: Props) {
               {rates.length > 1 && (
                 <button
                   onClick={() => removeRate(i)}
-                  className="text-gray-400 hover:text-red-400 transition-colors text-lg leading-none px-1"
+                  className="text-gray-400 hover:text-red-400 transition-colors text-lg w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
                   aria-label="削除"
                 >
                   ×
@@ -113,7 +113,7 @@ export default function RateComparison({ input, safePrice }: Props) {
         {rates.length < 4 && (
           <button
             onClick={addRate}
-            className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1 transition-colors"
+            className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1 transition-colors py-3 px-1"
           >
             <span className="text-base leading-none">+</span> シナリオを追加
           </button>
