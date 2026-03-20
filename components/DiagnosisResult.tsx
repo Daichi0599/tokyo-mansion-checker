@@ -184,18 +184,32 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           <p className="text-sm text-gray-700 leading-relaxed">{comment}</p>
         </div>
 
-        {/* Xシェアボタン */}
+        {/* シェアボタン（X + Threads） */}
         {input && (
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent("https://tokyo-mansion-checker.vercel.app")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => sendGAEvent("event", "share_click", { level })}
-            className="flex items-center justify-center gap-2 w-full bg-black hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors"
-          >
-            <span className="text-base font-bold">𝕏</span>
-            <span>この結果をXでシェア</span>
-          </a>
+          <div className="grid grid-cols-2 gap-3">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent("https://tokyo-mansion-checker.vercel.app")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => sendGAEvent("event", "share_click", { platform: "x", level })}
+              className="flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors text-sm"
+            >
+              <span className="font-bold">𝕏</span>
+              <span>Xでシェア</span>
+            </a>
+            <a
+              href={`https://www.threads.net/intent/post?text=${encodeURIComponent(shareText + "\nhttps://tokyo-mansion-checker.vercel.app")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => sendGAEvent("event", "share_click", { platform: "threads", level })}
+              className="flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 rounded-xl transition-colors text-sm"
+            >
+              <svg width="16" height="16" viewBox="0 0 192 192" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.232c8.248.053 14.474 2.452 18.515 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.195 47.292 9.643 32.788 28.08 19.882 44.485 13.224 67.315 13.01 96v.04c.214 28.685 6.872 51.515 19.778 67.92 14.504 18.437 36.094 27.885 64.172 28.08H97.07c24.366-.169 41.744-6.537 55.56-20.34 18.778-18.761 18.236-42.114 12.025-56.48-4.317-10.063-12.477-18.268-23.118-23.232Z"/>
+              </svg>
+              <span>Threadsでシェア</span>
+            </a>
+          </div>
         )}
 
         {/* 免責事項 */}
