@@ -67,7 +67,7 @@ const fields: FieldConfig[] = [
     label:   "返済年数",
     unit:    "年",
     desc:    "長いほど月返済は減るが、総利息は増える",
-    options: [10,15,20,25,30,35],
+    options: [10,15,20,25,30,35,40,50],
   },
   {
     key:     "monthlyLiving",
