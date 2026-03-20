@@ -68,28 +68,48 @@ export default function Home() {
             {/* ① 診断結果カード（常時表示） */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
 
-            {/* ② アフィリエイト */}
-            <div className="rounded-2xl border border-yellow-300 bg-yellow-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
-              <div className="flex-1 space-y-0.5">
-                <p className="text-xs font-bold text-yellow-700 uppercase tracking-wide">PR</p>
-                <p className="text-sm font-bold text-gray-800">新築マンション購入者アンケート — 回答者全員に5,000円</p>
-                <p className="text-xs text-gray-500">新築マンションを購入された方・検討中の方が対象です。</p>
+            {/* ② モゲチェック（メインアフィリエイト） */}
+            <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1 space-y-1">
+                <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-900">住宅ローン、どこが一番お得？ — モゲチェックで無料比較</p>
+                <p className="text-xs text-gray-500">借入額が決まったら金利比較が次のステップ。最短3分・完全無料。</p>
               </div>
               <a
-                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FN831U+136+1BQYPU"
+                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
                 rel="nofollow noopener"
                 target="_blank"
-                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "新築マンション購入者アンケート" })}
-                className="shrink-0 inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック" })}
+                className="shrink-0 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
               >
-                アンケートに答える →
+                無料で金利を比較する →
               </a>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img width={1} height={1} src="https://www11.a8.net/0.gif?a8mat=4AZGC3+FN831U+136+1BQYPU" alt="" style={{ display: "block" }} />
+              <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
             </div>
 
             {/* ③ タブ式ツール群 */}
             <ResultTabs result={result} input={diagnosisInput} />
+
+            {/* ④ 火災保険（サブアフィリエイト） */}
+            <div className="rounded-2xl border border-orange-200 bg-orange-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1 space-y-1">
+                <p className="text-xs font-bold text-orange-600 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-900">火災保険、一括見積もりで比較しよう</p>
+                <p className="text-xs text-gray-500">マンション購入時に必須の火災保険。複数社を比較して最安値を確認。回答者全員にセブンプレミアムカフェラテをプレゼント。</p>
+              </div>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
+                rel="nofollow noopener"
+                target="_blank"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "火災保険一括見積もり" })}
+                className="shrink-0 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+              >
+                無料で見積もりを比較 →
+              </a>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "block" }} />
+            </div>
 
           </div>
         )}
