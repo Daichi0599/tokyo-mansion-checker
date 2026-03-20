@@ -91,7 +91,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
 
   // Xシェアテキスト
   const shareText = input
-    ? `年収${input.annualIncome}万で都内マンション診断してみた！\n\n${config.icon} 診断結果：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン`
+    ? `都内マンション診断してみた！\n\n${config.icon} 診断結果：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン`
     : "";
 
   return (
