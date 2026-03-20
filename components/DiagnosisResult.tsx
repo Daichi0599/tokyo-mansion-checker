@@ -10,62 +10,63 @@ interface Props {
 
 const levelConfig = {
   safe: {
-    label: "余裕あり",
-    bg: "bg-emerald-50",
-    border: "border-emerald-400",
-    text: "text-emerald-700",
-    badge: "bg-emerald-100 text-emerald-800",
-    icon: "✅",
-    gauge: "bg-emerald-400",
+    label:   "余裕あり",
+    bg:      "bg-emerald-50",
+    border:  "border-emerald-400",
+    text:    "text-emerald-700",
+    badge:   "bg-emerald-100 text-emerald-800",
+    icon:    "✅",
+    gauge:   "bg-emerald-400",
   },
   caution: {
-    label: "安全圏",
-    bg: "bg-blue-50",
-    border: "border-blue-400",
-    text: "text-blue-700",
-    badge: "bg-blue-100 text-blue-800",
-    icon: "🟢",
-    gauge: "bg-blue-400",
+    label:   "安全圏",
+    bg:      "bg-blue-50",
+    border:  "border-blue-400",
+    text:    "text-blue-700",
+    badge:   "bg-blue-100 text-blue-800",
+    icon:    "🟢",
+    gauge:   "bg-blue-400",
   },
   warning: {
-    label: "やや注意",
-    bg: "bg-yellow-50",
-    border: "border-yellow-400",
-    text: "text-yellow-700",
-    badge: "bg-yellow-100 text-yellow-800",
-    icon: "⚠️",
-    gauge: "bg-yellow-400",
+    label:   "やや背伸び",
+    bg:      "bg-yellow-50",
+    border:  "border-yellow-400",
+    text:    "text-yellow-700",
+    badge:   "bg-yellow-100 text-yellow-800",
+    icon:    "⚠️",
+    gauge:   "bg-yellow-400",
   },
   danger: {
-    label: "リスクあり",
-    bg: "bg-orange-50",
-    border: "border-orange-400",
-    text: "text-orange-700",
-    badge: "bg-orange-100 text-orange-800",
-    icon: "🔶",
-    gauge: "bg-orange-400",
+    label:   "要注意",
+    bg:      "bg-orange-50",
+    border:  "border-orange-400",
+    text:    "text-orange-700",
+    badge:   "bg-orange-100 text-orange-800",
+    icon:    "🔶",
+    gauge:   "bg-orange-400",
   },
   critical: {
-    label: "危険",
-    bg: "bg-red-50",
-    border: "border-red-400",
-    text: "text-red-700",
-    badge: "bg-red-100 text-red-800",
-    icon: "🚨",
-    gauge: "bg-red-500",
+    label:   "危険",
+    bg:      "bg-red-50",
+    border:  "border-red-400",
+    text:    "text-red-700",
+    badge:   "bg-red-100 text-red-800",
+    icon:    "🚨",
+    gauge:   "bg-red-500",
   },
 };
 
 interface PriceCardProps {
-  title: string;
-  price: number;
-  cardStyle: string;
+  title:      string;
+  subtitle:   string;
+  price:      number;
+  cardStyle:  string;
   titleStyle: string;
-  badge?: string;
+  badge?:     string;
   badgeStyle?: string;
 }
 
-function PriceCard({ title, price, cardStyle, titleStyle, badge, badgeStyle }: PriceCardProps) {
+function PriceCard({ title, subtitle, price, cardStyle, titleStyle, badge, badgeStyle }: PriceCardProps) {
   return (
     <div className={`rounded-xl border-2 p-4 flex flex-col gap-1 ${cardStyle}`}>
       <div className="flex items-center justify-between">
@@ -78,20 +79,22 @@ function PriceCard({ title, price, cardStyle, titleStyle, badge, badgeStyle }: P
         {price.toLocaleString()}
         <span className="text-base font-normal text-gray-600 ml-1">万円</span>
       </p>
+      <p className="text-xs text-gray-400 leading-relaxed">{subtitle}</p>
     </div>
   );
 }
 
 export default function DiagnosisResultCard({ result, input }: Props) {
-  const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, comment, level } = result;
+  const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, monthlyTotal, comment, level } = result;
   const config = levelConfig[level];
+  const managementFee = input?.managementFee ?? 0;
 
   // ゲージの幅：負担率 0% → 0%, 50%以上 → 100% でクリップ
   const gaugeWidth = Math.min((burdenRate / 50) * 100, 100);
 
   // Xシェアテキスト
   const shareText = input
-    ? `都内マンション診断してみた！\n\n${config.icon} 診断結果：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン`
+    ? `都内マンション購入診断してみた！\n\n${config.icon} 判定：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n💰 月々の実質住居費：${monthlyTotal.toFixed(1)}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン #都内マンション`
     : "";
 
   return (
@@ -101,13 +104,13 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         <span className={`text-3xl font-black ${config.text}`}>
           {config.icon} {config.label}
         </span>
-        <p className="text-sm text-gray-500 mt-1">あなたの安全購入価格は</p>
+        <p className="text-sm text-gray-500 mt-1">無理なく買える安全購入価格は</p>
         <p className="text-5xl sm:text-6xl font-black text-gray-900 leading-none">
           {safePrice.toLocaleString()}
           <span className="text-2xl font-normal text-gray-500 ml-2">万円</span>
         </p>
         <p className={`text-sm font-semibold mt-1 ${config.text}`}>
-          住居費負担率 {burdenRate.toFixed(1)}%
+          住居費負担率 {burdenRate.toFixed(1)}%（ローン＋管理費ベース）
         </p>
       </div>
 
@@ -115,7 +118,8 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         {/* 価格カード 3枚 */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <PriceCard
-            title="安全購入価格"
+            title="安全圏"
+            subtitle="家計を崩しにくい目安"
             price={safePrice}
             cardStyle="border-emerald-300 bg-emerald-50"
             titleStyle="text-emerald-700"
@@ -123,13 +127,15 @@ export default function DiagnosisResultCard({ result, input }: Props) {
             badgeStyle="bg-emerald-200 text-emerald-800"
           />
           <PriceCard
-            title="やや攻めの価格"
+            title="背伸び圏"
+            subtitle="購入可能だが余裕は少ない"
             price={aggressivePrice}
             cardStyle="border-yellow-300 bg-yellow-50"
             titleStyle="text-yellow-700"
           />
           <PriceCard
-            title="危険ライン"
+            title="注意圏"
+            subtitle="家計への圧迫リスクあり"
             price={dangerPrice}
             cardStyle="border-red-300 bg-red-50"
             titleStyle="text-red-700"
@@ -138,13 +144,33 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           />
         </div>
 
-        {/* 月返済額 */}
-        <div className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
-          <span className="text-sm text-gray-600">安全価格ベースの月々の返済額</span>
-          <span className="text-xl font-bold text-gray-900">
-            {monthlyPayment.toLocaleString()}
-            <span className="text-sm font-normal text-gray-500 ml-1">万円 / 月</span>
-          </span>
+        {/* 月々の住居費内訳 */}
+        <div className="rounded-xl bg-gray-50 border border-gray-100 px-4 py-4 space-y-2.5">
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">月々の住居費内訳（安全価格ベース）</p>
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <span>ローン返済額</span>
+              <span className="font-semibold text-gray-900">{monthlyPayment.toFixed(1)} 万円</span>
+            </div>
+            {managementFee > 0 && (
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <span>管理費・修繕積立金</span>
+                <span className="font-semibold text-gray-900">{managementFee.toFixed(1)} 万円</span>
+              </div>
+            )}
+            <div className="border-t border-gray-200 pt-1.5 flex items-center justify-between">
+              <span className="text-sm font-bold text-gray-700">月々の実質住居費</span>
+              <span className="text-xl font-black text-gray-900">
+                {monthlyTotal.toFixed(1)}
+                <span className="text-sm font-normal text-gray-500 ml-1">万円 / 月</span>
+              </span>
+            </div>
+          </div>
+          {managementFee > 0 && (
+            <p className="text-xs text-gray-400 leading-relaxed pt-1">
+              ※ 都内マンションはローン以外に管理費・修繕積立金が毎月かかります。これらを含めた実質負担で診断しています。
+            </p>
+          )}
         </div>
 
         {/* 住居費負担率ゲージ */}
@@ -175,6 +201,13 @@ export default function DiagnosisResultCard({ result, input }: Props) {
             <span>30%</span>
             <span>35%</span>
             <span>50%+</span>
+          </div>
+          <div className="flex justify-between text-xs text-gray-300">
+            <span></span>
+            <span>安全圏</span>
+            <span>背伸び圏</span>
+            <span>注意圏</span>
+            <span></span>
           </div>
         </div>
 
@@ -222,13 +255,10 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           </p>
           <ul className="text-xs text-gray-500 leading-relaxed space-y-1 list-disc list-inside">
             <li>住宅ローン審査の結果は金融機関の判断によります。</li>
-            <li>管理費・修繕積立金・固定資産税・仲介手数料等の諸費用は含まれていません。</li>
+            <li>固定資産税・仲介手数料・リフォーム費等の諸費用は含まれていません。</li>
             <li>金利は将来変動する可能性があり、変動金利の場合は返済額が増加することがあります。</li>
             <li>実際の購入計画はファイナンシャルプランナーや金融機関にご相談ください。</li>
           </ul>
-          <p className="text-xs text-gray-400">
-            本診断の利用により生じた損害について、当サイトは一切の責任を負いません。
-          </p>
         </div>
       </div>
     </div>

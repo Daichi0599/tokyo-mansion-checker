@@ -2,30 +2,20 @@ import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics } from "@
 
 /**
  * 元利均等返済で「月返済額」から「最大借入可能額」を逆算する
- * @param monthlyPayment 月返済額（万円）
- * @param annualRate 年利（%）
- * @param years 返済年数
  */
 function calcMaxLoan(monthlyPayment: number, annualRate: number, years: number): number {
-  if (annualRate === 0) {
-    return monthlyPayment * years * 12;
-  }
-  const r = annualRate / 100 / 12; // 月次金利
-  const n = years * 12;            // 返済月数
+  if (annualRate === 0) return monthlyPayment * years * 12;
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
   const factor = Math.pow(1 + r, n);
   return monthlyPayment * (factor - 1) / (r * factor);
 }
 
 /**
  * 借入額から月返済額を計算する（元利均等返済）
- * @param loanAmount 借入額（万円）
- * @param annualRate 年利（%）
- * @param years 返済年数
  */
 function calcMonthlyPayment(loanAmount: number, annualRate: number, years: number): number {
-  if (annualRate === 0) {
-    return loanAmount / (years * 12);
-  }
+  if (annualRate === 0) return loanAmount / (years * 12);
   const r = annualRate / 100 / 12;
   const n = years * 12;
   const factor = Math.pow(1 + r, n);
@@ -34,39 +24,41 @@ function calcMonthlyPayment(loanAmount: number, annualRate: number, years: numbe
 
 /**
  * 負担率・年齢から診断レベルとコメントを返す
+ * 負担率は ローン返済 + 管理費 で計算済みの値を受け取る
  */
 function getComment(
   burdenRate: number,
   age: number,
   safePrice: number,
-  annualIncome: number
 ): { level: DiagnosisResult["level"]; comment: string } {
-  const ageNote = age >= 35 ? "※年齢的に返済期間が長く取れないため、慎重な計画が重要です。" : "";
+  const ageNote = age >= 35
+    ? " なお、年齢的に返済期間を長く取りにくいため、早めの資金計画がより重要です。"
+    : "";
 
   if (burdenRate < 20) {
     return {
       level: "safe",
-      comment: `住居費負担率 ${burdenRate.toFixed(1)}% は理想的です。老後資金・教育費・緊急予備費も十分確保できます。余裕資金を資産運用に回す計画も検討してみましょう。${ageNote}`,
+      comment: `住居費の月負担が収入の${burdenRate.toFixed(1)}%と、理想的な水準です。老後資金・教育費・緊急予備費を確保しながら資産形成も続けやすく、金利上昇や収入変動にも対応できる余裕があります。${ageNote}`,
     };
   } else if (burdenRate < 25) {
     return {
       level: "caution",
-      comment: `住居費負担率 ${burdenRate.toFixed(1)}% は安全圏です。無理のない返済計画といえます。生活費の変動に備えて 6 ヶ月分の生活費は手元に残しておきましょう。${ageNote}`,
+      comment: `住居費負担${burdenRate.toFixed(1)}%は安全圏です。共働き継続を前提にした、無理のない計画といえます。育児休業など収入が一時的に下がる場合に備えて、6ヶ月分の生活費を手元に確保しておくと安心です。${ageNote}`,
     };
   } else if (burdenRate < 30) {
     return {
       level: "warning",
-      comment: `住居費負担率 ${burdenRate.toFixed(1)}% はやや高め。収入が安定していれば対応可能ですが、共働きの場合は一方の収入が減るリスクを考慮してください。頭金を増やすことで負担率を下げられます。${ageNote}`,
+      comment: `住居費負担${burdenRate.toFixed(1)}%はやや背伸びした水準です。現在の収入が安定していれば対応できますが、金利上昇・教育費増加・育休などが重なると家計が圧迫されやすくなります。頭金の上乗せや、安全購入価格（${safePrice.toLocaleString()}万円）を目安に再検討してみましょう。${ageNote}`,
     };
   } else if (burdenRate < 35) {
     return {
       level: "danger",
-      comment: `住居費負担率 ${burdenRate.toFixed(1)}% はリスク水準です。年収の伸びがないと生活が厳しくなる可能性があります。頭金を増やすか、購入価格を「安全購入価格（${safePrice.toLocaleString()} 万円）」に引き下げることを検討してください。${ageNote}`,
+      comment: `住居費負担${burdenRate.toFixed(1)}%は要注意の水準です。万一の収入減や金利上昇で家計が回らなくなるリスクがあります。安全購入価格（${safePrice.toLocaleString()}万円）を目安に、頭金を増やすか購入価格を引き下げることをお勧めします。${ageNote}`,
     };
   } else {
     return {
       level: "critical",
-      comment: `住居費負担率 ${burdenRate.toFixed(1)}% は危険ゾーンです。この水準では住宅ローン審査が通らない可能性もあります。安全購入価格（${safePrice.toLocaleString()} 万円）を目安に計画を見直してください。${ageNote}`,
+      comment: `住居費負担${burdenRate.toFixed(1)}%は家計を圧迫するリスクが非常に高い水準です。住宅ローン審査が通りにくいケースもあります。安全購入価格（${safePrice.toLocaleString()}万円）まで引き下げるか、頭金を大幅に増やすことを強くお勧めします。${ageNote}`,
     };
   }
 }
@@ -80,12 +72,14 @@ function getBurdenLevel(burdenRate: number): DiagnosisLevel {
 }
 
 export function calcPriceMetrics(price: number, input: DiagnosisInput): PriceMetrics {
-  const { downPayment, interestRate, repaymentYears, annualIncome } = input;
+  const { downPayment, interestRate, repaymentYears, annualIncome, managementFee } = input;
+  const fee = managementFee ?? 0;
   const loanAmount = Math.max(0, price - downPayment);
   const monthlyPayment = loanAmount > 0
     ? Math.round(calcMonthlyPayment(loanAmount, interestRate, repaymentYears) * 10) / 10
     : 0;
-  const burdenRate = (monthlyPayment * 12 / annualIncome) * 100;
+  // 負担率はローン返済 + 管理費ベース
+  const burdenRate = ((monthlyPayment + fee) * 12 / annualIncome) * 100;
   return {
     price,
     loanAmount,
@@ -96,37 +90,31 @@ export function calcPriceMetrics(price: number, input: DiagnosisInput): PriceMet
 }
 
 export function diagnose(input: DiagnosisInput): DiagnosisResult {
-  const { annualIncome, age, downPayment, interestRate, repaymentYears, monthlyLiving } = input;
+  const { annualIncome, age, downPayment, interestRate, repaymentYears, managementFee } = input;
+  const fee = managementFee ?? 0;
 
-  // 各閾値の年間返済上限（万円）
-  const safeAnnualPayment = annualIncome * 0.25;
-  const aggressiveAnnualPayment = annualIncome * 0.30;
-  const dangerAnnualPayment = annualIncome * 0.35;
-
-  // 月返済上限（万円）
-  const safeMonthlyLimit = safeAnnualPayment / 12;
-  const aggressiveMonthlyLimit = aggressiveAnnualPayment / 12;
-  const dangerMonthlyLimit = dangerAnnualPayment / 12;
+  // 各閾値の月間住居費上限（万円）から管理費を差し引いた、ローン返済に充てられる上限
+  const safeMonthlyLoanLimit       = annualIncome * 0.25 / 12 - fee;
+  const aggressiveMonthlyLoanLimit = annualIncome * 0.30 / 12 - fee;
+  const dangerMonthlyLoanLimit     = annualIncome * 0.35 / 12 - fee;
 
   // 最大借入額（万円）
-  const safeLoan = calcMaxLoan(safeMonthlyLimit, interestRate, repaymentYears);
-  const aggressiveLoan = calcMaxLoan(aggressiveMonthlyLimit, interestRate, repaymentYears);
-  const dangerLoan = calcMaxLoan(dangerMonthlyLimit, interestRate, repaymentYears);
+  const safeLoan       = calcMaxLoan(Math.max(0, safeMonthlyLoanLimit),       interestRate, repaymentYears);
+  const aggressiveLoan = calcMaxLoan(Math.max(0, aggressiveMonthlyLoanLimit), interestRate, repaymentYears);
+  const dangerLoan     = calcMaxLoan(Math.max(0, dangerMonthlyLoanLimit),     interestRate, repaymentYears);
 
   // 購入価格 = 借入額 + 頭金
-  const safePrice = Math.floor(safeLoan + downPayment);
+  const safePrice       = Math.floor(safeLoan + downPayment);
   const aggressivePrice = Math.floor(aggressiveLoan + downPayment);
-  const dangerPrice = Math.floor(dangerLoan + downPayment);
+  const dangerPrice     = Math.floor(dangerLoan + downPayment);
 
-  // 安全購入価格ベースの月返済額・住居費負担率
-  const loanForSafe = safePrice - downPayment;
-  const monthlyPayment = calcMonthlyPayment(loanForSafe, interestRate, repaymentYears);
-  const burdenRate = (monthlyPayment * 12 / annualIncome) * 100;
+  // 安全購入価格ベースの月返済額・総住居費・負担率
+  const loanForSafe    = Math.max(0, safePrice - downPayment);
+  const monthlyPayment = loanForSafe > 0 ? calcMonthlyPayment(loanForSafe, interestRate, repaymentYears) : 0;
+  const monthlyTotal   = monthlyPayment + fee;
+  const burdenRate     = (monthlyTotal * 12 / annualIncome) * 100;
 
-  const { level, comment } = getComment(burdenRate, age, safePrice, annualIncome);
-
-  // monthlyLiving は将来の表示拡張用として計算に含める
-  void monthlyLiving;
+  const { level, comment } = getComment(burdenRate, age, safePrice);
 
   return {
     safePrice,
@@ -134,6 +122,7 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
     dangerPrice,
     burdenRate,
     monthlyPayment: Math.round(monthlyPayment * 10) / 10,
+    monthlyTotal:   Math.round(monthlyTotal   * 10) / 10,
     comment,
     level,
   };
