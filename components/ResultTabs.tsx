@@ -3,7 +3,6 @@
 import { useState } from "react";
 import RateTypeSimulator from "@/components/RateTypeSimulator";
 import AreaComparison    from "@/components/AreaComparison";
-import PropertyDiagnosis from "@/components/PropertyDiagnosis";
 import PriceComparison   from "@/components/PriceComparison";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
@@ -13,10 +12,9 @@ interface Props {
 }
 
 const TABS = [
-  { id: "rate",     label: "金利比較", icon: "📊" },
-  { id: "area",     label: "エリア",   icon: "🗺️" },
-  { id: "property", label: "物件診断", icon: "🔍" },
-  { id: "price",    label: "価格表",   icon: "💰" },
+  { id: "rate",  label: "金利比較", icon: "📊" },
+  { id: "area",  label: "エリア",   icon: "🗺️" },
+  { id: "price", label: "価格表",   icon: "💰" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -58,10 +56,6 @@ export default function ResultTabs({ result, input }: Props) {
 
       <div className={active === "area" ? "block" : "hidden"}>
         <AreaComparison safePrice={result.safePrice} />
-      </div>
-
-      <div className={active === "property" ? "block" : "hidden"}>
-        <PropertyDiagnosis input={input} safePrice={result.safePrice} />
       </div>
 
       <div className={active === "price" ? "block" : "hidden"}>

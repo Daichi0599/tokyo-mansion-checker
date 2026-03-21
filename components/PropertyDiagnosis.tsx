@@ -8,8 +8,8 @@ import { calcPriceMetrics } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisLevel } from "@/types";
 
 interface Props {
-  input: DiagnosisInput;
-  safePrice: number;
+  input?: DiagnosisInput;
+  safePrice?: number;
 }
 
 const DIRECTION_OPTIONS: AssetScoreInput["direction"][] = [
@@ -83,7 +83,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
     });
   };
 
-  const metrics     = result ? calcPriceMetrics(result.price, input) : null;
+  const metrics     = (result && input) ? calcPriceMetrics(result.price, input) : null;
   const futurePrice = result ? Math.round(result.price * result.score.futureRatio) : null;
   const areaData    = result ? findArea(form.area) : null;
   const pricePerSqm = result ? Math.round(result.price / result.sqm) : null;
@@ -115,7 +115,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <input
               type="number" value={form.price} onChange={set("price")}
               placeholder="例: 7500" min={100} step={100}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
@@ -127,7 +127,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <input
               type="number" value={form.sqm} onChange={set("sqm")}
               placeholder="例: 70" min={20} step={1}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
@@ -136,7 +136,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <label className="text-xs font-semibold text-gray-700">エリア（区）</label>
             <select
               value={form.area} onChange={set("area")}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               {sortedAreas.map((a) => (
                 <option key={a.name} value={a.name}>
@@ -152,7 +152,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <input
               type="number" value={form.buildingAge} onChange={set("buildingAge")}
               placeholder="例: 5" min={0} max={60}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
@@ -162,7 +162,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <input
               type="number" value={form.walkMinutes} onChange={set("walkMinutes")}
               placeholder="例: 5" min={1} max={30}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
@@ -172,7 +172,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <input
               type="number" value={form.floor} onChange={set("floor")}
               placeholder="例: 8" min={1} max={60}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
@@ -182,7 +182,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             <select
               value={form.direction}
               onChange={(e) => setForm((p) => ({ ...p, direction: e.target.value as AssetScoreInput["direction"] }))}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               {DIRECTION_OPTIONS.map((d) => (
                 <option key={d} value={d}>{d}向き</option>
@@ -200,11 +200,11 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
         </button>
 
         {/* 診断結果 */}
-        {result && metrics && futurePrice !== null && (
+        {result && futurePrice !== null && (
           <div className="space-y-4 pt-2 border-t border-gray-100">
 
-            {/* ① 予算比較 */}
-            {(() => {
+            {/* ① 予算比較（安全購入価格を診断済みの場合のみ表示） */}
+            {metrics && safePrice !== undefined && (() => {
               const lc = LEVEL_LABEL[metrics.level];
               const diff = result.price - safePrice;
               return (

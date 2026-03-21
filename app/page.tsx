@@ -5,6 +5,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
 import ResultTabs          from "@/components/ResultTabs";
+import PropertyDiagnosis   from "@/components/PropertyDiagnosis";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
@@ -274,7 +275,23 @@ export default function Home() {
           </div>
         )}
 
-        {/* ─── 6. FAQ ─── */}
+        {/* ─── 6. 物件診断（独立セクション） ─── */}
+        <section aria-labelledby="property-diagnosis-heading">
+          <div className="text-center mb-4">
+            <h2 id="property-diagnosis-heading" className="text-lg font-extrabold text-gray-800">
+              🔍 気になる物件を診断する
+            </h2>
+            <p className="text-xs text-gray-500 mt-1">
+              SUUMOなどで見つけた物件のスペックを入力して、資産性スコアとエリア相場を即確認
+            </p>
+          </div>
+          <PropertyDiagnosis
+            input={diagnosisInput ?? undefined}
+            safePrice={result?.safePrice}
+          />
+        </section>
+
+        {/* ─── 7. FAQ ─── */}
         <section aria-labelledby="faq-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
           <h2 id="faq-heading" className="text-base font-extrabold text-gray-800 mb-1">
             よくある質問
