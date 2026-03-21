@@ -222,7 +222,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent("https://tokyo-mansion-checker.vercel.app")}`}
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent("https://30lab.vercel.app")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendGAEvent("event", "share_click", { platform: "x", level })}
@@ -232,7 +232,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
                 <span>Xでシェア</span>
               </a>
               <a
-                href={`https://www.threads.net/intent/post?text=${encodeURIComponent(shareText + "\nhttps://tokyo-mansion-checker.vercel.app")}`}
+                href={`https://www.threads.net/intent/post?text=${encodeURIComponent(shareText + "\nhttps://30lab.vercel.app")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sendGAEvent("event", "share_click", { platform: "threads", level })}
@@ -247,7 +247,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
 
             {/* LINEでツールを知人に紹介 */}
             <a
-              href={`https://line.me/R/msg/text/?${encodeURIComponent("都内マンション購入を検討中なら、このツールが参考になるかも。\n無理なく買える価格を3分で無料診断できます👇\nhttps://tokyo-mansion-checker.vercel.app")}`}
+              href={`https://line.me/R/msg/text/?${encodeURIComponent("都内マンション購入を検討中なら、このツールが参考になるかも。\n無理なく買える価格を3分で無料診断できます👇\nhttps://30lab.vercel.app")}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sendGAEvent("event", "share_click", { platform: "line", level })}

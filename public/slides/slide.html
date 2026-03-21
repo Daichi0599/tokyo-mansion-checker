@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Slides</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow: hidden; background: #1e40af; }
+  body { width: 100vw; height: 100vh; overflow: hidden; font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; }
+
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+  /* ── nav ── */
+  .nav {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 999;
+    opacity: 0.7;
+  }
+  .nav button { padding: 6px 16px; border: none; border-radius: 20px; background: #2563eb; color: #fff; font-size: 13px; cursor: pointer; }
+  .nav span { color: #fff; font-size: 13px; padding: 6px 12px; background: rgba(0,0,0,0.4); border-radius: 20px; }
+  body.no-nav .nav { display: none; }
+
+  /* ─────────── SLIDE 1 ─────────── */
+  #s1 {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  #s1 .tag-row { display: flex; gap: 10px; margin-bottom: 28px; }
+  #s1 .tag {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 999px;
+  }
+  #s1 h1 {
+    color: #fff;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #s1 h1 span { color: #bfdbfe; }
+  #s1 .sub {
+    color: rgba(255,255,255,0.85);
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  #s1 .badges { display: flex; gap: 12px; }
+  #s1 .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 9px 20px;
+    border-radius: 999px;
+  }
+  #s1 .url {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+  }
+
+  /* ─────────── SLIDE 2 ─────────── */
+  #s2 {
+    background: #fff;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  #s2 .left {
+    width: 380px;
+    background: linear-gradient(160deg, #1e40af, #2563eb);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px 40px;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  #s2 .left .num { color: #93c5fd; font-size: 13px; font-weight: 800; letter-spacing: 2px; }
+  #s2 .left h2 { color: #fff; font-size: 36px; font-weight: 900; line-height: 1.3; }
+  #s2 .left p { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.7; }
+  #s2 .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px 60px;
+    gap: 22px;
+  }
+  #s2 .point {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #f0f7ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+  }
+  #s2 .point .icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+  #s2 .point .ttl { font-size: 16px; font-weight: 800; color: #1e3a8a; margin-bottom: 5px; }
+  #s2 .point .desc { font-size: 13px; color: #4b5563; line-height: 1.6; }
+
+  /* ─────────── SLIDE 3 ─────────── */
+  #s3 {
+    background: #f0f4ff;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 80px;
+    gap: 28px;
+  }
+  #s3 .header { text-align: center; }
+  #s3 .header .label { color: #2563eb; font-size: 13px; font-weight: 800; letter-spacing: 2px; margin-bottom: 8px; }
+  #s3 .header h2 { font-size: 34px; font-weight: 900; color: #111827; }
+  #s3 .header p { font-size: 14px; color: #6b7280; margin-top: 8px; }
+  #s3 .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+  #s3 .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
+  }
+  #s3 .card .ctag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+  #s3 .card .grade { font-size: 44px; font-weight: 900; color: #2563eb; }
+  #s3 .card .grade-sub { font-size: 14px; color: #6b7280; margin-bottom: 10px; }
+  #s3 .card .bar-wrap { display: flex; flex-direction: column; gap: 7px; }
+  #s3 .card .bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #6b7280; }
+  #s3 .card .bar-row .bar-bg { flex: 1; height: 7px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
+  #s3 .card .bar-row .bar-fill { height: 100%; background: #2563eb; border-radius: 999px; }
+  #s3 .card .bar-row .val { width: 34px; text-align: right; font-weight: 700; color: #1e40af; }
+
+  /* ─────────── SLIDE 4 ─────────── */
+  #s4 {
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 72px;
+    gap: 32px;
+  }
+  #s4 .header { width: 100%; }
+  #s4 .header .label { color: #2563eb; font-size: 13px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
+  #s4 .header h2 { font-size: 36px; font-weight: 900; color: #111827; }
+  #s4 .tools { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; width: 100%; }
+  #s4 .tool {
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #s4 .tool.blue { background: #eff6ff; border: 1.5px solid #bfdbfe; }
+  #s4 .tool.green { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+  #s4 .tool.orange { background: #fff7ed; border: 1.5px solid #fed7aa; }
+  #s4 .tool .icon { font-size: 34px; }
+  #s4 .tool h3 { font-size: 19px; font-weight: 800; color: #111827; }
+  #s4 .tool p { font-size: 13px; color: #4b5563; line-height: 1.65; }
+  #s4 .tool .ex {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 13px;
+    border-radius: 8px;
+    display: inline-block;
+    width: fit-content;
+    margin-top: auto;
+  }
+  #s4 .tool.blue .ex { background: #dbeafe; color: #1d4ed8; }
+  #s4 .tool.green .ex { background: #dcfce7; color: #15803d; }
+  #s4 .tool.orange .ex { background: #ffedd5; color: #c2410c; }
+
+  /* ─────────── SLIDE 5 ─────────── */
+  #s5 {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  #s5 h2 { color: #fff; font-size: 44px; font-weight: 900; text-align: center; margin-bottom: 16px; }
+  #s5 .sub { color: rgba(255,255,255,0.75); font-size: 17px; text-align: center; margin-bottom: 36px; line-height: 1.7; }
+  #s5 .url-box {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    padding: 20px 56px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 36px;
+  }
+  #s5 .steps { display: flex; gap: 28px; }
+  #s5 .step { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  #s5 .step .n {
+    width: 40px; height: 40px;
+    background: #2563eb;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #s5 .step p { color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 600; text-align: center; }
+  #s5 .arr { color: rgba(255,255,255,0.4); font-size: 26px; margin-top: 6px; align-self: center; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="s1">
+  <div class="tag-row">
+    <span class="tag">共働き・20〜30代向け</span>
+    <span class="tag">世帯年収1,000〜1,500万円帯</span>
+    <span class="tag">無料・匿名・3分</span>
+  </div>
+  <h1>「借りられる額」より<br><span>「無理なく買える額」</span>がわかる<br>都内マンション購入診断</h1>
+  <p class="sub">世帯年収・頭金・生活費・管理費まで含めた実質住居費で<br>安全な購入価格を無料で算出するWebアプリを作りました</p>
+  <div class="badges">
+    <span class="badge">✓ 完全無料</span>
+    <span class="badge">✓ 匿名OK</span>
+    <span class="badge">✓ 営業なし</span>
+    <span class="badge">✓ データ保存なし</span>
+  </div>
+  <div class="url">30lab.vercel.app</div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="s2">
+  <div class="left">
+    <div class="num">FEATURE 01</div>
+    <h2>安全購入価格<br>を診断</h2>
+    <p>「審査が通る額」ではなく「家計を崩さない額」で購入上限を算出します</p>
+  </div>
+  <div class="right">
+    <div class="point">
+      <div class="icon">💰</div>
+      <div>
+        <div class="ttl">住居費負担率25%以内が安全圏</div>
+        <div class="desc">ローン返済＋管理費・修繕積立金の合計が年収の25%以内になる価格を「安全圏」として提示</div>
+      </div>
+    </div>
+    <div class="point">
+      <div class="icon">🏠</div>
+      <div>
+        <div class="ttl">管理費・修繕積立金も込みで計算</div>
+        <div class="desc">都内マンション特有の月2〜5万円の固定費をローンと合算した「実質月負担」で診断</div>
+      </div>
+    </div>
+    <div class="point">
+      <div class="icon">📊</div>
+      <div>
+        <div class="ttl">安全圏・背伸び圏・注意圏の3段階</div>
+        <div class="desc">年収・頭金・返済年数・金利を入力するだけで3段階の購入価格目安を即算出</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="s3">
+  <div class="header">
+    <div class="label">FEATURE 02</div>
+    <h2>🔍 気になる物件を資産性スコアで診断</h2>
+    <p>SUUMOで見つけた物件のスペックを入力 → 100点満点の資産性スコアと10年後推定価格を即表示</p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="ctag">資産性スコア</div>
+      <div class="grade">78<span style="font-size:20px;color:#6b7280">/100</span></div>
+      <div class="grade-sub">Aランク — 資産性が高い物件</div>
+      <div class="bar-wrap">
+        <div class="bar-row"><span style="width:48px">エリア</span><div class="bar-bg"><div class="bar-fill" style="width:87%"></div></div><span class="val">26/30</span></div>
+        <div class="bar-row"><span style="width:48px">駅徒歩</span><div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div><span class="val">20/25</span></div>
+        <div class="bar-row"><span style="width:48px">築年数</span><div class="bar-bg"><div class="bar-fill" style="width:72%"></div></div><span class="val">18/25</span></div>
+        <div class="bar-row"><span style="width:48px">階数</span><div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div><span class="val">7/10</span></div>
+        <div class="bar-row"><span style="width:48px">向き</span><div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div><span class="val">7/10</span></div>
+      </div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px;">
+      <div class="ctag">エリア相場との比較</div>
+      <p style="font-size:14px;color:#374151;">入力した物件の㎡単価をエリア平均と自動比較。お買い得かどうかを即判定</p>
+      <div style="background:#f0fdf4;border-radius:12px;padding:18px 20px;">
+        <div style="font-size:12px;color:#6b7280;margin-bottom:4px">この物件の㎡単価</div>
+        <div style="font-size:32px;font-weight:900;color:#111827">107<span style="font-size:15px;font-weight:400;color:#6b7280"> 万円/㎡</span></div>
+      </div>
+      <div style="background:#fff7ed;border-radius:12px;padding:14px 20px;">
+        <div style="font-size:12px;color:#6b7280;margin-bottom:4px">10年後の推定売却価格</div>
+        <div style="font-size:28px;font-weight:900;color:#111827">7,175<span style="font-size:14px;font-weight:400;color:#6b7280"> 万円</span>
+          <span style="font-size:13px;font-weight:700;color:#15803d">（+5%）</span>
+        </div>
+      </div>
+      <div style="font-size:15px;font-weight:700;color:#15803d">相場より 10% 安め — お買い得の可能性あり ✅</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="s4">
+  <div class="header">
+    <div class="label">FEATURE 03</div>
+    <h2>診断後に使える3つのシミュレーター</h2>
+  </div>
+  <div class="tools">
+    <div class="tool blue">
+      <div class="icon">📊</div>
+      <h3>金利タイプ比較</h3>
+      <p>変動・固定・当初固定の3タイプで月返済・総支払額を比較。金利上昇リスクも確認</p>
+      <div class="ex">例：0.7% vs 1.5% で月2.4万円差</div>
+    </div>
+    <div class="tool green">
+      <div class="icon">🗺️</div>
+      <h3>エリア比較</h3>
+      <p>都内全区の相場と安全購入価格を比較。どの区なら予算内に収まるかを一覧で確認</p>
+      <div class="ex">例：世田谷・目黒・港区を比較</div>
+    </div>
+    <div class="tool orange">
+      <div class="icon">💰</div>
+      <h3>価格表シミュレーター</h3>
+      <p>頭金・金利・返済年数を変えた複数パターンの月返済額を表形式でまとめて確認</p>
+      <div class="ex">例：頭金500vs1000万円の差</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="s5">
+  <h2>無料で試せます 🏠</h2>
+  <p class="sub">入力3分・匿名・営業なし・データ保存なし<br>ブラウザ上でのみ動作するので個人情報は一切不要</p>
+  <div class="url-box">30lab.vercel.app</div>
+  <div class="steps">
+    <div class="step">
+      <div class="n">1</div>
+      <p>年収・頭金<br>などを入力</p>
+    </div>
+    <div class="arr">→</div>
+    <div class="step">
+      <div class="n">2</div>
+      <p>安全購入<br>価格を確認</p>
+    </div>
+    <div class="arr">→</div>
+    <div class="step">
+      <div class="n">3</div>
+      <p>物件診断・<br>シミュレーション</p>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav">
+  <button onclick="go(-1)">◀ 前</button>
+  <span id="idx"></span>
+  <button onclick="go(1)">次 ▶</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+  function show(n) {
+    slides[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    document.getElementById('idx').textContent = (cur+1) + ' / ' + slides.length;
+  }
+  function go(d) { show(cur + d); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') go(1);
+    if (e.key === 'ArrowLeft') go(-1);
+  });
+  show(0);
+</script>
+</body>
+</html>
