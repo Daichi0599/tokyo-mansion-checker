@@ -10,6 +10,38 @@ import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 /* ───────────────────────────────────────────
+   モゲチェックCTA：レベル別コピー
+─────────────────────────────────────────── */
+
+const mogeCtaByLevel: Record<string, { title: string; desc: string; cta: string }> = {
+  safe: {
+    title: "審査が通りやすい状態です。より良い金利で月返済を下げましょう",
+    desc:  "複数の金融機関を比較するだけで、総支払額が数百万円変わることも。最短3分・完全無料。",
+    cta:   "無料で金利を比較する →",
+  },
+  caution: {
+    title: "安全圏内です。金利次第でさらに返済を楽にできます",
+    desc:  "借入額が固まったら金利比較が次のステップ。0.3%の差が月返済・総額に大きく影響します。",
+    cta:   "無料で金利を比較する →",
+  },
+  warning: {
+    title: "金利を下げると安全圏に入れる可能性があります",
+    desc:  "0.3%下がるだけで月数万円、総額数百万円の差になります。まず無料で比較してみましょう。",
+    cta:   "金利を比較して月返済を下げる →",
+  },
+  danger: {
+    title: "借入条件の見直しで、負担率を改善できる余地があります",
+    desc:  "金利・借入額の最適化を専門家に相談することで、家計への影響を減らせる可能性があります。",
+    cta:   "無料で住宅ローンを相談する →",
+  },
+  critical: {
+    title: "現状は家計へのリスクが高め。専門家への無料相談をおすすめします",
+    desc:  "購入価格・頭金・金利など複数の条件を見直すことで改善できる可能性があります。",
+    cta:   "無料で住宅ローンを相談する →",
+  },
+};
+
+/* ───────────────────────────────────────────
    サブコンポーネント（インライン定義）
 ─────────────────────────────────────────── */
 
@@ -233,17 +265,21 @@ export default function Home() {
             <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex-1 space-y-1">
                 <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">PR</p>
-                <p className="text-sm font-bold text-gray-900">住宅ローン、どこが一番お得？ — モゲチェックで無料比較</p>
-                <p className="text-xs text-gray-500">借入額が決まったら金利比較が次のステップ。最短3分・完全無料。</p>
+                <p className="text-sm font-bold text-gray-900">
+                  {mogeCtaByLevel[result.level]?.title ?? "住宅ローン、どこが一番お得？ — モゲチェックで無料比較"}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {mogeCtaByLevel[result.level]?.desc ?? "借入額が決まったら金利比較が次のステップ。最短3分・完全無料。"}
+                </p>
               </div>
               <a
                 href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
                 rel="nofollow noopener"
                 target="_blank"
-                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック" })}
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", level: result.level })}
                 className="shrink-0 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
               >
-                無料で金利を比較する →
+                {mogeCtaByLevel[result.level]?.cta ?? "無料で金利を比較する →"}
               </a>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />

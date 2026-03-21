@@ -27,7 +27,7 @@ export default function ResultTabs({ result, input }: Props) {
     <div className="space-y-3">
       {/* ── タブバー ── */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-1.5">
-        <div className="grid grid-cols-4 gap-1">
+        <div className="grid grid-cols-3 gap-1">
           {TABS.map((tab) => (
             <button
               key={tab.id}
