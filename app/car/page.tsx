@@ -125,6 +125,49 @@ function getDiagnosisComment(
    サブコンポーネント
 ─────────────────────────────────────────── */
 
+function BenefitCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
+  return (
+    <div className="flex items-start gap-3 bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+      <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
+      <div>
+        <p className="text-sm font-bold text-gray-800">{title}</p>
+        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function LogicPoint({ step, title, desc }: { step: string; title: string; desc: string }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-xs font-extrabold flex items-center justify-center mt-0.5">
+        {step}
+      </span>
+      <div>
+        <p className="text-sm font-bold text-gray-800">{title}</p>
+        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-gray-100 last:border-0">
+      <button
+        className="w-full flex items-start justify-between gap-3 py-4 text-left"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        <span className="text-sm font-semibold text-gray-800 leading-relaxed">{q}</span>
+        <span className={`shrink-0 text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}>▼</span>
+      </button>
+      {open && <p className="text-sm text-gray-600 leading-relaxed pb-4 pr-6">{a}</p>}
+    </div>
+  );
+}
+
 function SelectField({
   label,
   sublabel,
@@ -288,6 +331,41 @@ export default function CarPage() {
             ))}
           </div>
         </header>
+
+        {/* ─── この診断でわかること ─── */}
+        <section aria-labelledby="benefits-heading">
+          <div className="text-center mb-5">
+            <h2 id="benefits-heading" className="text-lg font-extrabold text-gray-800">この診断でわかること</h2>
+            <p className="text-xs text-gray-500 mt-1">都内の車にまつわる「本当のコスト」を可視化します</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <BenefitCard icon="💰" title="10年間の総コスト比較" desc="カーシェア・中古車・新車の10年間コストを同条件で比較。月々の差だけでなく総額でどれだけ違うかがわかります。" />
+            <BenefitCard icon="🅿️" title="駐車場代の影響を試算" desc="都内の月額駐車場代（0〜5万円）がコストにどれほど影響するかを可視化。地域差を踏まえた判断ができます。" />
+            <BenefitCard icon="📊" title="利用頻度別の最適解" desc="月に何日・何時間使うかで、カーシェアが得か所有が得かが変わります。あなたの使い方に合った答えが出ます。" />
+            <BenefitCard icon="🏠" title="住宅費との合算確認" desc="マンション診断と連携し、住宅ローン＋車コストの合計負担を文脈表示。家計全体の視点で判断できます。" />
+          </div>
+        </section>
+
+        {/* ─── 計算の考え方 ─── */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+          <div>
+            <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">計算の考え方</p>
+            <h2 className="text-base font-extrabold text-gray-800">「所有コスト」と「利用コスト」を正しく比較します</h2>
+            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+              車の費用は購入価格だけではありません。保険・税金・ガソリン・車検・駐車場など毎月かかる維持費を含めた「10年間の総支出」で比較するのが正しい見方です。
+            </p>
+          </div>
+          <div className="space-y-4">
+            <LogicPoint step="①" title="カーシェアは固定費ゼロが強み" desc="時間料金（1,500円/時）＋距離料金目安（500円/回）のみ。保険・税金・駐車場・車検が一切不要なため、利用頻度が低いほど有利です。" />
+            <LogicPoint step="②" title="所有コストは維持費が本体" desc="中古車は初期費用150万円＋月約3.5万円の維持費、新車は350万円＋月約3.4万円。この月次固定費×120ヶ月が10年コストの大半を占めます。" />
+            <LogicPoint step="③" title="駐車場代が分岐点を左右する" desc="都内の駐車場代は月1〜5万円とエリアで大きく差があります。駐車場代が高いほど所有コストが膨らみ、カーシェアが有利になります。" />
+          </div>
+          <div className="rounded-xl bg-blue-50 border border-blue-100 px-4 py-3">
+            <p className="text-xs text-blue-700 leading-relaxed">
+              <strong>簡易診断について：</strong>費用は一般的な相場をもとにした参考値です。実際のカーシェア料金・保険内容・ガソリン価格などにより異なります。
+            </p>
+          </div>
+        </section>
 
         {/* ─── 入力フォーム ─── */}
         <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
@@ -468,6 +546,34 @@ export default function CarPage() {
             本ツールはあくまで参考情報です。カーシェアの実際の料金・中古車の状態・保険内容・ガソリン代などにより総コストは変動します。実際の購入・契約前に必ず各社の最新情報をご確認ください。
           </p>
         </div>
+
+        {/* ─── FAQ ─── */}
+        <section aria-labelledby="faq-car-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
+          <h2 id="faq-car-heading" className="text-base font-extrabold text-gray-800 mb-1 text-center">よくある質問</h2>
+          <p className="text-xs text-gray-500 mb-5 text-center">車コスト診断についてよく寄せられる疑問にお答えします</p>
+          <div className="divide-y divide-gray-100">
+            <FaqItem
+              q="都内で車を持つメリットはありますか？"
+              a="利便性・快適性・子育て時の移動という点ではメリットがあります。ただし都内は公共交通が充実しており、10年コストで比較するとカーシェアが安くなるケースが大多数です。「必要な時だけ使う」という発想がコスト最適です。"
+            />
+            <FaqItem
+              q="カーシェアとレンタカーはどう違いますか？"
+              a="カーシェアは近所の駐車場から15分単位で借りられ、ガソリン代・保険込みです。レンタカーは営業所への往復が必要で最短数時間単位。日常的な短時間利用にはカーシェアが、長距離・長時間利用にはレンタカーが向いています。"
+            />
+            <FaqItem
+              q="子育て中でも車なしで生活できますか？"
+              a="乳幼児期は移動が大変なため車が役立つ場面もありますが、都内であればカーシェアで対応できるケースがほとんどです。月4〜8日程度の利用なら、カーシェアの方が10年で100〜200万円安くなることも珍しくありません。"
+            />
+            <FaqItem
+              q="電気自動車（EV）の場合はどう計算すればよいですか？"
+              a="EVは初期費用がやや高め（400〜600万円）ですが、ガソリン代がかからずランニングコストが下がります。本ツールはガソリン車ベースの試算のため、EVをご検討の場合は各メーカーのシミュレーターも合わせてご確認ください。"
+            />
+            <FaqItem
+              q="計算に含まれていない費用はありますか？"
+              a="本ツールでは高速料金・有料駐車場・洗車代・カー用品費・事故修理費などは含まれていません。また中古車の状態によっては整備費用が増加する場合があります。実際の総コストはこれらを加味した上でご判断ください。"
+            />
+          </div>
+        </section>
 
         {/* ─── 関連リンク ─── */}
         <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-3">

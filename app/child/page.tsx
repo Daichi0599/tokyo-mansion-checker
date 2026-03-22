@@ -156,6 +156,49 @@ function getDiagnosisComment(result: ChildResult, numChildren: NumChildren): {
    UI Components
 ─────────────────────────────────────────── */
 
+function BenefitCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
+  return (
+    <div className="flex items-start gap-3 bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+      <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
+      <div>
+        <p className="text-sm font-bold text-gray-800">{title}</p>
+        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function LogicPoint({ step, title, desc }: { step: string; title: string; desc: string }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-xs font-extrabold flex items-center justify-center mt-0.5">
+        {step}
+      </span>
+      <div>
+        <p className="text-sm font-bold text-gray-800">{title}</p>
+        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-gray-100 last:border-0">
+      <button
+        className="w-full flex items-start justify-between gap-3 py-4 text-left"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        <span className="text-sm font-semibold text-gray-800 leading-relaxed">{q}</span>
+        <span className={`shrink-0 text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}>▼</span>
+      </button>
+      {open && <p className="text-sm text-gray-600 leading-relaxed pb-4 pr-6">{a}</p>}
+    </div>
+  );
+}
+
 function SelectField({
   label,
   value,
@@ -315,6 +358,41 @@ export default function ChildCostPage() {
             ))}
           </div>
         </header>
+
+        {/* ─── この診断でわかること ─── */}
+        <section aria-labelledby="benefits-child-heading">
+          <div className="text-center mb-5">
+            <h2 id="benefits-child-heading" className="text-lg font-extrabold text-gray-800">この診断でわかること</h2>
+            <p className="text-xs text-gray-500 mt-1">教育費の「全体像」を把握して、住宅ローンとの両立を判断できます</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <BenefitCard icon="📚" title="0歳〜大学卒業まで一括試算" desc="保育園・小中高・大学・習い事のフェーズ別費用を一覧化。教育方針を変えると総額がどう変わるかをすぐ確認できます。" />
+            <BenefitCard icon="💰" title="月換算の積立目安がわかる" desc="総額を264ヶ月（0〜22歳）で割った月々の積立目安を表示。学資保険やNISAの目標金額設定に活用できます。" />
+            <BenefitCard icon="⚖️" title="教育方針別のコスト差を比較" desc="全公立 vs 中学から私立 vs 小学から私立で、子ども1人あたりの差額がひと目でわかります。" />
+            <BenefitCard icon="🏠" title="住宅ローンとの両立を確認" desc="マンション診断と連携し、月の積立目安が年収比何%かを表示。住宅費と教育費を合わせた家計全体で判断できます。" />
+          </div>
+        </section>
+
+        {/* ─── 計算の考え方 ─── */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+          <div>
+            <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">計算の考え方</p>
+            <h2 className="text-base font-extrabold text-gray-800">「フェーズ別コスト」で教育費の全体像を把握します</h2>
+            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+              子育て費用は「生まれた瞬間から大学卒業まで」の長期にわたります。フェーズごとに費用の山があり、特に大学期と中高私立期は一時的に家計負担が急増します。
+            </p>
+          </div>
+          <div className="space-y-4">
+            <LogicPoint step="①" title="乳幼児期が最初の山（0〜5歳）" desc="保育園費用（公立月4万・私立月7万）と初期ベビー用品50万が重なります。3〜5歳は幼保無償化の対象ですが、副食費等の実費は発生します。" />
+            <LogicPoint step="②" title="教育方針で中高期が大きく変わる" desc="全公立なら中高の月コストは約0.5〜2万円ですが、中学から私立になると月7万円に跳ね上がります。この差が最も影響を与える選択です。" />
+            <LogicPoint step="③" title="大学費用は4年間で一気にかかる" desc="国立244万・私立文系350万・私立理系510万（入学金込み）。奨学金・学資保険・NISAなどの準備が間に合うよう、早めの積立計画が重要です。" />
+          </div>
+          <div className="rounded-xl bg-blue-50 border border-blue-100 px-4 py-3">
+            <p className="text-xs text-blue-700 leading-relaxed">
+              <strong>簡易試算について：</strong>費用は文部科学省・各種調査の平均値をもとにした参考値です。地域・学校・家庭状況により実際の費用は異なります。
+            </p>
+          </div>
+        </section>
 
         {/* ─── 入力フォーム ─── */}
         <section
@@ -545,6 +623,55 @@ export default function ChildCostPage() {
 
           </div>
         )}
+
+        {/* ─── 学資保険・NISA ─── */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+          <div>
+            <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">教育費の準備方法</p>
+            <h2 className="text-base font-extrabold text-gray-800">積立は早く始めるほど有利です</h2>
+            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+              子どもが0歳のうちに月3〜5万円の積立を始めると、大学入学までに200〜400万円を無理なく準備できます。学資保険・NISAの組み合わせが一般的です。
+            </p>
+          </div>
+          <div className="space-y-3">
+            <div className="rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 space-y-1">
+              <p className="text-xs font-bold text-amber-700">💡 よくある準備パターン</p>
+              <ul className="text-xs text-amber-800 space-y-1 leading-relaxed">
+                <li>・<strong>学資保険</strong>：元本保証型。返戻率110〜120%が目安。低リスクで確実に積み立てたい方向け。</li>
+                <li>・<strong>NISA（つみたて投資枠）</strong>：長期で運用すればリターンが期待できる。18年あれば複利効果も。</li>
+                <li>・<strong>組み合わせ</strong>：必要額の半分を学資保険で確保、残りをNISAで運用するのが一般的。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── FAQ ─── */}
+        <section aria-labelledby="faq-child-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
+          <h2 id="faq-child-heading" className="text-base font-extrabold text-gray-800 mb-1 text-center">よくある質問</h2>
+          <p className="text-xs text-gray-500 mb-5 text-center">子育て費用診断についてよく寄せられる疑問にお答えします</p>
+          <div className="divide-y divide-gray-100">
+            <FaqItem
+              q="この試算はどこまで正確ですか？"
+              a="文部科学省の「子供の学習費調査」や各種教育費調査の平均値をもとにした参考情報です。実際の費用は学校・地域・家庭によって大きく異なります。目安として活用し、詳細はFP（ファイナンシャルプランナー）にご相談ください。"
+            />
+            <FaqItem
+              q="教育費はいつから貯め始めるべきですか？"
+              a="できるだけ早く、理想は生まれた直後から始めるのがベストです。大学入学まで18年あれば、月2〜3万円の積立で200万円以上を準備できます。始める時期が遅いほど月々の積立額が増えるため、早期スタートが有利です。"
+            />
+            <FaqItem
+              q="学資保険とNISA、どちらがおすすめですか？"
+              a="どちらにも一長一短があります。学資保険は元本保証で確実に受け取れる安心感がある一方、返戻率は低め。NISAは長期運用でリターンが期待できますが、元本割れのリスクもあります。必要額の一部を学資保険、残りをNISAで運用するハイブリッド戦略が一般的です。"
+            />
+            <FaqItem
+              q="住宅ローンと教育費の両立は可能ですか？"
+              a="世帯年収1,000〜1,500万円であれば両立は十分可能です。ただし、子どもが中高私立＋大学進学と重なる時期（15〜22歳）に住宅ローン返済が重なると家計が厳しくなります。子どもの年齢と返済終了時期を合わせてキャッシュフローを確認しましょう。"
+            />
+            <FaqItem
+              q="子どもが複数人いる場合の注意点は？"
+              a="2〜3人の場合、費用は単純に人数倍になりますが、上の子が大学卒業する頃に下の子が入学するケースでは費用の山が重なりにくくなります。一方、年齢が近い兄弟では費用ピークが重なるため、より早い時期からの準備が必要です。"
+            />
+          </div>
+        </section>
 
         {/* ─── フッター ─── */}
         <footer className="text-center text-xs text-gray-400 pb-4 space-y-1">
