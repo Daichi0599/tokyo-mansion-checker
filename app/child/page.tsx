@@ -447,6 +447,33 @@ function SubsidySection({ result, numChildren }: { result: ChildResult | null; n
           <li>・東京都の例を参考にしています。</li>
         </ul>
       </div>
+
+      {/* 出典 */}
+      <div className="border-t border-gray-100 pt-4 space-y-1.5">
+        <p className="text-xs font-bold text-gray-500">出典・参考</p>
+        <ul className="space-y-1">
+          {[
+            { label: "出産育児一時金｜厚生労働省", url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html" },
+            { label: "児童手当制度｜こども家庭庁", url: "https://www.cfa.go.jp/policies/jidouteate/" },
+            { label: "幼児教育・保育の無償化｜内閣府", url: "https://www8.cao.go.jp/shoushi/shinseido/musyouka/about/index.html" },
+            { label: "高等学校就学支援金｜文部科学省", url: "https://www.mext.go.jp/a_menu/shotou/mushouka/" },
+            { label: "東京都私立高校授業料実質無償化｜東京都", url: "https://www.metro.tokyo.lg.jp/tosei/hodohappyo/press/2024/02/16/19.html" },
+            { label: "高等教育の修学支援制度｜文部科学省", url: "https://www.mext.go.jp/a_menu/koutou/hutankeigen/" },
+          ].map((s) => (
+            <li key={s.url}>
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-blue-500 hover:text-blue-700 hover:underline leading-relaxed"
+              >
+                ↗ {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="text-xs text-gray-400 pt-1">※ 2024年度時点の情報をもとにしています。最新情報は各公式サイトでご確認ください。</p>
+      </div>
     </section>
   );
 }
