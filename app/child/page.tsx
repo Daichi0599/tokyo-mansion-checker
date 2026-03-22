@@ -263,23 +263,10 @@ export default function ChildCostPage() {
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
 
         {/* ─── ヘッダー ─── */}
-        <header className="space-y-5">
-
-          {/* ナビ */}
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-            >
-              ← マンション購入診断に戻る
-            </Link>
-            <span className="text-xs font-bold text-blue-700 bg-blue-100 border border-blue-200 px-3 py-1 rounded-full">
-              30Lab
-            </span>
-          </div>
+        <header className="space-y-5 text-center">
 
           {/* タグ */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {["アラサー共働き向け", "高所得世帯", "0歳〜大学卒業まで対応"].map((tag) => (
               <span
                 key={tag}
@@ -293,21 +280,17 @@ export default function ChildCostPage() {
           {/* タイトル */}
           <div className="space-y-3">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">
-              子育て総費用
+              子育て総費用<br />
               <span className="text-blue-600">シミュレーター</span>
             </h1>
-            <p className="text-base text-gray-500 leading-relaxed">
-              0歳〜大学卒業まで、いくらかかる？
-            </p>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-md">
-              保育園・学校・大学・習い事の選択肢ごとに、
-              子育て総費用を即座に試算します。
-              住宅ローンとの両立プランニングにご活用ください。
+            <p className="text-sm text-gray-500 leading-relaxed max-w-md mx-auto">
+              保育園・学校・大学・習い事の選択肢ごとに、<br className="hidden sm:block" />
+              0歳〜大学卒業までの総費用を即座に試算します。
             </p>
           </div>
 
           {/* バッジ */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {["完全無料", "匿名OK", "データ保存なし", "約1分"].map((label) => (
               <span
                 key={label}

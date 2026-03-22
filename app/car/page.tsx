@@ -232,20 +232,9 @@ export default function CarPage() {
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
 
         {/* ─── ヘッダー ─── */}
-        <header className="space-y-5">
-          {/* ロゴ・ナビ */}
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-bold text-sm"
-            >
-              ← 30Lab トップへ
-            </Link>
-            <span className="text-xs text-gray-400 font-semibold tracking-wide">30Lab</span>
-          </div>
-
+        <header className="space-y-5 text-center">
           {/* タグ */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {["アラサー共働き向け", "都内在住", "10年コスト比較"].map((tag) => (
               <span
                 key={tag}
@@ -257,19 +246,19 @@ export default function CarPage() {
           </div>
 
           {/* タイトル */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">
               都内で車は持つべき？<br />
               <span className="text-blue-600">10年コスト診断</span>
             </h1>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed max-w-md mx-auto">
               カーシェア・中古車・新車の10年間総コストを比較して、<br className="hidden sm:block" />
               あなたのライフスタイルに最適な選択肢がわかります。
             </p>
           </div>
 
           {/* バッジ */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {[
               { icon: "✓", label: "完全無料" },
               { icon: "✓", label: "約3分" },
