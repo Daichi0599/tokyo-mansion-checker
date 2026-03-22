@@ -101,7 +101,7 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
   return (
     <form onSubmit={handleSubmit} id="form" className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
       {/* ヘッダー */}
-      <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/80">
+      <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/80 text-center">
         <h2 className="text-base font-bold text-gray-800">あなたの条件を入力</h2>
         <p className="text-xs text-gray-500 mt-1">
           目安の初期値が設定されています。実際の数値に合わせて調整してください。
