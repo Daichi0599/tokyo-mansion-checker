@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 /* ───────────────────────────────────────────
    型定義
@@ -274,13 +275,23 @@ export default function CarPage() {
     setIsLoading(true);
     setResults(null);
     setTimeout(() => {
-      setResults(calculate(inputs));
+      const r = calculate(inputs);
+      setResults(r);
+      sendGAEvent("event", "diagnosis_run", {
+        page: "car",
+        usage_days: inputs.usageDaysPerMonth,
+        hours_per_use: inputs.hoursPerUse,
+        parking_fee_man: inputs.parkingFeeMan,
+        recommended: r.find((x) => x.isRecommended)?.label ?? "unknown",
+      });
       setIsLoading(false);
       setTimeout(() => {
         document.getElementById("car-result")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }, 500);
   };
+
+
 
   const comment = results ? getDiagnosisComment(results, inputs) : null;
 

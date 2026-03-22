@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 /* ───────────────────────────────────────────
    Types
@@ -294,6 +295,15 @@ export default function ChildCostPage() {
     setTimeout(() => {
       const r = calculateCosts(input);
       setResult(r);
+      sendGAEvent("event", "diagnosis_run", {
+        page: "child",
+        num_children: input.numChildren,
+        nursery: input.nursery,
+        school_policy: input.schoolPolicy,
+        university: input.university,
+        extracurriculars: input.extracurriculars,
+        grand_total_man: r.grandTotal,
+      });
       setIsLoading(false);
       setTimeout(() => {
         document.getElementById("child-result")?.scrollIntoView({ behavior: "smooth", block: "start" });
