@@ -19,12 +19,14 @@ export default function OgImage() {
           background: "linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #2563eb 100%)",
           fontFamily: "sans-serif",
           padding: "60px",
+          position: "relative",
         }}
       >
         {/* Logo area */}
         <div
           style={{
             display: "flex",
+            flexDirection: "row",
             alignItems: "center",
             gap: "16px",
             marginBottom: "32px",
@@ -32,19 +34,20 @@ export default function OgImage() {
         >
           <div
             style={{
+              display: "flex",
               background: "white",
               borderRadius: "16px",
               padding: "12px 24px",
               fontSize: "28px",
               fontWeight: 900,
               color: "#1d4ed8",
-              letterSpacing: "-0.5px",
             }}
           >
             30Lab
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "18px",
               color: "rgba(255,255,255,0.7)",
             }}
@@ -56,13 +59,13 @@ export default function OgImage() {
         {/* Main title */}
         <div
           style={{
+            display: "flex",
             fontSize: "56px",
             fontWeight: 900,
             color: "white",
             textAlign: "center",
             lineHeight: 1.2,
             marginBottom: "24px",
-            letterSpacing: "-1px",
           }}
         >
           都内マンション購入診断
@@ -71,6 +74,7 @@ export default function OgImage() {
         {/* Sub */}
         <div
           style={{
+            display: "flex",
             fontSize: "28px",
             color: "rgba(255,255,255,0.85)",
             textAlign: "center",
@@ -84,6 +88,7 @@ export default function OgImage() {
         <div
           style={{
             display: "flex",
+            flexDirection: "row",
             gap: "24px",
           }}
         >
@@ -91,6 +96,7 @@ export default function OgImage() {
             <div
               key={f}
               style={{
+                display: "flex",
                 background: "rgba(255,255,255,0.15)",
                 borderRadius: "12px",
                 padding: "12px 24px",
@@ -99,7 +105,7 @@ export default function OgImage() {
                 border: "1px solid rgba(255,255,255,0.3)",
               }}
             >
-              ✓ {f}
+              {f}
             </div>
           ))}
         </div>
@@ -107,6 +113,7 @@ export default function OgImage() {
         {/* URL */}
         <div
           style={{
+            display: "flex",
             position: "absolute",
             bottom: "40px",
             right: "60px",
