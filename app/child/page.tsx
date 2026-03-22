@@ -884,6 +884,32 @@ export default function ChildCostPage() {
               </p>
             </div>
 
+            {/* おかねと暮らし相談 FP CTA */}
+            <div className="rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 to-emerald-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1 space-y-1">
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-900">
+                  {diagnosis && diagnosis.level !== "green"
+                    ? "住宅費＋教育費の両立プランをFPに無料相談しませんか？"
+                    : "学資保険・NISA・給付金活用をFPに無料で相談できます"}
+                </p>
+                <p className="text-xs text-gray-500">
+                  お金のプロが家計全体を診断。子育て費用・積立プランを個別にアドバイス。給付金の対象かどうかも確認できます。
+                </p>
+              </div>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM"
+                rel="nofollow noopener"
+                target="_blank"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "おかねと暮らし相談", page: "child" })}
+                className="shrink-0 inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+              >
+                FPに無料で相談する →
+              </a>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img width={1} height={1} src="https://www10.a8.net/0.gif?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM" alt="" style={{ display: "block" }} />
+            </div>
+
             {/* マンション診断CTA */}
             <section className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-5">
               <div className="space-y-3">
@@ -911,6 +937,30 @@ export default function ChildCostPage() {
                 </div>
               </div>
             </section>
+
+            {/* ベビープラネット 保険相談 CTA */}
+            <div className="rounded-2xl border border-pink-200 bg-gradient-to-r from-pink-50 to-rose-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1 space-y-1">
+                <p className="text-xs font-bold text-pink-600 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-900">
+                  子育て中ママのための保険、見直していますか？
+                </p>
+                <p className="text-xs text-gray-500">
+                  妊娠・出産・子育て期に合わせた保険プランをFPが無料で診断。20社以上から最適な保険を提案してもらえます。
+                </p>
+              </div>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+79YQYA+503M+60H7M"
+                rel="nofollow noopener"
+                target="_blank"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "ベビープラネット", page: "child" })}
+                className="shrink-0 inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+              >
+                無料で保険を相談する →
+              </a>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZLSJ+79YQYA+503M+60H7M" alt="" style={{ display: "block" }} />
+            </div>
 
           </div>
         )}
