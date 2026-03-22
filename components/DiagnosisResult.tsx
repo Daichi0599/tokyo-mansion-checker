@@ -261,6 +261,37 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           </div>
         )}
 
+        {/* 他のツール導線 */}
+        <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-3">
+          <p className="text-sm font-bold text-gray-600">他のツールも試す</p>
+          <a
+            href="/car"
+            className="flex items-center justify-between bg-white hover:bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 transition-colors group"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-xl">🚗</span>
+              <div>
+                <p className="text-sm font-bold text-gray-800">都内で車は持つべき？</p>
+                <p className="text-xs text-gray-500">カーシェア vs マイカー 10年コスト診断</p>
+              </div>
+            </div>
+            <span className="text-gray-400 group-hover:text-gray-600 transition-colors">→</span>
+          </a>
+          <a
+            href="/child"
+            className="flex items-center justify-between bg-white hover:bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 transition-colors group"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-xl">👶</span>
+              <div>
+                <p className="text-sm font-bold text-gray-800">子育て総費用シミュレーター</p>
+                <p className="text-xs text-gray-500">0歳〜大学卒業まで費用を一括試算</p>
+              </div>
+            </div>
+            <span className="text-gray-400 group-hover:text-gray-600 transition-colors">→</span>
+          </a>
+        </div>
+
         {/* 免責事項 */}
         <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-2">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">免責事項</p>

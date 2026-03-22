@@ -519,12 +519,20 @@ export default function ChildCostPage() {
                   都内マンション購入診断では、世帯年収・頭金・管理費から「無理なく買える価格」を算出します。
                   子育て費用と住宅ローンを合わせたキャッシュフロー確認にご活用ください。
                 </p>
-                <Link
-                  href="/"
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
-                >
-                  マンション購入診断を試す →
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Link
+                    href="/"
+                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+                  >
+                    マンション購入診断を試す →
+                  </Link>
+                  <Link
+                    href="/car"
+                    className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+                  >
+                    🚗 車コスト診断を試す →
+                  </Link>
+                </div>
               </div>
             </section>
 

@@ -466,6 +466,19 @@ export default function CarPage() {
             </div>
             <span className="ml-auto text-gray-400 group-hover:text-blue-500 transition-colors">→</span>
           </Link>
+          <Link
+            href="/child"
+            className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-blue-50 hover:border-blue-200 transition-colors group"
+          >
+            <span className="text-2xl">👶</span>
+            <div>
+              <p className="text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors">
+                子育て総費用シミュレーター
+              </p>
+              <p className="text-xs text-gray-500">0歳〜大学卒業まで費用を一括試算</p>
+            </div>
+            <span className="ml-auto text-gray-400 group-hover:text-blue-500 transition-colors">→</span>
+          </Link>
         </section>
 
         {/* ─── フッター ─── */}

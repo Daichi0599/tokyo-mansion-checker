@@ -327,7 +327,41 @@ export default function Home() {
           />
         </section>
 
-        {/* ─── 7. FAQ ─── */}
+        {/* ─── 7. 他のツール ─── */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+          <div>
+            <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">30Lab</p>
+            <h2 className="text-base font-extrabold text-gray-800">他の診断ツールも試す</h2>
+          </div>
+          <a
+            href="/car"
+            className="flex items-center justify-between bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 rounded-xl px-4 py-3 transition-colors group"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🚗</span>
+              <div>
+                <p className="text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors">都内で車は持つべき？10年コスト診断</p>
+                <p className="text-xs text-gray-500">カーシェア vs 中古車 vs 新車を一発比較</p>
+              </div>
+            </div>
+            <span className="text-gray-400 group-hover:text-blue-500 transition-colors">→</span>
+          </a>
+          <a
+            href="/child"
+            className="flex items-center justify-between bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 rounded-xl px-4 py-3 transition-colors group"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">👶</span>
+              <div>
+                <p className="text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors">子育て総費用シミュレーター</p>
+                <p className="text-xs text-gray-500">0歳〜大学卒業まで費用を一括試算</p>
+              </div>
+            </div>
+            <span className="text-gray-400 group-hover:text-blue-500 transition-colors">→</span>
+          </a>
+        </section>
+
+        {/* ─── 8. FAQ ─── */}
         <section aria-labelledby="faq-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
           <h2 id="faq-heading" className="text-base font-extrabold text-gray-800 mb-1">
             よくある質問
