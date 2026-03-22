@@ -12,7 +12,8 @@ type NumChildren = 1 | 2 | 3;
 type NurseryType = "hoiku_public" | "hoiku_private";
 type SchoolPolicy = "all_public" | "junior_private" | "elem_private";
 type UniversityType = "national" | "private_arts" | "private_science";
-type ExtracurricularsLevel = "none" | "standard" | "enriched";
+type ExtracurricularsLevel = "none" | "light" | "standard" | "enriched" | "intensive";
+type BirthCost = "none" | "standard" | "premium";
 
 interface ChildInput {
   numChildren: NumChildren;
@@ -20,6 +21,8 @@ interface ChildInput {
   schoolPolicy: SchoolPolicy;
   university: UniversityType;
   extracurriculars: ExtracurricularsLevel;
+  birthCost: BirthCost;
+  childCurrentAge: number;
 }
 
 interface PhaseBreakdown {
@@ -33,6 +36,10 @@ interface ChildResult {
   totalPerChild: number;
   grandTotal: number;
   monthlyBurden: number;
+  monthlyFromNow: number;
+  monthsRemaining: number;
+  birthCostTotal: number;
+  extraCostPerChild: number;
 }
 
 /* ───────────────────────────────────────────
@@ -40,12 +47,21 @@ interface ChildResult {
 ─────────────────────────────────────────── */
 
 function calculateCosts(input: ChildInput): ChildResult {
-  const { nursery, schoolPolicy, university, extracurriculars } = input;
+  const { nursery, schoolPolicy, university, extracurriculars, birthCost, numChildren, childCurrentAge } = input;
+
+  // 出産費用
+  let birthCostPerChild = 0;
+  if (birthCost === "standard") {
+    birthCostPerChild = 10; // 実費10万
+  } else if (birthCost === "premium") {
+    birthCostPerChild = 40; // 実費40万
+  }
+  const birthCostTotal = birthCostPerChild * numChildren;
 
   // 0-2歳 (36ヶ月)
   const nurseryCost = nursery === "hoiku_public" ? 4 * 36 : 7 * 36; // 万円
   const babyGoods = 50; // 万円 (初期一括)
-  const phase0to2 = nurseryCost + babyGoods;
+  const phase0to2 = nurseryCost + babyGoods + birthCostPerChild;
 
   // 3-5歳 (無償化対象)
   const phase3to5 = 0.5 * 36; // 18万
@@ -76,14 +92,17 @@ function calculateCosts(input: ChildInput): ChildResult {
   }
 
   // 習い事 (6歳〜18歳 = 144ヶ月)
-  let extraCost: number;
-  if (extracurriculars === "none") {
-    extraCost = 0;
+  let extraMonthly = 0;
+  if (extracurriculars === "light") {
+    extraMonthly = 1;
   } else if (extracurriculars === "standard") {
-    extraCost = 2 * 144; // 288万
-  } else {
-    extraCost = 5 * 144; // 720万
+    extraMonthly = 2;
+  } else if (extracurriculars === "enriched") {
+    extraMonthly = 3;
+  } else if (extracurriculars === "intensive") {
+    extraMonthly = 5;
   }
+  const extraCostPerChild = extraMonthly * 144;
 
   // フェーズカード用集計
   const phases: PhaseBreakdown[] = [
@@ -111,13 +130,17 @@ function calculateCosts(input: ChildInput): ChildResult {
 
   // 習い事は小学〜高校にまたがるため総額に加算
   const basePerChild = phases.reduce((sum, p) => sum + p.costPerChild, 0);
-  const totalPerChild = basePerChild + extraCost;
-  const grandTotal = totalPerChild * input.numChildren;
+  const totalPerChild = basePerChild + extraCostPerChild;
+  const grandTotal = totalPerChild * numChildren + birthCostTotal;
 
   // 月換算: 0歳〜大学卒業22歳 = 264ヶ月
   const monthlyBurden = Math.round(grandTotal / 264);
 
-  return { phases, totalPerChild, grandTotal, monthlyBurden };
+  // 今から始めると月いくら
+  const monthsRemaining = Math.max(1, (22 - childCurrentAge) * 12);
+  const monthlyFromNow = Math.ceil(grandTotal / monthsRemaining);
+
+  return { phases, totalPerChild, grandTotal, monthlyBurden, monthlyFromNow, monthsRemaining, birthCostTotal, extraCostPerChild };
 }
 
 /* ───────────────────────────────────────────
@@ -233,14 +256,15 @@ function SelectField({
   );
 }
 
-function PhaseCard({ phase, index }: { phase: PhaseBreakdown; index: number }) {
+function PhaseCard({ phase, index, totalPerChild }: { phase: PhaseBreakdown; index: number; totalPerChild: number }) {
   const colors = [
-    { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700", dot: "bg-blue-500" },
-    { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", dot: "bg-emerald-500" },
-    { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700", dot: "bg-amber-500" },
-    { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700", dot: "bg-purple-500" },
+    { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700", dot: "bg-blue-500", bar: "bg-blue-400" },
+    { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", dot: "bg-emerald-500", bar: "bg-emerald-400" },
+    { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700", dot: "bg-amber-500", bar: "bg-amber-400" },
+    { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700", dot: "bg-purple-500", bar: "bg-purple-400" },
   ];
   const c = colors[index % colors.length];
+  const pct = totalPerChild > 0 ? Math.round((phase.costPerChild / totalPerChild) * 100) : 0;
 
   return (
     <div className={`rounded-xl border ${c.border} ${c.bg} p-4`}>
@@ -256,7 +280,174 @@ function PhaseCard({ phase, index }: { phase: PhaseBreakdown; index: number }) {
         <span className="text-sm font-semibold ml-1">万円</span>
       </p>
       <p className="text-xs text-gray-500 mt-0.5">1人あたり</p>
+      {/* プログレスバー */}
+      <div className="mt-3">
+        <div className="w-full bg-white bg-opacity-60 rounded-full h-1.5 overflow-hidden">
+          <div
+            className={`h-1.5 rounded-full ${c.bar} transition-all duration-500`}
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        <p className="text-xs text-gray-400 mt-1">全体の{pct}%</p>
+      </div>
     </div>
+  );
+}
+
+/* ───────────────────────────────────────────
+   Subsidy Section
+─────────────────────────────────────────── */
+
+interface SubsidyItem {
+  name: string;
+  amount: string;
+  source: string;
+  note: string;
+}
+
+interface SubsidyPhase {
+  phase: string;
+  items: SubsidyItem[];
+}
+
+const SUBSIDY_DATA: SubsidyPhase[] = [
+  {
+    phase: "妊娠〜出産",
+    items: [
+      { name: "出産育児一時金", amount: "50万円/子", source: "国", note: "出産後に健保申請" },
+      { name: "妊婦健診費補助", amount: "約10万円分/子（14回）", source: "区市町村", note: "母子手帳取得時" },
+    ],
+  },
+  {
+    phase: "0〜2歳",
+    items: [
+      { name: "児童手当（0〜2歳）", amount: "月1.5万円/子", source: "国", note: "出生届後に市区町村申請" },
+      { name: "乳幼児医療費助成（マル乳）", amount: "医療費ほぼ無料", source: "都・区", note: "自動適用（区による）" },
+      { name: "ベビーシッター補助（東京都）", amount: "月2.4万円まで", source: "都", note: "申請制" },
+    ],
+  },
+  {
+    phase: "3〜5歳",
+    items: [
+      { name: "幼保無償化", amount: "保育料全額（認可）", source: "国", note: "2019年〜恒久制度・自動適用" },
+      { name: "こども医療費助成（マル子）", amount: "医療費ほぼ無料", source: "都・区", note: "自動適用" },
+    ],
+  },
+  {
+    phase: "小学校（6〜12歳）",
+    items: [
+      { name: "児童手当（3歳〜中学生）", amount: "月1万円/子（第3子以降1.5万）", source: "国", note: "継続（現況届不要に）" },
+      { name: "こども医療費（区による）", amount: "医療費無料（高校まで無料の区あり）", source: "区", note: "自動" },
+    ],
+  },
+  {
+    phase: "中学〜高校（13〜18歳）",
+    items: [
+      { name: "高等学校就学支援金", amount: "年最大11.88万（公立）〜39.6万（私立）", source: "国", note: "学校経由で申請" },
+      { name: "東京都私立高校授業料実質無償化", amount: "年最大59.4万円（所得制限なし・2024年〜）", source: "都", note: "学校経由で申請" },
+      { name: "都内高校生の医療費（一部の区）", amount: "無料〜自己負担あり", source: "区", note: "区による" },
+    ],
+  },
+  {
+    phase: "大学（18〜22歳）",
+    items: [
+      { name: "高等教育修学支援制度", amount: "授業料免除＋給付型奨学金（低所得世帯向け）", source: "国", note: "大学経由" },
+    ],
+  },
+];
+
+const phaseColors: Record<string, { bg: string; border: string; badge: string; badgeText: string }> = {
+  "妊娠〜出産": { bg: "bg-pink-50", border: "border-pink-200", badge: "bg-pink-100", badgeText: "text-pink-700" },
+  "0〜2歳": { bg: "bg-blue-50", border: "border-blue-200", badge: "bg-blue-100", badgeText: "text-blue-700" },
+  "3〜5歳": { bg: "bg-sky-50", border: "border-sky-200", badge: "bg-sky-100", badgeText: "text-sky-700" },
+  "小学校（6〜12歳）": { bg: "bg-emerald-50", border: "border-emerald-200", badge: "bg-emerald-100", badgeText: "text-emerald-700" },
+  "中学〜高校（13〜18歳）": { bg: "bg-amber-50", border: "border-amber-200", badge: "bg-amber-100", badgeText: "text-amber-700" },
+  "大学（18〜22歳）": { bg: "bg-purple-50", border: "border-purple-200", badge: "bg-purple-100", badgeText: "text-purple-700" },
+};
+
+function SubsidySection({ result, numChildren }: { result: ChildResult | null; numChildren: NumChildren }) {
+  // 概算軽減額計算
+  const birthSubsidy = 50 * numChildren;
+  const childAllowance = 246 * numChildren;
+  const highSchoolSupport = 35 * numChildren;
+  const totalSubsidy = birthSubsidy + childAllowance + highSchoolSupport;
+  const netCost = result ? Math.max(0, result.grandTotal - totalSubsidy) : null;
+
+  return (
+    <section className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6 space-y-5">
+      <div>
+        <p className="text-xs font-bold text-green-600 uppercase tracking-wide mb-1">補助金・支援制度</p>
+        <h2 className="text-base font-extrabold text-gray-800">
+          もらえる補助金・支援制度（2024年度版）
+        </h2>
+        <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+          国・都・区の主要制度を時系列でまとめました。申請しないと受け取れないものもあります。
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {SUBSIDY_DATA.map((group) => {
+          const c = phaseColors[group.phase] ?? { bg: "bg-gray-50", border: "border-gray-200", badge: "bg-gray-100", badgeText: "text-gray-700" };
+          return (
+            <div key={group.phase} className={`rounded-xl border ${c.border} ${c.bg} p-4 space-y-2`}>
+              <p className={`text-xs font-bold ${c.badgeText} mb-1`}>{group.phase}</p>
+              {group.items.map((item) => (
+                <div key={item.name} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs">
+                  <div className="flex-1">
+                    <span className="font-semibold text-gray-800">{item.name}</span>
+                    <span className="text-gray-400 ml-1">({item.note})</span>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${c.badge} ${c.badgeText}`}>{item.source}</span>
+                    <span className="font-bold text-gray-700">{item.amount}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* 概算軽減額（result がある時のみ） */}
+      {result && (
+        <div className="rounded-xl bg-green-50 border border-green-200 p-4 space-y-3">
+          <p className="text-xs font-bold text-green-700">子供の人数に応じた主要制度の合計概算（{numChildren}人）</p>
+          <div className="space-y-1 text-xs text-green-800">
+            <div className="flex justify-between">
+              <span>出産育児一時金（50万 × {numChildren}人）</span>
+              <span className="font-semibold">{birthSubsidy}万円</span>
+            </div>
+            <div className="flex justify-between">
+              <span>児童手当 0〜18歳合計（246万 × {numChildren}人）</span>
+              <span className="font-semibold">{childAllowance}万円</span>
+            </div>
+            <div className="flex justify-between">
+              <span>高校就学支援金・都補助概算（35万 × {numChildren}人）</span>
+              <span className="font-semibold">{highSchoolSupport}万円</span>
+            </div>
+            <div className="flex justify-between border-t border-green-300 pt-1 mt-1">
+              <span className="font-bold">補助金で軽減される概算額</span>
+              <span className="font-extrabold text-green-700 text-sm">{totalSubsidy}万円</span>
+            </div>
+          </div>
+          <div className="rounded-lg bg-white border border-green-200 px-3 py-2 flex items-center justify-between">
+            <span className="text-xs font-semibold text-gray-700">実質負担額（総費用 − 補助金概算）</span>
+            <span className="text-lg font-extrabold text-green-700">{netCost!.toLocaleString()}<span className="text-sm font-semibold ml-0.5">万円</span></span>
+          </div>
+        </div>
+      )}
+
+      <div className="rounded-xl bg-yellow-50 border border-yellow-200 px-4 py-3 space-y-1">
+        <p className="text-xs text-yellow-800 leading-relaxed">
+          <strong>注記：</strong>
+        </p>
+        <ul className="text-xs text-yellow-800 space-y-1 leading-relaxed">
+          <li>・自治体（区・市）によって内容が大きく異なります。</li>
+          <li>・制度は毎年見直されます。申請時期を逃さないよう市区町村の窓口やWebサイトで最新情報を確認してください。</li>
+          <li>・東京都の例を参考にしています。</li>
+        </ul>
+      </div>
+    </section>
   );
 }
 
@@ -271,6 +462,8 @@ export default function ChildCostPage() {
     schoolPolicy: "all_public",
     university: "private_arts",
     extracurriculars: "standard",
+    birthCost: "standard",
+    childCurrentAge: 0,
   });
   const [result, setResult] = useState<ChildResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -323,6 +516,15 @@ export default function ChildCostPage() {
     yellow: { bg: "bg-yellow-50", border: "border-yellow-200", text: "text-yellow-700", icon: "⚠️" },
     orange: { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", icon: "🔶" },
     red: { bg: "bg-red-50", border: "border-red-200", text: "text-red-700", icon: "🚨" },
+  };
+
+  // 習い事サマリー表示用
+  const extraLabelMap: Record<ExtracurricularsLevel, string> = {
+    none: "",
+    light: "月1万円 × 144ヶ月",
+    standard: "月2万円 × 144ヶ月",
+    enriched: "月3万円 × 144ヶ月",
+    intensive: "月5万円 × 144ヶ月",
   };
 
   return (
@@ -431,6 +633,26 @@ export default function ChildCostPage() {
             />
 
             <SelectField
+              label="お子さんの現在の年齢"
+              value={String(input.childCurrentAge)}
+              onChange={(v) => update("childCurrentAge", Number(v))}
+              hint="今から積み立てると月いくら必要かを計算します"
+              options={Array.from({ length: 11 }, (_, i) => ({ value: String(i), label: `${i}歳` }))}
+            />
+
+            <SelectField
+              label="出産費用（実費）"
+              value={input.birthCost}
+              onChange={(v) => update("birthCost", v as BirthCost)}
+              hint="出産育児一時金50万円を差し引いた実費"
+              options={[
+                { value: "none", label: "含めない" },
+                { value: "standard", label: "普通分娩（実費 約10万円）" },
+                { value: "premium", label: "無痛分娩・高額産院（実費 約40万円）" },
+              ]}
+            />
+
+            <SelectField
               label="保育園（0〜2歳）"
               value={input.nursery}
               onChange={(v) => update("nursery", v as NurseryType)}
@@ -469,8 +691,10 @@ export default function ChildCostPage() {
               onChange={(v) => update("extracurriculars", v as ExtracurricularsLevel)}
               options={[
                 { value: "none", label: "なし" },
-                { value: "standard", label: "標準（月2万円）— 12年で288万円" },
-                { value: "enriched", label: "充実（月5万円）— 12年で720万円" },
+                { value: "light", label: "月1万円（1種類）— 12年で144万円" },
+                { value: "standard", label: "月2万円（2種類）— 12年で288万円" },
+                { value: "enriched", label: "月3万円（充実）— 12年で432万円" },
+                { value: "intensive", label: "月5万円（本格的）— 12年で720万円" },
               ]}
             />
           </div>
@@ -529,6 +753,36 @@ export default function ChildCostPage() {
                   <p className="text-xs text-gray-400 mt-0.5">総額÷264ヶ月</p>
                 </div>
               </div>
+
+              {/* 今から始めると月いくら */}
+              <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-bold text-emerald-700">今から始めると月いくら？</p>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    現在{input.childCurrentAge}歳 → 残り{result.monthsRemaining}ヶ月（22歳まで）
+                  </p>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-2xl font-extrabold text-emerald-700">
+                    {result.monthlyFromNow.toLocaleString()}
+                    <span className="text-sm font-semibold ml-0.5">万円/月</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* 出産費用の内訳 */}
+              {result.birthCostTotal > 0 && (
+                <div className="rounded-xl border border-pink-200 bg-pink-50 px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-bold text-pink-700">出産費用（実費）</p>
+                    <p className="text-xs text-gray-400">{input.numChildren}人分 — 出産育児一時金50万差し引き後</p>
+                  </div>
+                  <p className="text-lg font-extrabold text-pink-700">
+                    {result.birthCostTotal}
+                    <span className="text-sm font-semibold ml-0.5">万円</span>
+                  </p>
+                </div>
+              )}
             </section>
 
             {/* ④ マンション診断との連携コンテキスト */}
@@ -556,7 +810,7 @@ export default function ChildCostPage() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {result.phases.map((phase, i) => (
-                  <PhaseCard key={phase.label} phase={phase} index={i} />
+                  <PhaseCard key={phase.label} phase={phase} index={i} totalPerChild={result.totalPerChild} />
                 ))}
               </div>
 
@@ -566,11 +820,11 @@ export default function ChildCostPage() {
                   <div>
                     <p className="text-xs font-bold text-gray-600">習い事（6〜18歳）</p>
                     <p className="text-xs text-gray-400">
-                      {input.extracurriculars === "standard" ? "月2万円 × 144ヶ月" : "月5万円 × 144ヶ月"}
+                      {extraLabelMap[input.extracurriculars]}
                     </p>
                   </div>
                   <p className="text-lg font-extrabold text-gray-700">
-                    {input.extracurriculars === "standard" ? "288" : "720"}
+                    {result.extraCostPerChild.toLocaleString()}
                     <span className="text-sm font-semibold ml-0.5">万円/人</span>
                   </p>
                 </div>
@@ -654,6 +908,9 @@ export default function ChildCostPage() {
             </div>
           </div>
         </section>
+
+        {/* ─── 補助金セクション ─── */}
+        <SubsidySection result={result} numChildren={input.numChildren} />
 
         {/* ─── FAQ ─── */}
         <section aria-labelledby="faq-child-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
