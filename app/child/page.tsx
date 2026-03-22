@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 /* ───────────────────────────────────────────
@@ -230,6 +230,20 @@ export default function ChildCostPage() {
   });
   const [result, setResult] = useState<ChildResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [mansionIncome, setMansionIncome] = useState<number | null>(null);
+
+  // ④ マンション診断の年収を引き継ぎ
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("30lab_diagnosis_input");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (typeof parsed.annualIncome === "number") {
+          setMansionIncome(parsed.annualIncome);
+        }
+      }
+    } catch (_) {}
+  }, []);
 
   const handleCalculate = () => {
     setIsLoading(true);
@@ -428,6 +442,16 @@ export default function ChildCostPage() {
                 </div>
               </div>
             </section>
+
+            {/* ④ マンション診断との連携コンテキスト */}
+            {mansionIncome && (
+              <div className="rounded-xl bg-indigo-50 border border-indigo-200 px-4 py-3 space-y-1">
+                <p className="text-xs font-bold text-indigo-600">📊 マンション診断との連携</p>
+                <p className="text-xs text-indigo-800 leading-relaxed">
+                  マンション診断の年収 <strong>{mansionIncome.toLocaleString()}万円</strong> をベースにすると、月換算の積立目安 <strong>{result.monthlyBurden}万円</strong> は月収比 <strong className={(result.monthlyBurden * 12 / mansionIncome) * 100 > 15 ? "text-orange-600" : "text-indigo-700"}>{((result.monthlyBurden * 12 / mansionIncome) * 100).toFixed(1)}%</strong>{(result.monthlyBurden * 12 / mansionIncome) * 100 > 15 ? "（住居費と並行すると家計が厳しくなる可能性があります）" : "（住居費と並行しても比較的管理しやすい水準です）"}
+                </p>
+              </div>
+            )}
 
             {/* フェーズ別カード */}
             <section className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6 space-y-4">

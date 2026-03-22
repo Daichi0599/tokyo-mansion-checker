@@ -92,6 +92,18 @@ export default function DiagnosisResultCard({ result, input }: Props) {
   // ゲージの幅：負担率 0% → 0%, 50%以上 → 100% でクリップ
   const gaugeWidth = Math.min((burdenRate / 50) * 100, 100);
 
+  // ③ 共働きリスク：収入半減時の住居費負担率
+  const riskBurdenRate = input
+    ? (monthlyTotal * 12) / (input.annualIncome / 2) * 100
+    : 0;
+  const riskConfig = riskBurdenRate < 30
+    ? { label: "余裕あり", bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", icon: "✅" }
+    : riskBurdenRate < 40
+    ? { label: "やや注意", bg: "bg-yellow-50", border: "border-yellow-200", text: "text-yellow-700", icon: "⚠️" }
+    : riskBurdenRate < 50
+    ? { label: "要注意", bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", icon: "🔶" }
+    : { label: "危険域", bg: "bg-red-50", border: "border-red-200", text: "text-red-700", icon: "🚨" };
+
   // Xシェアテキスト
   const shareText = input
     ? `都内マンション購入診断してみた！\n\n${config.icon} 判定：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n💰 月々の実質住居費：${monthlyTotal.toFixed(1)}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン #都内マンション`
@@ -143,6 +155,18 @@ export default function DiagnosisResultCard({ result, input }: Props) {
             badgeStyle="bg-red-200 text-red-800"
           />
         </div>
+
+        {/* ⑥ 計算根拠 */}
+        {input && (
+          <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
+            <p className="text-xs font-bold text-slate-500 mb-1.5">💡 計算根拠（安全価格）</p>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              年収 <strong>{input.annualIncome.toLocaleString()}万円</strong> × 25% ÷ 12 ＝ 月
+              <strong>{Math.round(input.annualIncome * 0.25 / 12 * 10) / 10}万円</strong>が住居費上限
+              　→　借入 <strong>{(safePrice - input.downPayment).toLocaleString()}万円</strong> ＋ 頭金 <strong>{input.downPayment.toLocaleString()}万円</strong> ＝ <strong>{safePrice.toLocaleString()}万円</strong>
+            </p>
+          </div>
+        )}
 
         {/* 月々の住居費内訳 */}
         <div className="rounded-xl bg-gray-50 border border-gray-100 px-4 py-4 space-y-2.5">
@@ -216,6 +240,26 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           <p className={`text-sm font-semibold mb-1 ${config.text}`}>診断コメント</p>
           <p className="text-sm text-gray-700 leading-relaxed">{comment}</p>
         </div>
+
+        {/* ③ 共働きリスクチェック */}
+        {input && (
+          <div className={`rounded-xl border px-4 py-4 space-y-2.5 ${riskConfig.bg} ${riskConfig.border}`}>
+            <div className="flex items-center gap-2">
+              <span>{riskConfig.icon}</span>
+              <p className={`text-sm font-bold ${riskConfig.text}`}>共働きリスクチェック</p>
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ml-auto border ${riskConfig.text} ${riskConfig.border} bg-white`}>
+                {riskConfig.label}
+              </span>
+            </div>
+            <p className="text-xs text-gray-700 leading-relaxed">
+              産休・育休などで収入が半減した場合（想定年収 <strong>{Math.round(input.annualIncome / 2).toLocaleString()}万円</strong>）、住居費負担率は
+              <strong className={riskConfig.text}> {riskBurdenRate.toFixed(1)}%</strong> になります。
+            </p>
+            <p className="text-xs text-gray-500 leading-relaxed border-t border-gray-200 pt-2">
+              ペアローンは育休中も両者の返済義務が継続します。収入減少時の返済余力を事前にシミュレーションしておきましょう。
+            </p>
+          </div>
+        )}
 
         {/* シェアボタン（X + Threads） */}
         {input && (

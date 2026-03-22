@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 /* ───────────────────────────────────────────
@@ -212,6 +212,20 @@ export default function CarPage() {
   });
   const [results, setResults] = useState<CostResult[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [mansionIncome, setMansionIncome] = useState<number | null>(null);
+
+  // ④ マンション診断の年収を引き継ぎ
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("30lab_diagnosis_input");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (typeof parsed.annualIncome === "number") {
+          setMansionIncome(parsed.annualIncome);
+        }
+      }
+    } catch (_) {}
+  }, []);
 
   const handleDiagnose = () => {
     setIsLoading(true);
@@ -364,6 +378,22 @@ export default function CarPage() {
                 ))}
               </div>
             </section>
+
+            {/* ④ マンション診断との連携コンテキスト */}
+            {mansionIncome && (() => {
+              const recommended = results.find((r) => r.isRecommended);
+              if (!recommended) return null;
+              const carAnnualMan = recommended.monthlyMan * 12;
+              const carIncomeRatio = (carAnnualMan / mansionIncome) * 100;
+              return (
+                <div className="rounded-xl bg-indigo-50 border border-indigo-200 px-4 py-3 space-y-1">
+                  <p className="text-xs font-bold text-indigo-600">📊 マンション診断との連携</p>
+                  <p className="text-xs text-indigo-800 leading-relaxed">
+                    マンション診断の年収 <strong>{mansionIncome.toLocaleString()}万円</strong> をベースにすると、最安の {recommended.label}（月 <strong>{recommended.monthlyMan}万円</strong>）は年収比 <strong className={carIncomeRatio > 10 ? "text-orange-600" : "text-indigo-700"}>{carIncomeRatio.toFixed(1)}%</strong>{carIncomeRatio > 10 ? "（住居費と合わせると家計が圧迫されやすい水準です）" : "（家計への負担は比較的小さい水準です）"}
+                  </p>
+                </div>
+              );
+            })()}
 
             {/* 内訳の注釈 */}
             <div className="bg-gray-50 rounded-xl border border-gray-200 px-4 py-3 text-xs text-gray-500 space-y-1 leading-relaxed">

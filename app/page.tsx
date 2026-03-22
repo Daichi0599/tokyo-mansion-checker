@@ -117,6 +117,8 @@ export default function Home() {
       const diagnosis = diagnose(input);
       setResult(diagnosis);
       setDiagnosisInput(input);
+      // ④ 他ツールへの引き継ぎ用にlocalStorageへ保存
+      try { localStorage.setItem("30lab_diagnosis_input", JSON.stringify(input)); } catch (_) {}
       setIsLoading(false);
       sendGAEvent("event", "diagnosis_run", {
         level:       diagnosis.level,
