@@ -59,6 +59,7 @@ export default function RootLayout({
             <span className="text-sm font-black text-blue-700 tracking-tight">30Lab</span>
             <div className="flex items-center gap-0.5">
               <a href="/" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">🏠 <span>マンション</span></a>
+              <a href="/check" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">🔍 <span>物件診断</span></a>
               <a href="/car" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">🚗 <span>車</span></a>
               <a href="/child" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">👶 <span>子育て</span></a>
             </div>

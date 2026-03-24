@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import { TOKYO_AREAS, findArea } from "@/lib/areaData";
 import { calcPriceMetrics } from "@/lib/calculator";
@@ -64,6 +64,18 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
     buildingAge: "", walkMinutes: "", managementFee: "",
   });
   const [result, setResult] = useState<ResultState | null>(null);
+  const [localSafePrice, setLocalSafePrice] = useState<number | undefined>(undefined);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (safePrice !== undefined) return;
+    try {
+      const stored = localStorage.getItem("30lab_safe_price");
+      if (stored) setLocalSafePrice(parseInt(stored));
+    } catch (_) {}
+  }, [safePrice]);
+
+  const effectiveSafePrice = safePrice ?? localSafePrice;
 
   const set = (key: keyof FormState) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
@@ -109,9 +121,9 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
 
   // ── シグナル ──────────────────────────────────────────────────────
   const budgetSignal: Signal = (() => {
-    if (!result || !safePrice) return "na";
-    if (result.price <= safePrice)       return "ok";
-    if (result.price <= safePrice * 1.1) return "warn";
+    if (!result || !effectiveSafePrice) return "na";
+    if (result.price <= effectiveSafePrice)       return "ok";
+    if (result.price <= effectiveSafePrice * 1.1) return "warn";
     return "ng";
   })();
 
@@ -288,17 +300,17 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
                   <p className="text-xs text-gray-400">/月</p>
                 </div>
               </div>
-              {safePrice && (
+              {effectiveSafePrice && (
                 <p className={`text-xs font-semibold ${
                   budgetSignal === "ok"   ? "text-emerald-700"
                   : budgetSignal === "warn" ? "text-yellow-700"
                   : "text-red-700"
                 }`}>
                   {budgetSignal === "ok"
-                    ? `✅ 安全購入価格（${safePrice.toLocaleString()}万円）の範囲内`
+                    ? `✅ 安全購入価格（${effectiveSafePrice.toLocaleString()}万円）の範囲内`
                     : budgetSignal === "warn"
-                    ? `⚠️ 安全購入価格より ${(result.price - safePrice).toLocaleString()}万円 オーバー（±10%以内）`
-                    : `❌ 安全購入価格より ${(result.price - safePrice).toLocaleString()}万円 オーバー`}
+                    ? `⚠️ 安全購入価格より ${(result.price - effectiveSafePrice).toLocaleString()}万円 オーバー（±10%以内）`
+                    : `❌ 安全購入価格より ${(result.price - effectiveSafePrice).toLocaleString()}万円 オーバー`}
                 </p>
               )}
             </div>
@@ -406,6 +418,70 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
               </div>
             )}
 
+          </div>
+        )}
+
+        {/* シェアボタン */}
+        {result && verdict && (
+          <div className="space-y-2 pt-1">
+            <p className="text-xs font-bold text-gray-600">結果をシェアして相談する</p>
+            <div className="flex gap-2">
+              {(() => {
+                const loan = metrics ? metrics.monthlyPayment : result.price * 0.9 * 0.0026;
+                const totalMonthly = loan + result.managementFee;
+                const lines = [
+                  `📍 ${result.area} ${result.price.toLocaleString()}万円 / ${result.sqm}㎡（築${result.buildingAge}年・徒歩${result.walkMinutes}分）`,
+                  ``,
+                  `総合判定：${verdict.icon} ${verdict.label}`,
+                  pricePerTsubo !== null && priceVsAvg !== null
+                    ? `🏠 坪単価：${pricePerTsubo}万円（相場${priceVsAvg >= 0 ? "+" : ""}${Math.round(priceVsAvg)}%）`
+                    : null,
+                  `💴 月々の実質：${totalMonthly.toFixed(1)}万円`,
+                  futureRatio !== null
+                    ? `📈 10年後推定：購入価格の${Math.round(futureRatio * 100)}%`
+                    : null,
+                  ``,
+                  `#マンション購入 #物件診断 この物件どう思う？`,
+                ].filter((l): l is string => l !== null).join("\n");
+
+                const shareUrl = "https://30lab.vercel.app/check";
+
+                return (
+                  <>
+                    <a
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(lines)}&url=${encodeURIComponent(shareUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => sendGAEvent("event", "property_share_click", { platform: "x", verdict: verdict.label })}
+                      className="flex-1 flex items-center justify-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-bold py-2.5 rounded-xl transition-colors"
+                    >
+                      <span>𝕏</span> でシェア
+                    </a>
+                    <a
+                      href={`https://line.me/R/msg/text/?${encodeURIComponent(lines + "\n" + shareUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => sendGAEvent("event", "property_share_click", { platform: "line", verdict: verdict.label })}
+                      className="flex-1 flex items-center justify-center gap-1.5 bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-2.5 rounded-xl transition-colors"
+                    >
+                      LINE
+                    </a>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(shareUrl).then(() => {
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        });
+                        sendGAEvent("event", "property_share_click", { platform: "copy", verdict: verdict.label });
+                      }}
+                      className="flex-1 flex items-center justify-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2.5 rounded-xl transition-colors"
+                    >
+                      {copied ? "✓ コピー済" : "🔗 URLコピー"}
+                    </button>
+                  </>
+                );
+              })()}
+            </div>
           </div>
         )}
 

@@ -5,7 +5,6 @@ import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
 import ResultTabs          from "@/components/ResultTabs";
-import PropertyDiagnosis   from "@/components/PropertyDiagnosis";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
@@ -118,7 +117,10 @@ export default function Home() {
       setResult(diagnosis);
       setDiagnosisInput(input);
       // ④ 他ツールへの引き継ぎ用にlocalStorageへ保存
-      try { localStorage.setItem("30lab_diagnosis_input", JSON.stringify(input)); } catch (_) {}
+      try {
+        localStorage.setItem("30lab_diagnosis_input", JSON.stringify(input));
+        localStorage.setItem("30lab_safe_price", String(diagnosis.safePrice));
+      } catch (_) {}
       setIsLoading(false);
       sendGAEvent("event", "diagnosis_run", {
         level:       diagnosis.level,
@@ -274,6 +276,20 @@ export default function Home() {
             {/* ① 診断結果カード */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
 
+            {/* ① .5 Step2バナー */}
+            <a
+              href="/check"
+              onClick={() => sendGAEvent("event", "step2_banner_click", { level: result.level })}
+              className="flex items-center justify-between gap-3 rounded-2xl border-2 border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+            >
+              <div>
+                <p className="text-xs font-bold text-blue-600 mb-0.5">Step 2 — 物件を評価する</p>
+                <p className="text-sm font-bold text-gray-900">気になる物件を診断する 🔍</p>
+                <p className="text-xs text-gray-500 mt-0.5">坪単価・管理費・10年後推定を即チェック。結果をシェアして相談できます。</p>
+              </div>
+              <span className="shrink-0 text-blue-600 font-bold text-lg">→</span>
+            </a>
+
             {/* ② モゲチェック（メインアフィリエイト） */}
             <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex-1 space-y-1">
@@ -324,23 +340,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* ─── 6. 物件診断（独立セクション） ─── */}
-        <section aria-labelledby="property-diagnosis-heading">
-          <div className="text-center mb-4">
-            <h2 id="property-diagnosis-heading" className="text-lg font-extrabold text-gray-800">
-              🔍 気になる物件を診断する
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              SUUMOなどで見つけた物件のスペックを入力して、資産性スコアとエリア相場を即確認
-            </p>
-          </div>
-          <PropertyDiagnosis
-            input={diagnosisInput ?? undefined}
-            safePrice={result?.safePrice}
-          />
-        </section>
-
-        {/* ─── 7. FAQ ─── */}
+        {/* ─── 6. FAQ ─── */}
         <section aria-labelledby="faq-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
           <h2 id="faq-heading" className="text-base font-extrabold text-gray-800 mb-1 text-center">
             よくある質問
