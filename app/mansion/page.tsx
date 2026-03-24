@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "都内マンション購入診断 | 無理なく買える価格を無料チェック",
     description: "「借りられる額」ではなく「無理なく買える額」がわかる。約3分・完全無料・匿名OK。",
   },

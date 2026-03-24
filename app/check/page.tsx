@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "物件診断 | 坪単価・管理費・10年後まで即チェック",
     description: "坪単価・管理費・10年後推定を無料で診断。結果をシェアして相談できます。",
   },
