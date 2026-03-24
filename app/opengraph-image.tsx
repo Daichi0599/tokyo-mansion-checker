@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "都内マンション購入診断 | 30Lab";
+export const alt = "30Lab | 気になったら、まずここから。";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,20 +16,35 @@ export default function OgImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #2563eb 100%)",
+          background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1d4ed8 100%)",
           fontFamily: "sans-serif",
           padding: "60px",
           position: "relative",
         }}
       >
-        {/* Logo area */}
+        {/* Badge */}
         <div
           style={{
             display: "flex",
-            flexDirection: "row",
+            background: "rgba(59,130,246,0.3)",
+            border: "1px solid rgba(96,165,250,0.5)",
+            borderRadius: "999px",
+            padding: "8px 24px",
+            fontSize: "18px",
+            color: "rgba(147,197,253,1)",
+            marginBottom: "24px",
+          }}
+        >
+          30代のお金の一歩目に
+        </div>
+
+        {/* Logo + tagline */}
+        <div
+          style={{
+            display: "flex",
             alignItems: "center",
-            gap: "16px",
-            marginBottom: "32px",
+            gap: "20px",
+            marginBottom: "20px",
           }}
         >
           <div
@@ -37,22 +52,13 @@ export default function OgImage() {
               display: "flex",
               background: "white",
               borderRadius: "16px",
-              padding: "12px 24px",
-              fontSize: "28px",
+              padding: "10px 28px",
+              fontSize: "48px",
               fontWeight: 900,
               color: "#1d4ed8",
             }}
           >
             30Lab
-          </div>
-          <div
-            style={{
-              display: "flex",
-              fontSize: "18px",
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            アラサーの人生選択を支援するツール集
           </div>
         </div>
 
@@ -60,52 +66,46 @@ export default function OgImage() {
         <div
           style={{
             display: "flex",
-            fontSize: "56px",
+            fontSize: "52px",
             fontWeight: 900,
             color: "white",
             textAlign: "center",
-            lineHeight: 1.2,
-            marginBottom: "24px",
+            lineHeight: 1.3,
+            marginBottom: "32px",
           }}
         >
-          都内マンション購入診断
+          気になったら、まずここから。
         </div>
 
-        {/* Sub */}
-        <div
-          style={{
-            display: "flex",
-            fontSize: "28px",
-            color: "rgba(255,255,255,0.85)",
-            textAlign: "center",
-            marginBottom: "48px",
-          }}
-        >
-          無理なく買える価格を約3分・完全無料で算出
-        </div>
-
-        {/* Features */}
+        {/* Tools row */}
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            gap: "24px",
+            gap: "16px",
           }}
         >
-          {["世帯年収から算出", "住居費負担率を表示", "金利・エリア比較付き"].map((f) => (
+          {[
+            { icon: "🏠", label: "マンション購入診断" },
+            { icon: "🔍", label: "物件診断" },
+            { icon: "🚗", label: "車コスト診断" },
+            { icon: "👶", label: "子育て費用試算" },
+          ].map((t) => (
             <div
-              key={f}
+              key={t.label}
               style={{
                 display: "flex",
-                background: "rgba(255,255,255,0.15)",
-                borderRadius: "12px",
-                padding: "12px 24px",
-                fontSize: "20px",
-                color: "white",
-                border: "1px solid rgba(255,255,255,0.3)",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "8px",
+                background: "rgba(255,255,255,0.1)",
+                borderRadius: "16px",
+                padding: "16px 20px",
+                border: "1px solid rgba(255,255,255,0.2)",
               }}
             >
-              {f}
+              <span style={{ fontSize: "28px" }}>{t.icon}</span>
+              <span style={{ fontSize: "15px", color: "rgba(255,255,255,0.9)", fontWeight: 700 }}>{t.label}</span>
             </div>
           ))}
         </div>
@@ -118,7 +118,7 @@ export default function OgImage() {
             bottom: "40px",
             right: "60px",
             fontSize: "20px",
-            color: "rgba(255,255,255,0.5)",
+            color: "rgba(255,255,255,0.4)",
           }}
         >
           30lab.vercel.app

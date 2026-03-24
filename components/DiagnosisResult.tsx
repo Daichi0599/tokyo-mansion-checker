@@ -106,7 +106,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
 
   // Xシェアテキスト
   const shareText = input
-    ? `都内マンション購入診断してみた！\n\n${config.icon} 判定：${config.label}\n🏠 安全購入価格：${safePrice.toLocaleString()}万円\n💰 月々の実質住居費：${monthlyTotal.toFixed(1)}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン #都内マンション`
+    ? `年収${input.annualIncome.toLocaleString()}万・頭金${input.downPayment.toLocaleString()}万で都内マンション診断してみた\n\n${config.icon} ${config.label}：安全購入価格 ${safePrice.toLocaleString()}万円\n💰 月々の実質住居費：${monthlyTotal.toFixed(1)}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\n「借りられる額」じゃなく「無理なく買える額」がわかる👇\n#マンション購入 #住宅ローン #都内マンション`
     : "";
 
   return (

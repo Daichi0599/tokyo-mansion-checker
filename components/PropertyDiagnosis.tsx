@@ -430,18 +430,21 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
                 const loan = metrics ? metrics.monthlyPayment : result.price * 0.9 * 0.0026;
                 const totalMonthly = loan + result.managementFee;
                 const lines = [
-                  `📍 ${result.area} ${result.price.toLocaleString()}万円 / ${result.sqm}㎡（築${result.buildingAge}年・徒歩${result.walkMinutes}分）`,
+                  `この物件どう思う？みんなの意見が聞きたい`,
                   ``,
-                  `総合判定：${verdict.icon} ${verdict.label}`,
+                  `📍 ${result.area} ${result.price.toLocaleString()}万円 / ${result.sqm}㎡`,
+                  `　築${result.buildingAge}年・徒歩${result.walkMinutes}分`,
+                  ``,
+                  `診断結果：${verdict.icon} ${verdict.label}`,
                   pricePerTsubo !== null && priceVsAvg !== null
-                    ? `🏠 坪単価：${pricePerTsubo}万円（相場${priceVsAvg >= 0 ? "+" : ""}${Math.round(priceVsAvg)}%）`
+                    ? `🏠 坪単価 ${pricePerTsubo}万円（エリア相場比 ${priceVsAvg >= 0 ? "+" : ""}${Math.round(priceVsAvg)}%）`
                     : null,
-                  `💴 月々の実質：${totalMonthly.toFixed(1)}万円`,
+                  `💴 月々の実質負担：${totalMonthly.toFixed(1)}万円`,
                   futureRatio !== null
                     ? `📈 10年後推定：購入価格の${Math.round(futureRatio * 100)}%`
                     : null,
                   ``,
-                  `#マンション購入 #物件診断 この物件どう思う？`,
+                  `#マンション購入 #物件診断 #30Lab`,
                 ].filter((l): l is string => l !== null).join("\n");
 
                 const shareUrl = "https://30lab.vercel.app/check";
