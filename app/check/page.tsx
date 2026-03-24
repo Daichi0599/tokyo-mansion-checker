@@ -47,7 +47,7 @@ export default function CheckPage() {
             </p>
           </div>
           <a
-            href="/"
+            href="/mansion"
             className="shrink-0 text-xs font-bold bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
           >
             購入上限を診断 →
