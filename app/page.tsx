@@ -57,15 +57,15 @@ export default function HomePage() {
         {/* ── ヒーロー ── */}
         <header className="text-center space-y-5">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full">
-            30代の大きな決断を、数字で支える
+            30代のお金の一歩目に
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">
-            買う前に、<br className="sm:hidden" />
-            <span className="text-blue-600">数字で確かめる。</span>
+            気になったら、<br className="sm:hidden" />
+            <span className="text-blue-600">まずここから。</span>
           </h1>
           <p className="text-sm text-gray-500 leading-relaxed max-w-md mx-auto">
-            マンション購入・物件選び・車・子育て費用。<br />
-            30代が直面するお金の判断を、無料ツールでサポートします。
+            マンション・車・子育て費用——<br />
+            大きな決断の前に、数字で整理しよう。
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {["完全無料", "匿名OK", "データ保存なし", "営業電話なし"].map((b) => (
@@ -123,12 +123,13 @@ export default function HomePage() {
         <section className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6 space-y-4 text-center">
           <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">About 30Lab</p>
           <p className="text-base font-extrabold text-gray-800 leading-snug">
-            「なんとなく決める」をなくしたい
+            気になり始めた、その最初の一歩に
           </p>
           <p className="text-sm text-gray-500 leading-relaxed">
-            マンション・車・子育て——30代は大きな出費が重なる時期です。<br />
-            でも、「実際いくらかかるか」を正確に把握できている人は少ない。<br />
-            30Labは、数字の根拠を持って決断できるツールを作っています。
+            「マンションって実際いくらまで買えるの？」<br />
+            「車、持つべき？手放すべき？」<br />
+            「子どもができたら、お金どうなる？」<br /><br />
+            そんな漠然とした疑問を、数字で整理する場所。それが30Labです。
           </p>
         </section>
 
