@@ -962,6 +962,28 @@ export default function ChildCostPage() {
               <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZLSJ+79YQYA+503M+60H7M" alt="" style={{ display: "block" }} />
             </div>
 
+            {/* ガーデン 学資保険 CTA */}
+            <div className="rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-yellow-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1 space-y-1">
+                <p className="text-xs font-bold text-amber-600 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-900">
+                  学資保険で教育費を確実に準備しませんか？
+                </p>
+                <p className="text-xs text-gray-500">
+                  元本保証＋返戻率110〜120%の学資保険。子どもが生まれたら早めに始めるほど有利。無料相談で最適プランを提案してもらえます。
+                </p>
+              </div>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+7AK6K2+4GN2+5ZEMP"
+                rel="nofollow noopener"
+                target="_blank"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "ガーデン学資保険", page: "child" })}
+                className="shrink-0 inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+              >
+                学資保険を無料で相談する →
+              </a>
+            </div>
+
           </div>
         )}
 

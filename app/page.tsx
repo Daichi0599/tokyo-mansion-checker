@@ -1,3 +1,25 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "30Lab | 気になったら、まずここから。",
+  description:
+    "マンション購入・物件診断・車・子育て費用——大きな決断の前に数字で整理できる無料ツール集。完全無料・匿名OK・データ保存なし・営業電話なし。",
+  keywords: ["マンション購入診断", "物件診断", "車コスト比較", "子育て費用試算", "30代 お金"],
+  openGraph: {
+    title: "30Lab | 気になったら、まずここから。",
+    description:
+      "マンション・車・子育て費用。大きな決断の前に数字で整理できる無料ツール集。",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "30Lab | 気になったら、まずここから。",
+    description:
+      "マンション・車・子育て費用。大きな決断の前に数字で整理できる無料ツール集。完全無料・匿名OK。",
+  },
+};
+
 /* ── ツールカード ──────────────────────────────────────────── */
 // Tailwindの動的クラス問題を避けるため、完全なクラス文字列をツールごとに定義
 const TOOLS = [
