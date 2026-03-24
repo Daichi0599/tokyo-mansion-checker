@@ -1,4 +1,5 @@
 /* ── ツールカード ──────────────────────────────────────────── */
+// Tailwindの動的クラス問題を避けるため、完全なクラス文字列をツールごとに定義
 const TOOLS = [
   {
     icon:    "🏠",
@@ -6,9 +7,12 @@ const TOOLS = [
     title:   "マンション購入診断",
     desc:    "「借りられる額」ではなく「無理なく買える額」がわかる。世帯年収・生活費・管理費から安全購入価格を算出。",
     badges:  ["約3分", "世帯年収対応", "負担率チェック"],
-    cta:     "無料で診断する →",
+    cta:     "診断を始める →",
     href:    "/mansion",
-    color:   "blue",
+    card:    "border-blue-200 hover:bg-blue-50",
+    footer:  "bg-blue-50 border-blue-200",
+    text:    "text-blue-700",
+    badge:   "bg-blue-100 text-blue-700",
   },
   {
     icon:    "🔍",
@@ -18,7 +22,10 @@ const TOOLS = [
     badges:  ["坪単価比較", "管理費チェック", "シェア機能"],
     cta:     "物件を診断する →",
     href:    "/check",
-    color:   "indigo",
+    card:    "border-indigo-200 hover:bg-indigo-50",
+    footer:  "bg-indigo-50 border-indigo-200",
+    text:    "text-indigo-700",
+    badge:   "bg-indigo-100 text-indigo-700",
   },
   {
     icon:    "🚗",
@@ -26,9 +33,12 @@ const TOOLS = [
     title:   "車コスト診断",
     desc:    "購入・ローン・カーシェア・リースを10年総コストで比較。都内在住者向けの現実的なコスト試算。",
     badges:  ["10年総コスト", "4パターン比較"],
-    cta:     "比較する →",
+    cta:     "コストを比較する →",
     href:    "/car",
-    color:   "emerald",
+    card:    "border-emerald-200 hover:bg-emerald-50",
+    footer:  "bg-emerald-50 border-emerald-200",
+    text:    "text-emerald-700",
+    badge:   "bg-emerald-100 text-emerald-700",
   },
   {
     icon:    "👶",
@@ -36,18 +46,14 @@ const TOOLS = [
     title:   "子育て費用試算",
     desc:    "0歳〜大学卒業まで。公立・私立・習い事の選択で教育費がどう変わるかを可視化。補助金・助成金も確認。",
     badges:  ["教育費シミュレーション", "補助金確認"],
-    cta:     "試算する →",
+    cta:     "費用を試算する →",
     href:    "/child",
-    color:   "orange",
+    card:    "border-orange-200 hover:bg-orange-50",
+    footer:  "bg-orange-50 border-orange-200",
+    text:    "text-orange-700",
+    badge:   "bg-orange-100 text-orange-700",
   },
 ];
-
-const COLOR_MAP: Record<string, { border: string; bg: string; text: string; badge: string; btn: string }> = {
-  blue:   { border: "border-blue-200",   bg: "bg-blue-50",   text: "text-blue-700",   badge: "bg-blue-100 text-blue-700",   btn: "bg-blue-600 hover:bg-blue-700"   },
-  indigo: { border: "border-indigo-200", bg: "bg-indigo-50", text: "text-indigo-700", badge: "bg-indigo-100 text-indigo-700", btn: "bg-indigo-600 hover:bg-indigo-700" },
-  emerald:{ border: "border-emerald-200",bg: "bg-emerald-50",text: "text-emerald-700",badge: "bg-emerald-100 text-emerald-700",btn: "bg-emerald-600 hover:bg-emerald-700"},
-  orange: { border: "border-orange-200", bg: "bg-orange-50", text: "text-orange-700", badge: "bg-orange-100 text-orange-700", btn: "bg-orange-500 hover:bg-orange-600" },
-};
 
 export default function HomePage() {
   return (
@@ -80,42 +86,39 @@ export default function HomePage() {
         <section className="space-y-4">
           <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest text-center">Tools</h2>
           <div className="space-y-4">
-            {TOOLS.map((tool) => {
-              const c = COLOR_MAP[tool.color];
-              return (
-                <a
-                  key={tool.href}
-                  href={tool.href}
-                  className={`block rounded-2xl border-2 ${c.border} bg-white hover:${c.bg} transition-colors shadow-sm overflow-hidden`}
-                >
-                  <div className="px-5 py-5 flex items-start gap-4">
-                    <span className="text-3xl shrink-0 mt-0.5">{tool.icon}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        {tool.step && (
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${c.badge}`}>
-                            {tool.step}
-                          </span>
-                        )}
-                        <p className="text-base font-extrabold text-gray-900">{tool.title}</p>
-                      </div>
-                      <p className="text-xs text-gray-500 leading-relaxed mb-2">{tool.desc}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {tool.badges.map((b) => (
-                          <span key={b} className={`text-xs font-semibold px-2 py-0.5 rounded-full ${c.badge}`}>
-                            {b}
-                          </span>
-                        ))}
-                      </div>
+            {TOOLS.map((tool) => (
+              <a
+                key={tool.href}
+                href={tool.href}
+                className={`block rounded-2xl border-2 bg-white transition-colors shadow-sm overflow-hidden ${tool.card}`}
+              >
+                <div className="px-5 py-5 flex items-start gap-4">
+                  <span className="text-3xl shrink-0 mt-0.5">{tool.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      {tool.step && (
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${tool.badge}`}>
+                          {tool.step}
+                        </span>
+                      )}
+                      <p className="text-base font-extrabold text-gray-900">{tool.title}</p>
                     </div>
-                    <span className={`shrink-0 text-sm font-bold ${c.text} mt-1`}>→</span>
+                    <p className="text-xs text-gray-500 leading-relaxed mb-2">{tool.desc}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {tool.badges.map((b) => (
+                        <span key={b} className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tool.badge}`}>
+                          {b}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className={`px-5 py-3 ${c.bg} border-t ${c.border}`}>
-                    <p className={`text-xs font-bold ${c.text}`}>{tool.cta}</p>
-                  </div>
-                </a>
-              );
-            })}
+                  <span className={`shrink-0 text-sm font-bold mt-1 ${tool.text}`}>→</span>
+                </div>
+                <div className={`px-5 py-3 border-t ${tool.footer}`}>
+                  <p className={`text-xs font-bold ${tool.text}`}>{tool.cta}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </section>
 
