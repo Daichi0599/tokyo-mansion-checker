@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import { TOKYO_AREAS, findArea } from "@/lib/areaData";
 import { calcPriceMetrics } from "@/lib/calculator";
@@ -66,6 +66,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
   const [result, setResult] = useState<ResultState | null>(null);
   const [localSafePrice, setLocalSafePrice] = useState<number | undefined>(undefined);
   const [copied, setCopied] = useState(false);
+  const hasStarted = useRef(false);
 
   useEffect(() => {
     if (safePrice !== undefined) return;
@@ -78,8 +79,13 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
   const effectiveSafePrice = safePrice ?? localSafePrice;
 
   const set = (key: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      if (!hasStarted.current) {
+        hasStarted.current = true;
+        sendGAEvent("event", "tool_start", { tool: "property_diagnosis" });
+      }
       setForm((prev) => ({ ...prev, [key]: e.target.value }));
+    };
 
   const handleDiagnose = () => {
     const priceNum = parseInt(form.price);
@@ -95,7 +101,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
       area:          form.area,
     });
 
-    sendGAEvent("event", "property_diagnosis", { area: form.area, price: priceNum });
+    sendGAEvent("event", "diagnosis_run", { tool: "property_diagnosis", area: form.area, price: priceNum });
   };
 
   const isDisabled = !form.price || !form.sqm;
@@ -418,6 +424,32 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
               </div>
             )}
 
+          </div>
+        )}
+
+        {/* モゲチェック アフィリエイトCTA */}
+        {result && (
+          <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1 space-y-1">
+              <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">PR</p>
+              <p className="text-sm font-bold text-gray-900">
+                この物件、実際に借りられる？金利は？— モゲチェックで無料確認
+              </p>
+              <p className="text-xs text-gray-500">
+                複数の金融機関を一括比較。借入可能額・金利・月返済を最短3分・完全無料でチェック。
+              </p>
+            </div>
+            <a
+              href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
+              rel="nofollow noopener"
+              target="_blank"
+              onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", page: "check" })}
+              className="shrink-0 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+            >
+              無料で金利を確認する →
+            </a>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
           </div>
         )}
 

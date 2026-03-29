@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
 
@@ -256,6 +256,15 @@ export default function CarPage() {
   });
   const [results, setResults] = useState<CostResult[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const hasStarted = useRef(false);
+
+  const handleInputChange = <K extends keyof CarInputs>(key: K, value: CarInputs[K]) => {
+    if (!hasStarted.current) {
+      hasStarted.current = true;
+      sendGAEvent("event", "tool_start", { tool: "car_diagnosis" });
+    }
+    setInputs((prev) => ({ ...prev, [key]: value }));
+  };
   const [mansionIncome, setMansionIncome] = useState<number | null>(null);
 
   // ④ マンション診断の年収を引き継ぎ
@@ -391,7 +400,7 @@ export default function CarPage() {
               label="月の利用日数"
               sublabel="外出・お出かけに車を使う日数"
               value={inputs.usageDaysPerMonth}
-              onChange={(v) => setInputs((prev) => ({ ...prev, usageDaysPerMonth: v }))}
+              onChange={(v) => handleInputChange("usageDaysPerMonth", v)}
               options={[
                 { value: 2, label: "2日（週1未満）" },
                 { value: 4, label: "4日（週1程度）" },
@@ -406,7 +415,7 @@ export default function CarPage() {
               label="1回あたり平均利用時間"
               sublabel="1回の外出で車を使う平均時間"
               value={inputs.hoursPerUse}
-              onChange={(v) => setInputs((prev) => ({ ...prev, hoursPerUse: v }))}
+              onChange={(v) => handleInputChange("hoursPerUse", v)}
               options={[
                 { value: 2, label: "2時間（近場の買い物など）" },
                 { value: 3, label: "3時間（ショッピングモールなど）" },
@@ -419,7 +428,7 @@ export default function CarPage() {
               label="月の駐車場代"
               sublabel="自宅・マンション駐車場の費用"
               value={inputs.parkingFeeMan}
-              onChange={(v) => setInputs((prev) => ({ ...prev, parkingFeeMan: v }))}
+              onChange={(v) => handleInputChange("parkingFeeMan", v)}
               options={[
                 { value: 0, label: "0万円（なし・無料）" },
                 { value: 1, label: "1万円" },
@@ -536,6 +545,29 @@ export default function CarPage() {
                   ))}
               </ol>
             </section>
+
+            {/* おかねと暮らし相談 アフィリエイトCTA */}
+            <div className="rounded-2xl border border-teal-200 bg-gradient-to-r from-teal-50 to-emerald-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1 space-y-1">
+                <p className="text-xs font-bold text-teal-600 uppercase tracking-wide">PR</p>
+                <p className="text-sm font-bold text-gray-900">
+                  「車は持つべき？」の答えを、家計のプロに相談する
+                </p>
+                <p className="text-xs text-gray-500">
+                  車コスト・住宅費・教育費…お金の不安をFPに無料相談。オンラインで気軽に話せます。
+                </p>
+              </div>
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM"
+                rel="nofollow noopener"
+                target="_blank"
+                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "おかねと暮らし相談", page: "car" })}
+                className="shrink-0 inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+              >
+                無料で相談してみる →
+              </a>
+              <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM" alt="" style={{ display: "block" }} />
+            </div>
 
             {/* 別の条件で試すボタン */}
             <button

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
 
@@ -531,7 +531,13 @@ export default function ChildCostPage() {
     }, 500);
   };
 
+  const hasStarted = useRef(false);
+
   const update = <K extends keyof ChildInput>(key: K, value: ChildInput[K]) => {
+    if (!hasStarted.current) {
+      hasStarted.current = true;
+      sendGAEvent("event", "tool_start", { tool: "child_diagnosis" });
+    }
     setInput((prev) => ({ ...prev, [key]: value }));
     setResult(null);
   };
