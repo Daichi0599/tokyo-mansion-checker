@@ -305,6 +305,24 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           </div>
         )}
 
+        {/* Xフォロー誘導 */}
+        <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-4 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-bold text-gray-800">📣 続報・使い方をXで発信中</p>
+            <p className="text-xs text-gray-500 mt-0.5">フォローすると新ツールや住宅ローン最新情報が届きます</p>
+          </div>
+          <a
+            href="https://twitter.com/intent/follow?screen_name=30lab_jp"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sendGAEvent("event", "follow_click", { platform: "x" })}
+            className="shrink-0 flex items-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors"
+          >
+            <span>𝕏</span>
+            <span>フォロー</span>
+          </a>
+        </div>
+
         {/* 他のツール導線 */}
         <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-3">
           <p className="text-sm font-bold text-gray-600">他のツールも試す</p>
