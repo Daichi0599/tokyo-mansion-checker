@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     description:
       "マンション・車・子育て費用。大きな決断の前に数字で整理できる無料ツール集。完全無料・匿名OK。",
   },
+  verification: {
+    google: "YJQaoLidiFiUXU1gk17pOzulSMSM8KbNYV0NnZ18uDU",
+  },
 };
 
 export default function RootLayout({
