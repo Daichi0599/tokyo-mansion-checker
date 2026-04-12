@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PropertyDiagnosis from "@/components/PropertyDiagnosis";
+import CheckPageTabs from "@/components/CheckPageTabs";
 
 export const metadata: Metadata = {
   title: "物件診断 | 坪単価・管理費・10年後まで即チェック — 30Lab",
@@ -54,8 +54,8 @@ export default function CheckPage() {
           </a>
         </div>
 
-        {/* 物件診断 */}
-        <PropertyDiagnosis />
+        {/* 物件診断 / 物件比較タブ */}
+        <CheckPageTabs />
 
         {/* フッター */}
         <footer className="text-center text-xs text-gray-400 pb-4 space-y-1">
