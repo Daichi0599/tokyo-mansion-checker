@@ -104,10 +104,17 @@ export default function DiagnosisResultCard({ result, input }: Props) {
     ? { label: "要注意", bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", icon: "🔶" }
     : { label: "危険域", bg: "bg-red-50", border: "border-red-200", text: "text-red-700", icon: "🚨" };
 
-  // Xシェアテキスト
+  // Xシェアテキスト（長文・詳細）
   const shareText = input
     ? `年収${input.annualIncome.toLocaleString()}万・頭金${input.downPayment.toLocaleString()}万で都内マンション診断してみた\n\n${config.icon} ${config.label}：安全購入価格 ${safePrice.toLocaleString()}万円\n💰 月々の実質住居費：${monthlyTotal.toFixed(1)}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\n「借りられる額」じゃなく「無理なく買える額」がわかる👇\n#マンション購入 #住宅ローン #都内マンション`
     : "";
+
+  // Xシェアテキスト（診断コメント直下用・短め）
+  const xShareTextShort = input
+    ? `年収${input.annualIncome.toLocaleString()}万で都内マンション診断してみた！\n\n✅ 安全購入価格：${safePrice.toLocaleString()}万円\n📊 住居費負担率：${burdenRate.toFixed(1)}%\n\nあなたも無料で診断できます👇\n#マンション購入 #住宅ローン`
+    : "";
+
+  const siteUrl = "https://tokyo-mansion-checker.vercel.app";
 
   return (
     <div className={`rounded-2xl border-2 shadow-md overflow-hidden ${config.border}`}>
@@ -116,7 +123,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         <span className={`text-3xl font-black ${config.text}`}>
           {config.icon} {config.label}
         </span>
-        <p className="text-sm text-gray-500 mt-1">無理なく買える安全購入価格は</p>
+        <p className="text-sm text-gray-500 mt-1">あなたの安全購入価格は</p>
         <p className="text-5xl sm:text-6xl font-black text-gray-900 leading-none">
           {safePrice.toLocaleString()}
           <span className="text-2xl font-normal text-gray-500 ml-2">万円</span>
@@ -240,6 +247,20 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           <p className={`text-sm font-semibold mb-1 ${config.text}`}>診断コメント</p>
           <p className="text-sm text-gray-700 leading-relaxed">{comment}</p>
         </div>
+
+        {/* Xシェアボタン（診断コメント直下） */}
+        {input && (
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(xShareTextShort)}&url=${encodeURIComponent(siteUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sendGAEvent("event", "share_click", { platform: "x", level })}
+            className="flex items-center justify-center gap-2 w-full bg-black hover:bg-gray-800 text-white font-bold py-3.5 rounded-xl transition-colors text-sm"
+          >
+            <span className="font-bold text-base">𝕏</span>
+            <span>この結果をXでシェア</span>
+          </a>
+        )}
 
         {/* ③ 共働きリスクチェック */}
         {input && (
