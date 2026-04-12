@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import RateTypeSimulator from "@/components/RateTypeSimulator";
-import AreaComparison    from "@/components/AreaComparison";
-import PriceComparison   from "@/components/PriceComparison";
+import RateTypeSimulator    from "@/components/RateTypeSimulator";
+import AreaComparison       from "@/components/AreaComparison";
+import PriceComparison      from "@/components/PriceComparison";
+import TsuboPriceComparison from "@/components/TsuboPriceComparison";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 interface Props {
@@ -15,6 +16,7 @@ const TABS = [
   { id: "rate",  label: "金利比較", icon: "📊" },
   { id: "area",  label: "エリア",   icon: "🗺️" },
   { id: "price", label: "価格表",   icon: "💰" },
+  { id: "tsubo", label: "物件比較", icon: "🏢" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -27,7 +29,7 @@ export default function ResultTabs({ result, input }: Props) {
     <div className="space-y-3">
       {/* ── タブバー ── */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-1.5">
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-4 gap-1">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -63,6 +65,10 @@ export default function ResultTabs({ result, input }: Props) {
           input={input}
           defaultPrices={[result.safePrice, result.aggressivePrice, result.dangerPrice]}
         />
+      </div>
+
+      <div className={active === "tsubo" ? "block" : "hidden"}>
+        <TsuboPriceComparison />
       </div>
     </div>
   );
