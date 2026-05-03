@@ -65,6 +65,7 @@ export default function RootLayout({
               <a href="/check" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">🔍 <span>物件診断</span></a>
               <a href="/car" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">🚗 <span>車</span></a>
               <a href="/child" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">👶 <span>子育て</span></a>
+              <a href="/articles" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors">📝 <span>コラム</span></a>
             </div>
           </div>
         </nav>
