@@ -57,6 +57,51 @@ const articles = [
     tag: "共働き・ペアローン",
     date: "2025年最新",
   },
+  {
+    href: "/articles/mansion-kanrihi-shuzenhi",
+    emoji: "🏢",
+    title: "マンションの管理費・修繕積立金の相場はいくら？",
+    description:
+      "マンション購入後に毎月かかる管理費・修繕積立金の都内平均相場と実質負担額を解説。住宅ローン返済額に足すと本当の住居費はいくらになるか。",
+    tag: "維持費・管理費",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/jutaku-loan-hendokinri-koteikinri",
+    emoji: "📈",
+    title: "住宅ローンは変動金利と固定金利どっちがいい？2025年の選び方",
+    description:
+      "2024年の日銀利上げ後の金利動向をふまえ、変動・固定それぞれのメリット・リスクを比較。金利上昇シミュレーションと、タイプ別のおすすめを解説。",
+    tag: "金利・住宅ローン",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/mansion-kaidoki-2025",
+    emoji: "📅",
+    title: "マンションの買い時はいつ？2025年の相場と判断基準を解説",
+    description:
+      "価格高止まり・金利上昇が続く2025年、今買うべきか待つべきか。「待つコスト」と「今買うべき人・待つべき人」の判断基準を具体的に解説。",
+    tag: "市況・購入タイミング",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/jutaku-loan-shinsa-nenshu",
+    emoji: "🔎",
+    title: "住宅ローン審査の年収基準は？通るための条件と落ちる理由",
+    description:
+      "審査で重視される返済比率・勤続年数・信用情報の基準を解説。年収別の借入可能額の目安と、審査に落ちる原因・対策もまとめました。",
+    tag: "住宅ローン審査",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/tokyo-mansion-chuko-vs-shintiku",
+    emoji: "🆚",
+    title: "都内マンション、中古と新築どっちがいい？価格差・選び方を解説",
+    description:
+      "東京で中古と新築を徹底比較。価格差・住宅ローン控除の違い・リノベコスト・資産価値の観点から、どちらを選ぶべきか判断基準を解説します。",
+    tag: "中古・新築比較",
+    date: "2025年最新",
+  },
 ];
 
 export default function ArticlesIndexPage() {
