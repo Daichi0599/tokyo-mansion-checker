@@ -209,6 +209,10 @@ export default function JutakuLoanShinsaNenshuPage() {
               <span className="text-xl">💰</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
+            <Link href="/articles/mansion-kaidoki-2025" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+              <span className="text-xl">📅</span>
+              <span className="text-sm text-gray-700 group-hover:text-blue-600">マンションの買い時はいつ？2025年の相場と判断基準を解説</span>
+            </Link>
           </div>
         </section>
 

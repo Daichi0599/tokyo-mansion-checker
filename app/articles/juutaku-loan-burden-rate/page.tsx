@@ -199,6 +199,10 @@ export default function JuutakuLoanBurdenRatePage() {
               <span className="text-xl">👫</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">共働き夫婦の住宅ローン｜世帯年収別の購入可能額</span>
             </Link>
+            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+              <span className="text-xl">🔎</span>
+              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
+            </Link>
           </div>
         </section>
 

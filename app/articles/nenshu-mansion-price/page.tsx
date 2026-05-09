@@ -198,6 +198,10 @@ export default function NenshuMansionPricePage() {
               <span className="text-xl">✖️</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">マンションは年収の何倍まで買える？適正な倍率を解説</span>
             </Link>
+            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+              <span className="text-xl">🔎</span>
+              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
+            </Link>
           </div>
         </section>
 

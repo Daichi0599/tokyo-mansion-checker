@@ -102,6 +102,46 @@ const articles = [
     tag: "中古・新築比較",
     date: "2025年最新",
   },
+  {
+    href: "/articles/mansion-shohiyo",
+    emoji: "💴",
+    title: "マンション購入の諸費用はいくら？内訳と相場を解説",
+    description: "物件価格の5〜10%かかる諸費用の内訳（仲介手数料・登記費用・ローン手数料など）を徹底解説。新築と中古の違い、資金計画で見落としがちなポイントも。",
+    tag: "諸費用・資金計画",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/mansion-kotei-shisanzei",
+    emoji: "🏛️",
+    title: "マンションの固定資産税はいくら？計算方法と相場を解説",
+    description: "都内マンションの固定資産税の目安と計算方法を解説。新築軽減措置・都市計画税との合算、毎年いくら払うのかを年収別にわかりやすく整理。",
+    tag: "固定資産税・維持費",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/jutaku-loan-kuriage-hensai",
+    emoji: "⏩",
+    title: "住宅ローンの繰り上げ返済はすべき？メリット・デメリットを解説",
+    description: "繰り上げ返済の期間短縮型・返済額軽減型の違いと利息削減効果をシミュレーション。住宅ローン控除との兼ね合いや、投資と比較した判断基準も解説。",
+    tag: "繰り上げ返済",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/mansion-baibai-shisan-kachi",
+    emoji: "📉",
+    title: "資産価値が落ちにくいマンションの条件とは？立地・築年数で解説",
+    description: "リセールバリューが高いマンションの条件（駅距離・規模・エリア）と築年数による価格推移を解説。売ることも視野に入れた選び方のポイント。",
+    tag: "資産価値・売却",
+    date: "2025年最新",
+  },
+  {
+    href: "/articles/jutaku-loan-koujyo",
+    emoji: "💹",
+    title: "住宅ローン控除でいくら戻る？計算方法と上限を解説",
+    description: "年末残高×0.7%の控除額の計算方法と、新築・中古別の上限額を解説。年収別の実際の還付額早見表と、初年度の確定申告手続きもわかりやすく整理。",
+    tag: "住宅ローン控除・節税",
+    date: "2025年最新",
+  },
 ];
 
 export default function ArticlesIndexPage() {

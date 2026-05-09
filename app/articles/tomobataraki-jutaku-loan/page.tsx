@@ -217,6 +217,10 @@ export default function TomobatarakiJutakuLoanPage() {
               <span className="text-xl">💰</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
+            <Link href="/articles/jutaku-loan-hendokinri-koteikinri" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+              <span className="text-xl">📈</span>
+              <span className="text-sm text-gray-700 group-hover:text-blue-600">変動金利と固定金利どっちがいい？2025年の選び方</span>
+            </Link>
           </div>
         </section>
 
