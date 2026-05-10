@@ -130,5 +130,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    { url: `${BASE_URL}/articles/jutaku-loan-danshin`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/articles/mansion-kasai-hoken`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/articles/jutaku-loan-hoshoryou`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/articles/mansion-dokushin-kounyu`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/articles/jutaku-loan-kinri-hikaku`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
   ];
 }

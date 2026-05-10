@@ -142,6 +142,11 @@ const articles = [
     tag: "住宅ローン控除・節税",
     date: "2025年最新",
   },
+  { href: "/articles/jutaku-loan-danshin", emoji: "🛡️", title: "住宅ローンの団信とは？種類・比較・選び方を解説", description: "団信の基本から3大疾病・がん100%特約まで徹底比較。保険料の上乗せ金利と選び方のポイントを解説。", tag: "団信・生命保険", date: "2025年最新" },
+  { href: "/articles/mansion-kasai-hoken", emoji: "🔥", title: "マンション購入時の火災保険はいくら？必要性と相場を解説", description: "都内マンションの火災保険年間相場と必要な補償範囲を解説。地震保険との組み合わせ方、一括見積もりで節約する方法も。", tag: "火災保険・保険", date: "2025年最新" },
+  { href: "/articles/jutaku-loan-hoshoryou", emoji: "💼", title: "住宅ローンの保証料と融資手数料、どちらが得？", description: "保証料（外枠・内枠）と融資手数料の違いをコスト比較表で解説。3,000万円借入時のトータルコストで判断する方法。", tag: "諸費用・住宅ローン", date: "2025年最新" },
+  { href: "/articles/mansion-dokushin-kounyu", emoji: "🏠", title: "独身でマンションを買うのはアリ？メリット・デメリットを解説", description: "独身マンション購入のリスクと資産形成メリットを整理。転勤・結婚リスクへの備え方と、単身向けエリア・間取りの選び方。", tag: "独身・ライフプラン", date: "2025年最新" },
+  { href: "/articles/jutaku-loan-kinri-hikaku", emoji: "🏦", title: "住宅ローン金利の比較方法【2025年最新】ネット銀行vs都市銀行", description: "変動金利の主要銀行比較表と、金利以外のコスト（団信・手数料）を含めたトータルコスト比較。2025年の選び方を解説。", tag: "金利・住宅ローン比較", date: "2025年最新" },
 ];
 
 export default function ArticlesIndexPage() {

@@ -94,6 +94,23 @@ export default function MansionNenshuNanbaiPage() {
           <p className="text-xs text-gray-400">※金利1%・35年返済・頭金ゼロでの試算。実際の金利・頭金によって変わります。</p>
         </section>
 
+        {/* ━━ アフィリエイト インライン CTA ━━ */}
+        <div className="bg-green-50 border border-green-200 rounded-2xl p-5 mb-10">
+          <p className="text-xs font-bold text-green-700 mb-1">💡 住宅ローン、どこが一番お得？</p>
+          <p className="text-sm font-black text-gray-900 mb-2">無料で複数行を一括比較できる「モゲチェック」</p>
+          <p className="text-xs text-gray-600 mb-3">年収・物件価格を入力するだけで最適なローンを提案。審査通過率も確認できます。</p>
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-600 text-white font-black text-sm px-5 py-3 rounded-xl hover:bg-green-700 transition-colors"
+          >
+            モゲチェックで無料診断する →
+          </a>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
+        </div>
+
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
