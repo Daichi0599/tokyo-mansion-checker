@@ -135,5 +135,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/articles/jutaku-loan-hoshoryou`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/articles/mansion-dokushin-kounyu`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/articles/jutaku-loan-kinri-hikaku`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/articles/jutaku-loan-karikaee`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/jutaku-loan-bonus-shiharai`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/mansion-uriage-timing`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/jutaku-loan-shunyugasan`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/mansion-floor-plan`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
   ];
 }

@@ -147,6 +147,11 @@ const articles = [
   { href: "/articles/jutaku-loan-hoshoryou", emoji: "💼", title: "住宅ローンの保証料と融資手数料、どちらが得？", description: "保証料（外枠・内枠）と融資手数料の違いをコスト比較表で解説。3,000万円借入時のトータルコストで判断する方法。", tag: "諸費用・住宅ローン", date: "2025年最新" },
   { href: "/articles/mansion-dokushin-kounyu", emoji: "🏠", title: "独身でマンションを買うのはアリ？メリット・デメリットを解説", description: "独身マンション購入のリスクと資産形成メリットを整理。転勤・結婚リスクへの備え方と、単身向けエリア・間取りの選び方。", tag: "独身・ライフプラン", date: "2025年最新" },
   { href: "/articles/jutaku-loan-kinri-hikaku", emoji: "🏦", title: "住宅ローン金利の比較方法【2025年最新】ネット銀行vs都市銀行", description: "変動金利の主要銀行比較表と、金利以外のコスト（団信・手数料）を含めたトータルコスト比較。2025年の選び方を解説。", tag: "金利・住宅ローン比較", date: "2025年最新" },
+  { href: "/articles/jutaku-loan-karikaee", emoji: "🔄", title: "住宅ローンの借り換えで得する人・損する人【損益分岐点を計算】", description: "借り換えで本当に得をする条件と損益分岐点の計算方法を解説。2025年の金利環境で借り換えを検討すべき人・やめておくべき人の判断基準。", tag: "借り換え・住宅ローン", date: "2025年最新" },
+  { href: "/articles/jutaku-loan-bonus-shiharai", emoji: "💴", title: "住宅ローンのボーナス払いはやめておくべき？リスクと対策を解説", description: "ボーナス払いの仕組みとカット時の返済リスクをシミュレーション。ボーナス払いが向く人・向かない人と、繰り上げ返済との比較。", tag: "ボーナス払い・住宅ローン", date: "2025年最新" },
+  { href: "/articles/mansion-uriage-timing", emoji: "🏷️", title: "マンションの売り時はいつ？築年数・市況から見る最適タイミング", description: "マンションの価格下落カーブと2025年の売却市況から、売り時の判断基準を解説。「売り先行」vs「買い先行」の注意点も。", tag: "売却・資産運用", date: "2025年最新" },
+  { href: "/articles/jutaku-loan-shunyugasan", emoji: "👥", title: "収入合算・連帯保証・連帯債務・ペアローンの違いを解説", description: "4つの借り方を比較表で徹底解説。借入可能額・住宅ローン控除・離婚リスクの違いから、共働き夫婦に最適な方式を解説。", tag: "収入合算・ペアローン", date: "2025年最新" },
+  { href: "/articles/mansion-floor-plan", emoji: "📐", title: "マンションの間取り選び方｜1LDK・2LDK・3LDKの違いと資産価値", description: "ライフステージ別のおすすめ間取りと、資産価値が高い間取りの条件を解説。南向き・角部屋・田の字型が有利な理由も。", tag: "間取り・物件選び", date: "2025年最新" },
 ];
 
 export default function ArticlesIndexPage() {
