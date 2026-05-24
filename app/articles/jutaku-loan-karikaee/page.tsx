@@ -247,6 +247,22 @@ export default function JutakuLoanKarikaePage() {
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
         </p>
 
+        {/* ━━ モゲチェックCTA ━━ */}
+        <div className="border-2 border-amber-400 bg-amber-50 rounded-2xl p-5 mb-6">
+          <p className="text-sm font-black text-amber-800 mb-1">💡 借り換えを検討中なら、まず今の金利との差を確認しましょう</p>
+          <p className="text-xs text-amber-700 mb-3">最新の住宅ローン金利を複数行で比較。今より0.3%以上低い銀行があれば借り換えの検討価値があります。</p>
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="block text-center bg-amber-500 hover:bg-amber-600 text-white font-black text-sm px-6 py-3 rounded-xl transition-colors"
+          >
+            ✨ 無料で借り換え先の金利を比較する →
+          </a>
+          <p className="text-xs text-amber-600 text-center mt-2">累計100万件超の診断実績 | 提携金融機関50行以上</p>
+          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "none" }} />
+        </div>
+
         {/* ━━ CTA ━━ */}
         <div className="bg-blue-600 rounded-2xl p-6 text-center text-white mb-8">
           <p className="text-base font-black mb-1">まず「自分の適正ローン額」を確認しよう</p>

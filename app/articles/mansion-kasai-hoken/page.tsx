@@ -250,6 +250,22 @@ export default function MansionKasaiHokenPage() {
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
         </p>
 
+        {/* ━━ 火災保険CTA ━━ */}
+        <div className="border-2 border-green-400 bg-green-50 rounded-2xl p-5 mb-6">
+          <p className="text-sm font-black text-green-800 mb-1">🏡 マンション購入時の火災保険、一括見積もりで最大50%節約できることも</p>
+          <p className="text-xs text-green-700 mb-3">複数の保険会社に同時見積もりを依頼できるサービスが無料で使えます。マンション購入前に必ず比較を。</p>
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="block text-center bg-green-600 hover:bg-green-700 text-white font-black text-sm px-6 py-3 rounded-xl transition-colors"
+          >
+            🎁 無料で火災保険を一括見積もりする →
+          </a>
+          <p className="text-xs text-green-600 text-center mt-2">無料・匿名・しつこい営業電話なし</p>
+          <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "none" }} />
+        </div>
+
         {/* ━━ CTA ━━ */}
         <div className="bg-blue-600 rounded-2xl p-6 text-center text-white mb-8">
           <p className="text-base font-black mb-1">マンション購入の総コストを診断しよう</p>
