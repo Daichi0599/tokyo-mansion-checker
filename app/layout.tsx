@@ -70,6 +70,22 @@ export default function RootLayout({
           </div>
         </nav>
         {children}
+        {/* フッター */}
+        <footer className="mt-16 border-t border-gray-100 bg-white">
+          <div className="max-w-2xl mx-auto px-4 py-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-sm font-black text-blue-700">30Lab</div>
+              <nav className="flex items-center gap-4 text-xs text-gray-500">
+                <a href="/about" className="hover:text-blue-600 transition-colors">このサイトについて</a>
+                <a href="/privacy-policy" className="hover:text-blue-600 transition-colors">プライバシーポリシー</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">𝕏 @30lab_jp</a>
+              </nav>
+            </div>
+            <p className="text-center text-xs text-gray-400 mt-4">
+              © 2026 30Lab. 当サイトの情報は参考目的であり、投資・購入の意思決定を保証するものではありません。
+            </p>
+          </div>
+        </footer>
       </body>
       <GoogleAnalytics gaId="G-MVF8CEE9X9" />
       <Analytics />
