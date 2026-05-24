@@ -152,6 +152,9 @@ const articles = [
   { href: "/articles/mansion-uriage-timing", emoji: "🏷️", title: "マンションの売り時はいつ？築年数・市況から見る最適タイミング", description: "マンションの価格下落カーブと2025年の売却市況から、売り時の判断基準を解説。「売り先行」vs「買い先行」の注意点も。", tag: "売却・資産運用", date: "2025年最新" },
   { href: "/articles/jutaku-loan-shunyugasan", emoji: "👥", title: "収入合算・連帯保証・連帯債務・ペアローンの違いを解説", description: "4つの借り方を比較表で徹底解説。借入可能額・住宅ローン控除・離婚リスクの違いから、共働き夫婦に最適な方式を解説。", tag: "収入合算・ペアローン", date: "2025年最新" },
   { href: "/articles/mansion-floor-plan", emoji: "📐", title: "マンションの間取り選び方｜1LDK・2LDK・3LDKの違いと資産価値", description: "ライフステージ別のおすすめ間取りと、資産価値が高い間取りの条件を解説。南向き・角部屋・田の字型が有利な理由も。", tag: "間取り・物件選び", date: "2025年最新" },
+  { href: "/articles/mansion-kattewa-ikenai-joken", emoji: "🚩", title: "買ってはいけないマンションの特徴10選【立地・建物・管理で後悔しない】", description: "買ってはいけないマンションの特徴を立地・建物・管理・契約の観点で解説。購入前に必ず確認すべき10のチェックポイント付き。", tag: "物件選び・失敗回避", date: "2025年最新" },
+  { href: "/articles/jutaku-loan-shinsa-ochita", emoji: "❌", title: "住宅ローン審査に落ちた原因と対策【年収別・通らない理由を解説】", description: "住宅ローン審査落ちの原因TOP5と再審査対策を解説。信用情報・借入・年収・勤続年数別の改善ポイントをまとめました。", tag: "住宅ローン審査", date: "2025年最新" },
+  { href: "/articles/mansion-kounyu-nagare", emoji: "📋", title: "マンション購入の流れと手順【2025年版・初めてでも迷わない完全ガイド】", description: "予算決め→物件探し→申込→審査→契約→引渡しの全8ステップを解説。各ステップの注意点・期間・諸費用も網羅。", tag: "購入の流れ・手順", date: "2025年最新" },
 ];
 
 export default function ArticlesIndexPage() {
