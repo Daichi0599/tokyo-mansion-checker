@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AnimateIn from "@/components/AnimateIn";
 
 export const metadata: Metadata = {
   title: "30Lab | 気になったら、まずここから。",
@@ -172,122 +173,132 @@ export default function HomePage() {
       <div className="max-w-2xl mx-auto px-4 pb-14 space-y-10">
 
         {/* ── マンション診断（メインツール） ── */}
-        <section className="space-y-3">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">
-            Main Tool
-          </p>
+        <AnimateIn>
+          <section className="space-y-3">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">
+              Main Tool
+            </p>
 
-          <Link
-            href="/mansion"
-            className="block rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 transition-all"
-            style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}
-          >
-            {/* カードヘッダー */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🏠</span>
-                <div>
-                  <p className="text-white font-extrabold text-base leading-tight">
-                    マンション購入診断
-                  </p>
-                  <p className="text-blue-200 text-xs mt-0.5">
-                    「無理なく買える価格」を3分で算出
-                  </p>
+            <Link
+              href="/mansion"
+              className="block rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 hover:-translate-y-1 transition-all duration-200"
+              style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}
+            >
+              {/* カードヘッダー */}
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">🏠</span>
+                  <div>
+                    <p className="text-white font-extrabold text-base leading-tight">
+                      マンション購入診断
+                    </p>
+                    <p className="text-blue-200 text-xs mt-0.5">
+                      「無理なく買える価格」を3分で算出
+                    </p>
+                  </div>
+                </div>
+                <span className="text-white font-bold text-xl">→</span>
+              </div>
+              {/* カードボディ */}
+              <div className="bg-slate-800 px-6 py-4">
+                <p className="text-sm text-slate-300 leading-relaxed mb-3">
+                  年収・生活費・管理費を入力するだけ。銀行の「借りられる額」ではなく、家計を崩さない安全な購入価格がわかります。
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {["約3分で完了", "世帯年収対応", "負担率チェック", "金利シミュレーション"].map((b) => (
+                    <span
+                      key={b}
+                      className="text-xs font-semibold bg-blue-500/10 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20"
+                    >
+                      {b}
+                    </span>
+                  ))}
                 </div>
               </div>
-              <span className="text-white font-bold text-xl">→</span>
-            </div>
-            {/* カードボディ */}
-            <div className="bg-slate-800 px-6 py-4">
-              <p className="text-sm text-slate-300 leading-relaxed mb-3">
-                年収・生活費・管理費を入力するだけ。銀行の「借りられる額」ではなく、家計を崩さない安全な購入価格がわかります。
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {["約3分で完了", "世帯年収対応", "負担率チェック", "金利シミュレーション"].map((b) => (
-                  <span
-                    key={b}
-                    className="text-xs font-semibold bg-blue-500/10 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20"
-                  >
-                    {b}
-                  </span>
-                ))}
+              <div className="bg-slate-800/60 border-t border-slate-700 px-6 py-2.5">
+                <p className="text-xs font-extrabold text-blue-400">今すぐ診断を始める →</p>
               </div>
-            </div>
-            <div className="bg-slate-800/60 border-t border-slate-700 px-6 py-2.5">
-              <p className="text-xs font-extrabold text-blue-400">今すぐ診断を始める →</p>
-            </div>
-          </Link>
-        </section>
+            </Link>
+          </section>
+        </AnimateIn>
 
         {/* ── サブツール3つ ── */}
         <section className="space-y-3">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">
-            Other Tools
-          </p>
+          <AnimateIn>
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">
+              Other Tools
+            </p>
+          </AnimateIn>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {SUB_TOOLS.map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className={`block rounded-xl border border-slate-700 bg-slate-800 px-4 py-4 transition-all ${tool.border}`}
-              >
-                <div className="flex items-start gap-3">
-                  <span className={`text-xl shrink-0 p-1.5 rounded-lg ${tool.glow}`}>
-                    {tool.icon}
-                  </span>
-                  <div>
-                    <p className={`text-sm font-extrabold ${tool.color}`}>{tool.title}</p>
-                    <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{tool.desc}</p>
+            {SUB_TOOLS.map((tool, i) => (
+              <AnimateIn key={tool.href} delay={i * 100} className="h-full">
+                <Link
+                  href={tool.href}
+                  className={`block h-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-4 transition-all duration-200 hover:-translate-y-1 ${tool.border}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className={`text-xl shrink-0 p-1.5 rounded-lg ${tool.glow}`}>
+                      {tool.icon}
+                    </span>
+                    <div>
+                      <p className={`text-sm font-extrabold ${tool.color}`}>{tool.title}</p>
+                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{tool.desc}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </AnimateIn>
             ))}
           </div>
         </section>
 
         {/* ── コラム記事ピックアップ ── */}
         <section className="space-y-3">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Column</p>
-            <Link href="/articles" className="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors">
-              すべて見る →
-            </Link>
-          </div>
-          <div className="space-y-2">
-            {ARTICLES.map((a) => (
-              <Link
-                key={a.href}
-                href={a.href}
-                className="flex items-center gap-3 bg-slate-800 rounded-xl border border-slate-700 px-4 py-3 hover:border-slate-500 hover:bg-slate-750 transition-colors"
-              >
-                <span className="shrink-0 text-xs font-bold bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full whitespace-nowrap">
-                  {a.tag}
-                </span>
-                <p className="text-sm font-semibold text-slate-200 leading-snug line-clamp-1">
-                  {a.title}
-                </p>
-                <span className="shrink-0 text-slate-500 text-xs ml-auto">→</span>
+          <AnimateIn>
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Column</p>
+              <Link href="/articles" className="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors">
+                すべて見る →
               </Link>
+            </div>
+          </AnimateIn>
+          <div className="space-y-2">
+            {ARTICLES.map((a, i) => (
+              <AnimateIn key={a.href} delay={i * 70}>
+                <Link
+                  href={a.href}
+                  className="flex items-center gap-3 bg-slate-800 rounded-xl border border-slate-700 px-4 py-3 hover:border-slate-500 hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <span className="shrink-0 text-xs font-bold bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full whitespace-nowrap">
+                    {a.tag}
+                  </span>
+                  <p className="text-sm font-semibold text-slate-200 leading-snug line-clamp-1">
+                    {a.title}
+                  </p>
+                  <span className="shrink-0 text-slate-500 text-xs ml-auto">→</span>
+                </Link>
+              </AnimateIn>
             ))}
           </div>
         </section>
 
         {/* ── コンセプト ── */}
-        <section
-          className="rounded-2xl border border-slate-700 bg-slate-800 px-6 py-6 space-y-3 text-center"
-          style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
-        >
-          <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">About 30Lab</p>
-          <p className="text-base font-extrabold text-white leading-snug">
-            気になり始めた、その最初の一歩に
-          </p>
-          <p className="text-sm text-slate-400 leading-relaxed">
-            「マンションって実際いくらまで買えるの？」<br />
-            「車、持つべき？手放すべき？」<br />
-            「子どもができたら、お金どうなる？」<br /><br />
-            そんな漠然とした疑問を、数字で整理する場所。それが30Labです。
-          </p>
-        </section>
+        <AnimateIn>
+          <section
+            className="rounded-2xl border border-slate-700 bg-slate-800 px-6 py-6 space-y-3 text-center"
+            style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
+          >
+            <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">About 30Lab</p>
+            <p className="text-base font-extrabold text-white leading-snug">
+              気になり始めた、その最初の一歩に
+            </p>
+            <p className="text-sm text-slate-400 leading-relaxed">
+              「マンションって実際いくらまで買えるの？」<br />
+              「車、持つべき？手放すべき？」<br />
+              「子どもができたら、お金どうなる？」<br /><br />
+              そんな漠然とした疑問を、数字で整理する場所。それが30Labです。
+            </p>
+          </section>
+        </AnimateIn>
 
         {/* ── フッター ── */}
         <footer className="text-center text-xs text-slate-600 pb-4 space-y-1">

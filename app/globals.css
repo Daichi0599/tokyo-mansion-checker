@@ -44,3 +44,15 @@ body {
     box-shadow: 0 4px 36px rgba(59, 130, 246, 0.6);
   }
 }
+
+/* ── スクロール fade-up ── */
+.anim-fadein {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.anim-fadein.anim-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
