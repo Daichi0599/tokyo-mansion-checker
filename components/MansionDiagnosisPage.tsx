@@ -14,28 +14,28 @@ import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 const mogeCtaByLevel: Record<string, { title: string; desc: string; cta: string }> = {
   safe: {
-    title: "🎉 審査通過率は高め！あとは金利を下げるだけ",
-    desc:  "今の条件ならほぼ審査が通ります。金融機関を比較するだけで月返済が数千円〜数万円変わることも。最短3分・完全無料で確認できます。",
-    cta:   "今すぐ最安金利を無料でチェック →",
+    title: "🎉 審査は問題なし。あとは「金利を最安にする」だけ",
+    desc:  "借入額が決まったら、次にやることは金利の比較のみ。銀行は言われなければ最安金利を提示しません。モゲチェックで一括比較すると、候補が見える化されます。",
+    cta:   "今すぐ最安金利を無料でチェックする →",
   },
   caution: {
-    title: "✅ 安全圏です。金利比較で毎月の返済をもっと楽に",
-    desc:  "0.3%の金利差が3,000万円・35年で総額約200万円の差に。借入額が固まった今こそ比較のベストタイミングです。",
-    cta:   "無料で最適なローンを見つける →",
+    title: "✅ 安全圏！金利を下げれば毎月の支払いがもっと楽に",
+    desc:  "今の条件は良好です。ここで金利を0.3%下げるだけで、毎月の支払いをさらに数千円〜数万円減らせる可能性があります。比較しないと損するケースがほとんど。",
+    cta:   "最安金利を無料で見つける →",
   },
   warning: {
-    title: "⚡ 金利を0.3%下げるだけで安全圏に入れる可能性あり",
-    desc:  "今の返済比率は少し高めですが、金利を下げることで改善できます。複数行を一括比較して最適なローンを探しましょう。完全無料。",
+    title: "⚡ 金利次第で安全圏に入れます。今すぐ比較を",
+    desc:  "今の返済比率はやや高めですが、金利を下げることで改善できます。銀行を一括比較して最適なローンに切り替えれば、同じ物件でも毎月の負担が変わります。",
     cta:   "金利を下げて返済比率を改善する →",
   },
   danger: {
-    title: "🔶 借入条件の見直しで、負担率を大幅改善できます",
-    desc:  "金利・借入額・返済期間の最適化で月返済を抑えられる可能性があります。専門家が無料で相談に乗ってくれます。まず比較してみましょう。",
-    cta:   "無料で最適なローン条件を相談する →",
+    title: "🔶 ローン条件の見直しで、負担率を大きく改善できます",
+    desc:  "金利を下げることが最も効果的なコスト削減策です。複数の銀行と比較せずに契約すると、数百万円単位で損するリスクがあります。まず無料で確認してみましょう。",
+    cta:   "無料でローン条件を最適化する →",
   },
   critical: {
-    title: "🔴 今すぐ専門家に相談を。条件次第で大きく改善できます",
-    desc:  "返済比率が高いと感じているなら、購入価格・頭金・金利の見直しが有効です。モゲチェックの専門家が無料でアドバイスしてくれます。",
+    title: "🔴 購入前に、専門家への無料相談を強くお勧めします",
+    desc:  "返済比率が高い場合でも、金利・頭金・返済期間の組み合わせ次第で大きく改善できます。モゲチェックの専門家が無料で最適な条件を提案してくれます。",
     cta:   "専門家に無料で相談してみる →",
   },
 };
@@ -291,47 +291,89 @@ export default function Home() {
             </a>
 
             {/* ② モゲチェック（メインアフィリエイト） */}
-            <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
-              <div className="flex-1 space-y-1">
-                <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">PR</p>
-                <p className="text-sm font-bold text-gray-900">
-                  {mogeCtaByLevel[result.level]?.title ?? "住宅ローン、どこが一番お得？ — モゲチェックで無料比較"}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {mogeCtaByLevel[result.level]?.desc ?? "借入額が決まったら金利比較が次のステップ。最短3分・完全無料。"}
-                </p>
-              </div>
-              <a
-                href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-                rel="nofollow noopener"
-                target="_blank"
-                onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", level: result.level })}
-                className="shrink-0 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
-              >
-                {mogeCtaByLevel[result.level]?.cta ?? "無料で金利を比較する →"}
-              </a>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-            </div>
+            {(() => {
+              // 金利0.3%削減時の節約額を計算
+              const safeLoan = Math.max(0, result.safePrice - diagnosisInput.downPayment);
+              const r = diagnosisInput.interestRate;
+              const y = diagnosisInput.repaymentYears;
+              const calcM = (loan: number, rate: number, years: number) => {
+                if (rate <= 0) return loan / (years * 12);
+                const rm = rate / 100 / 12;
+                const n = years * 12;
+                const f = Math.pow(1 + rm, n);
+                return loan * rm * f / (f - 1);
+              };
+              const mImproved = calcM(safeLoan, Math.max(0.01, r - 0.3), y);
+              const savingPerMonth = Math.round((result.monthlyPayment - mImproved) * 10000); // 円
+              const savingTotal = Math.round(savingPerMonth * 12 * y / 10000); // 万円
+              const showSaving = savingPerMonth >= 2000 && safeLoan >= 500;
+
+              return (
+                <div className="rounded-2xl border-2 border-blue-400 bg-white shadow-md overflow-hidden">
+                  {/* ヘッダーバー */}
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3.5 flex items-start justify-between gap-2">
+                    <p className="text-white font-extrabold text-sm leading-snug">
+                      {mogeCtaByLevel[result.level]?.title ?? "住宅ローンを金利比較して月返済を下げよう"}
+                    </p>
+                    <span className="text-xs text-blue-200 shrink-0 mt-0.5 whitespace-nowrap">広告</span>
+                  </div>
+                  {/* ボディ */}
+                  <div className="px-5 py-4 space-y-3">
+                    {/* パーソナライズされた節約額ハイライト */}
+                    {showSaving && (
+                      <div className="flex items-center gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2.5">
+                        <span className="text-lg shrink-0">💡</span>
+                        <p className="text-xs leading-relaxed text-amber-900">
+                          あなたの借入条件なら、金利が<strong>0.3%下がると</strong>月<strong className="text-orange-600 text-sm">約{savingPerMonth.toLocaleString()}円</strong>・{y}年で<strong className="text-orange-600 text-sm">約{savingTotal}万円</strong>の節約になります
+                        </p>
+                      </div>
+                    )}
+                    <p className="text-xs text-gray-600 leading-relaxed">
+                      {mogeCtaByLevel[result.level]?.desc ?? "借入額が固まったら金利比較が最後のステップ。最短3分・完全無料。"}
+                    </p>
+                    {/* メインCTAボタン（全幅） */}
+                    <a
+                      href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
+                      rel="nofollow noopener"
+                      target="_blank"
+                      onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", level: result.level })}
+                      className="flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-extrabold text-base py-4 rounded-xl text-center transition-colors shadow-sm"
+                    >
+                      {mogeCtaByLevel[result.level]?.cta ?? "無料で最安金利を見つける →"}
+                    </a>
+                    {/* 信頼ポイント */}
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center">
+                      {["完全無料", "最短3分", "登録不要", "銀行に個別交渉不要"].map((t) => (
+                        <span key={t} className="text-xs text-gray-400">✓ {t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
+                </div>
+              );
+            })()}
 
             {/* ③ タブ式ツール群 */}
             <ResultTabs result={result} input={diagnosisInput} />
 
             {/* ④ 火災保険（サブアフィリエイト） */}
-            <div className="rounded-2xl border border-orange-200 bg-orange-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
-              <div className="flex-1 space-y-1">
-                <p className="text-xs font-bold text-orange-600 uppercase tracking-wide">PR</p>
-                <p className="text-sm font-bold text-gray-900">火災保険、一括見積もりで比較しよう</p>
-                <p className="text-xs text-gray-500">マンション購入時に必須の火災保険。複数社を比較して最安値を確認。回答者全員にセブンプレミアムカフェラテをプレゼント。</p>
+            <div className="rounded-2xl border border-orange-300 bg-orange-50 px-5 py-4 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <div className="space-y-1">
+                  <p className="text-sm font-bold text-gray-900">🔥 火災保険、見積もり忘れていませんか？</p>
+                  <p className="text-xs text-gray-600 leading-relaxed">マンション購入時に必須の火災保険。複数社を比較しないと数万円単位で損することも。一括見積もりは完全無料で、回答者全員にセブンプレミアムカフェラテをプレゼント。</p>
+                </div>
+                <span className="text-xs text-orange-500 shrink-0 whitespace-nowrap">広告</span>
               </div>
               <a
                 href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
                 rel="nofollow noopener"
                 target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "火災保険一括見積もり" })}
-                className="shrink-0 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"
+                className="flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm py-3 rounded-xl text-center transition-colors"
               >
-                無料で見積もりを比較 →
+                無料で火災保険を一括見積もりする →
               </a>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "block" }} />
