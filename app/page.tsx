@@ -100,14 +100,20 @@ export default function HomePage() {
 
         <div className="relative max-w-2xl mx-auto px-4 pt-16 pb-14 space-y-6 text-center">
           {/* バッジ */}
-          <div className="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/25">
+          <div
+            className="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/25"
+            style={{ animation: "fadeUp 0.45s ease-out both" }}
+          >
             30代のお金の一歩目に
           </div>
 
           {/* ヘッドライン */}
-          <div className="space-y-3">
+          <div
+            className="space-y-3"
+            style={{ animation: "fadeUp 0.45s ease-out 0.1s both" }}
+          >
             <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
-              気になったら、<br className="sm:hidden" />
+              気になったら、<br />
               <span
                 style={{
                   background: "linear-gradient(135deg, #60a5fa 0%, #818cf8 100%)",
@@ -126,11 +132,14 @@ export default function HomePage() {
           </div>
 
           {/* 主要CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+            style={{ animation: "fadeUp 0.45s ease-out 0.2s both" }}
+          >
             <Link
               href="/mansion"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-extrabold px-7 py-3.5 rounded-xl text-sm transition-colors"
-              style={{ boxShadow: "0 4px 24px rgba(59,130,246,0.35)" }}
+              style={{ animation: "pulseBlue 2.8s ease-in-out 0.8s infinite" }}
             >
               🏠 マンション購入診断を始める →
             </Link>
@@ -143,7 +152,10 @@ export default function HomePage() {
           </div>
 
           {/* 安心バッジ */}
-          <div className="flex flex-wrap justify-center gap-2">
+          <div
+            className="flex flex-wrap justify-center gap-2"
+            style={{ animation: "fadeUp 0.45s ease-out 0.3s both" }}
+          >
             {["完全無料", "匿名OK", "データ保存なし", "営業電話なし"].map((b) => (
               <span
                 key={b}
