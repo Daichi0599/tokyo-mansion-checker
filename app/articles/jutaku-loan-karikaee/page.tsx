@@ -219,6 +219,34 @@ export default function JutakuLoanKarikaePage() {
           </div>
         </section>
 
+        {/* 著者情報 */}
+        <div className="mt-12 border-t border-gray-200 pt-8">
+          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+              🏠
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+                「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
+                複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
+              </p>
+              <div className="flex gap-3 mt-2">
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 免責事項 */}
+        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+          ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
+          記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
+          具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
+        </p>
+
         {/* ━━ CTA ━━ */}
         <div className="bg-blue-600 rounded-2xl p-6 text-center text-white mb-8">
           <p className="text-base font-black mb-1">まず「自分の適正ローン額」を確認しよう</p>
