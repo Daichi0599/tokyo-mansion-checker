@@ -1,22 +1,30 @@
 import { ImageResponse } from "next/og";
+import { loadNotoSansJP } from "@/lib/ogFont";
 
 export const runtime = "edge";
 export const alt = "都内マンション購入診断 | 30Lab";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OgImage() {
+const CHARS = "都内マンション購入診断無理なく買える額を数字で年収頭金金利から安全購入価格を3分算出完全無料匿名OK営業電話なし安全圏背伸び注意住居費負担率ローン管理費ベースlab.vercel.app";
+
+export default async function OgImage() {
+  const fontData = await loadNotoSansJP(CHARS);
+  const fonts = fontData
+    ? [{ name: "NotoJP", data: fontData, weight: 700 as const }]
+    : [];
+
   return new ImageResponse(
     (
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: 1200,
+          height: 630,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 60%, #bfdbfe 100%)",
-          fontFamily: "sans-serif",
+          fontFamily: fontData ? "NotoJP, sans-serif" : "sans-serif",
           padding: "0 50px",
         }}
       >
@@ -208,6 +216,6 @@ export default function OgImage() {
         </div>
       </div>
     ),
-    { ...size }
+    { ...size, fonts }
   );
 }
