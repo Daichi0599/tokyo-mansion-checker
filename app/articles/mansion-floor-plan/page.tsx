@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "マンションの間取り選び方｜1LDK・2LDK・3LDKの違いと資産価値を解説｜30Lab",
   description:
-    "ライフステージ別のおすすめ間取りと、資産価値が高い間取りの条件を解説。南向き・角部屋・田の字型が有利な理由も。",
+    "マンションの間取りはライフステージに合わせた選択が重要です。1LDK・2LDK・3LDKの価格差と使い勝手を比較し、資産価値が高い間取りの条件（南向き・角部屋・田の字型）も解説。一人暮らし・夫婦・ファミリーそれぞれの目安も紹介。",
   keywords: [
     "マンション 間取り 選び方",
     "1LDK 2LDK どっち",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "マンションの間取り選び方｜1LDK・2LDK・3LDKの違いと資産価値を解説",
-    description: "ライフステージ別おすすめ間取りと資産価値が高い条件を解説。",
+    description: "ライフステージ別おすすめ間取り・価格差比較・資産価値が高い条件（南向き・角部屋・田の字）を解説。",
   },
 };
 
