@@ -119,15 +119,15 @@ export default function JutakuLoanKarikaePage() {
         </section>
 
         {/* ━━ モゲチェックCTA ━━ */}
-        <div className="bg-green-50 border border-green-200 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-green-700 mb-1">💡 借り換え先の金利、複数行を一括比較</p>
-          <p className="text-sm font-black text-gray-900 mb-2">「モゲチェック」で最適な借り換え先を無料診断</p>
-          <p className="text-xs text-gray-600 mb-3">現在のローン残高・金利を入力するだけで、借り換え効果と最適な金融機関を提案。審査通過率も確認できます。</p>
+        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
+          <p className="text-xs font-bold text-blue-400 mb-1">💡 借り換え先の金利、複数行を一括比較</p>
+          <p className="text-sm font-black text-white mb-2">「モゲチェック」で最適な借り換え先を無料診断</p>
+          <p className="text-xs text-slate-400 mb-3">現在のローン残高・金利を入力するだけで、借り換え効果と最適な金融機関を提案。審査通過率も確認できます。</p>
           <a
             href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-green-600 text-white font-black text-sm px-5 py-3 rounded-xl hover:bg-green-700 transition-colors"
+            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
           >
             モゲチェックで借り換えを無料診断する →
           </a>
@@ -168,7 +168,7 @@ export default function JutakuLoanKarikaePage() {
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-2">{item.icon} {item.label}</p>
+                <p className="text-sm font-black text-white mb-2">{item.icon} {item.label}</p>
                 <ul className="space-y-1">
                   {item.items.map((point, j) => (
                     <li key={j} className="text-xs text-gray-700 flex items-start gap-1">

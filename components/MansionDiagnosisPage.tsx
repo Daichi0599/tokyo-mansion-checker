@@ -184,6 +184,88 @@ export default function Home() {
           </a>
         </header>
 
+        {/* ─── 2. 診断フォーム（ファーストビュー直後） ─── */}
+        <DiagnosisForm onSubmit={handleSubmit} isLoading={isLoading} />
+
+        {/* ─── 3. この診断でわかること（フォームの下） ─── */}
+        <details className="group">
+          <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors py-1">
+            <span className="group-open:hidden">▼ この診断でわかること・計算の考え方を見る</span>
+            <span className="hidden group-open:inline">▲ 閉じる</span>
+          </summary>
+
+          <div className="mt-6 space-y-8">
+            <section aria-labelledby="benefits-heading">
+              <div className="text-center mb-5">
+                <h2 id="benefits-heading" className="text-lg font-extrabold text-gray-800">
+                  この診断でわかること
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">
+                  便利な計算機ではなく、家計の判断材料になる診断を目指しています
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <BenefitCard
+                  icon="🏠"
+                  title="安全な購入価格の目安"
+                  desc="年収・生活費・管理費から、家計を崩しにくい上限価格を算出"
+                />
+                <BenefitCard
+                  icon="💰"
+                  title="月々の実質住居費"
+                  desc="ローン返済だけでなく、管理費・修繕積立金を含めた月額負担"
+                />
+                <BenefitCard
+                  icon="⚖️"
+                  title="負担率が安全か確認"
+                  desc="年収に対する住居費の割合で「背伸びしすぎていないか」をチェック"
+                />
+                <BenefitCard
+                  icon="📊"
+                  title="条件を変えて比較"
+                  desc="頭金・金利・返済年数を変えると月返済がどう変わるかをすぐ確認"
+                />
+              </div>
+            </section>
+
+            <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+              <div>
+                <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">診断の考え方</p>
+                <h2 className="text-base font-extrabold text-gray-800">
+                  「借りられる額」ではなく「無理なく返せる額」を見ます
+                </h2>
+                <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                  銀行の審査は年収の7〜8倍まで貸せるかを判断しますが、それが生活を圧迫しないとは限りません。
+                  この診断は家計への影響を軸に、3つの観点で安全購入価格を算出します。
+                </p>
+              </div>
+              <div className="space-y-4">
+                <LogicPoint
+                  step="①"
+                  title="住居費負担率（ローン＋管理費）"
+                  desc="月々の返済額と管理費・修繕積立金の合計が、世帯年収の25%以内を「安全圏」として算出。30%が背伸び圏、35%超が注意圏の目安です。"
+                />
+                <LogicPoint
+                  step="②"
+                  title="管理費・修繕積立金も込みで計算"
+                  desc="都内マンションはローン以外に月2〜5万円の固定費が発生します。これを含めた「実質月負担」で診断するのがこのツールの特徴です。"
+                />
+                <LogicPoint
+                  step="③"
+                  title="頭金・金利・返済年数の影響を可視化"
+                  desc="条件を変えると月返済額や負担率がどう変わるかを、診断後のシミュレーターで確認できます。"
+                />
+              </div>
+              <div className="rounded-xl bg-blue-50 border border-blue-100 px-4 py-3">
+                <p className="text-xs text-blue-700 leading-relaxed">
+                  <strong>簡易診断について：</strong>
+                  本ツールは元利均等返済の計算式をベースにした参考情報です。実際の審査結果・個別の返済能力を保証するものではありません。購入の最終判断は、FPや金融機関にご相談ください。
+                </p>
+              </div>
+            </section>
+          </div>
+        </details>
+
         {/* ─── 1.5. 30Lab 他ツール案内（コンパクト） ─── */}
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <span className="text-xs text-gray-400 font-semibold">30Labの他のツール:</span>
@@ -194,80 +276,6 @@ export default function Home() {
             👶 子育て費用
           </a>
         </div>
-
-        {/* ─── 2. この診断でわかること ─── */}
-        <section aria-labelledby="benefits-heading">
-          <div className="text-center mb-5">
-            <h2 id="benefits-heading" className="text-lg font-extrabold text-gray-800">
-              この診断でわかること
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              便利な計算機ではなく、家計の判断材料になる診断を目指しています
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <BenefitCard
-              icon="🏠"
-              title="安全な購入価格の目安"
-              desc="年収・生活費・管理費から、家計を崩しにくい上限価格を算出"
-            />
-            <BenefitCard
-              icon="💰"
-              title="月々の実質住居費"
-              desc="ローン返済だけでなく、管理費・修繕積立金を含めた月額負担"
-            />
-            <BenefitCard
-              icon="⚖️"
-              title="負担率が安全か確認"
-              desc="年収に対する住居費の割合で「背伸びしすぎていないか」をチェック"
-            />
-            <BenefitCard
-              icon="📊"
-              title="条件を変えて比較"
-              desc="頭金・金利・返済年数を変えると月返済がどう変わるかをすぐ確認"
-            />
-          </div>
-        </section>
-
-        {/* ─── 3. 診断ロジックの透明化 ─── */}
-        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
-          <div>
-            <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">診断の考え方</p>
-            <h2 className="text-base font-extrabold text-gray-800">
-              「借りられる額」ではなく「無理なく返せる額」を見ます
-            </h2>
-            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-              銀行の審査は年収の7〜8倍まで貸せるかを判断しますが、それが生活を圧迫しないとは限りません。
-              この診断は家計への影響を軸に、3つの観点で安全購入価格を算出します。
-            </p>
-          </div>
-          <div className="space-y-4">
-            <LogicPoint
-              step="①"
-              title="住居費負担率（ローン＋管理費）"
-              desc="月々の返済額と管理費・修繕積立金の合計が、世帯年収の25%以内を「安全圏」として算出。30%が背伸び圏、35%超が注意圏の目安です。"
-            />
-            <LogicPoint
-              step="②"
-              title="管理費・修繕積立金も込みで計算"
-              desc="都内マンションはローン以外に月2〜5万円の固定費が発生します。これを含めた「実質月負担」で診断するのがこのツールの特徴です。"
-            />
-            <LogicPoint
-              step="③"
-              title="頭金・金利・返済年数の影響を可視化"
-              desc="条件を変えると月返済額や負担率がどう変わるかを、診断後のシミュレーターで確認できます。"
-            />
-          </div>
-          <div className="rounded-xl bg-blue-50 border border-blue-100 px-4 py-3">
-            <p className="text-xs text-blue-700 leading-relaxed">
-              <strong>簡易診断について：</strong>
-              本ツールは元利均等返済の計算式をベースにした参考情報です。実際の審査結果・個別の返済能力を保証するものではありません。購入の最終判断は、FPや金融機関にご相談ください。
-            </p>
-          </div>
-        </section>
-
-        {/* ─── 4. 診断フォーム ─── */}
-        <DiagnosisForm onSubmit={handleSubmit} isLoading={isLoading} />
 
         {/* ─── 5. 診断結果 ─── */}
         {result && diagnosisInput && (

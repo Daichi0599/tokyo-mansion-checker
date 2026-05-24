@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 import { DiagnosisInput } from "@/types";
 
 interface Props {
@@ -87,8 +88,13 @@ const fields: FieldConfig[] = [
 
 export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
   const [values, setValues] = useState<DiagnosisInput>(defaultValues);
+  const hasStarted = useRef(false);
 
   const handleChange = (key: keyof DiagnosisInput, raw: string) => {
+    if (!hasStarted.current) {
+      hasStarted.current = true;
+      sendGAEvent("event", "tool_start", { tool: "mansion_diagnosis" });
+    }
     const num = parseFloat(raw);
     setValues((prev) => ({ ...prev, [key]: isNaN(num) ? 0 : num }));
   };

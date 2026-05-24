@@ -105,7 +105,7 @@ export default function HomePage() {
             className="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/25"
             style={{ animation: "fadeUp 0.45s ease-out both" }}
           >
-            30代のお金の一歩目に
+            30代の大きな決断を、数字で整理する
           </div>
 
           {/* ヘッドライン */}
@@ -127,9 +127,18 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm mx-auto">
-              マンション・車・子育て費用——<br />
-              大きな決断の前に、数字で整理しよう。
+              「いくらまで買える？」「車、持つべき？」<br />
+              漠然とした不安を、数字に変える無料ツール集。
             </p>
+          </div>
+
+          {/* ソーシャルプルーフ */}
+          <div
+            className="flex items-center justify-center gap-1.5 text-xs text-slate-500"
+            style={{ animation: "fadeUp 0.45s ease-out 0.15s both" }}
+          >
+            <span className="text-base">👥</span>
+            <span>累計 <strong className="text-slate-300">1,200+</strong> 件の診断完了</span>
           </div>
 
           {/* 主要CTA */}

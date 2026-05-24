@@ -41,7 +41,7 @@ const articles = [
   },
   {
     href: "/articles/mansion-nenshu-nanbai",
-    emoji: "✖️",
+    emoji: "📐",
     title: "マンションは年収の何倍まで買える？適正な倍率を解説",
     description:
       "「年収の5〜7倍が目安」と言われる根拠と、東京での現実。年収倍率だけで判断すると危ない理由と、正しい判断軸の考え方。",

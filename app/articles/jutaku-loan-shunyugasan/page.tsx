@@ -146,7 +146,7 @@ export default function JutakuLoanShunyugasanPage() {
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-2">{item.title}</p>
+                <p className="text-sm font-black text-white mb-2">{item.title}</p>
                 <p className="text-xs text-gray-600 leading-relaxed mb-2">{item.desc}</p>
                 <p className="text-xs font-bold text-gray-500">💡 {item.note}</p>
               </div>
@@ -155,15 +155,15 @@ export default function JutakuLoanShunyugasanPage() {
         </section>
 
         {/* ━━ モゲチェックCTA ━━ */}
-        <div className="bg-green-50 border border-green-200 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-green-700 mb-1">💡 夫婦の収入で借りられる上限額を確認</p>
-          <p className="text-sm font-black text-gray-900 mb-2">「モゲチェック」で世帯年収に合ったローンを無料診断</p>
-          <p className="text-xs text-gray-600 mb-3">ペアローン・収入合算のどちらが有利か、金融機関ごとの審査条件も合わせて確認できます。</p>
+        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
+          <p className="text-xs font-bold text-blue-400 mb-1">💡 夫婦の収入で借りられる上限額を確認</p>
+          <p className="text-sm font-black text-white mb-2">「モゲチェック」で世帯年収に合ったローンを無料診断</p>
+          <p className="text-xs text-slate-400 mb-3">ペアローン・収入合算のどちらが有利か、金融機関ごとの審査条件も合わせて確認できます。</p>
           <a
             href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-green-600 text-white font-black text-sm px-5 py-3 rounded-xl hover:bg-green-700 transition-colors"
+            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
           >
             モゲチェックで無料診断する →
           </a>
