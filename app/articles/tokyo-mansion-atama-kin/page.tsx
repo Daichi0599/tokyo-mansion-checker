@@ -229,7 +229,7 @@ export default function TokyoMansionAtamaKinPage() {
               <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
             <Link href="/articles/mansion-nenshu-nanbai" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
-              <span className="text-xl">✖️</span>
+              <span className="text-xl">📐</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">マンションは年収の何倍まで買える？適正な倍率を解説</span>
             </Link>
             <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
