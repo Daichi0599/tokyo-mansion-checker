@@ -24,6 +24,15 @@ export const metadata: Metadata = {
 
 const SUB_TOOLS = [
   {
+    icon: "🏦",
+    title: "ローン返済計算",
+    desc: "借入額・金利・返済期間から月返済額を即計算",
+    href: "/loan",
+    color: "text-blue-400",
+    border: "hover:border-blue-500/60",
+    glow: "bg-blue-500/10",
+  },
+  {
     icon: "🔍",
     title: "物件診断",
     desc: "坪単価・管理費・10年後売却価格を即チェック",
@@ -238,7 +247,7 @@ export default function HomePage() {
               Other Tools
             </p>
           </AnimateIn>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {SUB_TOOLS.map((tool, i) => (
               <AnimateIn key={tool.href} delay={i * 100} className="h-full">
                 <Link
