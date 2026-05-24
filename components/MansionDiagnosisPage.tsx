@@ -14,29 +14,29 @@ import { DiagnosisInput, DiagnosisResult } from "@/types";
 
 const mogeCtaByLevel: Record<string, { title: string; desc: string; cta: string }> = {
   safe: {
-    title: "🎉 審査は問題なし。あとは「金利を最安にする」だけ",
-    desc:  "借入額が決まったら、次にやることは金利の比較のみ。銀行は言われなければ最安金利を提示しません。モゲチェックで一括比較すると、候補が見える化されます。",
-    cta:   "今すぐ最安金利を無料でチェックする →",
+    title: "🎉 あとは「金利を最安にする」だけ。それだけで数百万円変わります",
+    desc:  "同じ物件・同じ借入額でも、金利が0.3%違うだけで総返済額は数百万円変わります。銀行は比較されないと最安金利を出しません。モゲチェックで30秒入力するだけで最安候補が見えます。",
+    cta:   "✨ 無料で最安金利を今すぐ確認する →",
   },
   caution: {
-    title: "✅ 安全圏！金利を下げれば毎月の支払いがもっと楽に",
-    desc:  "今の条件は良好です。ここで金利を0.3%下げるだけで、毎月の支払いをさらに数千円〜数万円減らせる可能性があります。比較しないと損するケースがほとんど。",
-    cta:   "最安金利を無料で見つける →",
+    title: "✅ 安全圏です！金利を0.3%下げると毎月どれだけ楽になる？",
+    desc:  "今の条件は良好ですが、金利改善でさらに余裕が生まれます。銀行は自分から最安金利を提示しません。無料の一括比較で、あなたに合う最安ローンを見つけましょう。",
+    cta:   "✨ 最安金利を無料でチェックする →",
   },
   warning: {
-    title: "⚡ 金利次第で安全圏に入れます。今すぐ比較を",
-    desc:  "今の返済比率はやや高めですが、金利を下げることで改善できます。銀行を一括比較して最適なローンに切り替えれば、同じ物件でも毎月の負担が変わります。",
-    cta:   "金利を下げて返済比率を改善する →",
+    title: "⚡ 金利を下げるだけで、今の返済比率が安全圏に入る可能性があります",
+    desc:  "今の返済比率はやや高めですが、金利の下げ幅次第で安全圏に改善できます。銀行1行だけの提示を鵜呑みにするのはリスクがあります。複数行を無料で一括比較してみましょう。",
+    cta:   "⚡ 金利を下げて返済比率を安全圏に →",
   },
   danger: {
-    title: "🔶 ローン条件の見直しで、負担率を大きく改善できます",
-    desc:  "金利を下げることが最も効果的なコスト削減策です。複数の銀行と比較せずに契約すると、数百万円単位で損するリスクがあります。まず無料で確認してみましょう。",
-    cta:   "無料でローン条件を最適化する →",
+    title: "🔶 この条件でも、金利次第で毎月の負担を大きく変えられます",
+    desc:  "返済比率が高い場合、金利の最適化が最も効果的な対策です。0.5%下げるだけで月数万円・総額数百万円変わることも。無料で複数行を比較して、今できる最善を探しましょう。",
+    cta:   "🔶 無料でローン条件を最適化する →",
   },
   critical: {
-    title: "🔴 購入前に、専門家への無料相談を強くお勧めします",
-    desc:  "返済比率が高い場合でも、金利・頭金・返済期間の組み合わせ次第で大きく改善できます。モゲチェックの専門家が無料で最適な条件を提案してくれます。",
-    cta:   "専門家に無料で相談してみる →",
+    title: "🔴 まず専門家に無料で相談を。金利改善だけで状況が変わるケースも多いです",
+    desc:  "返済比率が高くても、金利・頭金・返済期間の組み合わせ次第で大きく改善できます。モゲチェックの専門家が無料・匿名で最適なプランを提案してくれます。",
+    cta:   "🔴 専門家に無料で相談してみる →",
   },
 };
 
@@ -284,21 +284,7 @@ export default function Home() {
             {/* ① 診断結果カード */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
 
-            {/* ① .5 Step2バナー */}
-            <a
-              href="/check"
-              onClick={() => sendGAEvent("event", "step2_banner_click", { level: result.level })}
-              className="flex items-center justify-between gap-3 rounded-2xl border-2 border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
-            >
-              <div>
-                <p className="text-xs font-bold text-blue-600 mb-0.5">Step 2 — 物件を評価する</p>
-                <p className="text-sm font-bold text-gray-900">気になる物件を診断する 🔍</p>
-                <p className="text-xs text-gray-500 mt-0.5">坪単価・管理費・10年後推定を即チェック。結果をシェアして相談できます。</p>
-              </div>
-              <span className="shrink-0 text-blue-600 font-bold text-lg">→</span>
-            </a>
-
-            {/* ② モゲチェック（メインアフィリエイト） */}
+            {/* ② モゲチェック（メインアフィリエイト） — 結果直後・最高温度のタイミング */}
             {(() => {
               // 金利0.3%削減時の節約額を計算
               const safeLoan = Math.max(0, result.safePrice - diagnosisInput.downPayment);
@@ -355,6 +341,7 @@ export default function Home() {
                         <span key={t} className="text-xs text-gray-400">✓ {t}</span>
                       ))}
                     </div>
+                    <p className="text-center text-xs text-gray-400">累計100万件超の診断実績 | 提携金融機関50行以上</p>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
@@ -362,27 +349,43 @@ export default function Home() {
               );
             })()}
 
+            {/* ② .5 Step2バナー */}
+            <a
+              href="/check"
+              onClick={() => sendGAEvent("event", "step2_banner_click", { level: result.level })}
+              className="flex items-center justify-between gap-3 rounded-2xl border-2 border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+            >
+              <div>
+                <p className="text-xs font-bold text-blue-600 mb-0.5">Step 2 — 物件を評価する</p>
+                <p className="text-sm font-bold text-gray-900">気になる物件を診断する 🔍</p>
+                <p className="text-xs text-gray-500 mt-0.5">坪単価・管理費・10年後推定を即チェック。結果をシェアして相談できます。</p>
+              </div>
+              <span className="shrink-0 text-blue-600 font-bold text-lg">→</span>
+            </a>
+
             {/* ③ タブ式ツール群 */}
             <ResultTabs result={result} input={diagnosisInput} />
 
             {/* ④ 火災保険（サブアフィリエイト） */}
-            <div className="rounded-2xl border border-orange-300 bg-orange-50 px-5 py-4 space-y-3">
+            <div className="rounded-2xl border-2 border-orange-300 bg-gradient-to-br from-orange-50 to-amber-50 px-5 py-4 space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="space-y-1">
+                  <p className="text-xs font-bold text-orange-600 uppercase tracking-wide">マンション購入時にのみ必要・今だけ</p>
                   <p className="text-sm font-bold text-gray-900">🔥 火災保険、見積もり忘れていませんか？</p>
-                  <p className="text-xs text-gray-600 leading-relaxed">マンション購入時に必須の火災保険。複数社を比較しないと数万円単位で損することも。一括見積もりは完全無料で、回答者全員にセブンプレミアムカフェラテをプレゼント。</p>
+                  <p className="text-xs text-gray-600 leading-relaxed">マンション購入時に必須の火災保険。1社だけで決めると<strong>年間数万円損</strong>するケースも。一括見積もりは<strong>完全無料</strong>で、回答者全員にセブンプレミアムカフェラテをプレゼント中。</p>
                 </div>
-                <span className="text-xs text-orange-500 shrink-0 whitespace-nowrap">広告</span>
+                <span className="text-xs text-orange-400 shrink-0 whitespace-nowrap">広告</span>
               </div>
               <a
                 href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
                 rel="nofollow noopener"
                 target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "火災保険一括見積もり" })}
-                className="flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm py-3 rounded-xl text-center transition-colors"
+                className="flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-extrabold text-sm py-3.5 rounded-xl text-center transition-colors shadow-sm"
               >
-                無料で火災保険を一括見積もりする →
+                🎁 無料で火災保険を一括見積もりする →
               </a>
+              <p className="text-center text-xs text-orange-500">✓ 完全無料　✓ 最短3分　✓ 全員プレゼント付き</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "block" }} />
             </div>
