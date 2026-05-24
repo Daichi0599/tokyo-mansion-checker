@@ -275,6 +275,10 @@ export default function MansionShohiyoPage() {
               <span className="text-xl">🏙️</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">東京でマンション購入に必要な頭金はいくら？</span>
             </Link>
+            <Link href="/articles/mansion-kounyu-nagare" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+              <span className="text-xl">📋</span>
+              <span className="text-sm text-gray-700 group-hover:text-blue-600">マンション購入の流れと手順【2026年版・初めてでも迷わない完全ガイド】</span>
+            </Link>
             <Link href="/articles/tokyo-mansion-chuko-vs-shintiku" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
               <span className="text-xl">🆚</span>
               <span className="text-sm text-gray-700 group-hover:text-blue-600">都内マンション、中古と新築どっちがいい？価格差・選び方を解説</span>
