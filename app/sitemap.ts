@@ -152,5 +152,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/articles/mansion-uriage-timing`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${BASE_URL}/articles/jutaku-loan-shunyugasan`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${BASE_URL}/articles/mansion-floor-plan`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/mansion-kattewa-ikenai-joken`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/jutaku-loan-shinsa-ochita`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/articles/mansion-kounyu-nagare`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${BASE_URL}/loan`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
   ];
 }
