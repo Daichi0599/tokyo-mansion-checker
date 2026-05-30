@@ -299,19 +299,21 @@ export default function HomePage() {
         {/* ── コンセプト ── */}
         <AnimateIn>
           <section
-            className="rounded-2xl border border-slate-700 bg-slate-800 px-8 py-8 space-y-3 text-center max-w-2xl mx-auto"
+            className="rounded-2xl border border-slate-700 bg-slate-800 px-8 py-8 text-center"
             style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
           >
-            <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">About 30Lab</p>
-            <p className="text-base font-extrabold text-white leading-snug">
-              気になり始めた、その最初の一歩に
-            </p>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              「マンションって実際いくらまで買えるの？」<br />
-              「車、持つべき？手放すべき？」<br />
-              「子どもができたら、お金どうなる？」<br /><br />
-              そんな漠然とした疑問を、数字で整理する場所。それが30Labです。
-            </p>
+            <div className="max-w-xl mx-auto space-y-3">
+              <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">About 30Lab</p>
+              <p className="text-base font-extrabold text-white leading-snug">
+                気になり始めた、その最初の一歩に
+              </p>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                「マンションって実際いくらまで買えるの？」<br />
+                「車、持つべき？手放すべき？」<br />
+                「子どもができたら、お金どうなる？」<br /><br />
+                そんな漠然とした疑問を、数字で整理する場所。それが30Labです。
+              </p>
+            </div>
           </section>
         </AnimateIn>
 
