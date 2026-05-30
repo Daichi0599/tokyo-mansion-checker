@@ -191,17 +191,17 @@ export default function HomePage() {
       <div className="max-w-5xl mx-auto px-4 pb-14 space-y-10">
 
         {/* ── メインツール ＋ サブツール（PC: 横並び） ── */}
-        <section className="space-y-3 lg:space-y-0 lg:grid lg:grid-cols-[3fr_2fr] lg:gap-6 lg:items-start">
+        <section className="space-y-3 lg:space-y-0 lg:grid lg:grid-cols-[3fr_2fr] lg:gap-6">
 
           {/* メインツール */}
-          <AnimateIn>
-            <div className="space-y-3">
+          <AnimateIn className="flex flex-col">
+            <div className="flex flex-col flex-1 space-y-3">
               <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center lg:text-left">
                 Main Tool
               </p>
               <Link
                 href="/mansion"
-                className="block rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 hover:-translate-y-1 transition-all duration-200"
+                className="flex flex-col flex-1 rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 hover:-translate-y-1 transition-all duration-200"
                 style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}
               >
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 flex items-center justify-between">
@@ -218,7 +218,7 @@ export default function HomePage() {
                   </div>
                   <span className="text-white font-bold text-2xl shrink-0">→</span>
                 </div>
-                <div className="bg-slate-800 px-6 py-5">
+                <div className="bg-slate-800 px-6 py-5 flex-1">
                   <p className="text-sm text-slate-300 leading-relaxed mb-4">
                     年収・生活費・管理費を入力するだけ。銀行の「借りられる額」ではなく、家計を崩さない安全な購入価格がわかります。
                   </p>
