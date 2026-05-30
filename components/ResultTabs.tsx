@@ -26,7 +26,7 @@ export default function ResultTabs({ result, input }: Props) {
   return (
     <div className="space-y-3">
       {/* ── タブバー ── */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-1.5">
+      <div className="bg-slate-800 rounded-2xl border border-slate-700 p-1.5">
         <div className="grid grid-cols-3 gap-1">
           {TABS.map((tab) => (
             <button
@@ -35,7 +35,7 @@ export default function ResultTabs({ result, input }: Props) {
               className={`py-2.5 px-1 flex flex-col items-center gap-0.5 rounded-xl transition-all text-xs font-semibold ${
                 active === tab.id
                   ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-500 hover:bg-gray-100"
+                  : "text-slate-400 hover:bg-slate-700"
               }`}
             >
               <span className="text-sm leading-none">{tab.icon}</span>

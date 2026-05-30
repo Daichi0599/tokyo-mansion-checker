@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
 import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
@@ -46,7 +47,7 @@ const mogeCtaByLevel: Record<string, { title: string; desc: string; cta: string 
 
 function TrustBadge({ icon, label }: { icon: string; label: string }) {
   return (
-    <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+    <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
       <span>{icon}</span>
       {label}
     </span>
@@ -55,11 +56,11 @@ function TrustBadge({ icon, label }: { icon: string; label: string }) {
 
 function BenefitCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
-    <div className="flex items-start gap-3 bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+    <div className="flex items-start gap-3 bg-slate-800 rounded-xl border border-slate-700 p-4">
       <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
       <div>
-        <p className="text-sm font-bold text-gray-800">{title}</p>
-        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+        <p className="text-sm font-bold text-slate-100">{title}</p>
+        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -68,12 +69,12 @@ function BenefitCard({ icon, title, desc }: { icon: string; title: string; desc:
 function LogicPoint({ step, title, desc }: { step: string; title: string; desc: string }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 text-xs font-extrabold flex items-center justify-center mt-0.5">
+      <span className="shrink-0 w-7 h-7 rounded-full bg-blue-500/20 text-blue-300 text-xs font-extrabold flex items-center justify-center mt-0.5">
         {step}
       </span>
       <div>
-        <p className="text-sm font-bold text-gray-800">{title}</p>
-        <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</p>
+        <p className="text-sm font-bold text-slate-100">{title}</p>
+        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -82,19 +83,19 @@ function LogicPoint({ step, title, desc }: { step: string; title: string; desc: 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-gray-100 last:border-0">
+    <div className="border-b border-slate-700 last:border-0">
       <button
         className="w-full flex items-start justify-between gap-3 py-4 text-left"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        <span className="text-sm font-semibold text-gray-800 leading-relaxed">{q}</span>
-        <span className={`shrink-0 text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}>
+        <span className="text-sm font-semibold text-slate-200 leading-relaxed">{q}</span>
+        <span className={`shrink-0 text-slate-500 transition-transform duration-200 ${open ? "rotate-180" : ""}`}>
           ▼
         </span>
       </button>
       {open && (
-        <p className="text-sm text-gray-600 leading-relaxed pb-4 pr-6">{a}</p>
+        <p className="text-sm text-slate-300 leading-relaxed pb-4 pr-6">{a}</p>
       )}
     </div>
   );
@@ -134,7 +135,17 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-slate-900 text-white">
+
+      {/* ブレッドクラム */}
+      <nav className="bg-slate-800 border-b border-slate-700 px-4 py-2.5">
+        <div className="max-w-2xl mx-auto flex items-center gap-2 text-xs text-slate-400">
+          <Link href="/" className="hover:text-slate-200 transition-colors">30Lab</Link>
+          <span>/</span>
+          <span className="text-slate-200">マンション購入診断</span>
+        </div>
+      </nav>
+
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-10">
 
         {/* ─── 1. ヒーローセクション（ファーストビュー） ─── */}
@@ -145,7 +156,7 @@ export default function Home() {
             {["共働き・20〜30代向け", "世帯年収1,000〜1,500万円帯", "新築・中古マンション対応"].map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-semibold bg-blue-100 text-blue-700 px-3 py-1 rounded-full border border-blue-200"
+                className="text-xs font-semibold bg-blue-500/15 text-blue-300 px-3 py-1 rounded-full border border-blue-500/20"
               >
                 {tag}
               </span>
@@ -154,12 +165,12 @@ export default function Home() {
 
           {/* メインキャッチ */}
           <div className="space-y-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
               「借りられる額」より<br />
-              <span className="text-blue-600">「無理なく買える額」</span>がわかる<br />
+              <span className="text-blue-400">「無理なく買える額」</span>がわかる<br />
               都内マンション購入診断
             </h1>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-md mx-auto">
+            <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
               世帯年収・頭金・生活費・管理費まで含めた<br className="hidden sm:block" />
               実質住居費で、安全購入価格を無料で算出します。
             </p>
@@ -178,7 +189,7 @@ export default function Home() {
           <a
             href="#form"
             onClick={() => sendGAEvent("event", "hero_cta_click", {})}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl transition-colors text-base shadow-md"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-colors text-base"
           >
             3分で安全購入価格をチェックする →
           </a>
@@ -189,7 +200,7 @@ export default function Home() {
 
         {/* ─── 3. この診断でわかること（フォームの下） ─── */}
         <details className="group">
-          <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors py-1">
+          <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors py-1">
             <span className="group-open:hidden">▼ この診断でわかること・計算の考え方を見る</span>
             <span className="hidden group-open:inline">▲ 閉じる</span>
           </summary>
@@ -197,10 +208,10 @@ export default function Home() {
           <div className="mt-6 space-y-8">
             <section aria-labelledby="benefits-heading">
               <div className="text-center mb-5">
-                <h2 id="benefits-heading" className="text-lg font-extrabold text-gray-800">
+                <h2 id="benefits-heading" className="text-lg font-extrabold text-white">
                   この診断でわかること
                 </h2>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-slate-400 mt-1">
                   便利な計算機ではなく、家計の判断材料になる診断を目指しています
                 </p>
               </div>
@@ -228,13 +239,13 @@ export default function Home() {
               </div>
             </section>
 
-            <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+            <section className="bg-slate-800 rounded-2xl border border-slate-700 p-6 space-y-5">
               <div>
-                <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">診断の考え方</p>
-                <h2 className="text-base font-extrabold text-gray-800">
+                <p className="text-xs font-bold text-blue-400 uppercase tracking-wide mb-1">診断の考え方</p>
+                <h2 className="text-base font-extrabold text-white">
                   「借りられる額」ではなく「無理なく返せる額」を見ます
                 </h2>
-                <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   銀行の審査は年収の7〜8倍まで貸せるかを判断しますが、それが生活を圧迫しないとは限りません。
                   この診断は家計への影響を軸に、3つの観点で安全購入価格を算出します。
                 </p>
@@ -256,8 +267,8 @@ export default function Home() {
                   desc="条件を変えると月返済額や負担率がどう変わるかを、診断後のシミュレーターで確認できます。"
                 />
               </div>
-              <div className="rounded-xl bg-blue-50 border border-blue-100 px-4 py-3">
-                <p className="text-xs text-blue-700 leading-relaxed">
+              <div className="rounded-xl bg-blue-500/10 border border-blue-500/20 px-4 py-3">
+                <p className="text-xs text-blue-300 leading-relaxed">
                   <strong>簡易診断について：</strong>
                   本ツールは元利均等返済の計算式をベースにした参考情報です。実際の審査結果・個別の返済能力を保証するものではありません。購入の最終判断は、FPや金融機関にご相談ください。
                 </p>
@@ -268,11 +279,11 @@ export default function Home() {
 
         {/* ─── 1.5. 30Lab 他ツール案内（コンパクト） ─── */}
         <div className="flex items-center justify-center gap-2 flex-wrap">
-          <span className="text-xs text-gray-400 font-semibold">30Labの他のツール:</span>
-          <a href="/car" className="inline-flex items-center gap-1.5 text-xs font-bold bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700 hover:text-blue-700 px-3 py-1.5 rounded-full shadow-sm transition-colors">
+          <span className="text-xs text-slate-500 font-semibold">30Labの他のツール:</span>
+          <a href="/car" className="inline-flex items-center gap-1.5 text-xs font-bold bg-slate-800 border border-slate-700 hover:border-blue-500/50 text-slate-300 hover:text-blue-300 px-3 py-1.5 rounded-full transition-colors">
             🚗 車コスト診断
           </a>
-          <a href="/child" className="inline-flex items-center gap-1.5 text-xs font-bold bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700 hover:text-blue-700 px-3 py-1.5 rounded-full shadow-sm transition-colors">
+          <a href="/child" className="inline-flex items-center gap-1.5 text-xs font-bold bg-slate-800 border border-slate-700 hover:border-blue-500/50 text-slate-300 hover:text-blue-300 px-3 py-1.5 rounded-full transition-colors">
             👶 子育て費用
           </a>
         </div>
@@ -303,7 +314,7 @@ export default function Home() {
               const showSaving = savingPerMonth >= 2000 && safeLoan >= 500;
 
               return (
-                <div className="rounded-2xl border-2 border-blue-400 bg-white shadow-md overflow-hidden">
+                <div className="rounded-2xl border-2 border-blue-500/60 bg-slate-800 overflow-hidden">
                   {/* ヘッダーバー */}
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3.5 flex items-start justify-between gap-2">
                     <p className="text-white font-extrabold text-sm leading-snug">
@@ -315,22 +326,22 @@ export default function Home() {
                   <div className="px-5 py-4 space-y-3">
                     {/* パーソナライズされた節約額ハイライト */}
                     {showSaving && (
-                      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-orange-300 rounded-2xl p-4 text-center">
-                        <p className="text-xs font-bold text-orange-700 mb-2">💡 あなたの条件で金利0.3%改善すると…</p>
+                      <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border-2 border-orange-500/40 rounded-2xl p-4 text-center">
+                        <p className="text-xs font-bold text-orange-300 mb-2">💡 あなたの条件で金利0.3%改善すると…</p>
                         <div className="flex items-center justify-center gap-4">
                           <div>
-                            <p className="text-3xl font-black text-orange-600">月{savingPerMonth.toLocaleString()}円</p>
-                            <p className="text-xs text-orange-500 mt-0.5">毎月の節約</p>
+                            <p className="text-3xl font-black text-orange-300">月{savingPerMonth.toLocaleString()}円</p>
+                            <p className="text-xs text-orange-400 mt-0.5">毎月の節約</p>
                           </div>
                           <span className="text-orange-400 text-2xl font-bold">+</span>
                           <div>
-                            <p className="text-3xl font-black text-orange-600">{savingTotal}万円</p>
-                            <p className="text-xs text-orange-500 mt-0.5">{y}年間の総節約</p>
+                            <p className="text-3xl font-black text-orange-300">{savingTotal}万円</p>
+                            <p className="text-xs text-orange-400 mt-0.5">{y}年間の総節約</p>
                           </div>
                         </div>
                       </div>
                     )}
-                    <p className="text-xs text-gray-600 leading-relaxed">
+                    <p className="text-xs text-slate-300 leading-relaxed">
                       {mogeCtaByLevel[result.level]?.desc ?? "借入額が固まったら金利比較が最後のステップ。最短3分・完全無料。"}
                     </p>
                     {/* メインCTAボタン（全幅） */}
@@ -350,10 +361,10 @@ export default function Home() {
                     {/* 信頼ポイント */}
                     <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center">
                       {["完全無料", "最短3分", "登録不要", "銀行に個別交渉不要"].map((t) => (
-                        <span key={t} className="text-xs text-gray-500 font-semibold">✓ {t}</span>
+                        <span key={t} className="text-xs text-slate-400 font-semibold">✓ {t}</span>
                       ))}
                     </div>
-                    <p className="text-center text-xs text-gray-400">累計100万件超の診断実績 | 提携金融機関50行以上</p>
+                    <p className="text-center text-xs text-slate-500">累計100万件超の診断実績 | 提携金融機関50行以上</p>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
@@ -362,12 +373,12 @@ export default function Home() {
             })()}
 
             {/* ② .5 火災保険（サブアフィリエイト）— モゲチェック直後に移動 */}
-            <div className="rounded-2xl border-2 border-orange-300 bg-gradient-to-br from-orange-50 to-amber-50 px-5 py-4 space-y-3">
+            <div className="rounded-2xl border-2 border-orange-500/40 bg-gradient-to-br from-orange-500/10 to-amber-500/10 px-5 py-4 space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="space-y-1">
-                  <p className="text-xs font-bold text-orange-600 uppercase tracking-wide">マンション購入時に必須・今だけ無料</p>
-                  <p className="text-sm font-bold text-gray-900">🔥 火災保険、1社だけで決めていませんか？</p>
-                  <p className="text-xs text-gray-600 leading-relaxed">1社だけで決めると<strong>年間数万円損</strong>するケースも。一括見積もりは<strong>完全無料</strong>で、回答者全員にセブンプレミアムカフェラテをプレゼント中。</p>
+                  <p className="text-xs font-bold text-orange-400 uppercase tracking-wide">マンション購入時に必須・今だけ無料</p>
+                  <p className="text-sm font-bold text-slate-100">🔥 火災保険、1社だけで決めていませんか？</p>
+                  <p className="text-xs text-slate-300 leading-relaxed">1社だけで決めると<strong className="text-white">年間数万円損</strong>するケースも。一括見積もりは<strong className="text-white">完全無料</strong>で、回答者全員にセブンプレミアムカフェラテをプレゼント中。</p>
                 </div>
                 <span className="text-xs text-orange-400 shrink-0 whitespace-nowrap">広告</span>
               </div>
@@ -384,7 +395,7 @@ export default function Home() {
               >
                 🎁 無料で火災保険を一括見積もりする →
               </a>
-              <p className="text-center text-xs text-orange-600 font-semibold">✓ 完全無料　✓ 最短3分　✓ 回答者全員プレゼント付き</p>
+              <p className="text-center text-xs text-orange-300 font-semibold">✓ 完全無料　✓ 最短3分　✓ 回答者全員プレゼント付き</p>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "block" }} />
             </div>
@@ -393,14 +404,14 @@ export default function Home() {
             <a
               href="/check"
               onClick={() => sendGAEvent("event", "step2_banner_click", { level: result.level })}
-              className="flex items-center justify-between gap-3 rounded-2xl border-2 border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+              className="flex items-center justify-between gap-3 rounded-2xl border-2 border-blue-500/30 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 px-5 py-4 hover:border-blue-500/50 transition-colors"
             >
               <div>
-                <p className="text-xs font-bold text-blue-600 mb-0.5">Step 2 — 物件を評価する</p>
-                <p className="text-sm font-bold text-gray-900">気になる物件を診断する 🔍</p>
-                <p className="text-xs text-gray-500 mt-0.5">坪単価・管理費・10年後推定を即チェック。結果をシェアして相談できます。</p>
+                <p className="text-xs font-bold text-blue-400 mb-0.5">Step 2 — 物件を評価する</p>
+                <p className="text-sm font-bold text-slate-100">気になる物件を診断する 🔍</p>
+                <p className="text-xs text-slate-400 mt-0.5">坪単価・管理費・10年後推定を即チェック。結果をシェアして相談できます。</p>
               </div>
-              <span className="shrink-0 text-blue-600 font-bold text-lg">→</span>
+              <span className="shrink-0 text-blue-400 font-bold text-lg">→</span>
             </a>
 
             {/* ④ タブ式ツール群 */}
@@ -410,12 +421,12 @@ export default function Home() {
         )}
 
         {/* ─── 6. FAQ ─── */}
-        <section aria-labelledby="faq-heading" className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6">
-          <h2 id="faq-heading" className="text-base font-extrabold text-gray-800 mb-1 text-center">
+        <section aria-labelledby="faq-heading" className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6">
+          <h2 id="faq-heading" className="text-base font-extrabold text-white mb-1 text-center">
             よくある質問
           </h2>
-          <p className="text-xs text-gray-500 mb-5 text-center">診断についてよく寄せられる疑問にお答えします</p>
-          <div className="divide-y divide-gray-100">
+          <p className="text-xs text-slate-400 mb-5 text-center">診断についてよく寄せられる疑問にお答えします</p>
+          <div>
             <FaqItem
               q="この診断はどこまで正確ですか？"
               a="元利均等返済の計算式をベースにしており、一般的なFP（ファイナンシャルプランナー）の試算と同水準の精度があります。ただし簡易診断のため、実際の住宅ローン審査結果や個別の返済能力を保証するものではありません。参考情報としてご活用ください。"
@@ -440,9 +451,9 @@ export default function Home() {
         </section>
 
         {/* ─── フッター ─── */}
-        <footer className="text-center text-xs text-gray-400 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-700 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
-          <p>© 2025 都内マンション購入診断</p>
+          <p>© 2026 30Lab</p>
         </footer>
       </div>
     </div>

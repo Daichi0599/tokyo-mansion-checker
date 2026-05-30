@@ -11,46 +11,46 @@ interface Props {
 const levelConfig = {
   safe: {
     label:   "余裕あり",
-    bg:      "bg-emerald-50",
+    bg:      "bg-emerald-500/10",
     border:  "border-emerald-400",
-    text:    "text-emerald-700",
-    badge:   "bg-emerald-100 text-emerald-800",
+    text:    "text-emerald-400",
+    badge:   "bg-emerald-500/20 text-emerald-300",
     icon:    "✅",
     gauge:   "bg-emerald-400",
   },
   caution: {
     label:   "安全圏",
-    bg:      "bg-blue-50",
+    bg:      "bg-blue-500/10",
     border:  "border-blue-400",
-    text:    "text-blue-700",
-    badge:   "bg-blue-100 text-blue-800",
+    text:    "text-blue-400",
+    badge:   "bg-blue-500/20 text-blue-300",
     icon:    "🟢",
     gauge:   "bg-blue-400",
   },
   warning: {
     label:   "やや背伸び",
-    bg:      "bg-yellow-50",
+    bg:      "bg-yellow-500/10",
     border:  "border-yellow-400",
-    text:    "text-yellow-700",
-    badge:   "bg-yellow-100 text-yellow-800",
+    text:    "text-yellow-400",
+    badge:   "bg-yellow-500/20 text-yellow-300",
     icon:    "⚠️",
     gauge:   "bg-yellow-400",
   },
   danger: {
     label:   "要注意",
-    bg:      "bg-orange-50",
+    bg:      "bg-orange-500/10",
     border:  "border-orange-400",
-    text:    "text-orange-700",
-    badge:   "bg-orange-100 text-orange-800",
+    text:    "text-orange-400",
+    badge:   "bg-orange-500/20 text-orange-300",
     icon:    "🔶",
     gauge:   "bg-orange-400",
   },
   critical: {
     label:   "危険",
-    bg:      "bg-red-50",
+    bg:      "bg-red-500/10",
     border:  "border-red-400",
-    text:    "text-red-700",
-    badge:   "bg-red-100 text-red-800",
+    text:    "text-red-400",
+    badge:   "bg-red-500/20 text-red-300",
     icon:    "🚨",
     gauge:   "bg-red-500",
   },
@@ -75,11 +75,11 @@ function PriceCard({ title, subtitle, price, cardStyle, titleStyle, badge, badge
           <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${badgeStyle}`}>{badge}</span>
         )}
       </div>
-      <p className="text-2xl font-extrabold text-gray-900">
+      <p className="text-2xl font-extrabold text-slate-100">
         {price.toLocaleString()}
-        <span className="text-base font-normal text-gray-600 ml-1">万円</span>
+        <span className="text-base font-normal text-slate-400 ml-1">万円</span>
       </p>
-      <p className="text-xs text-gray-400 leading-relaxed">{subtitle}</p>
+      <p className="text-xs text-slate-500 leading-relaxed">{subtitle}</p>
     </div>
   );
 }
@@ -97,12 +97,12 @@ export default function DiagnosisResultCard({ result, input }: Props) {
     ? (monthlyTotal * 12) / (input.annualIncome / 2) * 100
     : 0;
   const riskConfig = riskBurdenRate < 30
-    ? { label: "余裕あり", bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", icon: "✅" }
+    ? { label: "余裕あり", bg: "bg-emerald-500/10", border: "border-emerald-500/20", text: "text-emerald-400", icon: "✅" }
     : riskBurdenRate < 40
-    ? { label: "やや注意", bg: "bg-yellow-50", border: "border-yellow-200", text: "text-yellow-700", icon: "⚠️" }
+    ? { label: "やや注意", bg: "bg-yellow-500/10",  border: "border-yellow-500/20",  text: "text-yellow-400",  icon: "⚠️" }
     : riskBurdenRate < 50
-    ? { label: "要注意", bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", icon: "🔶" }
-    : { label: "危険域", bg: "bg-red-50", border: "border-red-200", text: "text-red-700", icon: "🚨" };
+    ? { label: "要注意",   bg: "bg-orange-500/10",  border: "border-orange-500/20",  text: "text-orange-400",  icon: "🔶" }
+    : { label: "危険域",   bg: "bg-red-500/10",     border: "border-red-500/20",     text: "text-red-400",     icon: "🚨" };
 
   // Xシェアテキスト（長文・詳細）
   const shareText = input
@@ -117,88 +117,88 @@ export default function DiagnosisResultCard({ result, input }: Props) {
   const siteUrl = "https://tokyo-mansion-checker.vercel.app";
 
   return (
-    <div className={`rounded-2xl border-2 shadow-md overflow-hidden ${config.border}`}>
+    <div className={`rounded-2xl border-2 overflow-hidden ${config.border}`}>
       {/* ヒーローヘッダー */}
       <div className={`px-6 py-8 flex flex-col items-center text-center gap-2 ${config.bg}`}>
         <span className={`text-3xl font-black ${config.text}`}>
           {config.icon} {config.label}
         </span>
-        <p className="text-sm text-gray-500 mt-1">あなたの安全購入価格は</p>
-        <p className="text-5xl sm:text-6xl font-black text-gray-900 leading-none">
+        <p className="text-sm text-slate-400 mt-1">あなたの安全購入価格は</p>
+        <p className="text-5xl sm:text-6xl font-black text-slate-100 leading-none">
           {safePrice.toLocaleString()}
-          <span className="text-2xl font-normal text-gray-500 ml-2">万円</span>
+          <span className="text-2xl font-normal text-slate-400 ml-2">万円</span>
         </p>
         <p className={`text-sm font-semibold mt-1 ${config.text}`}>
           住居費負担率 {burdenRate.toFixed(1)}%（ローン＋管理費ベース）
         </p>
       </div>
 
-      <div className="bg-white px-6 py-5 space-y-6">
+      <div className="bg-slate-800 px-6 py-5 space-y-6">
         {/* 価格カード 3枚 */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <PriceCard
             title="安全圏"
             subtitle="家計を崩しにくい目安"
             price={safePrice}
-            cardStyle="border-emerald-300 bg-emerald-50"
-            titleStyle="text-emerald-700"
+            cardStyle="border-emerald-500/40 bg-emerald-500/10"
+            titleStyle="text-emerald-400"
             badge="推奨"
-            badgeStyle="bg-emerald-200 text-emerald-800"
+            badgeStyle="bg-emerald-500/20 text-emerald-300"
           />
           <PriceCard
             title="背伸び圏"
             subtitle="購入可能だが余裕は少ない"
             price={aggressivePrice}
-            cardStyle="border-yellow-300 bg-yellow-50"
-            titleStyle="text-yellow-700"
+            cardStyle="border-yellow-500/40 bg-yellow-500/10"
+            titleStyle="text-yellow-400"
           />
           <PriceCard
             title="注意圏"
             subtitle="家計への圧迫リスクあり"
             price={dangerPrice}
-            cardStyle="border-red-300 bg-red-50"
-            titleStyle="text-red-700"
+            cardStyle="border-red-500/40 bg-red-500/10"
+            titleStyle="text-red-400"
             badge="要注意"
-            badgeStyle="bg-red-200 text-red-800"
+            badgeStyle="bg-red-500/20 text-red-300"
           />
         </div>
 
         {/* ⑥ 計算根拠 */}
         {input && (
-          <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
-            <p className="text-xs font-bold text-slate-500 mb-1.5">💡 計算根拠（安全価格）</p>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              年収 <strong>{input.annualIncome.toLocaleString()}万円</strong> × 25% ÷ 12 ＝ 月
-              <strong>{Math.round(input.annualIncome * 0.25 / 12 * 10) / 10}万円</strong>が住居費上限
-              　→　借入 <strong>{(safePrice - input.downPayment).toLocaleString()}万円</strong> ＋ 頭金 <strong>{input.downPayment.toLocaleString()}万円</strong> ＝ <strong>{safePrice.toLocaleString()}万円</strong>
+          <div className="rounded-xl bg-slate-700/50 border border-slate-600 px-4 py-3">
+            <p className="text-xs font-bold text-slate-400 mb-1.5">💡 計算根拠（安全価格）</p>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              年収 <strong className="text-slate-100">{input.annualIncome.toLocaleString()}万円</strong> × 25% ÷ 12 ＝ 月
+              <strong className="text-slate-100">{Math.round(input.annualIncome * 0.25 / 12 * 10) / 10}万円</strong>が住居費上限
+              　→　借入 <strong className="text-slate-100">{(safePrice - input.downPayment).toLocaleString()}万円</strong> ＋ 頭金 <strong className="text-slate-100">{input.downPayment.toLocaleString()}万円</strong> ＝ <strong className="text-slate-100">{safePrice.toLocaleString()}万円</strong>
             </p>
           </div>
         )}
 
         {/* 月々の住居費内訳 */}
-        <div className="rounded-xl bg-gray-50 border border-gray-100 px-4 py-4 space-y-2.5">
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">月々の住居費内訳（安全価格ベース）</p>
+        <div className="rounded-xl bg-slate-700/50 border border-slate-700 px-4 py-4 space-y-2.5">
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-wide">月々の住居費内訳（安全価格ベース）</p>
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between text-sm text-gray-600">
+            <div className="flex items-center justify-between text-sm text-slate-300">
               <span>ローン返済額</span>
-              <span className="font-semibold text-gray-900">{monthlyPayment.toFixed(1)} 万円</span>
+              <span className="font-semibold text-slate-100">{monthlyPayment.toFixed(1)} 万円</span>
             </div>
             {managementFee > 0 && (
-              <div className="flex items-center justify-between text-sm text-gray-600">
+              <div className="flex items-center justify-between text-sm text-slate-300">
                 <span>管理費・修繕積立金</span>
-                <span className="font-semibold text-gray-900">{managementFee.toFixed(1)} 万円</span>
+                <span className="font-semibold text-slate-100">{managementFee.toFixed(1)} 万円</span>
               </div>
             )}
-            <div className="border-t border-gray-200 pt-1.5 flex items-center justify-between">
-              <span className="text-sm font-bold text-gray-700">月々の実質住居費</span>
-              <span className="text-xl font-black text-gray-900">
+            <div className="border-t border-slate-600 pt-1.5 flex items-center justify-between">
+              <span className="text-sm font-bold text-slate-200">月々の実質住居費</span>
+              <span className="text-xl font-black text-slate-100">
                 {monthlyTotal.toFixed(1)}
-                <span className="text-sm font-normal text-gray-500 ml-1">万円 / 月</span>
+                <span className="text-sm font-normal text-slate-400 ml-1">万円 / 月</span>
               </span>
             </div>
           </div>
           {managementFee > 0 && (
-            <p className="text-xs text-gray-400 leading-relaxed pt-1">
+            <p className="text-xs text-slate-500 leading-relaxed pt-1">
               ※ 都内マンションはローン以外に管理費・修繕積立金が毎月かかります。これらを含めた実質負担で診断しています。
             </p>
           )}
@@ -207,17 +207,17 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         {/* 住居費負担率ゲージ */}
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium text-gray-700">住居費負担率</span>
+            <span className="text-sm font-medium text-slate-300">住居費負担率</span>
             <span className={`text-lg font-extrabold ${config.text}`}>
               {burdenRate.toFixed(1)}%
             </span>
           </div>
-          <div className="relative h-4 bg-gray-200 rounded-full overflow-hidden">
+          <div className="relative h-4 bg-slate-700 rounded-full overflow-hidden">
             {/* 区切り線：25%, 30%, 35% */}
             {[25, 30, 35].map((pct) => (
               <div
                 key={pct}
-                className="absolute top-0 bottom-0 w-px bg-white/70 z-10"
+                className="absolute top-0 bottom-0 w-px bg-white/20 z-10"
                 style={{ left: `${(pct / 50) * 100}%` }}
               />
             ))}
@@ -226,14 +226,14 @@ export default function DiagnosisResultCard({ result, input }: Props) {
               style={{ width: `${gaugeWidth}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs text-gray-400">
+          <div className="flex justify-between text-xs text-slate-500">
             <span>0%</span>
             <span>25%</span>
             <span>30%</span>
             <span>35%</span>
             <span>50%+</span>
           </div>
-          <div className="flex justify-between text-xs text-gray-300">
+          <div className="flex justify-between text-xs text-slate-700">
             <span></span>
             <span>安全圏</span>
             <span>背伸び圏</span>
@@ -245,7 +245,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         {/* 診断コメント */}
         <div className={`rounded-xl p-4 ${config.bg} border ${config.border}`}>
           <p className={`text-sm font-semibold mb-1 ${config.text}`}>診断コメント</p>
-          <p className="text-sm text-gray-700 leading-relaxed">{comment}</p>
+          <p className="text-sm text-slate-200 leading-relaxed">{comment}</p>
         </div>
 
         {/* Xシェアボタン（診断コメント直下） */}
@@ -268,15 +268,15 @@ export default function DiagnosisResultCard({ result, input }: Props) {
             <div className="flex items-center gap-2">
               <span>{riskConfig.icon}</span>
               <p className={`text-sm font-bold ${riskConfig.text}`}>共働きリスクチェック</p>
-              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ml-auto border ${riskConfig.text} ${riskConfig.border} bg-white`}>
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ml-auto border ${riskConfig.text} ${riskConfig.border} bg-slate-800`}>
                 {riskConfig.label}
               </span>
             </div>
-            <p className="text-xs text-gray-700 leading-relaxed">
-              産休・育休などで収入が半減した場合（想定年収 <strong>{Math.round(input.annualIncome / 2).toLocaleString()}万円</strong>）、住居費負担率は
+            <p className="text-xs text-slate-300 leading-relaxed">
+              産休・育休などで収入が半減した場合（想定年収 <strong className="text-slate-100">{Math.round(input.annualIncome / 2).toLocaleString()}万円</strong>）、住居費負担率は
               <strong className={riskConfig.text}> {riskBurdenRate.toFixed(1)}%</strong> になります。
             </p>
-            <p className="text-xs text-gray-500 leading-relaxed border-t border-gray-200 pt-2">
+            <p className="text-xs text-slate-500 leading-relaxed border-t border-slate-700 pt-2">
               ペアローンは育休中も両者の返済義務が継続します。収入減少時の返済余力を事前にシミュレーションしておきましょう。
             </p>
           </div>
@@ -327,10 +327,10 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         )}
 
         {/* Xフォロー誘導 */}
-        <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-4 flex items-center justify-between gap-4">
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-4 flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-bold text-gray-800">📣 続報・使い方をXで発信中</p>
-            <p className="text-xs text-gray-500 mt-0.5">フォローすると新ツールや住宅ローン最新情報が届きます</p>
+            <p className="text-sm font-bold text-slate-100">📣 続報・使い方をXで発信中</p>
+            <p className="text-xs text-slate-400 mt-0.5">フォローすると新ツールや住宅ローン最新情報が届きます</p>
           </div>
           <a
             href="https://twitter.com/intent/follow?screen_name=30lab_jp"
@@ -345,45 +345,45 @@ export default function DiagnosisResultCard({ result, input }: Props) {
         </div>
 
         {/* 他のツール導線 */}
-        <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-3">
-          <p className="text-sm font-bold text-gray-600">他のツールも試す</p>
+        <div className="rounded-xl border border-slate-700 bg-slate-900/30 px-4 py-4 space-y-3">
+          <p className="text-sm font-bold text-slate-400">他のツールも試す</p>
           <a
             href="/car"
-            className="flex items-center justify-between bg-white hover:bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 transition-colors group"
+            className="flex items-center justify-between bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl px-4 py-3 transition-colors group"
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">🚗</span>
               <div>
-                <p className="text-sm font-bold text-gray-800">都内で車は持つべき？</p>
-                <p className="text-xs text-gray-500">カーシェア vs マイカー 10年コスト診断</p>
+                <p className="text-sm font-bold text-slate-100">都内で車は持つべき？</p>
+                <p className="text-xs text-slate-400">カーシェア vs マイカー 10年コスト診断</p>
               </div>
             </div>
-            <span className="text-gray-400 group-hover:text-gray-600 transition-colors">→</span>
+            <span className="text-slate-500 group-hover:text-slate-300 transition-colors">→</span>
           </a>
           <a
             href="/child"
-            className="flex items-center justify-between bg-white hover:bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 transition-colors group"
+            className="flex items-center justify-between bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl px-4 py-3 transition-colors group"
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">👶</span>
               <div>
-                <p className="text-sm font-bold text-gray-800">子育て総費用シミュレーター</p>
-                <p className="text-xs text-gray-500">0歳〜大学卒業まで費用を一括試算</p>
+                <p className="text-sm font-bold text-slate-100">子育て総費用シミュレーター</p>
+                <p className="text-xs text-slate-400">0歳〜大学卒業まで費用を一括試算</p>
               </div>
             </div>
-            <span className="text-gray-400 group-hover:text-gray-600 transition-colors">→</span>
+            <span className="text-slate-500 group-hover:text-slate-300 transition-colors">→</span>
           </a>
         </div>
 
         {/* 免責事項 */}
-        <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 space-y-2">
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">免責事項</p>
-          <p className="text-xs text-gray-500 leading-relaxed">
+        <div className="rounded-xl border border-slate-700 bg-slate-900/30 px-4 py-4 space-y-2">
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-wide">免責事項</p>
+          <p className="text-xs text-slate-400 leading-relaxed">
             本ツールの診断結果は、入力された年収・頭金・金利・返済期間をもとにした
-            <strong className="text-gray-700">参考情報</strong>
+            <strong className="text-slate-200">参考情報</strong>
             であり、住宅購入の可否や融資額を保証するものではありません。
           </p>
-          <ul className="text-xs text-gray-500 leading-relaxed space-y-1 list-disc list-inside">
+          <ul className="text-xs text-slate-400 leading-relaxed space-y-1 list-disc list-inside">
             <li>住宅ローン審査の結果は金融機関の判断によります。</li>
             <li>固定資産税・仲介手数料・リフォーム費等の諸費用は含まれていません。</li>
             <li>金利は将来変動する可能性があり、変動金利の場合は返済額が増加することがあります。</li>

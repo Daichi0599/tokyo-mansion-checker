@@ -86,6 +86,8 @@ const fields: FieldConfig[] = [
   },
 ];
 
+const selectCls = "w-full rounded-xl border border-slate-600 bg-slate-700 px-3 py-2.5 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer";
+
 export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
   const [values, setValues] = useState<DiagnosisInput>(defaultValues);
   const hasStarted = useRef(false);
@@ -105,11 +107,11 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} id="form" className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+    <form onSubmit={handleSubmit} id="form" className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden">
       {/* ヘッダー */}
-      <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/80 text-center">
-        <h2 className="text-base font-bold text-gray-800">あなたの条件を入力</h2>
-        <p className="text-xs text-gray-500 mt-1">
+      <div className="px-6 py-5 border-b border-slate-700 bg-slate-900/50 text-center">
+        <h2 className="text-base font-bold text-white">あなたの条件を入力</h2>
+        <p className="text-xs text-slate-400 mt-1">
           目安の初期値が設定されています。実際の数値に合わせて調整してください。
         </p>
       </div>
@@ -120,16 +122,16 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
           {fields.map(({ key, label, unit, desc, options }) => (
             <div key={key} className="flex flex-col gap-1.5">
               <div>
-                <label className="text-sm font-semibold text-gray-800">
+                <label className="text-sm font-semibold text-slate-200">
                   {label}
-                  <span className="ml-1.5 text-xs font-normal text-gray-400">（{unit}）</span>
+                  <span className="ml-1.5 text-xs font-normal text-slate-500">（{unit}）</span>
                 </label>
-                <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{desc}</p>
+                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
               </div>
               <select
                 value={values[key]}
                 onChange={(e) => handleChange(key, e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer"
+                className={selectCls}
               >
                 {options.map((opt) => (
                   <option key={opt} value={opt}>
@@ -146,7 +148,7 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:bg-blue-400 text-white font-bold py-4 rounded-xl transition-colors text-base shadow-sm flex items-center justify-center gap-2"
+            className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 disabled:bg-blue-400 text-white font-bold py-4 rounded-xl transition-colors text-base flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
@@ -157,7 +159,7 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
               "無理のない購入予算を診断する →"
             )}
           </button>
-          <p className="text-xs text-center text-gray-400">
+          <p className="text-xs text-center text-slate-500">
             完全無料・匿名・営業なし。入力内容はブラウザ上でのみ使用され、外部に送信されません。
           </p>
         </div>
