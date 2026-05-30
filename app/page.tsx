@@ -141,6 +141,27 @@ export default function HomePage() {
             </p>
           </div>
 
+          {/* ツール一覧チップ */}
+          <div
+            className="flex flex-wrap justify-center gap-2"
+            style={{ animation: "fadeUp 0.45s ease-out 0.13s both" }}
+          >
+            {[
+              { icon: "🏠", label: "マンション診断" },
+              { icon: "🔍", label: "物件チェック" },
+              { icon: "🏦", label: "ローン計算" },
+              { icon: "🚗", label: "車コスト比較" },
+              { icon: "👶", label: "子育て試算" },
+            ].map((t) => (
+              <span
+                key={t.label}
+                className="inline-flex items-center gap-1.5 bg-slate-800/80 border border-slate-700 rounded-full px-3 py-1.5 text-xs text-slate-300 font-medium"
+              >
+                {t.icon} {t.label}
+              </span>
+            ))}
+          </div>
+
           {/* ソーシャルプルーフ */}
           <div
             className="flex items-center justify-center gap-1.5 text-xs text-slate-500"
@@ -152,19 +173,19 @@ export default function HomePage() {
 
           {/* 主要CTA */}
           <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+            className="flex flex-col sm:flex-row items-stretch justify-center gap-3 w-full max-w-md mx-auto"
             style={{ animation: "fadeUp 0.45s ease-out 0.2s both" }}
           >
             <Link
               href="/mansion"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-extrabold px-7 py-3.5 rounded-xl text-sm transition-colors"
+              className="flex flex-1 items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-extrabold px-6 py-3.5 rounded-xl text-sm transition-colors"
               style={{ animation: "pulseBlue 2.8s ease-in-out 0.8s infinite" }}
             >
               🏠 マンション購入診断を始める →
             </Link>
             <Link
               href="/check"
-              className="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-5 py-3.5 rounded-xl text-sm border border-slate-600 transition-colors"
+              className="flex flex-1 items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-6 py-3.5 rounded-xl text-sm border border-slate-600 transition-colors"
             >
               🔍 気になる物件を診断する
             </Link>
