@@ -17,7 +17,7 @@ export default function CheckPageTabs() {
   return (
     <div className="space-y-4">
       {/* タブバー */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-1.5">
+      <div className="bg-slate-800 rounded-2xl border border-slate-700 p-1.5">
         <div className="grid grid-cols-2 gap-1">
           {TABS.map((tab) => (
             <button
@@ -26,7 +26,7 @@ export default function CheckPageTabs() {
               className={`py-2.5 px-1 flex items-center justify-center gap-1.5 rounded-xl transition-all text-sm font-semibold ${
                 active === tab.id
                   ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-500 hover:bg-gray-100"
+                  : "text-slate-400 hover:bg-slate-700"
               }`}
             >
               <span>{tab.icon}</span>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CheckPageTabs from "@/components/CheckPageTabs";
 
 export const metadata: Metadata = {
@@ -21,34 +22,44 @@ export const metadata: Metadata = {
 
 export default function CheckPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-slate-900 text-white">
+
+      {/* ブレッドクラム */}
+      <nav className="bg-slate-800 border-b border-slate-700 px-4 py-2.5">
+        <div className="max-w-2xl mx-auto flex items-center gap-2 text-xs text-slate-400">
+          <Link href="/" className="hover:text-slate-200 transition-colors">30Lab</Link>
+          <span>/</span>
+          <span className="text-slate-200">物件診断</span>
+        </div>
+      </nav>
+
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-6">
 
         {/* ヒーロー */}
         <header className="text-center space-y-3">
-          <span className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 bg-blue-500/15 text-blue-300 text-xs font-bold px-3 py-1.5 rounded-full border border-blue-500/20">
             🔍 Step 2 — 物件を評価する
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
             気になる物件を<br className="sm:hidden" />すぐ診断
           </h1>
-          <p className="text-sm text-gray-500 leading-relaxed max-w-md mx-auto">
+          <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
             SUUMOで見つけた物件のスペックを入力 → 予算・割安感・管理費を即確認。
             結果をシェアしてパートナーと一緒に検討できます。
           </p>
         </header>
 
         {/* Step 1 誘導バナー */}
-        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 flex items-center justify-between gap-3">
+        <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 px-4 py-3 flex items-center justify-between gap-3">
           <div>
-            <p className="text-xs font-bold text-blue-700">💡 Step 1 を先にやると精度UP</p>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs font-bold text-blue-300">💡 Step 1 を先にやると精度UP</p>
+            <p className="text-xs text-slate-400 mt-0.5">
               自分の安全購入価格を診断すると、予算シグナルが自動で連携されます
             </p>
           </div>
           <a
             href="/mansion"
-            className="shrink-0 text-xs font-bold bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
+            className="shrink-0 text-xs font-bold bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-500 transition-colors whitespace-nowrap"
           >
             購入上限を診断 →
           </a>
@@ -58,9 +69,9 @@ export default function CheckPage() {
         <CheckPageTabs />
 
         {/* フッター */}
-        <footer className="text-center text-xs text-gray-400 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-700 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
-          <p>© 2025 30Lab</p>
+          <p>© 2026 30Lab</p>
         </footer>
       </div>
     </div>
