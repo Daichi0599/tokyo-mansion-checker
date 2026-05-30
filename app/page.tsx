@@ -135,8 +135,9 @@ export default function HomePage() {
                 まずここから。
               </span>
             </h1>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm mx-auto">
-              「いくらまで買える？」「車、持つべき？」漠然とした不安を、数字に変える無料ツール集。
+            <p className="text-sm text-slate-400 leading-relaxed">
+              「いくらまで買える？」「車、持つべき？」<br />
+              漠然とした不安を、数字に変える無料ツール集。
             </p>
           </div>
 
@@ -173,19 +174,19 @@ export default function HomePage() {
 
           {/* 主要CTA */}
           <div
-            className="flex flex-col sm:flex-row items-stretch justify-center gap-3 w-full max-w-md mx-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
             style={{ animation: "fadeUp 0.45s ease-out 0.2s both" }}
           >
             <Link
               href="/mansion"
-              className="flex flex-1 items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-extrabold px-6 py-3.5 rounded-xl text-sm transition-colors"
+              className="w-full sm:w-auto whitespace-nowrap flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-extrabold px-7 py-3.5 rounded-xl text-sm transition-colors"
               style={{ animation: "pulseBlue 2.8s ease-in-out 0.8s infinite" }}
             >
               🏠 マンション購入診断を始める →
             </Link>
             <Link
               href="/check"
-              className="flex flex-1 items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-6 py-3.5 rounded-xl text-sm border border-slate-600 transition-colors"
+              className="w-full sm:w-auto whitespace-nowrap flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold px-7 py-3.5 rounded-xl text-sm border border-slate-600 transition-colors"
             >
               🔍 気になる物件を診断する
             </Link>
