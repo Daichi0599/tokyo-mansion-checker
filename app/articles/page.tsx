@@ -159,57 +159,73 @@ const articles = [
 
 export default function ArticlesIndexPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
+      {/* ブレッドクラム */}
+      <div className="bg-slate-800 border-b border-slate-700">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-500">
+          <a href="/" className="hover:text-slate-300 transition-colors">ホーム</a>
+          <span>›</span>
+          <span>コラム一覧</span>
+        </div>
+      </div>
+
       <div className="max-w-2xl mx-auto px-4 py-10">
         {/* ヘッダー */}
         <div className="mb-8">
-          <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">COLUMN</p>
-          <h1 className="text-2xl font-black text-gray-900 mb-2">マンション購入コラム</h1>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">COLUMN</p>
+          <h1 className="text-2xl font-black text-white mb-2">マンション購入コラム</h1>
+          <p className="text-sm text-slate-400">
             数字で理解するマンション購入。年収・ローン・頭金の基礎知識から、都内の相場まで。
           </p>
         </div>
 
         {/* 記事一覧 */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {articles.map((article) => (
-            <Link
+            <a
               key={article.href}
               href={article.href}
-              className="block bg-white rounded-2xl p-5 border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all group"
+              className="block bg-slate-800 rounded-2xl p-5 border border-slate-700 hover:border-slate-500 hover:-translate-y-0.5 transition-all duration-200 group"
             >
               <div className="flex items-start gap-4">
-                <span className="text-3xl">{article.emoji}</span>
+                <span className="text-3xl shrink-0">{article.emoji}</span>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">
+                  <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                    <span className="text-xs bg-blue-500/15 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">
                       {article.tag}
                     </span>
-                    <span className="text-xs text-gray-400">{article.date}</span>
+                    <span className="text-xs text-slate-600">{article.date}</span>
                   </div>
-                  <h2 className="text-base font-bold text-gray-900 group-hover:text-blue-700 transition-colors mb-1 leading-snug">
+                  <h2 className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors mb-1 leading-snug">
                     {article.title}
                   </h2>
-                  <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
                     {article.description}
                   </p>
                 </div>
+                <span className="text-slate-600 text-sm shrink-0 mt-1 group-hover:text-slate-400 transition-colors">→</span>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
 
         {/* ツールCTA */}
-        <div className="mt-10 bg-blue-600 rounded-2xl p-6 text-center text-white">
-          <p className="text-sm font-bold mb-1">📱 自分の数字で試してみたい方へ</p>
-          <p className="text-xs mb-4 opacity-90">年収・頭金・金利を入力するだけ。無料で診断できます。</p>
-          <Link
+        <div className="mt-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-center">
+          <p className="text-sm font-bold text-white mb-1">📱 自分の数字で試してみたい方へ</p>
+          <p className="text-xs mb-4 text-blue-200">年収・頭金・金利を入力するだけ。無料で診断できます。</p>
+          <a
             href="/mansion"
             className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
           >
             無料マンション診断ツールを使う →
-          </Link>
+          </a>
         </div>
+
+        {/* フッター */}
+        <footer className="text-center text-xs text-slate-700 mt-10 pb-4 space-y-1">
+          <p>本コンテンツは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
+          <p>© 2026 30Lab</p>
+        </footer>
       </div>
     </main>
   );
