@@ -108,7 +108,7 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative max-w-2xl mx-auto px-4 pt-16 pb-14 space-y-6 text-center">
+        <div className="relative max-w-3xl mx-auto px-4 pt-16 pb-14 space-y-6 text-center">
           {/* バッジ */}
           <div
             className="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/25"
@@ -188,85 +188,82 @@ export default function HomePage() {
       </div>
 
       {/* ── コンテンツエリア ── */}
-      <div className="max-w-2xl mx-auto px-4 pb-14 space-y-10">
+      <div className="max-w-5xl mx-auto px-4 pb-14 space-y-10">
 
-        {/* ── マンション診断（メインツール） ── */}
-        <AnimateIn>
-          <section className="space-y-3">
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">
-              Main Tool
-            </p>
+        {/* ── メインツール ＋ サブツール（PC: 横並び） ── */}
+        <section className="space-y-3 lg:space-y-0 lg:grid lg:grid-cols-[3fr_2fr] lg:gap-6 lg:items-start">
 
-            <Link
-              href="/mansion"
-              className="block rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 hover:-translate-y-1 transition-all duration-200"
-              style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}
-            >
-              {/* カードヘッダー */}
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">🏠</span>
-                  <div>
-                    <p className="text-white font-extrabold text-base leading-tight">
-                      マンション購入診断
-                    </p>
-                    <p className="text-blue-200 text-xs mt-0.5">
-                      「無理なく買える価格」を3分で算出
-                    </p>
-                  </div>
-                </div>
-                <span className="text-white font-bold text-xl">→</span>
-              </div>
-              {/* カードボディ */}
-              <div className="bg-slate-800 px-6 py-4">
-                <p className="text-sm text-slate-300 leading-relaxed mb-3">
-                  年収・生活費・管理費を入力するだけ。銀行の「借りられる額」ではなく、家計を崩さない安全な購入価格がわかります。
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {["約3分で完了", "世帯年収対応", "負担率チェック", "金利シミュレーション"].map((b) => (
-                    <span
-                      key={b}
-                      className="text-xs font-semibold bg-blue-500/10 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20"
-                    >
-                      {b}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-slate-800/60 border-t border-slate-700 px-6 py-2.5">
-                <p className="text-xs font-extrabold text-blue-400">今すぐ診断を始める →</p>
-              </div>
-            </Link>
-          </section>
-        </AnimateIn>
-
-        {/* ── サブツール3つ ── */}
-        <section className="space-y-3">
+          {/* メインツール */}
           <AnimateIn>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">
-              Other Tools
-            </p>
-          </AnimateIn>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {SUB_TOOLS.map((tool, i) => (
-              <AnimateIn key={tool.href} delay={i * 100} className="h-full">
-                <Link
-                  href={tool.href}
-                  className={`block h-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-4 transition-all duration-200 hover:-translate-y-1 ${tool.border}`}
-                >
-                  <div className="flex items-start gap-3">
-                    <span className={`text-xl shrink-0 p-1.5 rounded-lg ${tool.glow}`}>
-                      {tool.icon}
-                    </span>
+            <div className="space-y-3">
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center lg:text-left">
+                Main Tool
+              </p>
+              <Link
+                href="/mansion"
+                className="block rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 hover:-translate-y-1 transition-all duration-200"
+                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}
+              >
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <span className="text-4xl">🏠</span>
                     <div>
-                      <p className={`text-sm font-extrabold ${tool.color}`}>{tool.title}</p>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{tool.desc}</p>
+                      <p className="text-white font-extrabold text-lg leading-tight">
+                        マンション購入診断
+                      </p>
+                      <p className="text-blue-200 text-sm mt-0.5">
+                        「無理なく買える価格」を3分で算出
+                      </p>
                     </div>
                   </div>
-                </Link>
-              </AnimateIn>
-            ))}
-          </div>
+                  <span className="text-white font-bold text-2xl shrink-0">→</span>
+                </div>
+                <div className="bg-slate-800 px-6 py-5">
+                  <p className="text-sm text-slate-300 leading-relaxed mb-4">
+                    年収・生活費・管理費を入力するだけ。銀行の「借りられる額」ではなく、家計を崩さない安全な購入価格がわかります。
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["約3分で完了", "世帯年収対応", "負担率チェック", "金利シミュレーション"].map((b) => (
+                      <span
+                        key={b}
+                        className="text-xs font-semibold bg-blue-500/10 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20"
+                      >
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-slate-800/60 border-t border-slate-700 px-6 py-3">
+                  <p className="text-sm font-extrabold text-blue-400">今すぐ診断を始める →</p>
+                </div>
+              </Link>
+            </div>
+          </AnimateIn>
+
+          {/* サブツール（2×2グリッド） */}
+          <AnimateIn delay={100}>
+            <div className="space-y-3">
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center lg:text-left">
+                Other Tools
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {SUB_TOOLS.map((tool, i) => (
+                  <Link
+                    key={tool.href}
+                    href={tool.href}
+                    className={`flex flex-col items-center text-center gap-2.5 rounded-xl border border-slate-700 bg-slate-800 px-3 py-5 transition-all duration-200 hover:-translate-y-1 ${tool.border}`}
+                  >
+                    <span className={`text-3xl p-2.5 rounded-xl ${tool.glow}`}>
+                      {tool.icon}
+                    </span>
+                    <p className={`text-sm font-extrabold leading-tight ${tool.color}`}>{tool.title}</p>
+                    <p className="text-xs text-slate-400 leading-relaxed">{tool.desc}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </AnimateIn>
+
         </section>
 
         {/* ── コラム記事ピックアップ ── */}
@@ -279,17 +276,17 @@ export default function HomePage() {
               </Link>
             </div>
           </AnimateIn>
-          <div className="space-y-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
             {ARTICLES.map((a, i) => (
               <AnimateIn key={a.href} delay={i * 70}>
                 <Link
                   href={a.href}
-                  className="flex items-center gap-3 bg-slate-800 rounded-xl border border-slate-700 px-4 py-3 hover:border-slate-500 hover:-translate-y-0.5 transition-all duration-200"
+                  className="flex items-center gap-3 bg-slate-800 rounded-xl border border-slate-700 px-4 py-3.5 hover:border-slate-500 hover:-translate-y-0.5 transition-all duration-200 h-full"
                 >
                   <span className="shrink-0 text-xs font-bold bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full whitespace-nowrap">
                     {a.tag}
                   </span>
-                  <p className="text-sm font-semibold text-slate-200 leading-snug line-clamp-1">
+                  <p className="text-sm font-semibold text-slate-200 leading-snug line-clamp-2">
                     {a.title}
                   </p>
                   <span className="shrink-0 text-slate-500 text-xs ml-auto">→</span>
@@ -302,7 +299,7 @@ export default function HomePage() {
         {/* ── コンセプト ── */}
         <AnimateIn>
           <section
-            className="rounded-2xl border border-slate-700 bg-slate-800 px-6 py-6 space-y-3 text-center"
+            className="rounded-2xl border border-slate-700 bg-slate-800 px-8 py-8 space-y-3 text-center max-w-2xl mx-auto"
             style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
           >
             <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">About 30Lab</p>
