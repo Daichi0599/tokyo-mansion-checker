@@ -136,14 +136,13 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm mx-auto">
-              「いくらまで買える？」「車、持つべき？」<br />
-              漠然とした不安を、数字に変える無料ツール集。
+              「いくらまで買える？」「車、持つべき？」漠然とした不安を、数字に変える無料ツール集。
             </p>
           </div>
 
           {/* ツール一覧チップ */}
           <div
-            className="flex flex-wrap justify-center gap-2"
+            className="grid grid-cols-5 gap-2 w-full max-w-lg mx-auto"
             style={{ animation: "fadeUp 0.45s ease-out 0.13s both" }}
           >
             {[
@@ -155,9 +154,10 @@ export default function HomePage() {
             ].map((t) => (
               <span
                 key={t.label}
-                className="inline-flex items-center gap-1.5 bg-slate-800/80 border border-slate-700 rounded-full px-3 py-1.5 text-xs text-slate-300 font-medium"
+                className="flex flex-col items-center justify-center gap-1 bg-slate-800/80 border border-slate-700 rounded-xl px-2 py-2 text-slate-300 font-medium"
               >
-                {t.icon} {t.label}
+                <span className="text-xl">{t.icon}</span>
+                <span className="text-[10px] leading-tight text-center">{t.label}</span>
               </span>
             ))}
           </div>
