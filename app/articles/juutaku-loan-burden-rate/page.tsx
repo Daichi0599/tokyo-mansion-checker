@@ -28,81 +28,81 @@ const levelData = [
 
 export default function JuutakuLoanBurdenRatePage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">返済比率の目安</span>
+          <span className="text-slate-300">返済比率の目安</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">返済比率・住宅ローン</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">返済比率・住宅ローン</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
-          住宅ローンの返済比率は<span className="text-blue-600">何%が安全</span>？<br />
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
+          住宅ローンの返済比率は<span className="text-blue-400">何%が安全</span>？<br />
           年収別の目安と限界ラインを解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           住宅ローンを組む際に必ず出てくる「返済比率（負担率）」。「25%以内が安全」「30%まではOK」——さまざまな基準があって何を信じればいいのか迷う方も多いはずです。この記事では、返済比率の正しい計算方法と、年収別の安全ライン・危険ラインを具体的に解説します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             💡 返済比率（負担率）とは？
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             返済比率とは、<strong>年収に対する年間返済額の割合</strong>のことです。
           </p>
-          <div className="bg-blue-50 rounded-xl p-4 mb-4 text-center">
-            <p className="text-sm font-black text-blue-800">返済比率 = 年間返済額 ÷ 年収 × 100</p>
+          <div className="bg-blue-500/10 rounded-xl p-4 mb-4 text-center">
+            <p className="text-sm font-black text-blue-200">返済比率 = 年間返済額 ÷ 年収 × 100</p>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed mb-3">
+          <p className="text-sm text-slate-300 leading-relaxed mb-3">
             たとえば年収600万円で月々の返済が12.5万円（年間150万円）の場合：
           </p>
-          <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-700 mb-4">
+          <div className="bg-slate-800 rounded-xl p-4 text-sm text-slate-200 mb-4">
             <p>返済比率 = 150万 ÷ 600万 × 100 = <strong>25%</strong></p>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             金融機関の審査では一般的に<strong>35%以下</strong>が基準とされますが、「審査が通る＝安全に返せる」ではありません。実際の生活では25%以内を目安にすることをおすすめします。
           </p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🚦 返済比率別のリスクレベル
           </h2>
           <div className="space-y-3">
             {levelData.map((item, i) => {
               const colors: Record<string, string> = {
-                green: "bg-green-50 border-green-200",
-                blue: "bg-blue-50 border-blue-200",
-                yellow: "bg-yellow-50 border-yellow-200",
-                orange: "bg-orange-50 border-orange-200",
-                red: "bg-red-50 border-red-200",
+                green: "bg-green-500/10 border-green-200",
+                blue: "bg-blue-500/10 border-blue-200",
+                yellow: "bg-yellow-500/10 border-yellow-200",
+                orange: "bg-orange-500/10 border-orange-200",
+                red: "bg-red-500/10 border-red-200",
               };
               const labelColors: Record<string, string> = {
-                green: "text-green-700 bg-green-100",
-                blue: "text-blue-700 bg-blue-100",
-                yellow: "text-yellow-700 bg-yellow-100",
-                orange: "text-orange-700 bg-orange-100",
-                red: "text-red-700 bg-red-100",
+                green: "text-emerald-400 bg-green-500/20",
+                blue: "text-blue-300 bg-blue-500/20",
+                yellow: "text-yellow-400 bg-yellow-100",
+                orange: "text-orange-400 bg-orange-500/20",
+                red: "text-red-400 bg-red-500/20",
               };
               return (
                 <div key={i} className={`rounded-xl p-4 border ${colors[item.color]}`}>
                   <div className="flex items-center gap-2 mb-1">
                     <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${labelColors[item.color]}`}>{item.label}</span>
-                    <span className="text-sm font-bold text-gray-800">{item.range}</span>
+                    <span className="text-sm font-bold text-slate-100">{item.range}</span>
                   </div>
-                  <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
+                  <p className="text-xs text-slate-300 leading-relaxed">{item.desc}</p>
                 </div>
               );
             })}
@@ -128,25 +128,25 @@ export default function JuutakuLoanBurdenRatePage() {
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             📋 年収別「安全返済額」早見表
           </h2>
-          <p className="text-sm text-gray-600 mb-4">返済比率25%（安全圏）での月々の返済上限額です。</p>
-          <div className="overflow-x-auto rounded-xl border border-gray-200">
+          <p className="text-sm text-slate-300 mb-4">返済比率25%（安全圏）での月々の返済上限額です。</p>
+          <div className="overflow-x-auto rounded-xl border border-slate-700">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">年収</th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">年間返済上限<br /><span className="text-xs font-normal">(25%)</span></th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">月々の返済上限</th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">年収</th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">年間返済上限<br /><span className="text-xs font-normal">(25%)</span></th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">月々の返済上限</th>
                 </tr>
               </thead>
               <tbody>
                 {[500, 600, 700, 800, 900, 1000].map((n, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 font-bold text-gray-900">{n}万円</td>
-                    <td className="px-4 py-3 text-right text-gray-700">{(n * 0.25).toFixed(0)}万円</td>
-                    <td className="px-4 py-3 text-right text-blue-700 font-semibold">{((n * 0.25) / 12).toFixed(1)}万円</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 font-bold text-white">{n}万円</td>
+                    <td className="px-4 py-3 text-right text-slate-200">{(n * 0.25).toFixed(0)}万円</td>
+                    <td className="px-4 py-3 text-right text-blue-300 font-semibold">{((n * 0.25) / 12).toFixed(1)}万円</td>
                   </tr>
                 ))}
               </tbody>
@@ -156,66 +156,66 @@ export default function JuutakuLoanBurdenRatePage() {
 
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🏢 マンションでは「管理費込み」で考える
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             マンション購入では、ローン返済額に加えて毎月<strong>管理費・修繕積立金</strong>がかかります。都内のマンションでは合わせて月2〜4万円程度が一般的です。
           </p>
-          <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-4">
+          <div className="bg-orange-500/10 border border-orange-200 rounded-xl p-4 mb-4">
             <p className="text-sm font-bold text-orange-800 mb-2">⚠️ 実質的な住居費で考えよう</p>
-            <div className="text-sm text-orange-700 space-y-1">
+            <div className="text-sm text-orange-400 space-y-1">
               <p>ローン返済 12万円 ＋ 管理費・修繕積立金 2.5万円 = <strong>月14.5万円</strong></p>
               <p>年収600万なら実質負担率 = 14.5万 × 12 ÷ 600万 = <strong>29%</strong></p>
             </div>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             ローン返済だけで25%以内に収めていても、管理費等を含めると30%超になるケースがあります。返済比率はローン単体ではなく<strong>住居費合計</strong>で計算することが重要です。
           </p>
         </section>
 
         {/* ━━ セクション5 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             📈 金利上昇への備え
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             変動金利を選ぶ場合、金利が将来上昇すると返済比率も上がります。たとえば金利が1.0%から2.0%に上昇した場合、同じ借入額でも月返済額は約8〜10%増加します。
           </p>
-          <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-700 space-y-2 mb-4">
-            <p className="font-bold text-gray-800">【シミュレーション例】借入3,000万・35年</p>
+          <div className="bg-slate-800 rounded-xl p-4 text-sm text-slate-200 space-y-2 mb-4">
+            <p className="font-bold text-slate-100">【シミュレーション例】借入3,000万・35年</p>
             <p>金利1.0%：月返済 <strong>約8.5万円</strong></p>
             <p>金利2.0%：月返済 <strong>約9.9万円</strong>（＋約1.5万円/月）</p>
             <p>金利3.0%：月返済 <strong>約11.4万円</strong>（＋約2.9万円/月）</p>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             返済比率25%で組んでいても、金利上昇で30〜35%になり得ます。余裕のある返済計画を立てることが重要です。
           </p>
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
@@ -227,30 +227,30 @@ export default function JuutakuLoanBurdenRatePage() {
           <p className="text-xs mb-4 opacity-90">年収・購入価格・頭金を入力するだけで、返済比率と安全ラインをチェックできます。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💰</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
-            <Link href="/articles/tomobataraki-jutaku-loan" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/tomobataraki-jutaku-loan" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">👫</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">共働き夫婦の住宅ローン｜世帯年収別の購入可能額</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">共働き夫婦の住宅ローン｜世帯年収別の購入可能額</span>
             </Link>
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🔎</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
             </Link>
-            <Link href="/articles/jutaku-loan-shinsa-ochita" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-ochita" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">❌</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン審査に落ちた原因と対策【年収別・通らない理由を解説】</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査に落ちた原因と対策【年収別・通らない理由を解説】</span>
             </Link>
           </div>
         </section>

@@ -20,43 +20,43 @@ export const metadata: Metadata = {
 
 export default function TokyoMansionChukoVsShintikuPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">中古vs新築</span>
+          <span className="text-slate-300">中古vs新築</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">中古・新築比較</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">中古・新築比較</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
-          都内マンション、<span className="text-blue-600">中古と新築どっちがいい？</span><br />
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
+          都内マンション、<span className="text-blue-400">中古と新築どっちがいい？</span><br />
           価格差・メリット・選び方を解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           東京23区では新築マンションの平均価格が1億円に迫る水準になっており、「中古でいいのでは？」と考える人が増えています。一方で「新築のほうが安心」という声も根強い。この記事では価格・税制・維持費・資産価値の観点から中古と新築を比較し、どちらを選ぶべきかの判断基準を解説します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             💴 価格差：中古は新築の何割安いか
           </h2>
-          <div className="overflow-x-auto rounded-xl border border-gray-200 mb-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">エリア・タイプ</th>
-                  <th className="text-right px-4 py-3 font-bold text-blue-700 border-b border-gray-200">新築相場</th>
-                  <th className="text-right px-4 py-3 font-bold text-green-700 border-b border-gray-200">中古相場<br /><span className="text-xs font-normal">（築10〜15年）</span></th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">エリア・タイプ</th>
+                  <th className="text-right px-4 py-3 font-bold text-blue-300 border-b border-slate-700">新築相場</th>
+                  <th className="text-right px-4 py-3 font-bold text-emerald-400 border-b border-slate-700">中古相場<br /><span className="text-xs font-normal">（築10〜15年）</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -66,23 +66,23 @@ export default function TokyoMansionChukoVsShintikuPage() {
                   { area: "東京郊外（多摩・23区外）", shintiku: "5,000万〜7,000万円", chuko: "2,500万〜4,500万円" },
                   { area: "神奈川・埼玉（主要駅周辺）", shintiku: "4,000万〜6,000万円", chuko: "2,000万〜4,000万円" },
                 ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 text-xs font-semibold text-gray-700">{row.area}</td>
-                    <td className="px-4 py-3 text-right text-xs text-blue-700">{row.shintiku}</td>
-                    <td className="px-4 py-3 text-right text-xs text-green-700 font-bold">{row.chuko}</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 text-xs font-semibold text-slate-200">{row.area}</td>
+                    <td className="px-4 py-3 text-right text-xs text-blue-300">{row.shintiku}</td>
+                    <td className="px-4 py-3 text-right text-xs text-emerald-400 font-bold">{row.chuko}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             同エリアで比較すると、中古は新築の<strong>40〜60%程度の価格</strong>で購入できるケースが多い。予算が限られる場合、中古＋リノベーションは有力な選択肢です。
           </p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ⚖️ 中古と新築のメリット・デメリット比較
           </h2>
           <div className="space-y-4">
@@ -101,7 +101,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
                   "「新築プレミアム」で引渡し後すぐに価値が下がる",
                   "管理組合・修繕計画の実績がない",
                 ],
-                bg: "bg-blue-50 border-blue-200",
+                bg: "bg-blue-500/10 border-blue-200",
               },
               {
                 label: "🏠 中古マンション",
@@ -117,28 +117,28 @@ export default function TokyoMansionChukoVsShintikuPage() {
                   "耐震基準の確認が必要（1981年以前の旧耐震基準に注意）",
                   "仲介手数料が発生する（物件価格の最大3%+6万円）",
                 ],
-                bg: "bg-green-50 border-green-200",
+                bg: "bg-green-500/10 border-green-200",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-3">{item.label}</p>
+                <p className="text-sm font-black text-white mb-3">{item.label}</p>
                 <div className="grid grid-cols-1 gap-3">
                   <div>
-                    <p className="text-xs font-bold text-green-700 mb-1">✅ メリット</p>
+                    <p className="text-xs font-bold text-emerald-400 mb-1">✅ メリット</p>
                     <ul className="space-y-1">
                       {item.merits.map((m, j) => (
-                        <li key={j} className="text-xs text-gray-700 flex items-start gap-1">
-                          <span className="text-gray-400 mt-0.5">・</span><span>{m}</span>
+                        <li key={j} className="text-xs text-slate-200 flex items-start gap-1">
+                          <span className="text-slate-500 mt-0.5">・</span><span>{m}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-red-600 mb-1">❌ デメリット</p>
+                    <p className="text-xs font-bold text-red-400 mb-1">❌ デメリット</p>
                     <ul className="space-y-1">
                       {item.demerits.map((d, j) => (
-                        <li key={j} className="text-xs text-gray-700 flex items-start gap-1">
-                          <span className="text-gray-400 mt-0.5">・</span><span>{d}</span>
+                        <li key={j} className="text-xs text-slate-200 flex items-start gap-1">
+                          <span className="text-slate-500 mt-0.5">・</span><span>{d}</span>
                         </li>
                       ))}
                     </ul>
@@ -151,15 +151,15 @@ export default function TokyoMansionChukoVsShintikuPage() {
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🔑 中古を選ぶなら「1981年以降・築15年以内」が目安
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             中古マンションを選ぶ際に特に注意すべきポイントです。
           </p>
-          <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-4">
+          <div className="bg-orange-500/10 border border-orange-200 rounded-xl p-4 mb-4">
             <p className="text-sm font-bold text-orange-800 mb-2">⚠️ 築年数の目安</p>
-            <ul className="text-sm text-orange-700 space-y-2">
+            <ul className="text-sm text-orange-400 space-y-2">
               <li>・<strong>1981年以前</strong>：旧耐震基準。住宅ローン控除が使えない場合も。</li>
               <li>・<strong>1981〜2000年頃</strong>：新耐震基準だが、設備が古く大規模修繕済みかの確認が必要。</li>
               <li>・<strong>築15年以内</strong>：設備も比較的新しく、修繕積立金の実績も確認しやすい。おすすめ。</li>
@@ -169,7 +169,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
 
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ✅ どちらを選ぶべきか？タイプ別診断
           </h2>
           <div className="space-y-3">
@@ -177,7 +177,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
               {
                 label: "新築が向いている人",
                 icon: "🏗️",
-                bg: "bg-blue-50 border-blue-200",
+                bg: "bg-blue-500/10 border-blue-200",
                 items: [
                   "予算に余裕があり、最新設備・保証を重視する",
                   "入居後の修繕コストをできるだけ抑えたい",
@@ -188,7 +188,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
               {
                 label: "中古が向いている人",
                 icon: "🏠",
-                bg: "bg-green-50 border-green-200",
+                bg: "bg-green-500/10 border-green-200",
                 items: [
                   "同エリア・同面積でできるだけ安く買いたい",
                   "リノベーションで自分好みにカスタマイズしたい",
@@ -198,11 +198,11 @@ export default function TokyoMansionChukoVsShintikuPage() {
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-2">{item.icon} {item.label}</p>
+                <p className="text-sm font-black text-white mb-2">{item.icon} {item.label}</p>
                 <ul className="space-y-1">
                   {item.items.map((point, j) => (
-                    <li key={j} className="text-xs text-gray-700 flex items-start gap-1">
-                      <span className="text-gray-400 mt-0.5">・</span>
+                    <li key={j} className="text-xs text-slate-200 flex items-start gap-1">
+                      <span className="text-slate-500 mt-0.5">・</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -213,28 +213,28 @@ export default function TokyoMansionChukoVsShintikuPage() {
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
@@ -246,26 +246,26 @@ export default function TokyoMansionChukoVsShintikuPage() {
           <p className="text-xs mb-4 opacity-90">年収・物件価格・頭金を入力して、返済比率と安全購入ラインをすぐに確認。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/mansion-kaidoki-2025" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/mansion-kaidoki-2025" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📅</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">マンションの買い時はいつ？2025年の相場と判断基準を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの買い時はいつ？2025年の相場と判断基準を解説</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏙️</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">東京でマンション購入に必要な頭金はいくら？</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京でマンション購入に必要な頭金はいくら？</span>
             </Link>
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🔎</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
             </Link>
           </div>
         </section>

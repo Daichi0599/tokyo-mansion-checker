@@ -20,34 +20,34 @@ export const metadata: Metadata = {
 
 export default function MansionDokushinKounyuPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">独身マンション購入</span>
+          <span className="text-slate-300">独身マンション購入</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">独身・ライフプラン</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">独身・ライフプラン</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
-          独身でマンションを買うのは<span className="text-blue-600">アリ？</span><br />
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
+          独身でマンションを買うのは<span className="text-blue-400">アリ？</span><br />
           メリット・デメリットを解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           「独身のうちにマンションを買ってもいいのか？」——30代・40代の独身会社員から増えているこの疑問。賃貸に払い続けるよりも資産になるという意見もある一方、ライフスタイルの変化リスクを懸念する声も。この記事では独身購入の現実を整理します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ✅ 独身マンション購入のメリット
           </h2>
           <div className="space-y-3">
@@ -56,30 +56,30 @@ export default function MansionDokushinKounyuPage() {
                 icon: "💰",
                 title: "家賃を資産に変えられる",
                 body: "毎月支払う家賃は「捨て金」になりますが、ローン返済は将来の資産形成につながります。35年後には持ち家という資産が残ります。",
-                bg: "bg-green-50 border-green-200",
+                bg: "bg-green-500/10 border-green-200",
               },
               {
                 icon: "🏠",
                 title: "自由にカスタマイズできる",
                 body: "賃貸では制限されるリノベーション・インテリア変更が自由にできます。自分だけのこだわり空間を作れることは所有する大きな魅力です。",
-                bg: "bg-blue-50 border-blue-200",
+                bg: "bg-blue-500/10 border-blue-200",
               },
               {
                 icon: "📊",
                 title: "住宅ローン控除が受けられる",
                 body: "年末残高×0.7%が最長13年間の税額控除。独身でも世帯年収に関係なく控除を受けられます。年収500万円台でも数十万円の節税に。",
-                bg: "bg-purple-50 border-purple-200",
+                bg: "bg-purple-500/10 border-purple-200",
               },
               {
                 icon: "📈",
                 title: "資産価値を将来に活かせる",
                 body: "立地次第では購入時より値上がりすることも。将来的に売却益や賃貸収入として活用できる資産になります。",
-                bg: "bg-yellow-50 border-yellow-200",
+                bg: "bg-yellow-500/10 border-yellow-200",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-1">{item.icon} {item.title}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+                <p className="text-sm font-black text-white mb-1">{item.icon} {item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
@@ -87,7 +87,7 @@ export default function MansionDokushinKounyuPage() {
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ⚠️ 独身マンション購入のデメリット・リスク
           </h2>
           <div className="space-y-3 mb-4">
@@ -109,9 +109,9 @@ export default function MansionDokushinKounyuPage() {
                 body: "独身で亡くなった場合、ローンと不動産が相続財産になります。団信があれば残債は消えますが、物件の管理・売却を親族に任せることに。",
               },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 border border-gray-100">
-                <p className="text-sm font-bold text-red-700 mb-1">⚠️ {item.title}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+              <div key={i} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <p className="text-sm font-bold text-red-400 mb-1">⚠️ {item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
@@ -136,10 +136,10 @@ export default function MansionDokushinKounyuPage() {
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🏙️ 独身向けに向いているエリア・間取り
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             独身でのマンション購入で失敗しないためには<strong>将来の売却・賃貸のしやすさ</strong>を考えた選び方が重要です。
           </p>
           <div className="space-y-3 mb-6">
@@ -153,7 +153,7 @@ export default function MansionDokushinKounyuPage() {
                   "生活利便施設（スーパー・病院・飲食店）が徒歩圏内",
                   "再開発・都市計画が進むエリア（資産価値維持）",
                 ],
-                bg: "bg-blue-50 border-blue-200",
+                bg: "bg-blue-500/10 border-blue-200",
               },
               {
                 label: "間取り選びのポイント",
@@ -164,15 +164,15 @@ export default function MansionDokushinKounyuPage() {
                   "広すぎると維持費・ローン返済が重くなる",
                   "賃貸に出した際の需要も考慮（1LDKは単身需要大）",
                 ],
-                bg: "bg-green-50 border-green-200",
+                bg: "bg-green-500/10 border-green-200",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
                 <p className="text-sm font-black text-white mb-2">{item.icon} {item.label}</p>
                 <ul className="space-y-1">
                   {item.items.map((point, j) => (
-                    <li key={j} className="text-xs text-gray-700 flex items-start gap-1">
-                      <span className="text-gray-400 mt-0.5">・</span>
+                    <li key={j} className="text-xs text-slate-200 flex items-start gap-1">
+                      <span className="text-slate-500 mt-0.5">・</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -184,20 +184,20 @@ export default function MansionDokushinKounyuPage() {
 
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             💹 年収300〜500万でも買えるシミュレーション
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             独身でも工夫次第で購入は可能です。金利1.0%・35年返済での試算です。
           </p>
-          <div className="overflow-x-auto rounded-xl border border-gray-200 mb-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">年収</th>
-                  <th className="text-right px-4 py-3 font-bold text-green-700 border-b border-gray-200">安全な借入上限<br /><span className="text-xs font-normal">（25%）</span></th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">頭金200万追加<br /><span className="text-xs font-normal">購入可能額</span></th>
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">エリア目安</th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">年収</th>
+                  <th className="text-right px-4 py-3 font-bold text-emerald-400 border-b border-slate-700">安全な借入上限<br /><span className="text-xs font-normal">（25%）</span></th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">頭金200万追加<br /><span className="text-xs font-normal">購入可能額</span></th>
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">エリア目安</th>
                 </tr>
               </thead>
               <tbody>
@@ -208,42 +208,42 @@ export default function MansionDokushinKounyuPage() {
                   { nenshu: 450, loan: "約2,475万円", price: "約2,675万円", area: "城東・城北エリア" },
                   { nenshu: 500, loan: "約2,750万円", price: "約2,950万円", area: "23区中古1LDK圏" },
                 ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 font-bold text-gray-900 text-xs">{row.nenshu}万円</td>
-                    <td className="px-4 py-3 text-right text-green-700 font-semibold text-xs">{row.loan}</td>
-                    <td className="px-4 py-3 text-right text-blue-700 font-semibold text-xs">{row.price}</td>
-                    <td className="px-4 py-3 text-xs text-gray-600">{row.area}</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 font-bold text-white text-xs">{row.nenshu}万円</td>
+                    <td className="px-4 py-3 text-right text-emerald-400 font-semibold text-xs">{row.loan}</td>
+                    <td className="px-4 py-3 text-right text-blue-300 font-semibold text-xs">{row.price}</td>
+                    <td className="px-4 py-3 text-xs text-slate-300">{row.area}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400">※金利1.0%・35年返済・元利均等返済での試算。実際の審査は異なります。</p>
+          <p className="text-xs text-slate-500">※金利1.0%・35年返済・元利均等返済での試算。実際の審査は異なります。</p>
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
@@ -255,26 +255,26 @@ export default function MansionDokushinKounyuPage() {
           <p className="text-xs mb-4 opacity-90">独身でも使えます。年収・頭金・金利を入力するだけで安全購入価格がわかります。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💰</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
-            <Link href="/articles/mansion-baibai-shisan-kachi" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/mansion-baibai-shisan-kachi" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📉</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">資産価値が落ちにくいマンションの条件とは？立地・築年数で解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">資産価値が落ちにくいマンションの条件とは？立地・築年数で解説</span>
             </Link>
-            <Link href="/articles/mansion-kaidoki-2025" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/mansion-kaidoki-2025" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📅</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">マンションの買い時はいつ？2025年の相場と判断基準を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの買い時はいつ？2025年の相場と判断基準を解説</span>
             </Link>
           </div>
         </section>

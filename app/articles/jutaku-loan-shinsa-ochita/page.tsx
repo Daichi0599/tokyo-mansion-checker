@@ -20,28 +20,28 @@ export const metadata: Metadata = {
 
 export default function JutakuLoanShinsaOchitaPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">住宅ローン審査落ちた</span>
+          <span className="text-slate-300">住宅ローン審査落ちた</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">住宅ローン審査</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">住宅ローン審査</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
-          住宅ローン審査に<span className="text-red-600">落ちた</span>原因と対策<br />
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
+          住宅ローン審査に<span className="text-red-400">落ちた</span>原因と対策<br />
           年収別・通らない理由を解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           「事前審査に落ちた」「本審査で否決された」——住宅ローンの審査落ちは珍しくありません。銀行は否決の理由を教えてくれないため、自分では原因がわからないことが多いです。この記事では、審査落ちの主な原因と、再審査を通すための具体的な対策を解説します。
         </p>
 
@@ -66,19 +66,19 @@ export default function JutakuLoanShinsaOchitaPage() {
 
         {/* ━━ セクション1：信用情報 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ❶ 信用情報に傷がある（最多の原因）
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             住宅ローン審査落ちの最大の原因が「信用情報の問題」です。CIC・JICC・JBAの信用情報機関に記録された延滞・債務整理・破産歴があると、ほぼ全ての銀行で否決されます。
           </p>
-          <div className="overflow-x-auto rounded-xl border border-gray-200 mb-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">記録の種類</th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">保存期間</th>
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">影響度</th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">記録の種類</th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">保存期間</th>
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">影響度</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,18 +89,18 @@ export default function JutakuLoanShinsaOchitaPage() {
                   { type: "スマホ本体の分割払い延滞", period: "5年", impact: "中〜高" },
                   { type: "ローン申込の多重申込", period: "6ヶ月", impact: "中" },
                 ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 text-xs text-gray-700">{row.type}</td>
-                    <td className="px-4 py-3 text-right text-xs font-semibold text-gray-700">{row.period}</td>
-                    <td className="px-4 py-3 text-xs font-bold text-red-600">{row.impact}</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 text-xs text-slate-200">{row.type}</td>
+                    <td className="px-4 py-3 text-right text-xs font-semibold text-slate-200">{row.period}</td>
+                    <td className="px-4 py-3 text-xs font-bold text-red-400">{row.impact}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-            <p className="text-xs font-bold text-blue-800 mb-2">💡 対策：自分の信用情報を事前に開示請求する</p>
-            <p className="text-xs text-blue-700 leading-relaxed">
+          <div className="bg-blue-500/10 border border-blue-200 rounded-xl p-4">
+            <p className="text-xs font-bold text-blue-200 mb-2">💡 対策：自分の信用情報を事前に開示請求する</p>
+            <p className="text-xs text-blue-300 leading-relaxed">
               CIC（https://www.cic.co.jp/）に開示請求すると、自分の信用情報を確認できます。費用は500〜1,000円程度。審査前に確認し、問題があれば対策を取りましょう。記録の保存期間が過ぎれば審査に影響しなくなります。
             </p>
           </div>
@@ -108,14 +108,14 @@ export default function JutakuLoanShinsaOchitaPage() {
 
         {/* ━━ セクション2：借入 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ❷ 既存の借入が多い
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             住宅ローンの審査では、既存の借入残高も返済負担率に合算して計算されます。カーローン・カードローン・奨学金の返済が残っていると、借りられる住宅ローンの上限が大きく下がります。
           </p>
-          <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
-            <p className="text-sm font-bold text-gray-800 mb-3">年収500万円の場合の借入限度額の変化（金利1.0%・35年）</p>
+          <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 mb-4">
+            <p className="text-sm font-bold text-slate-100 mb-3">年収500万円の場合の借入限度額の変化（金利1.0%・35年）</p>
             <div className="space-y-2">
               {[
                 { condition: "他の借入なし", limit: "約3,500万円", rate: "100%" },
@@ -125,18 +125,18 @@ export default function JutakuLoanShinsaOchitaPage() {
               ].map((row, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="flex-1">
-                    <p className="text-xs text-gray-600">{row.condition}</p>
+                    <p className="text-xs text-slate-300">{row.condition}</p>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-sm font-bold text-blue-700">{row.limit}</p>
+                    <p className="text-sm font-bold text-blue-300">{row.limit}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-            <p className="text-xs font-bold text-green-800 mb-1">💡 対策：申込前にカードローン・カーローンを完済する</p>
-            <p className="text-xs text-green-700 leading-relaxed">
+          <div className="bg-green-500/10 border border-green-200 rounded-xl p-4">
+            <p className="text-xs font-bold text-emerald-300 mb-1">💡 対策：申込前にカードローン・カーローンを完済する</p>
+            <p className="text-xs text-emerald-400 leading-relaxed">
               残高が少ないローンは完済してから申込みましょう。完済後にカード自体を解約する必要はありませんが、完済の事実が信用情報に反映されるまで1〜2ヶ月かかります。
             </p>
           </div>
@@ -161,19 +161,19 @@ export default function JutakuLoanShinsaOchitaPage() {
 
         {/* ━━ セクション3：年収・返済比率 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ❸ 年収に対して借入額が多すぎる（返済比率オーバー）
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             銀行の審査基準では、年収に対する年間返済額の比率（返済比率）が一定を超えると否決されます。多くの銀行で「35〜40%以内」が基準ですが、実際には「30%以下推奨」の厳しい銀行もあります。
           </p>
-          <div className="overflow-x-auto rounded-xl border border-gray-200 mb-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">年収</th>
-                  <th className="text-right px-4 py-3 font-bold text-green-700 border-b border-gray-200">審査で通りやすい<br />借入上限目安</th>
-                  <th className="text-right px-4 py-3 font-bold text-red-700 border-b border-gray-200">審査で落ちやすい<br />借入額</th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">年収</th>
+                  <th className="text-right px-4 py-3 font-bold text-emerald-400 border-b border-slate-700">審査で通りやすい<br />借入上限目安</th>
+                  <th className="text-right px-4 py-3 font-bold text-red-400 border-b border-slate-700">審査で落ちやすい<br />借入額</th>
                 </tr>
               </thead>
               <tbody>
@@ -184,42 +184,42 @@ export default function JutakuLoanShinsaOchitaPage() {
                   { nenshu: 800, ok: "〜約5,500万円", ng: "7,000万円超" },
                   { nenshu: 1000, ok: "〜約7,000万円", ng: "9,000万円超" },
                 ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 font-bold text-gray-900 text-xs">{row.nenshu}万円</td>
-                    <td className="px-4 py-3 text-right text-green-700 font-semibold text-xs">{row.ok}</td>
-                    <td className="px-4 py-3 text-right text-red-600 font-semibold text-xs">{row.ng}</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 font-bold text-white text-xs">{row.nenshu}万円</td>
+                    <td className="px-4 py-3 text-right text-emerald-400 font-semibold text-xs">{row.ok}</td>
+                    <td className="px-4 py-3 text-right text-red-400 font-semibold text-xs">{row.ng}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400">※金利1.0%・35年・返済比率30%を基準とした目安。実際の審査基準は金融機関により異なります。</p>
+          <p className="text-xs text-slate-500">※金利1.0%・35年・返済比率30%を基準とした目安。実際の審査基準は金融機関により異なります。</p>
         </section>
 
         {/* ━━ セクション4：勤続年数 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ❹ 勤続年数が短い（転職直後）
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             多くの銀行では「勤続年数2〜3年以上」を審査の目安としています。転職直後（6ヶ月〜1年未満）の場合、否決または条件付き承認となるケースが多いです。
           </p>
           <div className="space-y-3">
             {[
-              { period: "勤続6ヶ月未満", result: "ほぼ否決", bg: "bg-red-50 border-red-200" },
-              { period: "勤続6ヶ月〜1年未満", result: "多くの銀行で否決or減額", bg: "bg-orange-50 border-orange-200" },
-              { period: "勤続1〜2年", result: "銀行によって審査可・同業種転職なら通りやすい", bg: "bg-yellow-50 border-yellow-200" },
-              { period: "勤続2〜3年以上", result: "多くの銀行で問題なし", bg: "bg-green-50 border-green-200" },
+              { period: "勤続6ヶ月未満", result: "ほぼ否決", bg: "bg-red-500/10 border-red-200" },
+              { period: "勤続6ヶ月〜1年未満", result: "多くの銀行で否決or減額", bg: "bg-orange-500/10 border-orange-200" },
+              { period: "勤続1〜2年", result: "銀行によって審査可・同業種転職なら通りやすい", bg: "bg-yellow-500/10 border-yellow-200" },
+              { period: "勤続2〜3年以上", result: "多くの銀行で問題なし", bg: "bg-green-500/10 border-green-200" },
             ].map((row, i) => (
               <div key={i} className={`rounded-xl p-3 border ${row.bg} flex items-center justify-between gap-3`}>
-                <span className="text-xs font-bold text-gray-700">{row.period}</span>
-                <span className="text-xs text-gray-600 text-right">{row.result}</span>
+                <span className="text-xs font-bold text-slate-200">{row.period}</span>
+                <span className="text-xs text-slate-300 text-right">{row.result}</span>
               </div>
             ))}
           </div>
-          <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-4">
-            <p className="text-xs font-bold text-blue-800 mb-1">💡 対策：転職後2年待つか、勤続年数不問の銀行を探す</p>
-            <p className="text-xs text-blue-700 leading-relaxed">
+          <div className="mt-4 bg-blue-500/10 border border-blue-200 rounded-xl p-4">
+            <p className="text-xs font-bold text-blue-200 mb-1">💡 対策：転職後2年待つか、勤続年数不問の銀行を探す</p>
+            <p className="text-xs text-blue-300 leading-relaxed">
               ネット銀行や信用金庫の中には勤続年数の要件が緩い金融機関もあります。モゲチェックなどの一括比較サービスで、自分の条件に合う銀行を探しましょう。
             </p>
           </div>
@@ -227,7 +227,7 @@ export default function JutakuLoanShinsaOchitaPage() {
 
         {/* ━━ セクション5：再審査対策まとめ ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🔄 審査落ち後にやるべき対策まとめ
           </h2>
           <div className="space-y-3">
@@ -236,39 +236,39 @@ export default function JutakuLoanShinsaOchitaPage() {
                 step: "1",
                 title: "信用情報を開示して確認する",
                 body: "CIC・JICCに開示請求し、延滞・異動情報がないか確認。問題があれば保存期間（5〜10年）が過ぎるまで待つか、解決策を検討。",
-                color: "border-blue-200 bg-blue-50",
+                color: "border-blue-200 bg-blue-500/10",
               },
               {
                 step: "2",
                 title: "小さな借入から完済する",
                 body: "カードローン・消費者金融・携帯分割払いの残高を完済。住宅ローンの借入可能額が上がり、審査も通りやすくなる。",
-                color: "border-green-200 bg-green-50",
+                color: "border-green-200 bg-green-500/10",
               },
               {
                 step: "3",
                 title: "借入希望額を下げる・頭金を増やす",
                 body: "返済比率が高い場合、頭金を増やして借入額を下げる。物件価格の10〜20%を頭金にすると審査が通りやすくなる。",
-                color: "border-purple-200 bg-purple-50",
+                color: "border-purple-200 bg-purple-500/10",
               },
               {
                 step: "4",
                 title: "複数の銀行に同時申込しない",
                 body: "短期間に複数の銀行へ審査申込すると「多重申込」として信用情報に残る（6ヶ月）。モゲチェック経由で一括照会が有効。",
-                color: "border-yellow-200 bg-yellow-50",
+                color: "border-yellow-200 bg-yellow-500/10",
               },
               {
                 step: "5",
                 title: "審査基準が緩めの銀行・フラット35を検討",
                 body: "都市銀行で落ちても、地方銀行・信用金庫・フラット35（勤続年数・雇用形態不問）で通過するケースがある。",
-                color: "border-orange-200 bg-orange-50",
+                color: "border-orange-200 bg-orange-500/10",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.color}`}>
                 <div className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-white border border-current text-xs font-black flex items-center justify-center shrink-0 mt-0.5 text-gray-700">{item.step}</span>
+                  <span className="w-6 h-6 rounded-full bg-slate-800 border border-current text-xs font-black flex items-center justify-center shrink-0 mt-0.5 text-slate-200">{item.step}</span>
                   <div>
-                    <p className="text-sm font-black text-gray-900 mb-1">{item.title}</p>
-                    <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+                    <p className="text-sm font-black text-white mb-1">{item.title}</p>
+                    <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
                   </div>
                 </div>
               </div>
@@ -277,28 +277,28 @@ export default function JutakuLoanShinsaOchitaPage() {
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・審査結果を保証するものではありません。
           記載内容は執筆時点の情報に基づいており、各金融機関の審査基準は変動します。
           具体的な判断は、銀行・FP・住宅ローンアドバイザーにご相談ください。
@@ -310,26 +310,26 @@ export default function JutakuLoanShinsaOchitaPage() {
           <p className="text-xs mb-4 opacity-90">年収・頭金・生活費を入力するだけ。安全な借入上限と月返済額がわかります。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🔎</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン審査の年収基準は？通るための条件と落ちる理由</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由</span>
             </Link>
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📊</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
             </Link>
-            <Link href="/articles/jutaku-loan-kinri-hikaku" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/jutaku-loan-kinri-hikaku" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏦</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローン金利の比較方法【2025年最新】ネット銀行vs都市銀行</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン金利の比較方法【2025年最新】ネット銀行vs都市銀行</span>
             </Link>
           </div>
         </section>

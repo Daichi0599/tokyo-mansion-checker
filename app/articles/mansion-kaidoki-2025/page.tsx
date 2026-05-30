@@ -20,34 +20,34 @@ export const metadata: Metadata = {
 
 export default function MansionKaidoki2025Page() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">マンションの買い時</span>
+          <span className="text-slate-300">マンションの買い時</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">市況・購入タイミング</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">市況・購入タイミング</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
-          マンションの<span className="text-blue-600">買い時はいつ？</span><br />
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
+          マンションの<span className="text-blue-400">買い時はいつ？</span><br />
           2025年の相場と判断基準を解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           「今は高すぎる」「もっと下がるのを待つべき」——マンション購入を検討していると、必ずタイミングの話になります。しかし「完璧な買い時」は誰にもわかりません。この記事では2025年の市況を整理した上で、個人の状況に応じた判断基準を解説します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🏙️ 2025年のマンション市況：今どうなっているか
           </h2>
           <div className="space-y-3 mb-4">
@@ -56,24 +56,24 @@ export default function MansionKaidoki2025Page() {
                 icon: "📈",
                 title: "価格は高止まりが続いている",
                 body: "東京23区の新築マンション平均価格は2023〜2024年にかけて9,000万円超に到達。資材費・人件費の上昇、インバウンド需要、高額所得層の購入が価格を押し上げており、急落のシグナルは現時点では見られない。",
-                bg: "bg-red-50 border-red-200",
+                bg: "bg-red-500/10 border-red-200",
               },
               {
                 icon: "📊",
                 title: "金利は上昇トレンドに転換",
                 body: "2024年の日銀利上げ以降、変動金利の基準となる短期金利は上昇傾向。今後2〜3年で0.5〜1%程度の追加上昇シナリオも想定される。金利上昇は購入可能額を実質的に圧縮する。",
-                bg: "bg-orange-50 border-orange-200",
+                bg: "bg-orange-500/10 border-orange-200",
               },
               {
                 icon: "🏘️",
                 title: "郊外・中古は比較的割安",
                 body: "23区内新築は高騰しているが、郊外（多摩・神奈川・埼玉）や中古市場では相対的に手が届きやすい価格帯が残っている。エリアを広げると選択肢は増える。",
-                bg: "bg-green-50 border-green-200",
+                bg: "bg-green-500/10 border-green-200",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-1">{item.icon} {item.title}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+                <p className="text-sm font-black text-white mb-1">{item.icon} {item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
@@ -81,10 +81,10 @@ export default function MansionKaidoki2025Page() {
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             📉 「価格が下がるまで待つ」戦略のリスク
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             「もう少し待てば安くなるかも」と考える人は多いですが、待つことにもコストがあります。
           </p>
           <div className="space-y-3 mb-4">
@@ -102,9 +102,9 @@ export default function MansionKaidoki2025Page() {
                 body: "リーマンショック・コロナなど外部ショックによる急落は予測困難。予測に頼った戦略はギャンブルに近い。",
               },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 border border-gray-100">
-                <p className="text-sm font-bold text-gray-800 mb-1">⚠️ {item.title}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+              <div key={i} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <p className="text-sm font-bold text-slate-100 mb-1">⚠️ {item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
@@ -112,7 +112,7 @@ export default function MansionKaidoki2025Page() {
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ✅ 今買うべき人・待つべき人
           </h2>
           <div className="space-y-3">
@@ -120,7 +120,7 @@ export default function MansionKaidoki2025Page() {
               {
                 label: "今買って良い人",
                 icon: "✅",
-                bg: "bg-green-50 border-green-200",
+                bg: "bg-green-500/10 border-green-200",
                 items: [
                   "返済比率が25%以内に収まる（管理費込みでも）",
                   "頭金が物件価格の10%以上ある",
@@ -132,7 +132,7 @@ export default function MansionKaidoki2025Page() {
               {
                 label: "もう少し待つべき人",
                 icon: "⏳",
-                bg: "bg-yellow-50 border-yellow-200",
+                bg: "bg-yellow-500/10 border-yellow-200",
                 items: [
                   "返済比率が30%を超えてしまう",
                   "頭金がほぼゼロ（諸費用も手元資金が不足）",
@@ -143,11 +143,11 @@ export default function MansionKaidoki2025Page() {
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
-                <p className="text-sm font-black text-gray-900 mb-2">{item.icon} {item.label}</p>
+                <p className="text-sm font-black text-white mb-2">{item.icon} {item.label}</p>
                 <ul className="space-y-1">
                   {item.items.map((point, j) => (
-                    <li key={j} className="text-xs text-gray-700 flex items-start gap-1">
-                      <span className="text-gray-400 mt-0.5">・</span>
+                    <li key={j} className="text-xs text-slate-200 flex items-start gap-1">
+                      <span className="text-slate-500 mt-0.5">・</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -159,29 +159,29 @@ export default function MansionKaidoki2025Page() {
 
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             💡 「買い時」より「自分に合う価格帯」を先に決める
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             市況の読みより大切なのは、<strong>自分の年収・頭金・ライフプランから「適正購入価格」を先に決めること</strong>です。
           </p>
-          <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-            <p className="text-sm font-bold text-blue-800 mb-2">判断の順番</p>
-            <ol className="text-sm text-gray-700 space-y-2">
+          <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20">
+            <p className="text-sm font-bold text-blue-200 mb-2">判断の順番</p>
+            <ol className="text-sm text-slate-200 space-y-2">
               <li className="flex items-start gap-2">
-                <span className="font-black text-blue-600">1.</span>
+                <span className="font-black text-blue-400">1.</span>
                 <span>返済比率25%以内の「安全な借入上限額」を計算する</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-black text-blue-600">2.</span>
+                <span className="font-black text-blue-400">2.</span>
                 <span>頭金を加えた「購入可能価格帯」を確定する</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-black text-blue-600">3.</span>
+                <span className="font-black text-blue-400">3.</span>
                 <span>その価格帯で条件に合う物件を探す（エリア・築年数を柔軟に）</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-black text-blue-600">4.</span>
+                <span className="font-black text-blue-400">4.</span>
                 <span>条件が合う物件に出会えたら買う</span>
               </li>
             </ol>
@@ -189,28 +189,28 @@ export default function MansionKaidoki2025Page() {
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
@@ -222,26 +222,26 @@ export default function MansionKaidoki2025Page() {
           <p className="text-xs mb-4 opacity-90">年収・頭金・希望金利を入力するだけで、安全な購入予算がわかります。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💰</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏙️</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">東京でマンション購入に必要な頭金はいくら？</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京でマンション購入に必要な頭金はいくら？</span>
             </Link>
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📊</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
             </Link>
           </div>
         </section>

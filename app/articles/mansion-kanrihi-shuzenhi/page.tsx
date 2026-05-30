@@ -20,34 +20,34 @@ export const metadata: Metadata = {
 
 export default function MansionKanrihiShuzenhiPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">管理費・修繕積立金の相場</span>
+          <span className="text-slate-300">管理費・修繕積立金の相場</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">維持費・管理費</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">維持費・管理費</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
           マンションの管理費・修繕積立金<br />
-          <span className="text-blue-600">相場はいくら？</span>毎月の負担を解説
+          <span className="text-blue-400">相場はいくら？</span>毎月の負担を解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           マンションを購入すると、住宅ローンの返済に加えて「管理費」と「修繕積立金」が毎月かかります。この2つは見落とされがちですが、月2〜4万円以上になることもあり、実質的な住居費に大きく影響します。購入前に必ず把握しておきましょう。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🏢 管理費・修繕積立金とは何か
           </h2>
           <div className="space-y-3 mb-4">
@@ -55,37 +55,37 @@ export default function MansionKanrihiShuzenhiPage() {
               {
                 title: "管理費",
                 body: "マンションの共用部分（エントランス・廊下・エレベーター・駐車場など）の清掃・維持・管理会社への委託費用。毎月支払う。",
-                color: "bg-blue-50 border-blue-200",
+                color: "bg-blue-500/10 border-blue-200",
               },
               {
                 title: "修繕積立金",
                 body: "外壁塗装・屋上防水・給排水管の交換など、将来の大規模修繕に備えて毎月積み立てるお金。新築時は安く、築年数とともに上がるケースが多い。",
-                color: "bg-orange-50 border-orange-200",
+                color: "bg-orange-500/10 border-orange-200",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.color}`}>
-                <p className="text-sm font-black text-gray-900 mb-1">{item.title}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+                <p className="text-sm font-black text-white mb-1">{item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             どちらも<strong>住宅ローンとは別に、毎月必ず支払う固定費</strong>です。購入前の資金計画に必ず含めてください。
           </p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             📊 全国・都内の平均相場
           </h2>
-          <div className="overflow-x-auto rounded-xl border border-gray-200 mb-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">費目</th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">全国平均</th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">東京都内目安</th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">費目</th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">全国平均</th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">東京都内目安</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,72 +94,72 @@ export default function MansionKanrihiShuzenhiPage() {
                   { label: "修繕積立金", national: "約1.1万円/月", tokyo: "約1.0〜2.0万円/月" },
                   { label: "合計", national: "約2.3万円/月", tokyo: "約2.5〜4.5万円/月" },
                 ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 font-semibold text-gray-900">{row.label}</td>
-                    <td className="px-4 py-3 text-right text-gray-700">{row.national}</td>
-                    <td className="px-4 py-3 text-right text-blue-700 font-bold">{row.tokyo}</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 font-semibold text-white">{row.label}</td>
+                    <td className="px-4 py-3 text-right text-slate-200">{row.national}</td>
+                    <td className="px-4 py-3 text-right text-blue-300 font-bold">{row.tokyo}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400">※国土交通省「マンション総合調査」およびスーモ・アットホーム等の物件データをもとにした参考値。物件・築年数・エリアにより大きく異なります。</p>
+          <p className="text-xs text-slate-500">※国土交通省「マンション総合調査」およびスーモ・アットホーム等の物件データをもとにした参考値。物件・築年数・エリアにより大きく異なります。</p>
         </section>
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             💡 住宅ローンに加算すると実質負担はこうなる
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             5,000万円のマンションを金利1%・35年で購入した場合、ローン返済だけで月約14万円。管理費・修繕積立金を加えると：
           </p>
           <div className="space-y-3 mb-4">
             {[
-              { label: "住宅ローン返済", amount: "約14.0万円/月", color: "text-gray-900" },
-              { label: "管理費（都内平均）", amount: "約1.8万円/月", color: "text-blue-700" },
-              { label: "修繕積立金（都内平均）", amount: "約1.5万円/月", color: "text-orange-700" },
-              { label: "合計（実質住居費）", amount: "約17.3万円/月", color: "text-red-700 font-black text-base" },
+              { label: "住宅ローン返済", amount: "約14.0万円/月", color: "text-white" },
+              { label: "管理費（都内平均）", amount: "約1.8万円/月", color: "text-blue-300" },
+              { label: "修繕積立金（都内平均）", amount: "約1.5万円/月", color: "text-orange-400" },
+              { label: "合計（実質住居費）", amount: "約17.3万円/月", color: "text-red-400 font-black text-base" },
             ].map((row, i) => (
-              <div key={i} className={`flex justify-between items-center px-4 py-3 rounded-xl ${i === 3 ? "bg-red-50 border border-red-200" : "bg-white border border-gray-100"}`}>
-                <span className="text-sm text-gray-700">{row.label}</span>
+              <div key={i} className={`flex justify-between items-center px-4 py-3 rounded-xl ${i === 3 ? "bg-red-500/10 border border-red-200" : "bg-slate-800 border border-slate-700"}`}>
+                <span className="text-sm text-slate-200">{row.label}</span>
                 <span className={`text-sm font-bold ${row.color}`}>{row.amount}</span>
               </div>
             ))}
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             ローン返済だけで計算すると「返済比率28%（年収600万の場合）」でも、管理費・積立金込みだと<strong>実質34%超</strong>になることがあります。
           </p>
         </section>
 
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ⚠️ 修繕積立金が「安すぎる」物件に注意
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed mb-4">
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
             新築マンションでは購入者を集めるため、修繕積立金を意図的に低く設定しているケースがあります。
           </p>
-          <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-4">
+          <div className="bg-orange-500/10 border border-orange-200 rounded-xl p-4 mb-4">
             <p className="text-sm font-bold text-orange-800 mb-2">⚠️ よくあるパターン</p>
-            <ul className="text-sm text-orange-700 space-y-2">
+            <ul className="text-sm text-orange-400 space-y-2">
               <li>・新築時：修繕積立金 <strong>月3,000〜5,000円</strong></li>
               <li>・5年後：値上げで <strong>月10,000〜15,000円</strong></li>
               <li>・10年後：さらに値上げで <strong>月20,000〜30,000円</strong></li>
             </ul>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             修繕積立金が月3,000円以下の場合は「段階増額方式」が採用されていることが多く、将来的に大幅な値上がりが見込まれます。<strong>購入前に長期修繕計画を確認</strong>することが重要です。
           </p>
         </section>
 
         {/* ━━ セクション5 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             ✅ 購入前のチェックポイント
           </h2>
-          <div className="bg-blue-50 rounded-xl p-5 border border-blue-100">
-            <ul className="text-sm text-gray-700 space-y-3">
+          <div className="bg-blue-500/10 rounded-xl p-5 border border-blue-500/20">
+            <ul className="text-sm text-slate-200 space-y-3">
               {[
                 { num: "1", title: "管理費・修繕積立金の合計を月ローン返済額に足して計算する", sub: "「ローン返済比率」ではなく「総住居費負担率」で判断する。" },
                 { num: "2", title: "修繕積立金の段階増額方式かどうか確認", sub: "新築で安くても、5〜10年後に倍以上になるケースあり。" },
@@ -167,10 +167,10 @@ export default function MansionKanrihiShuzenhiPage() {
                 { num: "4", title: "管理組合の財政状況を確認（中古の場合）", sub: "修繕積立金が不足していると、購入後に一時金徴収が発生することも。" },
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <span className="text-blue-600 font-black mt-0.5 text-base">{item.num}</span>
+                  <span className="text-blue-400 font-black mt-0.5 text-base">{item.num}</span>
                   <div>
                     <p className="font-bold">{item.title}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{item.sub}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">{item.sub}</p>
                   </div>
                 </li>
               ))}
@@ -179,28 +179,28 @@ export default function MansionKanrihiShuzenhiPage() {
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
@@ -212,26 +212,26 @@ export default function MansionKanrihiShuzenhiPage() {
           <p className="text-xs mb-4 opacity-90">ローン返済＋管理費・修繕積立金を含めた本当の住居費負担率を確認できます。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💰</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📊</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-chuko-vs-shintiku" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/tokyo-mansion-chuko-vs-shintiku" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🆚</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">都内マンション、中古と新築どっちがいい？価格差・選び方を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">都内マンション、中古と新築どっちがいい？価格差・選び方を解説</span>
             </Link>
           </div>
         </section>

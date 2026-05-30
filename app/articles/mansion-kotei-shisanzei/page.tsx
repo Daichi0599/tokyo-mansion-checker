@@ -20,71 +20,71 @@ export const metadata: Metadata = {
 
 export default function MansionKoteiShisanzeiPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
+        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+          <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
-          <Link href="/articles" className="hover:text-blue-600">コラム</Link>
+          <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-gray-600">固定資産税</span>
+          <span className="text-slate-300">固定資産税</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full">固定資産税・維持費</span>
-          <span className="text-xs text-gray-400">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">固定資産税・維持費</span>
+          <span className="text-xs text-slate-500">2025年最新</span>
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 leading-tight mb-4">
-          マンションの<span className="text-blue-600">固定資産税</span>はいくら？<br />
+        <h1 className="text-2xl font-black text-white leading-tight mb-4">
+          マンションの<span className="text-blue-400">固定資産税</span>はいくら？<br />
           計算方法と相場を解説
         </h1>
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-8">
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
           マンションを購入すると毎年かかる「固定資産税」。住宅ローンの返済額ばかり注目されがちですが、固定資産税も年間10〜30万円規模になる重要な維持費です。この記事では計算方法・都内マンションの相場・新築軽減措置・都市計画税との合計額を解説します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🏛️ 固定資産税の計算方法
           </h2>
-          <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 mb-4">
-            <p className="text-sm font-bold text-blue-800 mb-3">基本計算式</p>
-            <div className="space-y-2 text-sm text-gray-800">
-              <p>固定資産税 = <strong className="text-blue-700">課税標準額 × 1.4%</strong></p>
-              <p>都市計画税 = <strong className="text-orange-600">課税標準額 × 0.3%</strong>（市街化区域のみ）</p>
-              <p className="mt-3 text-xs text-gray-500">※課税標準額は市区町村が決定する「固定資産税評価額」がベース。市場価格の70%程度が目安。</p>
+          <div className="bg-blue-500/10 rounded-xl p-5 border border-blue-500/20 mb-4">
+            <p className="text-sm font-bold text-blue-200 mb-3">基本計算式</p>
+            <div className="space-y-2 text-sm text-slate-100">
+              <p>固定資産税 = <strong className="text-blue-300">課税標準額 × 1.4%</strong></p>
+              <p>都市計画税 = <strong className="text-orange-400">課税標準額 × 0.3%</strong>（市街化区域のみ）</p>
+              <p className="mt-3 text-xs text-slate-400">※課税標準額は市区町村が決定する「固定資産税評価額」がベース。市場価格の70%程度が目安。</p>
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-4 mb-4">
-            <p className="text-sm font-bold text-gray-800 mb-2">計算例：物件価格4,000万円の都内マンション</p>
-            <div className="text-sm text-gray-700 space-y-1">
+          <div className="bg-slate-800 rounded-xl p-4 mb-4">
+            <p className="text-sm font-bold text-slate-100 mb-2">計算例：物件価格4,000万円の都内マンション</p>
+            <div className="text-sm text-slate-200 space-y-1">
               <p>固定資産税評価額の目安 = 4,000万円 × 70% = <strong>2,800万円</strong></p>
               <p>課税標準額（マンション用地は1/6特例あり） = 約<strong>1,400〜2,000万円</strong></p>
               <p>固定資産税 = 2,000万円 × 1.4% = <strong>年間28万円</strong></p>
               <p>都市計画税 = 2,000万円 × 0.3% = <strong>年間6万円</strong></p>
-              <p className="font-bold text-blue-700 mt-2">合計：年間約34万円 → 月換算 約2.8万円</p>
+              <p className="font-bold text-blue-300 mt-2">合計：年間約34万円 → 月換算 約2.8万円</p>
             </div>
           </div>
-          <p className="text-xs text-gray-400">※土地と建物の評価額・課税標準額は物件・エリアにより異なります。上記は概算です。</p>
+          <p className="text-xs text-slate-500">※土地と建物の評価額・課税標準額は物件・エリアにより異なります。上記は概算です。</p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             📊 都内マンションの固定資産税・相場早見表
           </h2>
-          <div className="overflow-x-auto rounded-xl border border-gray-200 mb-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="text-left px-4 py-3 font-bold text-gray-700 border-b border-gray-200">物件価格</th>
-                  <th className="text-right px-4 py-3 font-bold text-blue-700 border-b border-gray-200">固定資産税（年）</th>
-                  <th className="text-right px-4 py-3 font-bold text-orange-600 border-b border-gray-200">都市計画税（年）</th>
-                  <th className="text-right px-4 py-3 font-bold text-gray-700 border-b border-gray-200">合計（年）</th>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-4 py-3 font-bold text-slate-200 border-b border-slate-700">物件価格</th>
+                  <th className="text-right px-4 py-3 font-bold text-blue-300 border-b border-slate-700">固定資産税（年）</th>
+                  <th className="text-right px-4 py-3 font-bold text-orange-400 border-b border-slate-700">都市計画税（年）</th>
+                  <th className="text-right px-4 py-3 font-bold text-slate-200 border-b border-slate-700">合計（年）</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,45 +95,45 @@ export default function MansionKoteiShisanzeiPage() {
                   { price: "7,000万円", tax: "約20〜34万円", city: "約4〜7万円", total: "約24〜41万円" },
                   { price: "1億円", tax: "約29〜48万円", city: "約6〜10万円", total: "約35〜58万円" },
                 ].map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                    <td className="px-4 py-3 font-bold text-gray-900">{row.price}</td>
-                    <td className="px-4 py-3 text-right text-blue-700">{row.tax}</td>
-                    <td className="px-4 py-3 text-right text-orange-600">{row.city}</td>
-                    <td className="px-4 py-3 text-right font-bold text-gray-800">{row.total}</td>
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-4 py-3 font-bold text-white">{row.price}</td>
+                    <td className="px-4 py-3 text-right text-blue-300">{row.tax}</td>
+                    <td className="px-4 py-3 text-right text-orange-400">{row.city}</td>
+                    <td className="px-4 py-3 text-right font-bold text-slate-100">{row.total}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400">※目安。実際は土地・建物の評価額・エリアの用途地域・床面積等により大きく変わります。</p>
+          <p className="text-xs text-slate-500">※目安。実際は土地・建物の評価額・エリアの用途地域・床面積等により大きく変わります。</p>
         </section>
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🎁 新築マンションの軽減措置（最初の5年間）
           </h2>
-          <div className="bg-green-50 rounded-xl p-5 border border-green-200 mb-4">
-            <p className="text-sm font-bold text-green-800 mb-3">新築住宅の固定資産税軽減措置</p>
-            <ul className="text-sm text-gray-700 space-y-2">
+          <div className="bg-green-500/10 rounded-xl p-5 border border-green-200 mb-4">
+            <p className="text-sm font-bold text-emerald-300 mb-3">新築住宅の固定資産税軽減措置</p>
+            <ul className="text-sm text-slate-200 space-y-2">
               <li className="flex items-start gap-2">
-                <span className="text-green-600 font-black mt-0.5">✓</span>
-                <span><strong>一般的な新築マンション：</strong>建物分の固定資産税が<strong className="text-green-700">最初の5年間 1/2に軽減</strong></span>
+                <span className="text-emerald-400 font-black mt-0.5">✓</span>
+                <span><strong>一般的な新築マンション：</strong>建物分の固定資産税が<strong className="text-emerald-400">最初の5年間 1/2に軽減</strong></span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-600 font-black mt-0.5">✓</span>
-                <span><strong>認定長期優良住宅：</strong>同様に建物分が<strong className="text-green-700">最初の7年間 1/2に軽減</strong></span>
+                <span className="text-emerald-400 font-black mt-0.5">✓</span>
+                <span><strong>認定長期優良住宅：</strong>同様に建物分が<strong className="text-emerald-400">最初の7年間 1/2に軽減</strong></span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-600 font-black mt-0.5">✓</span>
+                <span className="text-emerald-400 font-black mt-0.5">✓</span>
                 <span>軽減対象：120㎡以下の部分（120㎡超は120㎡分のみ）</span>
               </li>
             </ul>
           </div>
 
-          <div className="bg-yellow-50 rounded-xl p-4 border border-yellow-200">
-            <p className="text-sm font-bold text-yellow-800 mb-2">⚠️ 注意：6年目から税額が約2倍になる</p>
-            <p className="text-xs text-gray-700 leading-relaxed">
+          <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-200">
+            <p className="text-sm font-bold text-yellow-300 mb-2">⚠️ 注意：6年目から税額が約2倍になる</p>
+            <p className="text-xs text-slate-200 leading-relaxed">
               新築軽減が終了する6年目から、建物分の税額が本来の金額に戻ります。「6年目から固定資産税が2倍になった」と感じる方が多いため、軽減終了後の税額も事前に確認しておきましょう。
             </p>
           </div>
@@ -141,7 +141,7 @@ export default function MansionKoteiShisanzeiPage() {
 
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
-          <h2 className="text-lg font-black text-gray-900 mb-4 pb-2 border-b-2 border-blue-100">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             📅 固定資産税の支払い方法と時期
           </h2>
           <div className="space-y-3">
@@ -159,37 +159,37 @@ export default function MansionKoteiShisanzeiPage() {
                 body: "中古購入の場合、売主が年間分を先払いしているため、引き渡し日以降の日割り分を精算する「固定資産税清算金」が発生します（諸費用の一部）。",
               },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 border border-gray-100">
-                <p className="text-sm font-bold text-gray-800 mb-1">📌 {item.title}</p>
-                <p className="text-xs text-gray-600 leading-relaxed">{item.body}</p>
+              <div key={i} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <p className="text-sm font-bold text-slate-100 mb-1">📌 {item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* 著者情報 */}
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-5">
-            <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl flex-shrink-0">
+        <div className="mt-12 border-t border-slate-700 pt-8">
+          <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">
               🏠
             </div>
             <div className="flex-1">
-              <p className="font-bold text-gray-900 text-sm">たろう｜都内マンション研究中</p>
-              <p className="text-xs text-gray-500 mt-0.5">大企業勤務・アラサー・東京都在住</p>
-              <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+              <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
+              <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
                 複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
               </p>
               <div className="flex gap-3 mt-2">
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">𝕏 @30lab_jp</a>
-                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">note</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">note</a>
               </div>
             </div>
           </div>
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
@@ -201,26 +201,26 @@ export default function MansionKoteiShisanzeiPage() {
           <p className="text-xs mb-4 opacity-90">ローン返済＋管理費＋固定資産税を含めた本当の住居費を確認しましょう。</p>
           <Link
             href="/mansion"
-            className="inline-block bg-white text-blue-700 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors"
+            className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             無料マンション診断ツールを使う →
           </Link>
         </div>
 
         <section>
-          <h2 className="text-sm font-bold text-gray-700 mb-3">関連記事</h2>
+          <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/mansion-kanrihi-shuzenhi" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/mansion-kanrihi-shuzenhi" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏢</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">マンションの管理費・修繕積立金の相場はいくら？</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの管理費・修繕積立金の相場はいくら？</span>
             </Link>
-            <Link href="/articles/mansion-shohiyo" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/mansion-shohiyo" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💴</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">マンション購入の諸費用はいくら？内訳と相場を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンション購入の諸費用はいくら？内訳と相場を解説</span>
             </Link>
-            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-white rounded-xl p-3 border border-gray-100 hover:border-blue-200 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💰</span>
-              <span className="text-sm text-gray-700 group-hover:text-blue-600">年収別マンション購入可能額の目安【早見表付き】</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
           </div>
         </section>
