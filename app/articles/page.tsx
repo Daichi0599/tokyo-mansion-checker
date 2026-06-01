@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/mansion-kounyu-checklist",
+    emoji: "✅",
+    title: "マンション購入チェックリスト｜契約前に必ず確認すべき15項目【保存版】",
+    description:
+      "内覧から契約まで使えるチェックリスト15項目。立地・建物・価格・管理組合・住宅ローン・重要事項説明まで、見落としがちなポイントを網羅した保存版。",
+    tag: "購入前チェック",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/nenshu-mansion-price",
     emoji: "💰",
     title: "年収別マンション購入可能額の目安【早見表付き】",
