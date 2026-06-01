@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/chintai-vs-kounyu",
+    emoji: "🏠",
+    title: "賃貸 vs 購入、結局どっちが得？30代向けに費用・自由度・資産性を徹底比較",
+    description:
+      "30年間の総費用シミュレーション・メリットデメリット・ライフステージ別の判断基準を解説。都内在住30代が賃貸か購入かを判断するための現実的な比較記事。",
+    tag: "賃貸・購入比較",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/mansion-kounyu-checklist",
     emoji: "✅",
     title: "マンション購入チェックリスト｜契約前に必ず確認すべき15項目【保存版】",

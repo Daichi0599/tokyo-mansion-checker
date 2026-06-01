@@ -329,6 +329,10 @@ export default function MansionKounyuNagarePage() {
               <span className="text-xl">🔎</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由</span>
             </Link>
+            <Link href="/articles/mansion-kounyu-checklist" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">✅</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンション購入チェックリスト｜契約前に必ず確認すべき15項目【保存版】</span>
+            </Link>
           </div>
         </section>
 

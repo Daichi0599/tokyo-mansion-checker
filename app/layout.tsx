@@ -52,6 +52,40 @@ export default function RootLayout({
         {/* Google AdSense */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8547173454903621" crossOrigin="anonymous"></script>
+        {/* 構造化データ (WebSite + Organization) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://30lab.vercel.app/#website",
+                  "url": "https://30lab.vercel.app",
+                  "name": "30Lab",
+                  "description": "30代の大きな決断を、数字で整理する無料ツール集",
+                  "inLanguage": "ja",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                      "@type": "EntryPoint",
+                      "urlTemplate": "https://30lab.vercel.app/articles?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                  }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://30lab.vercel.app/#organization",
+                  "name": "30Lab",
+                  "url": "https://30lab.vercel.app",
+                  "sameAs": ["https://x.com/30lab_jp", "https://note.com/30lab"]
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -71,17 +105,17 @@ export default function RootLayout({
         </nav>
         {children}
         {/* フッター */}
-        <footer className="mt-16 border-t border-gray-100 bg-white">
+        <footer className="mt-16 border-t border-slate-700/60 bg-slate-900">
           <div className="max-w-2xl mx-auto px-4 py-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-sm font-black text-blue-700">30Lab</div>
-              <nav className="flex items-center gap-4 text-xs text-gray-500">
-                <a href="/about" className="hover:text-blue-600 transition-colors">このサイトについて</a>
-                <a href="/privacy-policy" className="hover:text-blue-600 transition-colors">プライバシーポリシー</a>
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">𝕏 @30lab_jp</a>
+              <div className="text-sm font-black text-blue-400">30Lab</div>
+              <nav className="flex items-center gap-4 text-xs text-slate-500">
+                <a href="/about" className="hover:text-slate-300 transition-colors">このサイトについて</a>
+                <a href="/privacy-policy" className="hover:text-slate-300 transition-colors">プライバシーポリシー</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">𝕏 @30lab_jp</a>
               </nav>
             </div>
-            <p className="text-center text-xs text-gray-400 mt-4">
+            <p className="text-center text-xs text-slate-600 mt-4">
               © 2026 30Lab. 当サイトの情報は参考目的であり、投資・購入の意思決定を保証するものではありません。
             </p>
           </div>
