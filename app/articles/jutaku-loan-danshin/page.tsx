@@ -2,25 +2,85 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "住宅ローンの団信とは？種類・比較・選び方を解説｜30Lab",
+  title: "住宅ローンの団信を比較｜おすすめの選び方と上乗せ金利一覧【2026年】｜30Lab",
   description:
-    "住宅ローンの団体信用生命保険（団信）の基本から3大疾病・がん100%特約・ワイド団信まで徹底比較。保険料の上乗せ金利と、ライフステージ別の選び方を解説します。",
+    "住宅ローンの団体信用生命保険（団信）を種類別に比較。基本団信・がん50%/100%・3大疾病・ワイド団信の上乗せ金利一覧表と、ライフステージ別のおすすめの選び方を解説します。",
   keywords: [
-    "住宅ローン 団信",
+    "住宅ローン 団信 比較",
+    "住宅ローン 団信 おすすめ",
     "団体信用生命保険 比較",
     "団信 がん特約",
-    "団信 3大疾病",
     "ワイド団信",
   ],
   openGraph: {
-    title: "住宅ローンの団信とは？種類・比較・選び方を解説",
-    description: "団信の基本から3大疾病・がん100%特約まで徹底比較。保険料の上乗せ金利と選び方のポイントを解説。",
+    title: "住宅ローンの団信を比較｜おすすめの選び方と上乗せ金利一覧【2026年】",
+    description: "基本団信・がん特約・3大疾病・ワイド団信の上乗せ金利を一覧比較。ライフステージ別のおすすめも解説。",
+    locale: "ja_JP",
+    type: "article",
   },
+};
+
+const FAQ_ITEMS = [
+  {
+    q: "団信のがん特約はつけるべきですか？",
+    a: "子育て世代（30〜40代）で教育費の負担が大きい家庭にはがん100%保障がおすすめです。一方、独身や子なし世帯は基本団信＋民間の就業不能保険の組み合わせの方が割安になるケースもあります。上乗せ金利0.2%は3,000万円・35年借入で総額約130万円の負担増になるため、コストと安心のバランスで判断しましょう。",
+  },
+  {
+    q: "団信の上乗せ金利はどのくらいですか？",
+    a: "基本団信は無料（金利に込み）、がん50%保障で+0.1〜0.2%、がん100%保障で+0.2〜0.4%、3大疾病特約で+0.2〜0.3%、8疾病・ワイド団信で+0.3〜0.5%が目安です。同じ保障内容でも金融機関によって差があるため複数行の比較が重要です。",
+  },
+  {
+    q: "持病があっても団信に入れますか？",
+    a: "通常の団信に加入できない場合は、加入条件を緩和した「ワイド団信」（上乗せ金利+0.3〜0.5%）を検討できます。それも難しい場合は、団信加入が任意のフラット35を利用し、民間の生命保険で別途カバーする方法があります。",
+  },
+  {
+    q: "団信と生命保険はどちらを優先すべきですか？",
+    a: "住宅ローンを組むなら団信が基本です。団信でローン残高がゼロになるため、既存の死亡保険と保障が重複していないか見直しましょう。住宅購入を機に生命保険の死亡保障を減額すると、保険料を節約できるケースが多いです。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "住宅ローンの団信を比較｜おすすめの選び方と上乗せ金利一覧【2026年】",
+  description:
+    "団体信用生命保険（団信）を種類別に比較。上乗せ金利一覧表とライフステージ別のおすすめの選び方を解説。",
+  author: {
+    "@type": "Person",
+    name: "たろう｜都内マンション研究中",
+    url: "https://x.com/30lab_jp",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "30Lab",
+    url: "https://30lab.vercel.app",
+  },
+  datePublished: "2026-04-20",
+  dateModified: "2026-06-11",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/jutaku-loan-danshin",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function JutakuLoanDanshinPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
@@ -33,12 +93,12 @@ export default function JutakuLoanDanshinPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">団信・生命保険</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs text-slate-500">2026年6月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
-          住宅ローンの<span className="text-blue-400">団信とは？</span><br />
-          種類・比較・選び方を解説
+          住宅ローンの<span className="text-blue-400">団信を比較</span><br />
+          おすすめの選び方と上乗せ金利一覧【2026年】
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
@@ -66,8 +126,8 @@ export default function JutakuLoanDanshinPage() {
               </li>
             </ul>
           </div>
-          <div className="bg-orange-500/10 border border-orange-200 rounded-xl p-4">
-            <p className="text-sm font-bold text-orange-800 mb-1">⚠️ 注意点</p>
+          <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
+            <p className="text-sm font-bold text-orange-300 mb-1">⚠️ 注意点</p>
             <p className="text-xs text-slate-300 leading-relaxed">
               基本団信は<strong>死亡・高度障害のみ</strong>が補償対象です。がん・脳卒中・心筋梗塞などの重病で働けなくなっても、死亡・高度障害に至らない限り保険金は支払われません。追加の特約が必要かどうかを検討しましょう。
             </p>
@@ -142,17 +202,17 @@ export default function JutakuLoanDanshinPage() {
               {
                 title: "通常団信に加入できない場合",
                 body: "ワイド団信（加入条件を緩和した団信）を選択するか、団信不要のフラット35を検討する。フラット35は団信任意加入のため審査は通りやすい。",
-                bg: "bg-yellow-500/10 border-yellow-200",
+                bg: "bg-yellow-500/10 border-yellow-500/30",
               },
               {
                 title: "団信なしのフラット35のリスク",
                 body: "死亡・重病時にローン残高が残り続け、遺族や同居家族に返済負担が残る。別途、民間の生命保険でカバーする設計が必要。",
-                bg: "bg-red-500/10 border-red-200",
+                bg: "bg-red-500/10 border-red-500/30",
               },
               {
                 title: "審査落ちを防ぐには告知が重要",
                 body: "過去5年以内の手術・入院・投薬歴など、告知内容に虚偽があると保険金支払い拒否（告知義務違反）になるため、正確に申告すること。",
-                bg: "bg-orange-500/10 border-orange-200",
+                bg: "bg-orange-500/10 border-orange-500/30",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
@@ -202,6 +262,21 @@ export default function JutakuLoanDanshinPage() {
           <p className="text-sm text-slate-300 leading-relaxed">
             結論として、<strong>まずは金利差と保障内容のコスパを比較すること</strong>が重要です。同じがん100%でも金融機関によって上乗せ金利が0.1〜0.4%と差があるため、複数の銀行を比較することをおすすめします。
           </p>
+        </section>
+
+        {/* ━━ FAQ ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            ❓ よくある質問
+          </h2>
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <p className="text-sm font-bold text-blue-300 mb-2">Q. {item.q}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">A. {item.a}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* 著者情報 */}
