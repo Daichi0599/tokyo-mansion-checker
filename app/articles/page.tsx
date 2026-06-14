@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/jonan-mansion-takakute-kaenai",
+    emoji: "🏙️",
+    title: "城南エリアのマンションが高くて買えない人へ｜現実的な代替と狙い方",
+    description:
+      "品川・目黒・大田・世田谷の城南エリアが高すぎる…そんな人向けに、同じ城南で狙える割安区・隣接エリア・妥協ポイントを坪単価データで解説。診断で射程内エリアも確認できます。",
+    tag: "エリア・資産価値",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/tokyo-23ku-shisan-kachi-ranking",
     emoji: "🗺️",
     title: "東京23区 マンション資産価値ランキング2026｜値下がりしにくい区を一覧解説",
