@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "マンションの固定資産税はいくら？計算方法と相場を解説｜30Lab",
+  title: "マンションの固定資産税はいくら？相場早見表と計算方法【2026年】｜30Lab",
   description:
-    "都内マンションの固定資産税の相場と計算方法を解説。年10〜30万円が目安。新築軽減措置（5年間1/2）・都市計画税との合計額や、購入前に知っておくべき維持費の知識をまとめました。",
+    "都内マンションの固定資産税の相場を物件価格別の早見表で解説。年10〜30万円が目安。計算方法・新築軽減措置（5年間1/2）・都市計画税との合計・6年目の増額・FAQまで、購入前に必要な維持費の知識をまとめました。",
   keywords: [
     "マンション 固定資産税 いくら",
     "マンション 固定資産税 計算",
@@ -13,14 +13,83 @@ export const metadata: Metadata = {
     "マンション 維持費 固定資産税",
   ],
   openGraph: {
-    title: "マンションの固定資産税はいくら？計算方法と相場を解説",
-    description: "都内マンションの固定資産税の目安・計算式・新築軽減措置を解説。",
+    title: "マンションの固定資産税はいくら？相場早見表と計算方法【2026年】",
+    description: "都内マンションの固定資産税を物件価格別の早見表で解説。計算式・新築軽減措置・FAQも。",
+    locale: "ja_JP",
+    type: "article",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "マンションの固定資産税はいくら？相場早見表と計算方法",
+    description: "物件価格別の固定資産税早見表。計算式・新築軽減・6年目の増額まで解説。",
+  },
+};
+
+const FAQ_ITEMS = [
+  {
+    q: "マンションの固定資産税は年間いくらですか？",
+    a: "物件価格2,500万円で年10〜15万円、5,000万円で年17〜29万円、1億円で年35〜58万円（都市計画税込み）が目安です。固定資産税評価額・エリアの用途地域・床面積によって変動します。",
+  },
+  {
+    q: "固定資産税はどうやって計算しますか？",
+    a: "固定資産税＝課税標準額×1.4%、都市計画税＝課税標準額×0.3%（市街化区域）で計算します。課税標準額のベースとなる固定資産税評価額は市場価格の約70%が目安で、住宅用地には軽減特例（1/6など）が適用されます。",
+  },
+  {
+    q: "新築マンションの固定資産税はいつまで安いですか？",
+    a: "一般的な新築マンションは建物分の固定資産税が最初の5年間1/2に軽減されます（認定長期優良住宅は7年間）。軽減が切れる6年目から建物分が本来の額に戻るため、税額が体感で約2倍になる点に注意が必要です。",
+  },
+  {
+    q: "固定資産税はいつ支払いますか？",
+    a: "毎年4〜6月頃に納税通知書が届き、第1期〜第4期の年4回（または一括）で支払います。金融機関・コンビニ・口座振替のほか、クレジットカードやPayPay等のQR決済に対応する自治体も増えています。",
+  },
+  {
+    q: "中古マンションを買うと固定資産税の精算が必要ですか？",
+    a: "はい。売主がその年の固定資産税を先払いしているため、引き渡し日以降の日割り分を「固定資産税清算金」として精算します。購入諸費用の一部として見込んでおきましょう。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "マンションの固定資産税はいくら？相場早見表と計算方法【2026年】",
+  description:
+    "都内マンションの固定資産税を物件価格別の早見表で解説。計算方法・新築軽減措置・都市計画税との合計を解説。",
+  author: {
+    "@type": "Person",
+    name: "たろう｜都内マンション研究中",
+    url: "https://x.com/30lab_jp",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "30Lab",
+    url: "https://30lab.vercel.app",
+  },
+  datePublished: "2026-04-25",
+  dateModified: "2026-06-12",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/mansion-kotei-shisanzei",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function MansionKoteiShisanzeiPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
@@ -33,12 +102,12 @@ export default function MansionKoteiShisanzeiPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">固定資産税・維持費</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs text-slate-500">2026年6月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
           マンションの<span className="text-blue-400">固定資産税</span>はいくら？<br />
-          計算方法と相場を解説
+          相場早見表と計算方法【2026年】
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
@@ -113,7 +182,7 @@ export default function MansionKoteiShisanzeiPage() {
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
             🎁 新築マンションの軽減措置（最初の5年間）
           </h2>
-          <div className="bg-green-500/10 rounded-xl p-5 border border-green-200 mb-4">
+          <div className="bg-green-500/10 rounded-xl p-5 border border-green-500/30 mb-4">
             <p className="text-sm font-bold text-emerald-300 mb-3">新築住宅の固定資産税軽減措置</p>
             <ul className="text-sm text-slate-200 space-y-2">
               <li className="flex items-start gap-2">
@@ -131,7 +200,7 @@ export default function MansionKoteiShisanzeiPage() {
             </ul>
           </div>
 
-          <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-200">
+          <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/30">
             <p className="text-sm font-bold text-yellow-300 mb-2">⚠️ 注意：6年目から税額が約2倍になる</p>
             <p className="text-xs text-slate-200 leading-relaxed">
               新築軽減が終了する6年目から、建物分の税額が本来の金額に戻ります。「6年目から固定資産税が2倍になった」と感じる方が多いため、軽減終了後の税額も事前に確認しておきましょう。
@@ -162,6 +231,21 @@ export default function MansionKoteiShisanzeiPage() {
               <div key={i} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
                 <p className="text-sm font-bold text-slate-100 mb-1">📌 {item.title}</p>
                 <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ━━ FAQ ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            ❓ よくある質問
+          </h2>
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <p className="text-sm font-bold text-blue-300 mb-2">Q. {item.q}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">A. {item.a}</p>
               </div>
             ))}
           </div>

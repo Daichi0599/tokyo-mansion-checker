@@ -15,12 +15,77 @@ export const metadata: Metadata = {
   openGraph: {
     title: "住宅ローンは変動金利と固定金利どっちがいい？2026年版の選び方",
     description: "2026年の金利動向・シミュレーション・タイプ別おすすめを解説。変動vs固定の総返済額比較付き。",
+    locale: "ja_JP",
+    type: "article",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "住宅ローンは変動金利と固定金利どっちがいい？2026年版の選び方",
+    description: "2026年の金利動向・総返済額シミュレーション・タイプ別おすすめを解説。",
+  },
+};
+
+const FAQ_ITEMS = [
+  {
+    q: "フラット35（固定）と変動金利はどっちがいいですか？",
+    a: "金利上昇リスクを取りたくない・繰り上げ返済をあまりしない人にはフラット35などの固定が向きます。一方、低金利を活かして早期に元本を減らせる人や、金利が2%まで上がっても返済比率が安全圏に収まる人は変動が有利になりやすいです。まずは「固定2%でも返せるか」を基準に判断しましょう。",
+  },
+  {
+    q: "2026年は変動金利と固定金利どちらを選ぶべきですか？",
+    a: "2024年以降の日銀利上げで変動金利も緩やかに上昇傾向ですが、依然として変動（0.4〜0.6%前後）と固定（1.5〜2.0%前後）には1%以上の差があります。総返済額では変動が有利な状況が続いていますが、金利上昇に耐えられる返済計画かどうかが選択の分かれ目です。",
+  },
+  {
+    q: "変動金利はどのくらい上がる可能性がありますか？",
+    a: "将来の金利は誰にも予測できませんが、リスク管理としては「2%まで上昇した場合」で返済比率を試算しておくのが定石です。変動金利には返済額の急増を抑える125%ルール・5年ルールがありますが、未払い利息が積み上がるリスクもあるため過信は禁物です。",
+  },
+  {
+    q: "金利タイプは途中で変更できますか？",
+    a: "多くの金融機関で変動→固定への変更は可能ですが、固定→変動は不可だったり手数料がかかる場合があります。借り換え（他行への乗り換え）であれば自由に選べますが、諸費用がかかるため金利差とのバランスで判断します。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "住宅ローンは変動金利と固定金利どっちがいい？2026年版の選び方",
+  description:
+    "変動金利と固定金利の違いを比較。2026年の金利動向をふまえ、どちらが得か・どんな人に向いているかを解説。",
+  author: {
+    "@type": "Person",
+    name: "たろう｜都内マンション研究中",
+    url: "https://x.com/30lab_jp",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "30Lab",
+    url: "https://30lab.vercel.app",
+  },
+  datePublished: "2026-04-10",
+  dateModified: "2026-06-12",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/jutaku-loan-hendokinri-koteikinri",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function JutakuLoanHendoKoteiPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
@@ -33,16 +98,16 @@ export default function JutakuLoanHendoKoteiPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">金利・住宅ローン</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs text-slate-500">2026年6月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
           住宅ローンは<span className="text-blue-400">変動金利と固定金利</span><br />
-          どっちがいい？2025年の選び方
+          どっちがいい？2026年の選び方
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
-          住宅ローンを検討するとき、多くの人が悩む「変動か固定か」問題。2024年に日本銀行が利上げに踏み切り、変動金利への不安が高まっています。この記事では2025年時点での金利動向をふまえ、それぞれの特徴と選び方を解説します。
+          住宅ローンを検討するとき、多くの人が悩む「変動か固定か」問題。2024年に日本銀行が利上げに踏み切り、変動金利への不安が高まっています。この記事では2026年時点での金利動向をふまえ、それぞれの特徴と選び方を解説します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
@@ -61,7 +126,7 @@ export default function JutakuLoanHendoKoteiPage() {
               </thead>
               <tbody>
                 {[
-                  { label: "2025年の金利水準", hendo: "0.4〜0.6%前後", kotei: "1.5〜2.0%前後（フラット35等）" },
+                  { label: "2026年の金利水準", hendo: "0.4〜0.6%前後", kotei: "1.5〜2.0%前後（フラット35等）" },
                   { label: "返済額の変動", hendo: "金利上昇で増える", kotei: "借入時から変わらない" },
                   { label: "月返済額（4,000万・35年）", hendo: "約10.5万円", kotei: "約12.8万円" },
                   { label: "総返済額（金利据え置き想定）", hendo: "約4,400万円", kotei: "約5,370万円" },
@@ -77,19 +142,19 @@ export default function JutakuLoanHendoKoteiPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500">※2025年5月時点の参考値。金融機関・審査状況により異なります。</p>
+          <p className="text-xs text-slate-500">※2026年6月時点の参考値。金融機関・審査状況により異なります。</p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
-            📈 2025年の金利動向：変動は本当に上がるのか
+            📈 2026年の金利動向：変動は本当に上がるのか
           </h2>
           <p className="text-sm text-slate-300 leading-relaxed mb-4">
             2024年、日本銀行は約17年ぶりに政策金利を引き上げました。住宅ローンの変動金利は短期プライムレートに連動するため、今後も段階的な上昇が見込まれています。
           </p>
-          <div className="bg-orange-500/10 border border-orange-200 rounded-xl p-4 mb-4">
-            <p className="text-sm font-bold text-orange-800 mb-2">📌 金利上昇シミュレーション（借入4,000万・35年）</p>
+          <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 mb-4">
+            <p className="text-sm font-bold text-orange-300 mb-2">📌 金利上昇シミュレーション（借入4,000万・35年）</p>
             <div className="space-y-2">
               {[
                 { rate: "現状 0.5%", monthly: "約10.4万円", total: "約4,370万円" },
@@ -136,7 +201,7 @@ export default function JutakuLoanHendoKoteiPage() {
               {
                 type: "変動金利が向いている人",
                 icon: "🔵",
-                bg: "bg-blue-500/10 border-blue-200",
+                bg: "bg-blue-500/10 border-blue-500/30",
                 items: [
                   "繰り上げ返済を積極的に行える貯蓄力がある",
                   "収入が安定していて将来的にも下がりにくい",
@@ -147,7 +212,7 @@ export default function JutakuLoanHendoKoteiPage() {
               {
                 type: "固定金利が向いている人",
                 icon: "🟢",
-                bg: "bg-green-500/10 border-green-200",
+                bg: "bg-green-500/10 border-green-500/30",
                 items: [
                   "毎月の返済額を確定させて生活設計したい",
                   "共働きで一方の収入がなくなるリスクが高い",
@@ -174,7 +239,7 @@ export default function JutakuLoanHendoKoteiPage() {
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
-            ✅ 結論：2025年の現実的な判断基準
+            ✅ 結論：2026年の現実的な判断基準
           </h2>
           <div className="bg-blue-500/10 rounded-xl p-5 border border-blue-500/20 mb-4">
             <ul className="text-sm text-slate-200 space-y-3">
@@ -200,6 +265,21 @@ export default function JutakuLoanHendoKoteiPage() {
                 </div>
               </li>
             </ul>
+          </div>
+        </section>
+
+        {/* ━━ FAQ ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            ❓ よくある質問
+          </h2>
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <p className="text-sm font-bold text-blue-300 mb-2">Q. {item.q}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">A. {item.a}</p>
+              </div>
+            ))}
           </div>
         </section>
 
