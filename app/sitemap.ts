@@ -159,6 +159,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/articles/chintai-vs-kounyu`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${BASE_URL}/articles/tokyo-23ku-shisan-kachi-ranking`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${BASE_URL}/articles/jonan-mansion-takakute-kaenai`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: `${BASE_URL}/articles/jonan-daitai-area`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${BASE_URL}/loan`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
   ];
 }

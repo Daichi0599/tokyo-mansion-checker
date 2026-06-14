@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/jonan-daitai-area",
+    emoji: "🗺️",
+    title: "城南エリアの代わりになる街は？代替候補5エリアを比較",
+    description:
+      "城南が高くて買えない人向けに、代替候補5エリア（大田区・武蔵小杉・川崎・日吉綱島・品川区西部）を城南っぽさ・価格・都心アクセス・資産性で比較。予算内で城南的な暮らしを実現する現実解を解説。",
+    tag: "エリア・資産価値",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/jonan-mansion-takakute-kaenai",
     emoji: "🏙️",
     title: "城南エリアのマンションが高くて買えない人へ｜現実的な代替と狙い方",
