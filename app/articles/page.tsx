@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/mansion-developer-brand",
+    emoji: "🏗️",
+    title: "マンションデベロッパー大手のブランド比較｜三井・野村・東急・モリモト",
+    description:
+      "主要デベロッパー（売主）のブランド特徴を比較。三井・野村・東急・モリモトなど大手〜デザイナーズ系の強みと資産価値の見方を解説。気になる物件メモも随時更新。",
+    tag: "デベロッパー・ブランド",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/jonan-daitai-area",
     emoji: "🗺️",
     title: "城南エリアの代わりになる街は？代替候補5エリアを比較",
