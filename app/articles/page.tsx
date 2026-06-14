@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/tokyo-23ku-shisan-kachi-ranking",
+    emoji: "🗺️",
+    title: "東京23区 マンション資産価値ランキング2026｜値下がりしにくい区を一覧解説",
+    description:
+      "23区を坪単価・資産性グレード（S〜D）・価格トレンドで一覧ランキング。値下がりしにくい区の4条件と予算別のエリアの狙い方を解説。診断ツールで買えるエリアも確認できます。",
+    tag: "エリア・資産価値",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/chintai-vs-kounyu",
     emoji: "🏠",
     title: "賃貸 vs 購入、結局どっちが得？30代向けに費用・自由度・資産性を徹底比較",
