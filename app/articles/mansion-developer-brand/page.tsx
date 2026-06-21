@@ -101,11 +101,12 @@ interface WatchItem {
 
 const WATCHLIST: WatchItem[] = [
   {
-    developer: "（記入例）",
-    name: "ここに気になる物件名",
-    area: "エリア・最寄駅",
-    comment: "実際に見て・調べて感じたことを自分の言葉でメモ。価格や設備の数字は公式情報で確認したものだけ書く。",
-    url: undefined,
+    developer: "モリモト",
+    name: "ディアナコート荏原町アトラス",
+    area: "品川区荏原町・東急大井町線「荏原町」徒歩6分（城南エリア）",
+    comment:
+      "城南（品川区）のディアナコート。角住戸率約70％・内廊下設計の上質仕様で気になる存在。専有面積は43〜107㎡の全51邸。価格は未公表だが、品川区の相場＋ディアナコート割増を考えると、70㎡級のファミリータイプは1億円超えが濃厚そう…。43〜50㎡台のコンパクトプランが出れば、1億未満で射程に入るか要チェック。",
+    url: "https://www.morimoto-real.co.jp/shinchiku/dc-ebaramachi-atlas/index.html",
   },
 ];
 
