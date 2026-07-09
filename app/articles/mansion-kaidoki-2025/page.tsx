@@ -15,12 +15,62 @@ export const metadata: Metadata = {
   openGraph: {
     title: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説",
     description: "2026年の不動産市況と「今買うべき人・待つべき人」の判断基準。無料診断ツールで予算確認も。",
+    locale: "ja_JP",
+    type: "article",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "マンションの買い時はいつ？2026年の相場予測と判断基準",
+    description: "価格高止まり×金利上昇の2026年、「今買うべき人・待つべき人」の判断基準を解説。",
+  },
+};
+
+const FAQ_ITEMS = [
+  {
+    q: "2026年はマンションの買い時ですか？",
+    a: "市況だけで言えば「価格は高止まり・金利は上昇傾向」で、待てば安くなる保証はありません。買い時は市況ではなく個人の条件で決まります。返済比率が25%以内に収まり、10年以上住む予定があり、ライフイベントで住まいが必要なら、2026年でも買い時と言えます。",
+  },
+  {
+    q: "マンション価格は今後下がりますか？",
+    a: "誰にも断言できませんが、都心部は資材費・人件費の上昇と供給減で急落のシグナルは見られません。仮に価格が5%下がっても金利が0.5%上がれば月返済はほぼ変わらないため、「価格と金利のトータル」で判断することが重要です。",
+  },
+  {
+    q: "金利が上がりそうなので急いで買うべきですか？",
+    a: "金利だけを理由に焦って買うのは危険です。ただし金利上昇は購入可能額を実質的に圧縮するため、「買うと決めている人」にとっては早い方が条件は有利になりやすいのは事実。まず返済比率25%以内で買える価格帯を確認し、その範囲で物件が見つかるなら動く、が正解です。",
+  },
+  {
+    q: "買い時を判断する一番のポイントは何ですか？",
+    a: "「市況の読み」ではなく「自分の適正購入価格が先に決まっているか」です。年収・頭金から安全な購入価格帯を算出し、その範囲で条件に合う物件に出会えたときが、あなたにとっての買い時です。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説",
+  description: "2026年の市況（価格高止まり・金利上昇）を整理し、「今買うべき人・待つべき人」の判断基準を解説。",
+  author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
+  publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
+  datePublished: "2026-04-05",
+  dateModified: "2026-07-09",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/mansion-kaidoki-2025",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function MansionKaidoki2025Page() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
@@ -33,22 +83,22 @@ export default function MansionKaidoki2025Page() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">市況・購入タイミング</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs text-slate-500">2026年7月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
           マンションの<span className="text-blue-400">買い時はいつ？</span><br />
-          2025年の相場と判断基準を解説
+          2026年の相場と判断基準を解説
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
-          「今は高すぎる」「もっと下がるのを待つべき」——マンション購入を検討していると、必ずタイミングの話になります。しかし「完璧な買い時」は誰にもわかりません。この記事では2025年の市況を整理した上で、個人の状況に応じた判断基準を解説します。
+          「今は高すぎる」「もっと下がるのを待つべき」——マンション購入を検討していると、必ずタイミングの話になります。しかし「完璧な買い時」は誰にもわかりません。この記事では2026年の市況を整理した上で、個人の状況に応じた判断基準を解説します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
-            🏙️ 2025年のマンション市況：今どうなっているか
+            🏙️ 2026年のマンション市況：今どうなっているか
           </h2>
           <div className="space-y-3 mb-4">
             {[
@@ -56,19 +106,19 @@ export default function MansionKaidoki2025Page() {
                 icon: "📈",
                 title: "価格は高止まりが続いている",
                 body: "東京23区の新築マンション平均価格は2023〜2024年にかけて9,000万円超に到達。資材費・人件費の上昇、インバウンド需要、高額所得層の購入が価格を押し上げており、急落のシグナルは現時点では見られない。",
-                bg: "bg-red-500/10 border-red-200",
+                bg: "bg-red-500/10 border-red-500/30",
               },
               {
                 icon: "📊",
                 title: "金利は上昇トレンドに転換",
                 body: "2024年の日銀利上げ以降、変動金利の基準となる短期金利は上昇傾向。今後2〜3年で0.5〜1%程度の追加上昇シナリオも想定される。金利上昇は購入可能額を実質的に圧縮する。",
-                bg: "bg-orange-500/10 border-orange-200",
+                bg: "bg-orange-500/10 border-orange-500/30",
               },
               {
                 icon: "🏘️",
                 title: "郊外・中古は比較的割安",
                 body: "23区内新築は高騰しているが、郊外（多摩・神奈川・埼玉）や中古市場では相対的に手が届きやすい価格帯が残っている。エリアを広げると選択肢は増える。",
-                bg: "bg-green-500/10 border-green-200",
+                bg: "bg-green-500/10 border-green-500/30",
               },
             ].map((item, i) => (
               <div key={i} className={`rounded-xl p-4 border ${item.bg}`}>
@@ -120,7 +170,7 @@ export default function MansionKaidoki2025Page() {
               {
                 label: "今買って良い人",
                 icon: "✅",
-                bg: "bg-green-500/10 border-green-200",
+                bg: "bg-green-500/10 border-green-500/30",
                 items: [
                   "返済比率が25%以内に収まる（管理費込みでも）",
                   "頭金が物件価格の10%以上ある",
@@ -132,7 +182,7 @@ export default function MansionKaidoki2025Page() {
               {
                 label: "もう少し待つべき人",
                 icon: "⏳",
-                bg: "bg-yellow-500/10 border-yellow-200",
+                bg: "bg-yellow-500/10 border-yellow-500/30",
                 items: [
                   "返済比率が30%を超えてしまう",
                   "頭金がほぼゼロ（諸費用も手元資金が不足）",
@@ -188,6 +238,21 @@ export default function MansionKaidoki2025Page() {
           </div>
         </section>
 
+        {/* ━━ FAQ ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            ❓ よくある質問
+          </h2>
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <p className="text-sm font-bold text-blue-300 mb-2">Q. {item.q}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">A. {item.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* 著者情報 */}
         <div className="mt-12 border-t border-slate-700 pt-8">
           <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
@@ -231,6 +296,10 @@ export default function MansionKaidoki2025Page() {
         <section>
           <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
+            <Link href="/articles/tokyo-23ku-shisan-kachi-ranking" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">🗺️</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京23区 マンション資産価値ランキング2026</span>
+            </Link>
             <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💰</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>

@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/articles/kosodate-hiyou-sougaku",
+    emoji: "👶",
+    title: "子育て費用は総額いくら？0歳〜大学卒業までの目安【公立vs私立の早見表】",
+    description:
+      "子ども1人の総額は教育費＋養育費で2,000万〜4,000万円超。公立・私立別の教育費早見表、家計負担の山が来る時期、住宅ローンとの両立の順番まで解説。無料ツールで進路別の試算も。",
+    tag: "子育て・教育費",
+    date: "2026年最新",
+  },
+  {
     href: "/articles/mansion-developer-brand",
     emoji: "🏗️",
     title: "マンションデベロッパー大手のブランド比較｜三井・野村・東急・モリモト",
