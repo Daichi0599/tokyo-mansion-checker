@@ -325,9 +325,9 @@ export default function MansionKounyuNagarePage() {
               <span className="text-xl">💴</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">マンション購入の諸費用はいくら？内訳と相場を解説</span>
             </Link>
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-ochita" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🔎</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算</span>
             </Link>
             <Link href="/articles/mansion-kounyu-checklist" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">✅</span>

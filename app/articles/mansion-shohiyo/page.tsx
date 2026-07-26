@@ -2,25 +2,75 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "マンション購入の諸費用はいくら？内訳と相場を解説｜30Lab",
+  title: "マンションの諸費用・維持費の完全ガイド｜購入時＋購入後にかかるお金の全額【2026年】｜30Lab",
   description:
-    "マンション購入時にかかる諸費用の内訳と相場を徹底解説。仲介手数料・登記費用・ローン手数料・火災保険など物件価格の5〜10%分の費用を事前に把握して、資金計画を立てましょう。",
+    "マンション購入時の諸費用（物件価格の5〜10%）と、購入後に毎年かかる維持費（管理費・修繕積立金・固定資産税）を一本にまとめた完全ガイド。生涯コストの試算例・節約ポイント・FAQまで。無料ツールで実質住居費も試算できます。",
   keywords: [
     "マンション 諸費用 内訳",
-    "マンション 購入 諸費用 いくら",
-    "マンション 購入 費用 相場",
-    "新築 中古 諸費用 違い",
-    "マンション 仲介手数料",
+    "マンション 維持費 いくら",
+    "マンション 管理費 修繕積立金 相場",
+    "マンション 固定資産税",
+    "マンション 購入 費用 総額",
   ],
   openGraph: {
-    title: "マンション購入の諸費用はいくら？内訳と相場を解説",
-    description: "物件価格の5〜10%かかる諸費用の内訳と、新築・中古の違いを解説。",
+    title: "マンションの諸費用・維持費の完全ガイド｜購入時＋購入後の全額【2026年】",
+    description: "購入時の諸費用と購入後の維持費（管理費・修繕積立金・固定資産税）を一本に集約。生涯コストの試算例つき。",
+    locale: "ja_JP",
+    type: "article",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "マンションの諸費用・維持費の完全ガイド【2026年】",
+    description: "購入時＋購入後にかかるお金を一本にまとめました。生涯コスト試算つき。",
+  },
+};
+
+const FAQ_ITEMS = [
+  {
+    q: "マンション購入の諸費用は総額いくらですか？",
+    a: "物件価格の5〜10%が目安です。3,000万円なら150〜300万円、6,000万円なら300〜600万円。新築より中古の方が仲介手数料がかかる分、割合としては高くなる傾向があります。原則として現金で用意が必要です。",
+  },
+  {
+    q: "マンションの維持費は毎月いくらかかりますか？",
+    a: "管理費と修繕積立金の合計で月2〜5万円（70㎡クラス）が目安です。これに固定資産税・都市計画税（年10〜30万円＝月1〜2.5万円相当）と火災保険が加わるため、実質的な維持費は月3〜7万円程度を見込むのが安全です。",
+  },
+  {
+    q: "管理費・修繕積立金は値上がりしますか？",
+    a: "修繕積立金は値上がりが前提と考えてください。多くのマンションが「段階増額積立方式」を採用しており、築年数の経過とともに上昇します。購入前に長期修繕計画と積立金の推移予定を必ず確認しましょう。",
+  },
+  {
+    q: "住宅ローン返済額だけで予算を考えてはいけないのはなぜですか？",
+    a: "ローン返済に加えて、管理費・修繕積立金・固定資産税・火災保険が毎月かかるためです。返済額だけで判断すると、実質的な住居費は月3〜7万円上振れします。予算は必ず「ローン＋維持費」の合計で考えましょう。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "マンションの諸費用・維持費の完全ガイド｜購入時＋購入後にかかるお金の全額",
+  description: "購入時の諸費用と購入後の維持費（管理費・修繕積立金・固定資産税）をまとめた完全ガイド。",
+  author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
+  publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
+  datePublished: "2026-04-15",
+  dateModified: "2026-07-26",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/mansion-shohiyo",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function MansionShohiyoPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
@@ -28,22 +78,40 @@ export default function MansionShohiyoPage() {
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-slate-300">マンション諸費用</span>
+          <span className="text-slate-300">諸費用・維持費ガイド</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">諸費用・資金計画</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">諸費用・維持費</span>
+          <span className="text-xs text-slate-500">2026年7月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
-          マンション購入の<span className="text-blue-400">諸費用</span>はいくら？<br />
-          内訳と相場を解説
+          マンションの<span className="text-blue-400">諸費用・維持費</span>の完全ガイド<br />
+          購入時＋購入後にかかるお金の全額【2026年】
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
-          マンション購入では、物件価格だけでなく「諸費用」と呼ばれる追加コストが必ずかかります。目安は<strong>物件価格の5〜10%</strong>。3,000万円のマンションなら150〜300万円です。この記事では諸費用の内訳と相場、新築・中古の違い、資金計画で見落としがちなポイントをわかりやすく解説します。
+          マンションのお金は「物件価格」だけではありません。買うときにかかる<strong className="text-white">諸費用（物件価格の5〜10%）</strong>と、買ったあと毎年かかり続ける<strong className="text-white">維持費（管理費・修繕積立金・固定資産税）</strong>——この2つを合わせて見ないと、資金計画は必ずズレます。この記事では購入時と購入後のコストを一本にまとめ、生涯コストの試算例まで示します。
         </p>
+
+        {/* ━━ 目次 ━━ */}
+        <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 mb-10">
+          <p className="text-xs font-bold text-slate-400 mb-2">この記事でわかること</p>
+          <ul className="text-sm text-slate-300 space-y-1">
+            {[
+              "買うときの諸費用の内訳と相場（新築・中古の違い）",
+              "買ったあとの維持費：管理費・修繕積立金の相場と値上がり",
+              "毎年かかる固定資産税・都市計画税の計算と目安",
+              "購入時＋10年間の生涯コスト試算例",
+            ].map((t, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-blue-400 font-bold">{i + 1}.</span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
@@ -224,6 +292,153 @@ export default function MansionShohiyoPage() {
           </div>
         </section>
 
+        {/* ━━ 統合：購入後の維持費 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            🏢 買ったあと毎月かかる維持費（管理費・修繕積立金）
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            諸費用が「一度きり」なのに対して、維持費は<strong className="text-white">住んでいる限り毎月かかり続けます</strong>。ここを軽視すると、ローンは払えても家計が回らなくなります。
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">専有面積</th>
+                  <th className="text-right px-3 py-3 font-bold text-blue-300 border-b border-slate-700">管理費</th>
+                  <th className="text-right px-3 py-3 font-bold text-amber-300 border-b border-slate-700">修繕積立金</th>
+                  <th className="text-right px-3 py-3 font-bold text-white border-b border-slate-700">合計/月</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { size: "〜50㎡", kanri: "1.0〜1.5万円", shuzen: "0.6〜1.2万円", total: "約1.6〜2.7万円" },
+                  { size: "50〜70㎡", kanri: "1.2〜2.0万円", shuzen: "0.8〜1.5万円", total: "約2.0〜3.5万円" },
+                  { size: "70〜90㎡", kanri: "1.5〜2.5万円", shuzen: "1.0〜2.0万円", total: "約2.5〜4.5万円" },
+                  { size: "タワマン等", kanri: "2.0〜4.0万円", shuzen: "1.5〜3.0万円", total: "約3.5〜7.0万円" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-bold text-white text-xs">{row.size}</td>
+                    <td className="px-3 py-3 text-right text-blue-300 text-xs">{row.kanri}</td>
+                    <td className="px-3 py-3 text-right text-amber-300 text-xs">{row.shuzen}</td>
+                    <td className="px-3 py-3 text-right font-bold text-white text-xs">{row.total}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-slate-500 mb-4">※都内マンションの一般的な目安。共用設備（コンシェルジュ・ジム・プール等）が多いほど管理費は上がります。</p>
+
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+            <p className="text-sm font-bold text-amber-300 mb-1">⚠️ 修繕積立金は「上がる前提」で考える</p>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              多くのマンションが段階増額積立方式を採用しており、築年数とともに修繕積立金は上昇します。購入時に月1万円でも、20年後には月2〜3万円になっているケースは珍しくありません。国交省ガイドラインの目安は<strong className="text-white">1㎡あたり月200〜300円</strong>。これを大きく下回る物件は、将来の値上げ幅が大きくなる可能性があります。
+            </p>
+          </div>
+        </section>
+
+        {/* ━━ 統合：固定資産税 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            🏛️ 毎年かかる固定資産税・都市計画税
+          </h2>
+          <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20 mb-4">
+            <p className="text-sm font-bold text-blue-200 mb-2">計算式</p>
+            <div className="space-y-1 text-sm text-slate-100">
+              <p>固定資産税 ＝ <strong className="text-blue-300">課税標準額 × 1.4%</strong></p>
+              <p>都市計画税 ＝ <strong className="text-orange-400">課税標準額 × 0.3%</strong>（市街化区域）</p>
+              <p className="text-xs text-slate-400 mt-2">※課税標準額のベースとなる固定資産税評価額は市場価格の約70%。住宅用地には軽減特例あり。</p>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">物件価格</th>
+                  <th className="text-right px-3 py-3 font-bold text-blue-300 border-b border-slate-700">固定資産税</th>
+                  <th className="text-right px-3 py-3 font-bold text-orange-400 border-b border-slate-700">都市計画税</th>
+                  <th className="text-right px-3 py-3 font-bold text-white border-b border-slate-700">合計/年</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { price: "3,500万円", tax: "約10〜17万円", city: "約2〜3.5万円", total: "約13〜21万円" },
+                  { price: "5,000万円", tax: "約14〜24万円", city: "約3〜5万円", total: "約17〜29万円" },
+                  { price: "7,000万円", tax: "約20〜34万円", city: "約4〜7万円", total: "約24〜41万円" },
+                  { price: "1億円", tax: "約29〜48万円", city: "約6〜10万円", total: "約35〜58万円" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-bold text-white text-xs">{row.price}</td>
+                    <td className="px-3 py-3 text-right text-blue-300 text-xs">{row.tax}</td>
+                    <td className="px-3 py-3 text-right text-orange-400 text-xs">{row.city}</td>
+                    <td className="px-3 py-3 text-right font-bold text-white text-xs">{row.total}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+            <p className="text-sm font-bold text-emerald-300 mb-1">🎁 新築は5年間、建物分が1/2に軽減</p>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              新築マンションは建物分の固定資産税が最初の5年間1/2に軽減されます（認定長期優良住宅は7年間）。裏を返すと<strong className="text-white">6年目から税額が上がる</strong>ということ。「6年目に急に高くなった」と驚かないよう、軽減終了後の金額も確認しておきましょう。
+            </p>
+          </div>
+        </section>
+
+        {/* ━━ 統合：生涯コスト試算 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            📐 総額シミュレーション：6,000万円・70㎡を10年保有した場合
+          </h2>
+          <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 mb-4">
+            <div className="space-y-1.5 text-sm text-slate-300">
+              <p className="text-xs font-bold text-slate-400 mb-2">■ 買うとき（一度きり）</p>
+              <div className="flex justify-between"><span>諸費用（物件価格の約6%）</span><span className="font-semibold text-white">約360万円</span></div>
+              <p className="text-xs font-bold text-slate-400 mt-3 mb-2">■ 住んでいる間（10年間）</p>
+              <div className="flex justify-between"><span>管理費・修繕積立金（月3万円×120ヶ月）</span><span className="font-semibold text-white">約360万円</span></div>
+              <div className="flex justify-between"><span>固定資産税・都市計画税（年25万円×10年）</span><span className="font-semibold text-white">約250万円</span></div>
+              <div className="flex justify-between"><span>火災保険（5年一括×2回）</span><span className="font-semibold text-white">約20万円</span></div>
+              <div className="flex justify-between border-t border-slate-700 pt-2 mt-2">
+                <span className="font-bold">ローン返済とは別に必要な総額</span><span className="font-black text-amber-400">約990万円</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold">月あたり換算（10年平均）</span><span className="font-black text-amber-400">約8.3万円/月</span>
+              </div>
+            </div>
+          </div>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            ローン返済に加えて<strong className="text-white">月8万円以上</strong>——これが「物件価格しか見ていなかった人」が最も驚くポイントです。予算は必ず「ローン＋維持費」の合計で考えてください。
+          </p>
+        </section>
+
+        {/* ━━ ツールCTA ━━ */}
+        <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-2xl p-5 mb-10">
+          <p className="text-xs font-bold text-blue-300 mb-1">🏠 維持費込みの「実質住居費」を試算</p>
+          <p className="text-sm font-black text-white mb-2">無料診断で、無理なく買える価格がわかる</p>
+          <p className="text-xs text-slate-400 mb-3">年収・頭金・管理費を入れるだけで、維持費を含めた実質的な住居費負担率と安全購入価格を自動計算します。</p>
+          <Link href="/mansion" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3 rounded-xl transition-colors">
+            🏠 安全購入価格を診断する →
+          </Link>
+        </div>
+
+        {/* ━━ FAQ ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            ❓ よくある質問
+          </h2>
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <p className="text-sm font-bold text-blue-300 mb-2">Q. {item.q}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">A. {item.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* 著者情報 */}
         <div className="mt-12 border-t border-slate-700 pt-8">
           <div className="flex items-start gap-4 bg-slate-800 rounded-2xl p-5">
@@ -271,9 +486,9 @@ export default function MansionShohiyoPage() {
               <span className="text-xl">💰</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
-              <span className="text-xl">🏙️</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京でマンション購入に必要な頭金はいくら？</span>
+            <Link href="/articles/tokyo-23ku-shisan-kachi-ranking" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">🗺️</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京23区 マンション資産価値ランキング2026</span>
             </Link>
             <Link href="/articles/mansion-kounyu-nagare" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📋</span>

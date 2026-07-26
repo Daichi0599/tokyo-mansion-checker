@@ -317,9 +317,9 @@ export default function MansionKattewaIkenaiPage() {
               <span className="text-xl">🆚</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">都内マンション、中古と新築どっちがいい？価格差・選び方を解説</span>
             </Link>
-            <Link href="/articles/mansion-kanrihi-shuzenhi" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/mansion-shohiyo" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏢</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの管理費・修繕積立金の相場はいくら？</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの諸費用・維持費の完全ガイド｜購入時＋購入後の全額</span>
             </Link>
           </div>
         </section>

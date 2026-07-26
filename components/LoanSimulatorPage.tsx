@@ -362,19 +362,19 @@ export default function LoanSimulatorPage() {
         <section>
           <h2 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/jutaku-loan-kinri-hikaku" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-slate-500 transition-colors group">
-              <span className="text-xl">🏦</span>
-              <span className="text-sm text-slate-300 group-hover:text-white transition-colors">住宅ローン金利の比較方法【2026年最新】ネット銀行vs都市銀行</span>
-              <span className="ml-auto text-slate-600 group-hover:text-slate-400 text-xs">→</span>
-            </Link>
             <Link href="/articles/jutaku-loan-hendokinri-koteikinri" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-slate-500 transition-colors group">
               <span className="text-xl">📊</span>
-              <span className="text-sm text-slate-300 group-hover:text-white transition-colors">住宅ローンは変動金利と固定金利どっちがいい？2026年版</span>
+              <span className="text-sm text-slate-300 group-hover:text-white transition-colors">住宅ローン金利の完全ガイド｜変動vs固定・団信・繰上返済</span>
               <span className="ml-auto text-slate-600 group-hover:text-slate-400 text-xs">→</span>
             </Link>
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-slate-500 transition-colors group">
-              <span className="text-xl">📐</span>
-              <span className="text-sm text-slate-300 group-hover:text-white transition-colors">住宅ローンの返済比率は何%が安全？年収別の目安と限界ライン</span>
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-slate-500 transition-colors group">
+              <span className="text-xl">💰</span>
+              <span className="text-sm text-slate-300 group-hover:text-white transition-colors">年収別マンション購入可能額の目安【早見表・返済比率】</span>
+              <span className="ml-auto text-slate-600 group-hover:text-slate-400 text-xs">→</span>
+            </Link>
+            <Link href="/articles/jutaku-loan-shinsa-ochita" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-slate-500 transition-colors group">
+              <span className="text-xl">🔎</span>
+              <span className="text-sm text-slate-300 group-hover:text-white transition-colors">住宅ローン審査の完全ガイド｜年収基準・落ちる原因</span>
               <span className="ml-auto text-slate-600 group-hover:text-slate-400 text-xs">→</span>
             </Link>
           </div>

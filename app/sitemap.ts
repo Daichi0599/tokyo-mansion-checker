@@ -1,167 +1,44 @@
 import { MetadataRoute } from "next";
+import fs from "node:fs";
+import path from "node:path";
 
 const BASE_URL = "https://30lab.vercel.app";
 
+/** app/articles 配下の実在する記事スラッグを列挙する（削除・追加に自動追従） */
+function getArticleSlugs(): string[] {
+  const dir = path.join(process.cwd(), "app", "articles");
+  try {
+    return fs
+      .readdirSync(dir, { withFileTypes: true })
+      .filter((e) => e.isDirectory() && fs.existsSync(path.join(dir, e.name, "page.tsx")))
+      .map((e) => e.name)
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: BASE_URL,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: `${BASE_URL}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.3,
-    },
-    {
-      url: `${BASE_URL}/mansion`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/check`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/car`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/child`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/articles/nenshu-mansion-price`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/juutaku-loan-burden-rate`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/tokyo-mansion-atama-kin`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/mansion-nenshu-nanbai`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/tomobataraki-jutaku-loan`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/mansion-kanrihi-shuzenhi`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/jutaku-loan-hendokinri-koteikinri`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/mansion-kaidoki-2025`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/jutaku-loan-shinsa-nenshu`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/tokyo-mansion-chuko-vs-shintiku`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/mansion-shohiyo`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/mansion-kotei-shisanzei`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/jutaku-loan-kuriage-hensai`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/mansion-baibai-shisan-kachi`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/articles/jutaku-loan-koujyo`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    { url: `${BASE_URL}/articles/jutaku-loan-danshin`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-kasai-hoken`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/articles/jutaku-loan-hoshoryou`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-dokushin-kounyu`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/articles/jutaku-loan-kinri-hikaku`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/articles/jutaku-loan-karikaee`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/jutaku-loan-bonus-shiharai`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-uriage-timing`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/jutaku-loan-shunyugasan`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-floor-plan`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-kattewa-ikenai-joken`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/jutaku-loan-shinsa-ochita`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-kounyu-nagare`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${BASE_URL}/articles/mansion-kounyu-checklist`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/articles/chintai-vs-kounyu`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/articles/tokyo-23ku-shisan-kachi-ranking`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/articles/jonan-mansion-takakute-kaenai`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/articles/jonan-daitai-area`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/articles/mansion-developer-brand`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/articles/kosodate-hiyou-sougaku`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${BASE_URL}/loan`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
+  const now = new Date();
+
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: BASE_URL, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/mansion`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/loan`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/check`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/articles`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/car`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/child`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/privacy-policy`, lastModified: now, changeFrequency: "monthly", priority: 0.3 },
   ];
+
+  const articlePages: MetadataRoute.Sitemap = getArticleSlugs().map((slug) => ({
+    url: `${BASE_URL}/articles/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...articlePages];
 }

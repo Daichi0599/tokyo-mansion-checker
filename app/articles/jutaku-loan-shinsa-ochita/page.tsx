@@ -2,25 +2,75 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "住宅ローン審査に落ちた原因と対策【年収別・通らない理由を解説】｜30Lab",
+  title: "住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算・保証料【2026年】｜30Lab",
   description:
-    "住宅ローン審査に落ちた原因TOP5と再審査を通すための対策を解説。年収・勤続年数・信用情報・借入状況・物件条件別に「落ちた理由」と「改善策」を具体的にまとめました。",
+    "住宅ローン審査を一本にまとめた完全ガイド。審査に落ちる原因TOP5と対策、年収別の借入可能額の基準、共働きの収入合算・ペアローンの違い、保証料の仕組みと相場まで。無料診断で自分の安全借入額も確認できます。",
   keywords: [
     "住宅ローン 審査 落ちた",
+    "住宅ローン 審査 年収 基準",
+    "住宅ローン 収入合算 ペアローン",
+    "住宅ローン 保証料 相場",
     "住宅ローン 審査 通らない 原因",
-    "住宅ローン 否決 理由",
-    "住宅ローン 審査 対策",
-    "住宅ローン 通る方法",
   ],
   openGraph: {
-    title: "住宅ローン審査に落ちた原因と対策【再審査を通す方法】",
-    description: "審査落ちの原因TOP5と再審査対策を解説。年収・信用情報・勤続年数別の改善ポイントまとめ。",
+    title: "住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算・保証料【2026年】",
+    description: "審査落ちの原因と対策、年収基準、収入合算・ペアローン、保証料までまとめて解説。",
+    locale: "ja_JP",
+    type: "article",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "住宅ローン審査の完全ガイド【2026年】",
+    description: "落ちる原因・年収基準・収入合算・保証料を一本にまとめました。",
+  },
+};
+
+const FAQ_ITEMS = [
+  {
+    q: "住宅ローン審査に落ちる一番多い原因は何ですか？",
+    a: "信用情報の傷（クレジットカードや携帯分割の延滞履歴）が最も多い原因です。次いで他社借入（カードローン・自動車ローン・リボ払い）の残高、勤続年数の短さ（1年未満）が続きます。特に延滞は本人が忘れていることも多いため、審査前にCIC等で信用情報を開示して確認するのが確実です。",
+  },
+  {
+    q: "年収がいくらあれば住宅ローンは組めますか？",
+    a: "多くの金融機関の最低年収要件は200〜400万円です。ただし借入可能額は年収の7〜8倍程度が上限で、返済負担率（年収に占める年間返済額の割合）が年収400万円未満で30%以内、400万円以上で35%以内という基準が一般的。ただしこれは「貸せる上限」であり、安全に返せる水準は返済比率25%以内です。",
+  },
+  {
+    q: "収入合算とペアローンはどちらが良いですか？",
+    a: "収入合算（連帯保証型）は契約が1本で諸費用が安く済みますが、住宅ローン控除と団信は主債務者のみ。ペアローンは2本契約で諸費用は2倍かかるものの、夫婦それぞれが住宅ローン控除と団信を使えます。共働きが長く続く前提ならペアローン、片方の離職可能性があるなら借入額を抑えた単独ローンが無難です。",
+  },
+  {
+    q: "保証料はいくらかかりますか？",
+    a: "保証料は「一括前払い型」で借入額の約2%（3,000万円なら約60万円）、「金利上乗せ型」で金利+0.2%が一般的な相場です。ネット銀行では保証料無料の代わりに融資事務手数料が借入額の2.2%かかるケースが多く、実質的な負担は大差ありません。総支払額で比較することが重要です。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算・保証料",
+  description: "住宅ローン審査の落ちる原因と対策、年収基準、収入合算・ペアローン、保証料をまとめた完全ガイド。",
+  author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
+  publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
+  datePublished: "2026-05-01",
+  dateModified: "2026-07-26",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/jutaku-loan-shinsa-ochita",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function JutakuLoanShinsaOchitaPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
@@ -28,17 +78,17 @@ export default function JutakuLoanShinsaOchitaPage() {
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
           <span>/</span>
-          <span className="text-slate-300">住宅ローン審査落ちた</span>
+          <span className="text-slate-300">住宅ローン審査ガイド</span>
         </nav>
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">住宅ローン審査</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs text-slate-500">2026年7月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
-          住宅ローン審査に<span className="text-red-400">落ちた</span>原因と対策<br />
-          年収別・通らない理由を解説
+          住宅ローン<span className="text-blue-400">審査</span>の完全ガイド<br />
+          年収基準・落ちる原因・収入合算・保証料【2026年】
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
@@ -46,8 +96,8 @@ export default function JutakuLoanShinsaOchitaPage() {
         </p>
 
         {/* ━━ 概要ボックス ━━ */}
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-10">
-          <p className="text-sm font-black text-amber-800 mb-3">📋 住宅ローン審査落ちの主な原因（5つ）</p>
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 mb-10">
+          <p className="text-sm font-black text-amber-300 mb-3">📋 住宅ローン審査落ちの主な原因（5つ）</p>
           <ol className="space-y-1.5">
             {[
               "信用情報に傷がある（延滞・債務整理の記録）",
@@ -56,8 +106,8 @@ export default function JutakuLoanShinsaOchitaPage() {
               "勤続年数が短い（1〜2年未満）",
               "物件条件・担保評価の問題",
             ].map((item, i) => (
-              <li key={i} className="text-xs text-amber-900 flex items-start gap-2">
-                <span className="font-black text-amber-700 shrink-0">{i + 1}.</span>
+              <li key={i} className="text-xs text-slate-300 flex items-start gap-2">
+                <span className="font-black text-amber-400 shrink-0">{i + 1}.</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -98,7 +148,7 @@ export default function JutakuLoanShinsaOchitaPage() {
               </tbody>
             </table>
           </div>
-          <div className="bg-blue-500/10 border border-blue-200 rounded-xl p-4">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
             <p className="text-xs font-bold text-blue-200 mb-2">💡 対策：自分の信用情報を事前に開示請求する</p>
             <p className="text-xs text-blue-300 leading-relaxed">
               CIC（https://www.cic.co.jp/）に開示請求すると、自分の信用情報を確認できます。費用は500〜1,000円程度。審査前に確認し、問題があれば対策を取りましょう。記録の保存期間が過ぎれば審査に影響しなくなります。
@@ -217,7 +267,7 @@ export default function JutakuLoanShinsaOchitaPage() {
               </div>
             ))}
           </div>
-          <div className="mt-4 bg-blue-500/10 border border-blue-200 rounded-xl p-4">
+          <div className="mt-4 bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
             <p className="text-xs font-bold text-blue-200 mb-1">💡 対策：転職後2年待つか、勤続年数不問の銀行を探す</p>
             <p className="text-xs text-blue-300 leading-relaxed">
               ネット銀行や信用金庫の中には勤続年数の要件が緩い金融機関もあります。モゲチェックなどの一括比較サービスで、自分の条件に合う銀行を探しましょう。
@@ -236,7 +286,7 @@ export default function JutakuLoanShinsaOchitaPage() {
                 step: "1",
                 title: "信用情報を開示して確認する",
                 body: "CIC・JICCに開示請求し、延滞・異動情報がないか確認。問題があれば保存期間（5〜10年）が過ぎるまで待つか、解決策を検討。",
-                color: "border-blue-200 bg-blue-500/10",
+                color: "border-blue-500/30 bg-blue-500/10",
               },
               {
                 step: "2",
@@ -271,6 +321,138 @@ export default function JutakuLoanShinsaOchitaPage() {
                     <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ━━ 統合：年収基準 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            💴 年収別・審査で見られる基準
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            金融機関が審査で最も重視するのが<strong className="text-white">返済負担率</strong>（年収に占める年間返済額の割合）です。年収帯によって基準が変わります。
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">年収</th>
+                  <th className="text-center px-3 py-3 font-bold text-slate-200 border-b border-slate-700">審査上の<br />返済負担率</th>
+                  <th className="text-right px-3 py-3 font-bold text-blue-300 border-b border-slate-700">借入上限<br />（審査基準）</th>
+                  <th className="text-right px-3 py-3 font-bold text-emerald-400 border-b border-slate-700">安全圏<br />（負担率25%）</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { y: "400万円", r: "35%", max: "約4,100万円", safe: "約2,900万円" },
+                  { y: "500万円", r: "35%", max: "約5,100万円", safe: "約3,600万円" },
+                  { y: "700万円", r: "35%", max: "約7,200万円", safe: "約5,100万円" },
+                  { y: "1,000万円", r: "35%", max: "約10,300万円", safe: "約7,300万円" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-bold text-white text-xs">{row.y}</td>
+                    <td className="px-3 py-3 text-center text-slate-300 text-xs">{row.r}</td>
+                    <td className="px-3 py-3 text-right text-blue-300 text-xs">{row.max}</td>
+                    <td className="px-3 py-3 text-right text-emerald-400 text-xs font-semibold">{row.safe}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+            <p className="text-sm font-bold text-red-300 mb-1">⚠️ 「借りられる額」で買ってはいけない</p>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              審査基準（負担率35%）と安全水準（25%）には<strong className="text-white">1,000万円以上の差</strong>があります。審査に通ったからといってその額で買うと、教育費や金利上昇に耐えられなくなります。審査上限はあくまで「銀行が貸せる額」です。
+            </p>
+          </div>
+        </section>
+
+        {/* ━━ 統合：収入合算・ペアローン ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            👫 共働きの選択肢：収入合算 vs ペアローン
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            年収が足りない場合、夫婦の収入を合わせる方法が2つあります。仕組みも税制メリットも違うので、違いを理解して選びましょう。
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">項目</th>
+                  <th className="text-center px-3 py-3 font-bold text-blue-300 border-b border-slate-700">収入合算<br />（連帯保証）</th>
+                  <th className="text-center px-3 py-3 font-bold text-emerald-400 border-b border-slate-700">ペアローン</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { k: "契約数", a: "1本", b: "2本（夫婦それぞれ）" },
+                  { k: "諸費用", a: "1本分", b: "2本分（約2倍）" },
+                  { k: "住宅ローン控除", a: "主債務者のみ", b: "夫婦それぞれ利用可" },
+                  { k: "団信", a: "主債務者のみ", b: "夫婦それぞれ加入" },
+                  { k: "片方が亡くなった場合", a: "残債は全額残る（連帯保証人）", b: "その人の分だけ完済される" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-semibold text-white text-xs">{row.k}</td>
+                    <td className="px-3 py-3 text-center text-slate-300 text-xs">{row.a}</td>
+                    <td className="px-3 py-3 text-center text-slate-300 text-xs">{row.b}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+            <p className="text-sm font-bold text-amber-300 mb-1">⚠️ ペアローン最大のリスク</p>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              産休・育休・時短勤務・離職で片方の収入が減っても、<strong className="text-white">2本のローン返済義務は続きます</strong>。「収入が半分になっても返せるか」を必ず試算してから決めてください。共働き前提の借入額は、想像以上に脆いことがあります。
+            </p>
+          </div>
+        </section>
+
+        {/* ━━ 統合：保証料 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            💳 保証料の仕組みと相場
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            保証料は、返済不能になったときに保証会社が銀行へ代位弁済するための費用です（あなたの債務が消えるわけではありません）。支払い方法は2種類あります。
+          </p>
+          <div className="space-y-3 mb-4">
+            {[
+              { title: "一括前払い型（外枠方式）", body: "借入額の約2%を契約時に現金で支払う。3,000万円なら約60万円。繰上返済で完済すると一部が戻ってくる。", color: "border-blue-500/40 bg-blue-500/10", text: "text-blue-300" },
+              { title: "金利上乗せ型（内枠方式）", body: "金利に+0.2%上乗せして分割払い。初期費用を抑えられるが、総支払額は前払い型より高くなることが多い。返金もなし。", color: "border-amber-500/40 bg-amber-500/10", text: "text-amber-300" },
+              { title: "保証料無料（ネット銀行に多い）", body: "保証料ゼロの代わりに融資事務手数料が借入額の2.2%かかるのが一般的。実質的な負担は前払い型と大差ないため、必ず総額で比較すること。", color: "border-emerald-500/40 bg-emerald-500/10", text: "text-emerald-300" },
+            ].map((item, i) => (
+              <div key={i} className={`rounded-xl border-2 p-4 ${item.color}`}>
+                <p className={`text-sm font-bold mb-1 ${item.text}`}>{item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ━━ ツールCTA ━━ */}
+        <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-2xl p-5 mb-10">
+          <p className="text-xs font-bold text-blue-300 mb-1">🏠 審査に通る額ではなく「返せる額」を知る</p>
+          <p className="text-sm font-black text-white mb-2">無料診断で安全な借入額を3分で算出</p>
+          <p className="text-xs text-slate-400 mb-3">年収・頭金・金利を入れるだけ。審査上限ではなく、家計を崩さない安全購入価格を提示します。</p>
+          <Link href="/mansion" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3 rounded-xl transition-colors">
+            🏠 安全購入価格を診断する →
+          </Link>
+        </div>
+
+        {/* ━━ FAQ ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            ❓ よくある質問
+          </h2>
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <p className="text-sm font-bold text-blue-300 mb-2">Q. {item.q}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">A. {item.a}</p>
               </div>
             ))}
           </div>
@@ -319,17 +501,17 @@ export default function JutakuLoanShinsaOchitaPage() {
         <section>
           <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
-              <span className="text-xl">🔎</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由</span>
+            <Link href="/articles/tokyo-23ku-shisan-kachi-ranking" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">🗺️</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京23区 マンション資産価値ランキング2026</span>
             </Link>
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📊</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表・返済比率・頭金】</span>
             </Link>
-            <Link href="/articles/jutaku-loan-kinri-hikaku" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/jutaku-loan-hendokinri-koteikinri" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏦</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン金利の比較方法【2025年最新】ネット銀行vs都市銀行</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン金利の完全ガイド｜変動vs固定・団信・繰上返済</span>
             </Link>
           </div>
         </section>

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "住宅ローンは変動金利と固定金利どっちがいい？2026年版の選び方｜30Lab",
+  title: "住宅ローン金利の完全ガイド｜変動vs固定・金融機関比較・団信・繰上返済【2026年】｜30Lab",
   description:
-    "住宅ローンの変動金利と固定金利の違いを徹底比較。2026年の金利動向をふまえ、どちらが得か・どんな人に向いているかをシミュレーション付きで解説。金利タイプ別の総返済額シミュレーションも確認できます。",
+    "住宅ローンの金利まわりを一本に集約した完全ガイド。変動vs固定の比較と金利上昇シミュレーション、金融機関タイプ別の金利・手数料、団信（がん特約・ワイド団信）の選び方、繰り上げ返済とボーナス払いの考え方まで解説します。",
   keywords: [
     "住宅ローン 変動金利 固定金利 どっち",
     "住宅ローン 変動 固定 比較",
@@ -42,6 +42,18 @@ const FAQ_ITEMS = [
     q: "金利タイプは途中で変更できますか？",
     a: "多くの金融機関で変動→固定への変更は可能ですが、固定→変動は不可だったり手数料がかかる場合があります。借り換え（他行への乗り換え）であれば自由に選べますが、諸費用がかかるため金利差とのバランスで判断します。",
   },
+  {
+    q: "団信のがん特約はつけるべきですか？",
+    a: "子育て世代で教育費の負担が大きい家庭にはがん100%保障がおすすめです。一方、独身や子なし世帯は基本団信＋民間の就業不能保険の方が割安になることも。上乗せ金利0.2%は3,000万円・35年で総額約130万円の負担増になるため、コストと安心のバランスで判断しましょう。",
+  },
+  {
+    q: "繰り上げ返済はしたほうがいいですか？",
+    a: "低金利下では「手元資金を残す」方が合理的な場面も多いです。住宅ローンは最も低金利な借入なので、繰り上げ返済に回すより生活防衛資金や教育資金を確保する方が優先。また住宅ローン控除期間中（13年）は、繰り上げると控除額が減って逆効果になるケースもあります。",
+  },
+  {
+    q: "ボーナス払いは設定すべきですか？",
+    a: "おすすめしません。ボーナスは業績で変動し、支給されない年もあり得るためです。特に転職を考えている人は避けるべき。月々の返済額が上がってもボーナス払いなしで組める価格帯にすることが、家計の安定につながります。",
+  },
 ];
 
 const articleJsonLd = {
@@ -61,7 +73,7 @@ const articleJsonLd = {
     url: "https://30lab.vercel.app",
   },
   datePublished: "2026-04-10",
-  dateModified: "2026-06-12",
+  dateModified: "2026-07-26",
   mainEntityOfPage: "https://30lab.vercel.app/articles/jutaku-loan-hendokinri-koteikinri",
 };
 
@@ -98,7 +110,7 @@ export default function JutakuLoanHendoKoteiPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">金利・住宅ローン</span>
-          <span className="text-xs text-slate-500">2026年6月更新</span>
+          <span className="text-xs text-slate-500">2026年7月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -268,6 +280,114 @@ export default function JutakuLoanHendoKoteiPage() {
           </div>
         </section>
 
+        {/* ━━ 統合：金融機関の選び方 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            🏦 金融機関のタイプ別・金利と手数料の比較
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            同じ変動金利でも、金融機関のタイプで金利水準と手数料の構造が変わります。「金利の安さ」だけで選ぶと、手数料で逆転することがあります。
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">タイプ</th>
+                  <th className="text-right px-3 py-3 font-bold text-blue-300 border-b border-slate-700">変動金利<br />目安</th>
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">特徴</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { t: "ネット銀行", r: "0.3〜0.5%", d: "金利は最安水準。保証料無料だが事務手数料が借入額の2.2%。審査はやや厳しめ。" },
+                  { t: "都市銀行", r: "0.4〜0.7%", d: "総合的な安心感。給与振込等で金利優遇。対面相談ができる。" },
+                  { t: "地方銀行・信金", r: "0.5〜0.9%", d: "地元物件に強く柔軟な審査。金利はやや高めだが融通が利く場合も。" },
+                  { t: "フラット35", r: "1.5〜2.0%（固定）", d: "全期間固定で安心。団信は任意加入のため持病がある人でも借りやすい。" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-bold text-white text-xs whitespace-nowrap">{row.t}</td>
+                    <td className="px-3 py-3 text-right text-blue-300 text-xs whitespace-nowrap">{row.r}</td>
+                    <td className="px-3 py-3 text-slate-300 text-xs">{row.d}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-slate-500">※2026年時点の一般的な目安。実際の適用金利は審査結果・優遇条件により異なります。</p>
+        </section>
+
+        {/* ━━ 統合：団信 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            🛡️ 団信（団体信用生命保険）の選び方
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            団信は、借入者が死亡・高度障害になった際にローン残高が完済される保険です。特約を付けると保障は手厚くなりますが、その分金利が上乗せされます。
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">種類</th>
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">補償内容</th>
+                  <th className="text-right px-3 py-3 font-bold text-blue-300 border-b border-slate-700">上乗せ金利</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { t: "基本団信", c: "死亡・高度障害", r: "0%（無料）" },
+                  { t: "がん50%保障", c: "がん診断でローン残高が半分に", r: "+0.1〜0.2%" },
+                  { t: "がん100%保障", c: "がん診断でローン全額完済", r: "+0.2〜0.4%" },
+                  { t: "3大疾病特約", c: "がん・心筋梗塞・脳卒中", r: "+0.2〜0.3%" },
+                  { t: "ワイド団信", c: "持病があっても加入できる", r: "+0.3〜0.5%" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-semibold text-white text-xs whitespace-nowrap">{row.t}</td>
+                    <td className="px-3 py-3 text-slate-300 text-xs">{row.c}</td>
+                    <td className="px-3 py-3 text-right text-blue-300 text-xs font-bold whitespace-nowrap">{row.r}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+            <p className="text-xs text-slate-300 leading-relaxed">
+              <strong className="text-blue-300">判断の目安：</strong>子育て世代で教育費のピークが控えているなら、がん100%や3大疾病を検討する価値があります。逆に独身・子なし世帯は基本団信で十分なことが多い。また住宅購入を機に<strong className="text-white">既存の生命保険を見直す</strong>と、団信と重複した死亡保障を減らして保険料を節約できます。
+            </p>
+          </div>
+        </section>
+
+        {/* ━━ 統合：繰上返済・ボーナス払い ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            💸 繰り上げ返済とボーナス払いの考え方
+          </h2>
+          <div className="space-y-3">
+            {[
+              {
+                title: "繰り上げ返済：急がなくていい",
+                body: "住宅ローンは世の中で最も低金利な借入です。手元資金を削ってまで繰り上げるより、生活防衛資金・教育資金を確保する方が優先。特に住宅ローン控除の期間中（最大13年）は、繰り上げると控除額が減って実質的に損をするケースもあります。",
+                color: "border-blue-500/40 bg-blue-500/10", text: "text-blue-300",
+              },
+              {
+                title: "繰り上げるなら「期間短縮型」が有利",
+                body: "同じ金額を繰り上げるなら、月々の返済額を減らす「返済額軽減型」より、返済期間を縮める「期間短縮型」の方が利息削減効果は大きくなります。ただし月々の負担は変わらないため、家計に余裕がある場合の選択肢です。",
+                color: "border-emerald-500/40 bg-emerald-500/10", text: "text-emerald-300",
+              },
+              {
+                title: "ボーナス払い：設定しない方が安全",
+                body: "ボーナスは業績次第で減額・不支給がありえます。ボーナス払いを組み込むと、支給されなかった年に一気に家計が崩れます。転職の可能性がある人は特に避けるべき。ボーナス払いなしで組める価格帯にすることが、結果的に安全な買い物になります。",
+                color: "border-red-500/40 bg-red-500/10", text: "text-red-300",
+              },
+            ].map((item, i) => (
+              <div key={i} className={`rounded-xl border-2 p-4 ${item.color}`}>
+                <p className={`text-sm font-bold mb-1 ${item.text}`}>{item.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ━━ FAQ ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
@@ -342,17 +462,17 @@ export default function JutakuLoanHendoKoteiPage() {
         <section>
           <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📊</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表・返済比率・頭金】</span>
             </Link>
-            <Link href="/articles/mansion-nenshu-nanbai" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
-              <span className="text-xl">📐</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションは年収の何倍まで買える？適正な倍率を解説</span>
+            <Link href="/articles/tokyo-23ku-shisan-kachi-ranking" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">🗺️</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京23区 マンション資産価値ランキング2026</span>
             </Link>
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-ochita" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🔎</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算</span>
             </Link>
           </div>
         </section>

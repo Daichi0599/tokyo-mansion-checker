@@ -75,7 +75,7 @@ const ARTICLES = [
   {
     tag: "返済比率",
     title: "住宅ローンの返済比率は何%が安全？年収別の目安を解説",
-    href: "/articles/juutaku-loan-burden-rate",
+    href: "/articles/nenshu-mansion-price",
   },
   {
     tag: "買い時",

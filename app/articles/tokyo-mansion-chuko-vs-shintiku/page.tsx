@@ -259,13 +259,13 @@ export default function TokyoMansionChukoVsShintikuPage() {
               <span className="text-xl">📅</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの買い時はいつ？2025年の相場と判断基準を解説</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/nenshu-mansion-price" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🏙️</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京でマンション購入に必要な頭金はいくら？</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表・返済比率・頭金】</span>
             </Link>
-            <Link href="/articles/jutaku-loan-shinsa-nenshu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/jutaku-loan-shinsa-ochita" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🔎</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の年収基準は？通るための条件と落ちる理由を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算</span>
             </Link>
           </div>
         </section>

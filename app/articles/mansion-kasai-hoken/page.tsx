@@ -375,9 +375,9 @@ export default function MansionKasaiHokenPage() {
         <section>
           <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/jutaku-loan-danshin" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/jutaku-loan-hendokinri-koteikinri" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🛡️</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの団信とは？種類・比較・選び方を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローン金利の完全ガイド｜変動vs固定・団信・繰上返済</span>
             </Link>
             <Link href="/articles/mansion-shohiyo" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">💴</span>

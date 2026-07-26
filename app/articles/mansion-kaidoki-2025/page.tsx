@@ -304,13 +304,13 @@ export default function MansionKaidoki2025Page() {
               <span className="text-xl">💰</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">年収別マンション購入可能額の目安【早見表付き】</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-atama-kin" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
-              <span className="text-xl">🏙️</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">東京でマンション購入に必要な頭金はいくら？</span>
+            <Link href="/articles/chintai-vs-kounyu" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">🏠</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">賃貸 vs 購入、結局どっちが得？30代向けに徹底比較</span>
             </Link>
-            <Link href="/articles/juutaku-loan-burden-rate" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
-              <span className="text-xl">📊</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">住宅ローンの返済比率は何%が安全？年収別の目安を解説</span>
+            <Link href="/articles/mansion-kounyu-checklist" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+              <span className="text-xl">✅</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">マンション購入チェックリスト｜契約前に確認すべき15項目</span>
             </Link>
           </div>
         </section>
