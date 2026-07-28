@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -49,9 +50,6 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {/* Google AdSense */}
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8547173454903621" crossOrigin="anonymous"></script>
         {/* 構造化データ (WebSite + Organization) */}
         <script
           type="application/ld+json"
@@ -120,6 +118,16 @@ export default function RootLayout({
             </p>
           </div>
         </footer>
+        {/* Google AdSense — next/script 経由で読み込む。
+            head に生の <script> を置くと AdSense が実行時に head を書き換え、
+            React の hydration と衝突して警告が出るため。 */}
+        <Script
+          id="google-adsense"
+          async
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8547173454903621"
+        />
       </body>
       <GoogleAnalytics gaId="G-MVF8CEE9X9" />
       <Analytics />
