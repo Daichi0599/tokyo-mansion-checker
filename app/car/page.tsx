@@ -233,6 +233,37 @@ function CostCard({ result }: { result: CostResult }) {
    メインページ
 ─────────────────────────────────────────── */
 
+const CAR_FAQ = [
+  { q: "都内で車を持つメリットはありますか？", a: "利便性・快適性・子育て時の移動という点ではメリットがあります。ただし都内は公共交通が充実しており、10年コストで比較するとカーシェアが安くなるケースが大多数です。" },
+  { q: "カーシェアとレンタカーはどう違いますか？", a: "カーシェアは近所の駐車場から15分単位で借りられ、ガソリン代・保険込みです。レンタカーは営業所への往復が必要で最短数時間単位。日常的な短時間利用にはカーシェアが、長距離・長時間利用にはレンタカーが向いています。" },
+  { q: "子育て中でも車なしで生活できますか？", a: "乳幼児期は移動が大変なため車が役立つ場面もありますが、都内であればカーシェアで対応できるケースがほとんどです。月4〜8日程度の利用なら、カーシェアの方が10年で100〜200万円安くなることも珍しくありません。" },
+  { q: "電気自動車（EV）の場合はどう計算すればよいですか？", a: "EVは初期費用がやや高め（400〜600万円）ですが、ガソリン代がかからずランニングコストが下がります。本ツールはガソリン車ベースの試算のため、EVをご検討の場合は各メーカーのシミュレーターも合わせてご確認ください。" },
+  { q: "計算に含まれていない費用はありますか？", a: "本ツールでは高速料金・有料駐車場・洗車代・カー用品費・事故修理費などは含まれていません。また中古車の状態によっては整備費用が増加する場合があります。" },
+];
+
+/** 画面に出しているFAQと同じ配列から生成する（表示と構造化データがズレないように） */
+const carJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      name: "都内で車は持つべき？10年コスト診断",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Web",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+      description: "カーシェア・中古車・新車の10年総コストを比較できる無料ツール。",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: CAR_FAQ.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
 export default function CarPage() {
   const [inputs, setInputs] = useState<CarInputs>({
     usageDaysPerMonth: 4,
@@ -287,7 +318,9 @@ export default function CarPage() {
   const comment = results ? getDiagnosisComment(results, inputs) : null;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(carJsonLd) }} />
+      <div className="min-h-screen bg-slate-900 text-white">
       {/* ブレッドクラム */}
       <div className="bg-slate-800 border-b border-slate-700">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-400">
@@ -562,11 +595,9 @@ export default function CarPage() {
         <section className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6">
           <h2 className="text-base font-extrabold text-white mb-1 text-center">よくある質問</h2>
           <p className="text-xs text-slate-400 mb-5 text-center">車コスト診断についてよく寄せられる疑問にお答えします</p>
-          <FaqItem q="都内で車を持つメリットはありますか？" a="利便性・快適性・子育て時の移動という点ではメリットがあります。ただし都内は公共交通が充実しており、10年コストで比較するとカーシェアが安くなるケースが大多数です。" />
-          <FaqItem q="カーシェアとレンタカーはどう違いますか？" a="カーシェアは近所の駐車場から15分単位で借りられ、ガソリン代・保険込みです。レンタカーは営業所への往復が必要で最短数時間単位。日常的な短時間利用にはカーシェアが、長距離・長時間利用にはレンタカーが向いています。" />
-          <FaqItem q="子育て中でも車なしで生活できますか？" a="乳幼児期は移動が大変なため車が役立つ場面もありますが、都内であればカーシェアで対応できるケースがほとんどです。月4〜8日程度の利用なら、カーシェアの方が10年で100〜200万円安くなることも珍しくありません。" />
-          <FaqItem q="電気自動車（EV）の場合はどう計算すればよいですか？" a="EVは初期費用がやや高め（400〜600万円）ですが、ガソリン代がかからずランニングコストが下がります。本ツールはガソリン車ベースの試算のため、EVをご検討の場合は各メーカーのシミュレーターも合わせてご確認ください。" />
-          <FaqItem q="計算に含まれていない費用はありますか？" a="本ツールでは高速料金・有料駐車場・洗車代・カー用品費・事故修理費などは含まれていません。また中古車の状態によっては整備費用が増加する場合があります。" />
+          {CAR_FAQ.map((f) => (
+            <FaqItem key={f.q} q={f.q} a={f.a} />
+          ))}
         </section>
 
         {/* ─── 関連リンク ─── */}
@@ -597,6 +628,7 @@ export default function CarPage() {
         </footer>
 
       </div>
-    </div>
+      </div>
+    </>
   );
 }

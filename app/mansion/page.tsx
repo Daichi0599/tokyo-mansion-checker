@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import MansionDiagnosisPage from "@/components/MansionDiagnosisPage";
+import { MANSION_FAQ } from "@/lib/mansionFaq";
 
 export const metadata: Metadata = {
   title: "都内マンション購入診断 | 無理なく買える価格を無料チェック【約3分】",
@@ -23,6 +24,38 @@ export const metadata: Metadata = {
   },
 };
 
+/** 画面に出しているFAQと同じ配列から生成する（表示と構造化データがズレないように） */
+const mansionJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      name: "都内マンション購入診断",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Web",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+      description:
+        "世帯年収・頭金・生活費・管理費から、家計を崩しにくい安全購入価格と住居費負担率を算出する無料ツール。金利上昇シミュレーション付き。",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: MANSION_FAQ.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
 export default function MansionPage() {
-  return <MansionDiagnosisPage />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(mansionJsonLd) }}
+      />
+      <MansionDiagnosisPage />
+    </>
+  );
 }

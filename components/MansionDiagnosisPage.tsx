@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
+import { MANSION_FAQ } from "@/lib/mansionFaq";
 import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
 import ResultTabs          from "@/components/ResultTabs";
@@ -418,26 +419,9 @@ export default function Home() {
           </h2>
           <p className="text-xs text-slate-400 mb-5 text-center">診断についてよく寄せられる疑問にお答えします</p>
           <div>
-            <FaqItem
-              q="この診断はどこまで正確ですか？"
-              a="元利均等返済の計算式をベースにしており、一般的なFP（ファイナンシャルプランナー）の試算と同水準の精度があります。ただし簡易診断のため、実際の住宅ローン審査結果や個別の返済能力を保証するものではありません。参考情報としてご活用ください。"
-            />
-            <FaqItem
-              q="住宅ローンの事前審査額とは何が違いますか？"
-              a="銀行の審査は「年収の7〜8倍まで貸せるか」という上限を判断します。この診断は「返済が家計を圧迫しないか」という視点で、生活費・管理費も踏まえた無理のない購入価格を算出します。審査が通っても生活が苦しくなるケースがあるため、この診断も並行して確認することをお勧めします。"
-            />
-            <FaqItem
-              q="新築と中古どちらにも使えますか？"
-              a="はい、どちらにもお使いいただけます。購入価格と諸条件を入力することで、物件種別に関わらず住居費負担率を確認できます。なお、中古物件の場合はリフォーム費用も別途考慮してください。"
-            />
-            <FaqItem
-              q="夫婦ペアローンにも使えますか？"
-              a="はい。世帯年収の欄に夫婦合算の収入を入力することで、ペアローンでの購入を想定した診断が可能です。ただし、ペアローンは一方の収入が減った際のリスクが高いため、余裕のある負担率を目指すことをお勧めします。"
-            />
-            <FaqItem
-              q="入力内容は保存・送信されますか？"
-              a="保存・送信は一切されません。入力データはブラウザ上でのみ処理されており、外部サーバーへの送信や個人情報の取得は行っていません。匿名で安心してご利用いただけます。"
-            />
+            {MANSION_FAQ.map((f) => (
+              <FaqItem key={f.q} q={f.q} a={f.a} />
+            ))}
           </div>
         </section>
 

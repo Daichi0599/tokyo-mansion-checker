@@ -191,6 +191,17 @@ export default function KosodateHiyouSougakuPage() {
           </div>
         </section>
 
+        <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 mb-10">
+
+          <p className="text-sm font-bold text-white mb-1">その前に、出産期はいくらかかる？</p>
+
+          <p className="text-xs text-slate-300 leading-relaxed mb-3">無痛分娩か正常分娩か、育休をどれだけ取るかで収支は大きく変わります。出産一時金・育児休業給付金まで差し引いた実際の負担額は専用ツールで試算できます。</p>
+
+          <Link href="/birth" className="inline-block bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-colors">🤰 出産費用シミュレーターを使う →</Link>
+
+        </div>
+
+
         <AffiliateCta
           program="gakushi"
           page="kosodate-hiyou-sougaku"

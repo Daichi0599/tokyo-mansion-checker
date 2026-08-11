@@ -292,6 +292,37 @@ function SubsidySection({ result, input }: { result: ChildResult | null; input: 
    Main Page
 ─────────────────────────────────────────── */
 
+const CHILD_FAQ = [
+  { q: "この試算はどこまで正確ですか？", a: "文部科学省の「子供の学習費調査」や各種教育費調査の平均値をもとにした参考情報です。実際の費用は学校・地域・家庭によって大きく異なります。目安として活用し、詳細はFP（ファイナンシャルプランナー）にご相談ください。" },
+  { q: "教育費はいつから貯め始めるべきですか？", a: "できるだけ早く、理想は生まれた直後から始めるのがベストです。大学入学まで18年あれば、月2〜3万円の積立で200万円以上を準備できます。始める時期が遅いほど月々の積立額が増えるため、早期スタートが有利です。" },
+  { q: "学資保険とNISA、どちらがおすすめですか？", a: "どちらにも一長一短があります。学資保険は元本保証で確実に受け取れる安心感がある一方、返戻率は低め。NISAは長期運用でリターンが期待できますが、元本割れのリスクもあります。必要額の一部を学資保険、残りをNISAで運用するハイブリッド戦略が一般的です。" },
+  { q: "住宅ローンと教育費の両立は可能ですか？", a: "世帯年収800万円前後から両立は可能です。ただし、子どもが中高私立＋大学進学と重なる時期（15〜22歳）に住宅ローン返済が重なると家計が厳しくなります。子どもの年齢と返済終了時期を合わせてキャッシュフローを確認しましょう。" },
+  { q: "子どもが複数人いる場合の注意点は？", a: "2〜3人の場合、費用は単純に人数倍になりますが、上の子が大学卒業する頃に下の子が入学するケースでは費用の山が重なりにくくなります。一方、年齢が近い兄弟では費用ピークが重なるため、より早い時期からの準備が必要です。" },
+];
+
+/** 画面に出しているFAQと同じ配列から生成する（表示と構造化データがズレないように） */
+const childJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      name: "子育て総費用シミュレーター",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Web",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+      description: "0歳から大学卒業までの子育て費用と、児童手当・018サポートを含めた実質負担を試算できる無料ツール。",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: CHILD_FAQ.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
 export default function ChildCostPage() {
   const [input, setInput] = useState<ChildInput>({
     numChildren: 2,
@@ -368,7 +399,9 @@ export default function ChildCostPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(childJsonLd) }} />
+      <div className="min-h-screen bg-slate-900 text-white">
       {/* ブレッドクラム */}
       <div className="bg-slate-800 border-b border-slate-700">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-400">
@@ -688,6 +721,9 @@ export default function ChildCostPage() {
                   <Link href="/" className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors">
                     マンション購入診断を試す →
                   </Link>
+                  <Link href="/birth" className="inline-block bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors">
+                    🤰 出産費用シミュレーターを試す →
+                  </Link>
                   <Link href="/car" className="inline-block bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors">
                     🚗 車コスト診断を試す →
                   </Link>
@@ -753,11 +789,9 @@ export default function ChildCostPage() {
         <section className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6">
           <h2 className="text-base font-extrabold text-white mb-1 text-center">よくある質問</h2>
           <p className="text-xs text-slate-400 mb-5 text-center">子育て費用診断についてよく寄せられる疑問にお答えします</p>
-          <FaqItem q="この試算はどこまで正確ですか？" a="文部科学省の「子供の学習費調査」や各種教育費調査の平均値をもとにした参考情報です。実際の費用は学校・地域・家庭によって大きく異なります。目安として活用し、詳細はFP（ファイナンシャルプランナー）にご相談ください。" />
-          <FaqItem q="教育費はいつから貯め始めるべきですか？" a="できるだけ早く、理想は生まれた直後から始めるのがベストです。大学入学まで18年あれば、月2〜3万円の積立で200万円以上を準備できます。始める時期が遅いほど月々の積立額が増えるため、早期スタートが有利です。" />
-          <FaqItem q="学資保険とNISA、どちらがおすすめですか？" a="どちらにも一長一短があります。学資保険は元本保証で確実に受け取れる安心感がある一方、返戻率は低め。NISAは長期運用でリターンが期待できますが、元本割れのリスクもあります。必要額の一部を学資保険、残りをNISAで運用するハイブリッド戦略が一般的です。" />
-          <FaqItem q="住宅ローンと教育費の両立は可能ですか？" a="世帯年収800万円前後から両立は可能です。ただし、子どもが中高私立＋大学進学と重なる時期（15〜22歳）に住宅ローン返済が重なると家計が厳しくなります。子どもの年齢と返済終了時期を合わせてキャッシュフローを確認しましょう。" />
-          <FaqItem q="子どもが複数人いる場合の注意点は？" a="2〜3人の場合、費用は単純に人数倍になりますが、上の子が大学卒業する頃に下の子が入学するケースでは費用の山が重なりにくくなります。一方、年齢が近い兄弟では費用ピークが重なるため、より早い時期からの準備が必要です。" />
+          {CHILD_FAQ.map((f) => (
+            <FaqItem key={f.q} q={f.q} a={f.a} />
+          ))}
         </section>
 
         {/* ─── フッター ─── */}
@@ -767,6 +801,7 @@ export default function ChildCostPage() {
         </footer>
 
       </div>
-    </div>
+      </div>
+    </>
   );
 }
