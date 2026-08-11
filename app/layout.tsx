@@ -93,11 +93,12 @@ export default function RootLayout({
           <div className="max-w-2xl mx-auto px-4 py-2.5 flex items-center justify-between">
             <a href="/" className="text-sm font-black text-white tracking-tight hover:text-blue-300 transition-colors">30Lab</a>
             <div className="flex items-center gap-0.5">
-              <a href="/mansion" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🏠 <span>マンション</span></a>
-              <a href="/check" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🔍 <span>物件診断</span></a>
-              <a href="/car" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🚗 <span>車</span></a>
-              <a href="/child" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">👶 <span>子育て</span></a>
-              <a href="/articles" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">📝 <span>コラム</span></a>
+              <a href="/mansion" aria-label="マンション購入診断" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🏠 <span className="hidden sm:inline">マンション</span></a>
+              <a href="/check" aria-label="物件診断" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🔍 <span className="hidden sm:inline">物件診断</span></a>
+              <a href="/car" aria-label="車コスト診断" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🚗 <span className="hidden sm:inline">車</span></a>
+              <a href="/birth" aria-label="出産費用シミュレーター" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🤰 <span className="hidden sm:inline">出産</span></a>
+              <a href="/child" aria-label="子育て費用シミュレーター" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">👶 <span className="hidden sm:inline">子育て</span></a>
+              <a href="/articles" aria-label="コラム" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">📝 <span className="hidden sm:inline">コラム</span></a>
             </div>
           </div>
         </nav>
@@ -107,13 +108,14 @@ export default function RootLayout({
           <div className="max-w-2xl mx-auto px-4 py-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-sm font-black text-blue-400">30Lab</div>
-              <nav className="flex items-center gap-4 text-xs text-slate-500">
-                <a href="/about" className="hover:text-slate-300 transition-colors">このサイトについて</a>
-                <a href="/privacy-policy" className="hover:text-slate-300 transition-colors">プライバシーポリシー</a>
-                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">𝕏 @30lab_jp</a>
+              {/* slate-500/600 は暗背景でコントラスト比が4.5:1に届かないため slate-400 にしている */}
+              <nav className="flex items-center gap-4 text-xs text-slate-400">
+                <a href="/about" className="hover:text-white transition-colors">このサイトについて</a>
+                <a href="/privacy-policy" className="hover:text-white transition-colors">プライバシーポリシー</a>
+                <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">𝕏 @30lab_jp</a>
               </nav>
             </div>
-            <p className="text-center text-xs text-slate-600 mt-4">
+            <p className="text-center text-xs text-slate-400 mt-4">
               © 2026 30Lab. 当サイトの情報は参考目的であり、投資・購入の意思決定を保証するものではありません。
             </p>
           </div>

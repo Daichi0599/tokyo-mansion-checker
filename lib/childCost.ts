@@ -50,6 +50,21 @@ export const CHECKUP_SUBSIDY = 10;
 const IKUKYU_CAP_67 = 31;
 const IKUKYU_CAP_50 = 23;
 
+/** 出産期の計算に必要な入力だけを切り出したもの（/birth はこれだけを使う） */
+export interface BirthInput {
+  birthCost: BirthCost;
+  numChildren: NumChildren;
+  /** 産休・育休を取る親の年収（万円）。0 なら給付を計算しない */
+  parentIncome: number;
+  /** 育休を取る月数。省略時は10ヶ月（産後休業を除いて1歳まで取った場合） */
+  leaveMonths?: number;
+  /** 帝王切開など保険適用の分娩。高額療養費が効くぶん自己負担は増えにくい */
+  cesarean?: boolean;
+}
+
+/** 帝王切開の場合の追加自己負担（高額療養費適用後・入院延長分を含む概算） */
+export const CESAREAN_EXTRA = 10;
+
 export interface BirthResult {
   /** 出産費用の総額（人数分） */
   grossCost: number;
@@ -67,10 +82,11 @@ export interface BirthResult {
   netBalance: number;
 }
 
-export function calcBirth(input: ChildInput): BirthResult {
-  const { birthCost, numChildren, parentIncome } = input;
+export function calcBirth(input: BirthInput): BirthResult {
+  const { birthCost, numChildren, parentIncome, leaveMonths = 10, cesarean = false } = input;
 
-  const grossCost = BIRTH_GROSS[birthCost] * numChildren;
+  const perChild = BIRTH_GROSS[birthCost] + (birthCost !== "none" && cesarean ? CESAREAN_EXTRA : 0);
+  const grossCost = perChild * numChildren;
   const lumpSum = birthCost === "none" ? 0 : BIRTH_LUMP_SUM * numChildren;
   const gifts = birthCost === "none" ? 0 : (BIRTH_GIFT + CHECKUP_SUBSIDY) * numChildren;
   const netCost = Math.max(0, grossCost - lumpSum);
@@ -82,9 +98,9 @@ export function calcBirth(input: ChildInput): BirthResult {
     const monthly = parentIncome / 12;
     // 出産手当金：標準報酬日額の2/3 × 98日 ≒ 月給 × 2.18
     maternityAllowance = Math.round(monthly * (2 / 3) * (98 / 30) * numChildren);
-    // 育児休業給付金：最初180日は67%、以降50%。産後休業を除いた約10ヶ月で概算
-    const first = Math.min(monthly * 0.67, IKUKYU_CAP_67) * 6;
-    const later = Math.min(monthly * 0.5, IKUKYU_CAP_50) * 4;
+    // 育児休業給付金：最初180日は67%、以降50%
+    const first = Math.min(monthly * 0.67, IKUKYU_CAP_67) * Math.min(leaveMonths, 6);
+    const later = Math.min(monthly * 0.5, IKUKYU_CAP_50) * Math.max(0, leaveMonths - 6);
     parentalLeaveBenefit = Math.round((first + later) * numChildren);
   }
 
