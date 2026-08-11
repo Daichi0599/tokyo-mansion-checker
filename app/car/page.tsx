@@ -501,7 +501,28 @@ export default function CarPage() {
               </ol>
             </section>
 
-            <AffiliateCta program="jidoshahoken" page="car" />
+            {/* 診断結果と広告を一致させる。
+                「車を持つ」判定なら維持費を下げる話（自動車保険）が続きになるが、
+                「持たない方が得」と出た人に保険を出しても意味がないので出し分ける。
+                車買取の提携が下りたら、持たない判定側にそちらを追加する。 */}
+            {results.find((r) => r.isRecommended)?.label !== "カーシェア" ? (
+              <AffiliateCta program="jidoshahoken" page="car-keep" />
+            ) : (
+              <div className="rounded-2xl border border-sky-500/30 bg-sky-500/10 px-5 py-4 space-y-2">
+                <p className="text-sm font-bold text-white">今の車を手放すか迷っているなら</p>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  この診断では<strong className="text-white">カーシェアが最安</strong>という結果でした。すでに車をお持ちの場合、手放して浮く維持費は月
+                  {" "}
+                  <strong className="text-white">
+                    {(results.find((r) => r.label === "中古車購入")?.monthlyMan ?? 0).toLocaleString()}万円前後
+                  </strong>
+                  です。売却価格が上乗せされるぶん、乗り換えの判断はしやすくなります。
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  駐車場代が月{inputs.parkingFeeMan}万円かかる前提での試算です。手放す前に、駐車場を解約できるかと、週末の移動をカーシェアで回せるかを確認してみてください。
+                </p>
+              </div>
+            )}
 
             <div className="rounded-2xl border border-teal-500/30 bg-teal-500/10 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex-1 space-y-1">
