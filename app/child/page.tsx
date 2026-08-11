@@ -50,7 +50,7 @@ function BenefitCard({ icon, title, desc }: { icon: string; title: string; desc:
       <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
       <div>
         <p className="text-sm font-bold text-slate-200">{title}</p>
-        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
+        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -64,7 +64,7 @@ function LogicPoint({ step, title, desc }: { step: string; title: string; desc: 
       </span>
       <div>
         <p className="text-sm font-bold text-slate-200">{title}</p>
-        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
+        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -90,7 +90,7 @@ function SelectField({ label, value, onChange, options, hint }: {
   return (
     <div className="space-y-1">
       <label className="block text-sm font-semibold text-slate-200">{label}</label>
-      {hint && <p className="text-xs text-slate-500">{hint}</p>}
+      {hint && <p className="text-xs text-slate-400">{hint}</p>}
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -120,18 +120,18 @@ function PhaseCard({ phase, index, totalPerChild }: { phase: PhaseBreakdown; ind
       <div className="flex items-center gap-2 mb-2">
         <span className={`w-2 h-2 rounded-full ${c.dot} shrink-0`} />
         <span className={`text-xs font-bold ${c.text} uppercase tracking-wide`}>{phase.label}</span>
-        <span className="text-xs text-slate-500 ml-1">{phase.ageRange}</span>
+        <span className="text-xs text-slate-400 ml-1">{phase.ageRange}</span>
       </div>
       <p className={`text-xl font-extrabold ${c.text}`}>
         {phase.costPerChild.toLocaleString()}
         <span className="text-sm font-semibold ml-1 text-slate-400">万円</span>
       </p>
-      <p className="text-xs text-slate-500 mt-0.5">1人あたり</p>
+      <p className="text-xs text-slate-400 mt-0.5">1人あたり</p>
       <div className="mt-3">
         <div className="w-full bg-slate-700 rounded-full h-1.5 overflow-hidden">
           <div className={`h-1.5 rounded-full ${c.bar} transition-all duration-500`} style={{ width: `${pct}%` }} />
         </div>
-        <p className="text-xs text-slate-600 mt-1">全体の{pct}%</p>
+        <p className="text-xs text-slate-400 mt-1">全体の{pct}%</p>
       </div>
     </div>
   );
@@ -371,7 +371,7 @@ export default function ChildCostPage() {
     <div className="min-h-screen bg-slate-900 text-white">
       {/* ブレッドクラム */}
       <div className="bg-slate-800 border-b border-slate-700">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-500">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-400">
           <Link href="/" className="hover:text-slate-300 transition-colors">ホーム</Link>
           <span>›</span>
           <span>子育て費用試算</span>
@@ -409,7 +409,7 @@ export default function ChildCostPage() {
         <section>
           <div className="text-center mb-5">
             <h2 className="text-lg font-extrabold text-white">この診断でわかること</h2>
-            <p className="text-xs text-slate-500 mt-1">教育費の「全体像」を把握して、住宅ローンとの両立を判断できます</p>
+            <p className="text-xs text-slate-400 mt-1">教育費の「全体像」を把握して、住宅ローンとの両立を判断できます</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <BenefitCard icon="📚" title="0歳〜大学卒業まで一括試算" desc="保育園・小中高・大学・習い事のフェーズ別費用を一覧化。教育方針を変えると総額がどう変わるかをすぐ確認できます。" />
@@ -550,7 +550,7 @@ export default function ChildCostPage() {
               <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-xs font-bold text-emerald-400">今から始めると月いくら？</p>
-                  <p className="text-xs text-slate-500 mt-0.5">現在{input.childCurrentAge}歳 → 残り{result.monthsRemaining}ヶ月（22歳まで）</p>
+                  <p className="text-xs text-slate-400 mt-0.5">現在{input.childCurrentAge}歳 → 残り{result.monthsRemaining}ヶ月（22歳まで）</p>
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-2xl font-extrabold text-emerald-400">
@@ -597,11 +597,11 @@ export default function ChildCostPage() {
                     </span>
                   </div>
                   {result.birth.parentalLeaveBenefit > 0 ? (
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-400 leading-relaxed">
                       ※ 出産手当金・育児休業給付金は<strong className="text-slate-400">休業中の収入の代わり</strong>に支給されるものです。働き続けた場合と比べれば減収になるため、この差引がそのまま貯金になるわけではありません。
                     </p>
                   ) : (
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-400 leading-relaxed">
                       ※ 産休・育休を取る方の年収を入力すると、出産手当金・育児休業給付金も含めた収支が出ます。
                     </p>
                   )}
@@ -623,7 +623,7 @@ export default function ChildCostPage() {
               <div>
                 <p className="text-xs font-bold text-blue-400 uppercase tracking-wide mb-1">フェーズ別内訳</p>
                 <h2 className="text-base font-extrabold text-white">1人あたりの費用（フェーズ別）</h2>
-                <p className="text-xs text-slate-500 mt-0.5">※ 習い事費用（6〜18歳）は各フェーズに含まれていません。総額に別途加算されています。</p>
+                <p className="text-xs text-slate-400 mt-0.5">※ 習い事費用（6〜18歳）は各フェーズに含まれていません。総額に別途加算されています。</p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {result.phases.map((phase, i) => (
@@ -634,7 +634,7 @@ export default function ChildCostPage() {
                 <div className="rounded-xl border border-slate-600 bg-slate-700/50 p-4 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold text-slate-300">習い事（6〜18歳）</p>
-                    <p className="text-xs text-slate-500">{extraLabelMap[input.extracurriculars]}</p>
+                    <p className="text-xs text-slate-400">{extraLabelMap[input.extracurriculars]}</p>
                   </div>
                   <p className="text-lg font-extrabold text-slate-200">
                     {result.extraCostPerChild.toLocaleString()}
@@ -752,7 +752,7 @@ export default function ChildCostPage() {
         {/* ─── FAQ ─── */}
         <section className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6">
           <h2 className="text-base font-extrabold text-white mb-1 text-center">よくある質問</h2>
-          <p className="text-xs text-slate-500 mb-5 text-center">子育て費用診断についてよく寄せられる疑問にお答えします</p>
+          <p className="text-xs text-slate-400 mb-5 text-center">子育て費用診断についてよく寄せられる疑問にお答えします</p>
           <FaqItem q="この試算はどこまで正確ですか？" a="文部科学省の「子供の学習費調査」や各種教育費調査の平均値をもとにした参考情報です。実際の費用は学校・地域・家庭によって大きく異なります。目安として活用し、詳細はFP（ファイナンシャルプランナー）にご相談ください。" />
           <FaqItem q="教育費はいつから貯め始めるべきですか？" a="できるだけ早く、理想は生まれた直後から始めるのがベストです。大学入学まで18年あれば、月2〜3万円の積立で200万円以上を準備できます。始める時期が遅いほど月々の積立額が増えるため、早期スタートが有利です。" />
           <FaqItem q="学資保険とNISA、どちらがおすすめですか？" a="どちらにも一長一短があります。学資保険は元本保証で確実に受け取れる安心感がある一方、返戻率は低め。NISAは長期運用でリターンが期待できますが、元本割れのリスクもあります。必要額の一部を学資保険、残りをNISAで運用するハイブリッド戦略が一般的です。" />
@@ -761,7 +761,7 @@ export default function ChildCostPage() {
         </section>
 
         {/* ─── フッター ─── */}
-        <footer className="text-center text-xs text-slate-700 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-400 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
           <p>© 2026 30Lab</p>
         </footer>

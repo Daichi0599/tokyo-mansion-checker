@@ -24,7 +24,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
     <main className="min-h-screen bg-slate-900 text-white">
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -34,7 +34,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">中古・新築比較</span>
-          <span className="text-xs text-slate-500">2025年最新</span>
+          <span className="text-xs text-slate-400">2025年最新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -243,7 +243,7 @@ export default function TokyoMansionChukoVsShintikuPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・不動産物件の購入を推奨するものではありません。
           記載内容は執筆時点の情報に基づいており、金利・税制・市況は変動します。
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。

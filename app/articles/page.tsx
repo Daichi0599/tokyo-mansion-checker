@@ -199,7 +199,7 @@ export default function ArticlesIndexPage() {
     <main className="min-h-screen bg-slate-900 text-white">
       {/* ブレッドクラム */}
       <div className="bg-slate-800 border-b border-slate-700">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-500">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-400">
           <a href="/" className="hover:text-slate-300 transition-colors">ホーム</a>
           <span>›</span>
           <span>コラム一覧</span>
@@ -236,7 +236,7 @@ export default function ArticlesIndexPage() {
                   <h2 className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors mb-1 leading-snug">
                     {article.title}
                   </h2>
-                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
                     {article.description}
                   </p>
                 </div>
@@ -259,7 +259,7 @@ export default function ArticlesIndexPage() {
         </div>
 
         {/* フッター */}
-        <footer className="text-center text-xs text-slate-700 mt-10 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-400 mt-10 pb-4 space-y-1">
           <p>本コンテンツは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
           <p>© 2026 30Lab</p>
         </footer>

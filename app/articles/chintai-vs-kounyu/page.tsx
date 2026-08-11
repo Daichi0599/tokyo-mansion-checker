@@ -33,7 +33,7 @@ export default function ChintaiVsKounyuPage() {
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         {/* パンくず */}
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -44,7 +44,7 @@ export default function ChintaiVsKounyuPage() {
         {/* タグ・日付 */}
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">賃貸・購入比較</span>
-          <span className="text-xs text-slate-500">2026年最新</span>
+          <span className="text-xs text-slate-400">2026年最新</span>
         </div>
 
         {/* タイトル */}
@@ -82,7 +82,7 @@ export default function ChintaiVsKounyuPage() {
               <div className="flex justify-between border-t border-slate-700 pt-1 mt-1">
                 <span className="font-bold">総コスト概算</span><span className="font-black text-red-400">約7,500万円</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1">※ 退去時の原状回復費用・引越し費用別途</p>
+              <p className="text-xs text-slate-400 mt-1">※ 退去時の原状回復費用・引越し費用別途</p>
             </div>
           </div>
 
@@ -111,7 +111,7 @@ export default function ChintaiVsKounyuPage() {
               <div className="flex justify-between border-t border-slate-700 pt-1 mt-1">
                 <span className="font-bold">総コスト概算</span><span className="font-black text-emerald-400">約7,350万円</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1">※ 30年後に資産（不動産）が残る</p>
+              <p className="text-xs text-slate-400 mt-1">※ 30年後に資産（不動産）が残る</p>
             </div>
           </div>
 
@@ -319,7 +319,7 @@ export default function ChintaiVsKounyuPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の不動産物件・金融商品の購入を推奨するものではありません。シミュレーション数値はあくまで参考値です。実際の購入判断は専門家にご相談ください。
         </p>
 

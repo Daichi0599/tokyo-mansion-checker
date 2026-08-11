@@ -69,7 +69,7 @@ export default function CheckPage() {
         <CheckPageTabs />
 
         {/* フッター */}
-        <footer className="text-center text-xs text-slate-700 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-400 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
           <p>© 2026 30Lab</p>
         </footer>

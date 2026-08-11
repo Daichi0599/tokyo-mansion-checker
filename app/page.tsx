@@ -3,22 +3,22 @@ import Link from "next/link";
 import AnimateIn from "@/components/AnimateIn";
 
 export const metadata: Metadata = {
-  title: "30Lab | 気になったら、まずここから。",
+  title: "都内マンション・車・出産・子育て費用の無料診断ツール｜30Lab",
   description:
-    "マンション購入・物件診断・車・子育て費用——大きな決断の前に数字で整理できる無料ツール集。完全無料・匿名OK・データ保存なし・営業電話なし。",
-  keywords: ["マンション購入診断", "物件診断", "車コスト比較", "子育て費用試算", "30代 お金"],
+    "都内マンション購入・物件診断・車の維持費・出産費用・子育て費用——30代の大きな決断を数字で整理できる無料ツール集。完全無料・匿名OK・データ保存なし・営業電話なし。",
+  keywords: ["マンション購入診断", "物件診断", "車コスト比較", "出産費用 シミュレーション", "子育て費用試算", "30代 お金"],
   openGraph: {
-    title: "30Lab | 気になったら、まずここから。",
+    title: "都内マンション・車・出産・子育て費用の無料診断ツール｜30Lab",
     description:
-      "マンション・車・子育て費用。大きな決断の前に数字で整理できる無料ツール集。",
+      "マンション・車・出産・子育て費用。大きな決断の前に数字で整理できる無料ツール集。",
     locale: "ja_JP",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "30Lab | 気になったら、まずここから。",
+    title: "都内マンション・車・出産・子育て費用の無料診断ツール｜30Lab",
     description:
-      "マンション・車・子育て費用。大きな決断の前に数字で整理できる無料ツール集。完全無料・匿名OK。",
+      "マンション・車・出産・子育て費用。大きな決断の前に数字で整理できる無料ツール集。完全無料・匿名OK。",
   },
 };
 
@@ -49,6 +49,15 @@ const SUB_TOOLS = [
     color: "text-emerald-400",
     border: "hover:border-emerald-500/60",
     glow: "bg-emerald-500/10",
+  },
+  {
+    icon: "🤰",
+    title: "出産費用試算",
+    desc: "無痛分娩も対応。もらえる給付金まで差引",
+    href: "/birth",
+    color: "text-pink-400",
+    border: "hover:border-pink-500/60",
+    glow: "bg-pink-500/10",
   },
   {
     icon: "👶",
@@ -134,8 +143,13 @@ export default function HomePage() {
               >
                 まずここから。
               </span>
+              {/* h1 にキーワードが1語も入っていなかったため、ブランドコピーは残したまま
+                  何のサイトかを示す一文を h1 の中に含めている */}
+              <span className="block text-base sm:text-lg font-bold text-slate-200 mt-3">
+                都内マンション・車・出産・子育て費用の無料診断ツール
+              </span>
             </h1>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               「いくらまで買える？」「車、持つべき？」<br />
               漠然とした不安を、数字に変える無料ツール集。
             </p>
@@ -143,7 +157,7 @@ export default function HomePage() {
 
           {/* ツール一覧チップ */}
           <div
-            className="grid grid-cols-5 gap-2 w-full max-w-lg mx-auto"
+            className="grid grid-cols-3 sm:grid-cols-6 gap-2 w-full max-w-lg mx-auto"
             style={{ animation: "fadeUp 0.45s ease-out 0.13s both" }}
           >
             {[

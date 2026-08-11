@@ -124,9 +124,9 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
               <div>
                 <label className="text-sm font-semibold text-slate-200">
                   {label}
-                  <span className="ml-1.5 text-xs font-normal text-slate-500">（{unit}）</span>
+                  <span className="ml-1.5 text-xs font-normal text-slate-400">（{unit}）</span>
                 </label>
-                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
+                <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
               </div>
               <select
                 value={values[key]}
@@ -159,7 +159,7 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
               "無理のない購入予算を診断する →"
             )}
           </button>
-          <p className="text-xs text-center text-slate-500">
+          <p className="text-sm text-center text-slate-300">
             完全無料・匿名・営業なし。入力内容はブラウザ上でのみ使用され、外部に送信されません。
           </p>
         </div>

@@ -74,7 +74,7 @@ export default function JutakuLoanShinsaOchitaPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -84,7 +84,7 @@ export default function JutakuLoanShinsaOchitaPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">住宅ローン審査</span>
-          <span className="text-xs text-slate-500">2026年7月更新</span>
+          <span className="text-xs text-slate-400">2026年7月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -236,7 +236,7 @@ export default function JutakuLoanShinsaOchitaPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500">※金利1.0%・35年・返済比率30%を基準とした目安。実際の審査基準は金融機関により異なります。</p>
+          <p className="text-xs text-slate-400">※金利1.0%・35年・返済比率30%を基準とした目安。実際の審査基準は金融機関により異なります。</p>
         </section>
 
         {/* ━━ セクション4：勤続年数 ━━ */}
@@ -473,7 +473,7 @@ export default function JutakuLoanShinsaOchitaPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の金融商品・審査結果を保証するものではありません。
           記載内容は執筆時点の情報に基づいており、各金融機関の審査基準は変動します。
           具体的な判断は、銀行・FP・住宅ローンアドバイザーにご相談ください。

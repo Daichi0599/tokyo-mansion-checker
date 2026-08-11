@@ -285,14 +285,14 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
                       ? `${metrics.monthlyPayment.toFixed(1)}万`
                       : `${(result.price * 0.9 * 0.0026).toFixed(1)}万`}
                   </p>
-                  <p className="text-xs text-slate-500">/月</p>
+                  <p className="text-xs text-slate-400">/月</p>
                 </div>
                 <div className="rounded-lg bg-slate-700/50 px-2 py-3">
                   <p className="text-xs text-slate-400 mb-1">管理費等</p>
                   <p className="text-base font-black text-slate-100">
                     {result.managementFee > 0 ? `${result.managementFee}万` : "—"}
                   </p>
-                  <p className="text-xs text-slate-500">/月</p>
+                  <p className="text-xs text-slate-400">/月</p>
                 </div>
                 <div className="rounded-lg bg-slate-700/50 px-2 py-3">
                   <p className="text-xs text-slate-400 mb-1">月々の実質</p>
@@ -306,7 +306,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
                       return `${(loan + result.managementFee).toFixed(1)}万`;
                     })()}
                   </p>
-                  <p className="text-xs text-slate-500">/月</p>
+                  <p className="text-xs text-slate-400">/月</p>
                 </div>
               </div>
               {effectiveSafePrice && (
@@ -421,7 +421,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
                     <p className="font-bold text-slate-200">{result.price.toLocaleString()}万円</p>
                   </div>
                 </div>
-                <p className="text-xs text-slate-600 mt-2">
+                <p className="text-xs text-slate-400 mt-2">
                   ※ エリア・駅徒歩・築年数をもとにした推計です
                 </p>
               </div>
@@ -523,7 +523,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
           </div>
         )}
 
-        <p className="text-xs text-slate-600">
+        <p className="text-xs text-slate-400">
           ※ 診断結果は公開情報をもとにした推計です。実際の価格変動・費用を保証するものではありません。
         </p>
       </div>

@@ -162,7 +162,7 @@ export default function MansionChecklistPage() {
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         {/* パンくず */}
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -175,7 +175,7 @@ export default function MansionChecklistPage() {
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">
             購入前チェック
           </span>
-          <span className="text-xs text-slate-500">2026年最新</span>
+          <span className="text-xs text-slate-400">2026年最新</span>
         </div>
 
         {/* タイトル */}
@@ -315,7 +315,7 @@ export default function MansionChecklistPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の物件・金融商品の購入を推奨するものではありません。
           チェックリストはあくまでも参考情報です。実際の購入判断は、宅建士・FP・金融機関などの専門家にご相談ください。
         </p>

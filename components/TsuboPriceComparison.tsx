@@ -131,7 +131,7 @@ export default function TsuboPriceComparison() {
                 <div className="flex items-baseline gap-1.5 pt-1">
                   <span className="text-2xl font-extrabold text-slate-100">{tsubo.toLocaleString()}</span>
                   <span className="text-xs text-slate-400 font-semibold">万円/坪</span>
-                  <span className="text-xs text-slate-500 ml-1">
+                  <span className="text-xs text-slate-400 ml-1">
                     （{Math.round(parseFloat(prop.price) / parseFloat(prop.area)).toLocaleString()}万円/㎡）
                   </span>
                 </div>
@@ -145,7 +145,7 @@ export default function TsuboPriceComparison() {
       {properties.length < 5 && (
         <button
           onClick={addProperty}
-          className="w-full py-2 rounded-xl border-2 border-dashed border-slate-600 text-xs text-slate-500 font-semibold hover:border-blue-400 hover:text-blue-400 transition-colors"
+          className="w-full py-2 rounded-xl border-2 border-dashed border-slate-600 text-xs text-slate-400 font-semibold hover:border-blue-400 hover:text-blue-400 transition-colors"
         >
           ＋ 物件を追加する
         </button>
@@ -184,7 +184,7 @@ export default function TsuboPriceComparison() {
             </div>
           ))}
           {ranked.length >= 2 && (
-            <p className="text-xs text-slate-500 pt-1 border-t border-slate-700 mt-2">
+            <p className="text-xs text-slate-400 pt-1 border-t border-slate-700 mt-2">
               最高値と最安値の差：
               <strong className="text-slate-300">
                 {Math.round((ranked[ranked.length - 1].tsubo! - ranked[0].tsubo!) * 10) / 10}万円/坪

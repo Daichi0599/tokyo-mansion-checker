@@ -71,7 +71,7 @@ export default function AreaComparison({ safePrice }: Props) {
               </button>
             ))}
           </div>
-          <span className="text-xs text-slate-500">（2LDK目安 = 60〜70㎡）</span>
+          <span className="text-xs text-slate-400">（2LDK目安 = 60〜70㎡）</span>
         </div>
 
         {/* サマリー */}
@@ -86,7 +86,7 @@ export default function AreaComparison({ safePrice }: Props) {
           </div>
           <div className="rounded-xl bg-slate-700/50 border border-slate-700 p-3 text-center">
             <p className="text-2xl font-black text-slate-400">{over}</p>
-            <p className="text-xs text-slate-500 mt-0.5">予算オーバー</p>
+            <p className="text-xs text-slate-400 mt-0.5">予算オーバー</p>
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export default function AreaComparison({ safePrice }: Props) {
                     <span className={`text-xs font-bold shrink-0 ${TREND_COLOR[area.trend]}`}>
                       {TREND_ICON[area.trend]}
                     </span>
-                    <span className="text-xs text-slate-500 truncate hidden sm:block">{area.desc}</span>
+                    <span className="text-xs text-slate-400 truncate hidden sm:block">{area.desc}</span>
                   </div>
                   <span className={`text-xs font-semibold shrink-0 ml-2 ${
                     isAfford ? "text-emerald-400" : isBorder ? "text-yellow-400" : "text-slate-500"

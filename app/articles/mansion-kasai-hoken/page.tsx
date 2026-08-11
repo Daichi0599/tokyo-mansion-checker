@@ -93,7 +93,7 @@ export default function MansionKasaiHokenPage() {
       />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -103,7 +103,7 @@ export default function MansionKasaiHokenPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">火災保険・保険</span>
-          <span className="text-xs text-slate-500">2026年6月更新</span>
+          <span className="text-xs text-slate-400">2026年6月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -150,7 +150,7 @@ export default function MansionKasaiHokenPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500 mb-4">※年払い換算の目安。築年数・所在地・保険金額・免責金額により変動します。木造（H構造）の戸建てはこの2〜4倍が相場です。</p>
+          <p className="text-xs text-slate-400 mb-4">※年払い換算の目安。築年数・所在地・保険金額・免責金額により変動します。木造（H構造）の戸建てはこの2〜4倍が相場です。</p>
 
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
             <p className="text-sm font-bold text-blue-300 mb-1">💡 マンションが戸建てより安い理由</p>
@@ -329,7 +329,7 @@ export default function MansionKasaiHokenPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定の保険商品への加入を推奨するものではありません。
           保険料は物件の構造・所在地・補償内容・各社の料率改定により変動します。
           実際の加入判断は、保険会社・代理店・FPなどの専門家にご相談ください。

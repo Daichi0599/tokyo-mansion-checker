@@ -121,7 +121,7 @@ function BenefitCard({ icon, title, desc }: { icon: string; title: string; desc:
       <span className="text-2xl shrink-0 mt-0.5">{icon}</span>
       <div>
         <p className="text-sm font-bold text-slate-200">{title}</p>
-        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
+        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -135,7 +135,7 @@ function LogicPoint({ step, title, desc }: { step: string; title: string; desc: 
       </span>
       <div>
         <p className="text-sm font-bold text-slate-200">{title}</p>
-        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
+        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -290,7 +290,7 @@ export default function CarPage() {
     <div className="min-h-screen bg-slate-900 text-white">
       {/* ブレッドクラム */}
       <div className="bg-slate-800 border-b border-slate-700">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-500">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-400">
           <Link href="/" className="hover:text-slate-300 transition-colors">ホーム</Link>
           <span>›</span>
           <span>車コスト診断</span>
@@ -336,7 +336,7 @@ export default function CarPage() {
         <section>
           <div className="text-center mb-5">
             <h2 className="text-lg font-extrabold text-white">この診断でわかること</h2>
-            <p className="text-xs text-slate-500 mt-1">都内の車にまつわる「本当のコスト」を可視化します</p>
+            <p className="text-xs text-slate-400 mt-1">都内の車にまつわる「本当のコスト」を可視化します</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <BenefitCard icon="💰" title="10年間の総コスト比較" desc="カーシェア・中古車・新車の10年間コストを同条件で比較。月々の差だけでなく総額でどれだけ違うかがわかります。" />
@@ -372,7 +372,7 @@ export default function CarPage() {
           <div>
             <p className="text-xs font-bold text-blue-400 uppercase tracking-wide mb-1">STEP 1</p>
             <h2 className="text-base font-extrabold text-white">利用状況を入力してください</h2>
-            <p className="text-xs text-slate-500 mt-0.5">現在または想定する車の使い方を選んでください</p>
+            <p className="text-xs text-slate-400 mt-0.5">現在または想定する車の使い方を選んでください</p>
           </div>
 
           <div className="space-y-4">
@@ -442,7 +442,7 @@ export default function CarPage() {
               <div className="text-center">
                 <p className="text-xs font-bold text-blue-400 uppercase tracking-wide mb-1">RESULT</p>
                 <h2 className="text-lg font-extrabold text-white">10年間コスト比較</h2>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-400 mt-1">
                   利用{inputs.usageDaysPerMonth}日/月・{inputs.hoursPerUse}時間/回・駐車場{inputs.parkingFeeMan}万円/月
                 </p>
               </div>
@@ -468,7 +468,7 @@ export default function CarPage() {
               );
             })()}
 
-            <div className="bg-slate-800 rounded-xl border border-slate-700 px-4 py-3 text-xs text-slate-500 space-y-1 leading-relaxed">
+            <div className="bg-slate-800 rounded-xl border border-slate-700 px-4 py-3 text-xs text-slate-400 space-y-1 leading-relaxed">
               <p className="font-bold text-slate-400 mb-1.5">計算の内訳（目安）</p>
               <p><span className="font-semibold text-slate-300">カーシェア：</span>時間料金 1,500円/時 + 距離料金目安 500円/回</p>
               <p><span className="font-semibold text-slate-300">中古車：</span>初期費用150万 + 保険8,000 + 税金3,000 + ガソリン8,000 + 車検・整備16,000円/月</p>
@@ -540,7 +540,7 @@ export default function CarPage() {
         {/* ─── FAQ ─── */}
         <section className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6">
           <h2 className="text-base font-extrabold text-white mb-1 text-center">よくある質問</h2>
-          <p className="text-xs text-slate-500 mb-5 text-center">車コスト診断についてよく寄せられる疑問にお答えします</p>
+          <p className="text-xs text-slate-400 mb-5 text-center">車コスト診断についてよく寄せられる疑問にお答えします</p>
           <FaqItem q="都内で車を持つメリットはありますか？" a="利便性・快適性・子育て時の移動という点ではメリットがあります。ただし都内は公共交通が充実しており、10年コストで比較するとカーシェアが安くなるケースが大多数です。" />
           <FaqItem q="カーシェアとレンタカーはどう違いますか？" a="カーシェアは近所の駐車場から15分単位で借りられ、ガソリン代・保険込みです。レンタカーは営業所への往復が必要で最短数時間単位。日常的な短時間利用にはカーシェアが、長距離・長時間利用にはレンタカーが向いています。" />
           <FaqItem q="子育て中でも車なしで生活できますか？" a="乳幼児期は移動が大変なため車が役立つ場面もありますが、都内であればカーシェアで対応できるケースがほとんどです。月4〜8日程度の利用なら、カーシェアの方が10年で100〜200万円安くなることも珍しくありません。" />
@@ -555,7 +555,7 @@ export default function CarPage() {
             <span className="text-2xl">🏠</span>
             <div>
               <p className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">都内マンション購入診断</p>
-              <p className="text-xs text-slate-500">無理なく買える価格を3分でチェック</p>
+              <p className="text-xs text-slate-400">無理なく買える価格を3分でチェック</p>
             </div>
             <span className="ml-auto text-slate-600 group-hover:text-slate-400 transition-colors">→</span>
           </Link>
@@ -563,14 +563,14 @@ export default function CarPage() {
             <span className="text-2xl">👶</span>
             <div>
               <p className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">子育て総費用シミュレーター</p>
-              <p className="text-xs text-slate-500">0歳〜大学卒業まで費用を一括試算</p>
+              <p className="text-xs text-slate-400">0歳〜大学卒業まで費用を一括試算</p>
             </div>
             <span className="ml-auto text-slate-600 group-hover:text-slate-400 transition-colors">→</span>
           </Link>
         </section>
 
         {/* ─── フッター ─── */}
-        <footer className="text-center text-xs text-slate-700 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-400 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。</p>
           <p>© 2026 30Lab</p>
         </footer>

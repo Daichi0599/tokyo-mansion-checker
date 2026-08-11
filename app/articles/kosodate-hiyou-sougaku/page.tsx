@@ -75,7 +75,7 @@ export default function KosodateHiyouSougakuPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -85,7 +85,7 @@ export default function KosodateHiyouSougakuPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-amber-500/10 text-amber-300 font-semibold px-2 py-0.5 rounded-full border border-amber-500/20">子育て・教育費</span>
-          <span className="text-xs text-slate-500">2026年7月</span>
+          <span className="text-xs text-slate-400">2026年7月</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -117,7 +117,7 @@ export default function KosodateHiyouSougakuPage() {
               <p className="text-xs text-slate-400">22年間で約1,300〜1,600万円が目安</p>
             </div>
           </div>
-          <p className="text-xs text-slate-500">※文部科学省「子供の学習費調査」等の公的調査をもとにした一般的な目安です。地域・家庭により大きく変動します。</p>
+          <p className="text-xs text-slate-400">※文部科学省「子供の学習費調査」等の公的調査をもとにした一般的な目安です。地域・家庭により大きく変動します。</p>
         </section>
 
         {/* ━━ 早見表 ━━ */}
@@ -151,7 +151,7 @@ export default function KosodateHiyouSougakuPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500 mb-4">※幼保無償化（2019年〜）により認可保育園・幼稚園の保育料は3〜5歳で大きく軽減されています。表は給食費・課外活動等を含む目安。塾・習い事は別途（月1〜5万円が目安）。</p>
+          <p className="text-xs text-slate-400 mb-4">※幼保無償化（2019年〜）により認可保育園・幼稚園の保育料は3〜5歳で大きく軽減されています。表は給食費・課外活動等を含む目安。塾・習い事は別途（月1〜5万円が目安）。</p>
 
           <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
             <p className="text-sm font-bold text-amber-300 mb-1">💡 分かれ道は「中学から私立にするか」</p>
@@ -248,7 +248,7 @@ export default function KosodateHiyouSougakuPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、金額は公的調査等をもとにした一般的な目安です。実際の費用は地域・学校・家庭の方針により大きく異なります。支援制度は改正される場合があるため、最新情報は各自治体・学校にご確認ください。
         </p>
 

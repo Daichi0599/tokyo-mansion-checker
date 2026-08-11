@@ -73,7 +73,7 @@ export default function LoanSimulatorPage() {
     <main className="min-h-screen bg-slate-900 text-white">
       {/* ヘッダー */}
       <div className="bg-slate-800 border-b border-slate-700">
-        <div className="max-w-xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-500">
+        <div className="max-w-xl mx-auto px-4 py-3 flex items-center gap-2 text-xs text-slate-400">
           <Link href="/" className="hover:text-slate-300 transition-colors">ホーム</Link>
           <span>›</span>
           <span>住宅ローン返済シミュレーター</span>
@@ -112,7 +112,7 @@ export default function LoanSimulatorPage() {
               onChange={(e) => setLoanMan(Number(e.target.value))}
               className="w-full accent-blue-500"
             />
-            <div className="flex justify-between text-xs text-slate-600 mt-1">
+            <div className="flex justify-between text-xs text-slate-400 mt-1">
               <span>500万</span>
               <span>1億5,000万</span>
             </div>
@@ -148,7 +148,7 @@ export default function LoanSimulatorPage() {
               onChange={(e) => setRate(Number(e.target.value))}
               className="w-full accent-blue-500"
             />
-            <div className="flex justify-between text-xs text-slate-600 mt-1">
+            <div className="flex justify-between text-xs text-slate-400 mt-1">
               <span>0.1%</span>
               <span>4.0%</span>
             </div>
@@ -196,7 +196,7 @@ export default function LoanSimulatorPage() {
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="text-sm font-bold text-slate-300">
-                年収 <span className="text-xs font-normal text-slate-500">（返済比率の計算に使用・任意）</span>
+                年収 <span className="text-xs font-normal text-slate-400">（返済比率の計算に使用・任意）</span>
               </label>
               <span className="text-base font-black text-slate-300">
                 {incomeMan > 0 ? `${fmt(incomeMan)}万円` : "未入力"}
@@ -211,7 +211,7 @@ export default function LoanSimulatorPage() {
               onChange={(e) => setIncomeMan(Number(e.target.value))}
               className="w-full accent-blue-500"
             />
-            <div className="flex justify-between text-xs text-slate-600 mt-1">
+            <div className="flex justify-between text-xs text-slate-400 mt-1">
               <span>未入力</span>
               <span>2,000万</span>
             </div>
@@ -220,10 +220,10 @@ export default function LoanSimulatorPage() {
 
         {/* 結果カード */}
         <div className="bg-slate-800 rounded-2xl border border-slate-700 p-5 mb-6">
-          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">📊 計算結果</h2>
+          <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">📊 計算結果</h2>
 
           <div className="text-center mb-5">
-            <p className="text-xs text-slate-500 mb-1">月返済額（元利均等）</p>
+            <p className="text-xs text-slate-400 mb-1">月返済額（元利均等）</p>
             <p className="text-4xl font-black text-blue-400">
               {fmtMan(result.monthly)}
               <span className="text-lg font-bold text-slate-500">/月</span>
@@ -237,11 +237,11 @@ export default function LoanSimulatorPage() {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-slate-700/50 rounded-xl p-3 text-center">
-              <p className="text-xs text-slate-500 mb-1">総返済額</p>
+              <p className="text-xs text-slate-400 mb-1">総返済額</p>
               <p className="text-lg font-black text-white">{fmtMan(result.total)}</p>
             </div>
             <div className="bg-red-500/10 rounded-xl p-3 text-center border border-red-500/20">
-              <p className="text-xs text-slate-500 mb-1">うち利息</p>
+              <p className="text-xs text-slate-400 mb-1">うち利息</p>
               <p className="text-lg font-black text-red-400">{fmtMan(result.interest)}</p>
             </div>
           </div>
@@ -266,7 +266,7 @@ export default function LoanSimulatorPage() {
                   style={{ width: `${Math.min(100, result.burdenRate / 40 * 100)}%` }}
                 />
               </div>
-              <div className="flex justify-between text-xs text-slate-600 mt-1">
+              <div className="flex justify-between text-xs text-slate-400 mt-1">
                 <span>0%</span>
                 <span className="text-emerald-500">20%</span>
                 <span className="text-yellow-500">25%</span>
@@ -281,15 +281,15 @@ export default function LoanSimulatorPage() {
         {/* 金利上昇シナリオ比較 */}
         <div className="bg-slate-800 rounded-2xl border border-slate-700 p-5 mb-6">
           <h2 className="text-sm font-bold text-white mb-1">⚠️ 金利上昇シナリオ比較</h2>
-          <p className="text-xs text-slate-500 mb-4">変動金利選択時に知っておきたいリスク</p>
+          <p className="text-xs text-slate-400 mb-4">変動金利選択時に知っておきたいリスク</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-slate-700">
-                  <th className="text-left py-2 text-xs text-slate-500 font-bold">金利</th>
-                  <th className="text-right py-2 text-xs text-slate-500 font-bold">月返済額</th>
-                  <th className="text-right py-2 text-xs text-slate-500 font-bold">総返済額</th>
-                  <th className="text-right py-2 text-xs text-slate-500 font-bold">利息総計</th>
+                  <th className="text-left py-2 text-xs text-slate-400 font-bold">金利</th>
+                  <th className="text-right py-2 text-xs text-slate-400 font-bold">月返済額</th>
+                  <th className="text-right py-2 text-xs text-slate-400 font-bold">総返済額</th>
+                  <th className="text-right py-2 text-xs text-slate-400 font-bold">利息総計</th>
                 </tr>
               </thead>
               <tbody>
@@ -311,7 +311,7 @@ export default function LoanSimulatorPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-600 mt-3">
+          <p className="text-xs text-slate-400 mt-3">
             ※変動金利は5年ごとに見直し。金利が上昇しても125%ルールにより急激な月返済額増加は抑えられますが、総返済額は大きく変わります。
           </p>
         </div>
@@ -350,7 +350,7 @@ export default function LoanSimulatorPage() {
         {/* 計算方式の説明 */}
         <div className="bg-slate-800 rounded-2xl border border-slate-700 p-4 mb-6">
           <h3 className="text-sm font-bold text-slate-300 mb-2">📝 計算方式について</h3>
-          <ul className="text-xs text-slate-500 space-y-1">
+          <ul className="text-xs text-slate-400 space-y-1">
             <li>• 元利均等返済（毎月の返済額が一定）で計算しています</li>
             <li>• 返済比率 = 年間ローン返済額 ÷ 年収 × 100</li>
             <li>• 管理費・修繕積立金・固定資産税は含まれていません</li>
@@ -360,7 +360,7 @@ export default function LoanSimulatorPage() {
 
         {/* 関連記事 */}
         <section>
-          <h2 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">関連記事</h2>
+          <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">関連記事</h2>
           <div className="space-y-2">
             <Link href="/articles/jutaku-loan-hendokinri-koteikinri" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-slate-500 transition-colors group">
               <span className="text-xl">📊</span>
@@ -381,7 +381,7 @@ export default function LoanSimulatorPage() {
         </section>
 
         {/* フッター */}
-        <footer className="text-center text-xs text-slate-700 mt-10 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-400 mt-10 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
           <p>© 2026 30Lab</p>
         </footer>

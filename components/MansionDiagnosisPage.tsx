@@ -270,7 +270,7 @@ export default function Home() {
 
         {/* ─── 1.5. 30Lab 他ツール案内（コンパクト） ─── */}
         <div className="flex items-center justify-center gap-2 flex-wrap">
-          <span className="text-xs text-slate-500 font-semibold">30Labの他のツール:</span>
+          <span className="text-xs text-slate-400 font-semibold">30Labの他のツール:</span>
           <a href="/car" className="inline-flex items-center gap-1.5 text-xs font-bold bg-slate-800 border border-slate-700 hover:border-blue-500/50 text-slate-300 hover:text-blue-300 px-3 py-1.5 rounded-full transition-colors">
             🚗 車コスト診断
           </a>
@@ -355,7 +355,7 @@ export default function Home() {
                         <span key={t} className="text-xs text-slate-400 font-semibold">✓ {t}</span>
                       ))}
                     </div>
-                    <p className="text-center text-xs text-slate-500">モゲチェック：累計100万件超の診断実績・提携金融機関50行以上</p>
+                    <p className="text-center text-sm text-slate-300">モゲチェック：累計100万件超の診断実績・提携金融機関50行以上</p>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
@@ -442,7 +442,7 @@ export default function Home() {
         </section>
 
         {/* ─── フッター ─── */}
-        <footer className="text-center text-xs text-slate-700 pb-4 space-y-1">
+        <footer className="text-center text-xs text-slate-400 pb-4 space-y-1">
           <p>本ツールは参考情報の提供を目的としています。投資・金融アドバイスではありません。</p>
           <p>© 2026 30Lab</p>
         </footer>

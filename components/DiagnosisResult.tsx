@@ -79,7 +79,7 @@ function PriceCard({ title, subtitle, price, cardStyle, titleStyle, badge, badge
         {price.toLocaleString()}
         <span className="text-base font-normal text-slate-400 ml-1">万円</span>
       </p>
-      <p className="text-xs text-slate-500 leading-relaxed">{subtitle}</p>
+      <p className="text-sm text-slate-300 leading-relaxed">{subtitle}</p>
     </div>
   );
 }
@@ -198,7 +198,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
             </div>
           </div>
           {managementFee > 0 && (
-            <p className="text-xs text-slate-500 leading-relaxed pt-1">
+            <p className="text-sm text-slate-300 leading-relaxed pt-1">
               ※ 都内マンションはローン以外に管理費・修繕積立金が毎月かかります。これらを含めた実質負担で診断しています。
             </p>
           )}
@@ -226,14 +226,14 @@ export default function DiagnosisResultCard({ result, input }: Props) {
               style={{ width: `${gaugeWidth}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs text-slate-500">
+          <div className="flex justify-between text-xs text-slate-400">
             <span>0%</span>
             <span>25%</span>
             <span>30%</span>
             <span>35%</span>
             <span>50%+</span>
           </div>
-          <div className="flex justify-between text-xs text-slate-700">
+          <div className="flex justify-between text-xs text-slate-400">
             <span></span>
             <span>安全圏</span>
             <span>背伸び圏</span>
@@ -272,7 +272,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               ※ 変動金利には5年ルール・125%ルールがある商品が多く、返済額の見直しは段階的に反映されます（元金の減り方が遅くなります）。
             </p>
           </div>
@@ -316,7 +316,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
               産休・育休などで収入が半減した場合（想定年収 <strong className="text-slate-100">{Math.round(input.annualIncome / 2).toLocaleString()}万円</strong>）、住居費負担率は
               <strong className={riskConfig.text}> {riskBurdenRate.toFixed(1)}%</strong> になります。
             </p>
-            <p className="text-xs text-slate-500 leading-relaxed border-t border-slate-700 pt-2">
+            <p className="text-sm text-slate-300 leading-relaxed border-t border-slate-700 pt-2">
               ペアローンは育休中も両者の返済義務が継続します。収入減少時の返済余力を事前にシミュレーションしておきましょう。
             </p>
           </div>
@@ -417,7 +417,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
 
         {/* 免責事項 */}
         <div className="rounded-xl border border-slate-700 bg-slate-900/30 px-4 py-4 space-y-2">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-wide">免責事項</p>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-wide">免責事項</p>
           <p className="text-xs text-slate-400 leading-relaxed">
             本ツールの診断結果は、入力された年収・頭金・金利・返済期間をもとにした
             <strong className="text-slate-200">参考情報</strong>

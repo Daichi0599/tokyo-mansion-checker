@@ -84,7 +84,7 @@ export default function JonanMansionPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -94,7 +94,7 @@ export default function JonanMansionPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">エリア・資産価値</span>
-          <span className="text-xs text-slate-500">2026年6月</span>
+          <span className="text-xs text-slate-400">2026年6月</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -140,7 +140,7 @@ export default function JonanMansionPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500 mb-4">※2024年時点の区別平均からの推計。港区は参考として記載。同一区でも駅距離・築年で大きく変わります。</p>
+          <p className="text-xs text-slate-400 mb-4">※2024年時点の区別平均からの推計。港区は参考として記載。同一区でも駅距離・築年で大きく変わります。</p>
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
             <p className="text-sm font-bold text-blue-300 mb-1">💡 同じ城南でも、目黒と大田で3割以上ちがう</p>
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -246,7 +246,7 @@ export default function JonanMansionPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定のエリア・物件の購入を推奨するものではありません。坪単価は推計であり、将来の価格を保証するものではありません。実際の購入判断は専門家にご相談ください。
         </p>
 

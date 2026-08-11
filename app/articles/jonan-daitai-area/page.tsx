@@ -145,7 +145,7 @@ export default function JonanDaitaiAreaPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
-        <nav className="text-xs text-slate-500 mb-6 flex items-center gap-1">
+        <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
           <Link href="/" className="hover:text-blue-400">ホーム</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-blue-400">コラム</Link>
@@ -155,7 +155,7 @@ export default function JonanDaitaiAreaPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">エリア・資産価値</span>
-          <span className="text-xs text-slate-500">2026年6月</span>
+          <span className="text-xs text-slate-400">2026年6月</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -199,7 +199,7 @@ export default function JonanDaitaiAreaPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400">
             ◎ 高い ／ ○ 標準 ／ △ やや弱い。編集部による相対評価（目安）です。坪単価の実データは東京23区のみで、神奈川エリアは城南主要区との相対的な目安として評価しています。
           </p>
         </section>
@@ -214,7 +214,7 @@ export default function JonanDaitaiAreaPage() {
               <div key={c.name} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <p className="text-sm font-bold text-white">{c.name}</p>
-                  <span className="text-xs text-slate-500 shrink-0">{c.area}</span>
+                  <span className="text-xs text-slate-400 shrink-0">{c.area}</span>
                 </div>
                 <p className="text-xs text-blue-300 mb-2">💴 {c.priceNote}</p>
                 <p className="text-xs text-slate-300 leading-relaxed mb-1">
@@ -309,7 +309,7 @@ export default function JonanDaitaiAreaPage() {
         </div>
 
         {/* 免責事項 */}
-        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
+        <p className="text-xs text-slate-400 mt-4 leading-relaxed">
           ※本記事は情報提供を目的としており、特定のエリア・物件の購入を推奨するものではありません。評価は編集部の主観を含む目安であり、坪単価・資産性は将来の価格を保証するものではありません。神奈川エリアの価格は概況であり、実際の購入判断は最新の物件情報と専門家への相談をもとに行ってください。
         </p>
 
