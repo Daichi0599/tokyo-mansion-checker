@@ -1,4 +1,16 @@
-import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics } from "@/types";
+import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics, RateStressCase } from "@/types";
+
+/**
+ * 年収倍率の上限。
+ *
+ * 返済比率だけで購入価格を逆算すると、金利が低いほど「同じ返済額で借りられる額」が
+ * 膨らむため、金利0.7%・35年では負担率25%でも年収7.7倍が「安全」として出てしまう。
+ * 低金利が続く前提が結果に埋め込まれてしまうので、倍率側からも上限をかける。
+ */
+const MAX_INCOME_MULTIPLE = 7;
+
+/** 金利上昇のストレステストで見る上げ幅（%ポイント） */
+const RATE_STRESS_STEPS = [0.5, 1.0];
 
 /**
  * 元利均等返済で「月返済額」から「最大借入可能額」を逆算する
@@ -104,9 +116,14 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
   const dangerLoan     = calcMaxLoan(Math.max(0, dangerMonthlyLoanLimit),     interestRate, repaymentYears);
 
   // 購入価格 = 借入額 + 頭金
-  const safePrice       = Math.floor(safeLoan + downPayment);
+  const safeByBurden    = Math.floor(safeLoan + downPayment);
   const aggressivePrice = Math.floor(aggressiveLoan + downPayment);
   const dangerPrice     = Math.floor(dangerLoan + downPayment);
+
+  // 返済比率と年収倍率の両方を満たす額を採用する（小さいほう）
+  const safeByMultiple  = Math.floor(annualIncome * MAX_INCOME_MULTIPLE);
+  const safePrice       = Math.min(safeByBurden, safeByMultiple);
+  const cappedByMultiple = safeByMultiple < safeByBurden;
 
   // 安全購入価格ベースの月返済額・総住居費・負担率
   const loanForSafe    = Math.max(0, safePrice - downPayment);
@@ -114,7 +131,24 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
   const monthlyTotal   = monthlyPayment + fee;
   const burdenRate     = (monthlyTotal * 12 / annualIncome) * 100;
 
-  const { level, comment } = getComment(burdenRate, age, safePrice);
+  const { level, comment: baseComment } = getComment(burdenRate, age, safePrice);
+  const comment = cappedByMultiple
+    ? `${baseComment} なお今回は、月々の返済比率よりも先に「年収の${MAX_INCOME_MULTIPLE}倍」の上限に達したため、そちらを安全購入価格としています。低金利では返済比率だけを見ると借入額が膨らみやすいためです。`
+    : baseComment;
+
+  // 金利が上がった場合、同じ借入額で返済額がどう変わるか
+  const rateStress: RateStressCase[] = RATE_STRESS_STEPS.map((step) => {
+    const rate = interestRate + step;
+    const m = loanForSafe > 0 ? calcMonthlyPayment(loanForSafe, rate, repaymentYears) : 0;
+    const total = m + fee;
+    return {
+      rate: Math.round(rate * 100) / 100,
+      monthlyPayment: Math.round(m * 10) / 10,
+      diff: Math.round((m - monthlyPayment) * 10) / 10,
+      burdenRate: (total * 12 / annualIncome) * 100,
+      level: getBurdenLevel((total * 12 / annualIncome) * 100),
+    };
+  });
 
   return {
     safePrice,
@@ -125,5 +159,8 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
     monthlyTotal:   Math.round(monthlyTotal   * 10) / 10,
     comment,
     level,
+    incomeMultiple: Math.round((safePrice / annualIncome) * 10) / 10,
+    cappedByMultiple,
+    rateStress,
   };
 }

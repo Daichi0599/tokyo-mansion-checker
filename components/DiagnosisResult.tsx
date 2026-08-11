@@ -85,7 +85,7 @@ function PriceCard({ title, subtitle, price, cardStyle, titleStyle, badge, badge
 }
 
 export default function DiagnosisResultCard({ result, input }: Props) {
-  const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, monthlyTotal, comment, level } = result;
+  const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, monthlyTotal, comment, level, incomeMultiple, cappedByMultiple, rateStress } = result;
   const config = levelConfig[level];
   const managementFee = input?.managementFee ?? 0;
 
@@ -242,10 +242,50 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           </div>
         </div>
 
+        {/* 金利上昇シミュレーション */}
+        {input && rateStress.length > 0 && monthlyPayment > 0 && (
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 space-y-3">
+            <div>
+              <p className="text-sm font-bold text-amber-300">⚠️ 金利が上がったら？</p>
+              <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                借入 {(safePrice - input.downPayment).toLocaleString()}万円・{input.repaymentYears}年のまま、金利だけが上がった場合の月返済額です。変動金利を選ぶなら、この幅に耐えられるかが判断基準になります。
+              </p>
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-xs text-slate-400 px-1">
+                <span>現在の想定 {input.interestRate}%</span>
+                <span className="font-semibold text-slate-300">{monthlyPayment.toFixed(1)} 万円 / 月</span>
+              </div>
+              {rateStress.map((s) => (
+                <div
+                  key={s.rate}
+                  className="flex items-center justify-between bg-slate-800 rounded-lg px-3 py-2 border border-slate-700"
+                >
+                  <span className="text-xs font-bold text-slate-200">
+                    {s.rate}% <span className="font-normal text-slate-500">に上昇</span>
+                  </span>
+                  <span className="text-sm font-black text-white">
+                    {s.monthlyPayment.toFixed(1)}
+                    <span className="text-xs font-normal text-slate-400 ml-1">万円</span>
+                    <span className="text-xs font-bold text-amber-400 ml-2">+{s.diff.toFixed(1)}万</span>
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              ※ 変動金利には5年ルール・125%ルールがある商品が多く、返済額の見直しは段階的に反映されます（元金の減り方が遅くなります）。
+            </p>
+          </div>
+        )}
+
         {/* 診断コメント */}
         <div className={`rounded-xl p-4 ${config.bg} border ${config.border}`}>
           <p className={`text-sm font-semibold mb-1 ${config.text}`}>診断コメント</p>
           <p className="text-sm text-slate-200 leading-relaxed">{comment}</p>
+          <p className="text-xs text-slate-400 mt-2 pt-2 border-t border-white/10">
+            安全購入価格は年収の <strong className="text-slate-200">{incomeMultiple}倍</strong>
+            {cappedByMultiple && <span className="text-amber-400 font-semibold">（年収倍率の上限で判定）</span>}
+          </p>
         </div>
 
         {/* Xシェアボタン（診断コメント直下） */}

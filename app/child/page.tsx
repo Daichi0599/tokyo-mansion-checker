@@ -4,95 +4,26 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
 
-/* ───────────────────────────────────────────
-   Types
-─────────────────────────────────────────── */
-
-type NumChildren = 1 | 2 | 3;
-type NurseryType = "hoiku_public" | "hoiku_private";
-type SchoolPolicy = "all_public" | "junior_private" | "elem_private";
-type UniversityType = "national" | "private_arts" | "private_science";
-type ExtracurricularsLevel = "none" | "light" | "standard" | "enriched" | "intensive";
-type BirthCost = "none" | "standard" | "premium";
-
-interface ChildInput {
-  numChildren: NumChildren;
-  nursery: NurseryType;
-  schoolPolicy: SchoolPolicy;
-  university: UniversityType;
-  extracurriculars: ExtracurricularsLevel;
-  birthCost: BirthCost;
-  childCurrentAge: number;
-}
-
-interface PhaseBreakdown {
-  label: string;
-  ageRange: string;
-  costPerChild: number;
-}
-
-interface ChildResult {
-  phases: PhaseBreakdown[];
-  totalPerChild: number;
-  grandTotal: number;
-  monthlyBurden: number;
-  monthlyFromNow: number;
-  monthsRemaining: number;
-  birthCostTotal: number;
-  extraCostPerChild: number;
-}
-
-/* ───────────────────────────────────────────
-   Calculation Logic
-─────────────────────────────────────────── */
-
-function calculateCosts(input: ChildInput): ChildResult {
-  const { nursery, schoolPolicy, university, extracurriculars, birthCost, numChildren, childCurrentAge } = input;
-
-  let birthCostPerChild = 0;
-  if (birthCost === "standard") birthCostPerChild = 10;
-  else if (birthCost === "premium") birthCostPerChild = 40;
-  const birthCostTotal = birthCostPerChild * numChildren;
-
-  const nurseryCost = nursery === "hoiku_public" ? 4 * 36 : 7 * 36;
-  const babyGoods = 50;
-  const phase0to2 = nurseryCost + babyGoods + birthCostPerChild;
-  const phase3to5 = 0.5 * 36;
-  const elemRate = schoolPolicy === "elem_private" ? 5 : 0.5;
-  const phase6to11 = elemRate * 72;
-  const juniorRate = schoolPolicy === "all_public" ? 0.5 : 7;
-  const phase12to14 = juniorRate * 36;
-  const highRate = schoolPolicy === "all_public" ? 2 : 6;
-  const phase15to17 = highRate * 36;
-
-  let univCost: number;
-  if (university === "national") univCost = 54 * 4 + 28;
-  else if (university === "private_arts") univCost = 80 * 4 + 30;
-  else univCost = 120 * 4 + 30;
-
-  let extraMonthly = 0;
-  if (extracurriculars === "light") extraMonthly = 1;
-  else if (extracurriculars === "standard") extraMonthly = 2;
-  else if (extracurriculars === "enriched") extraMonthly = 3;
-  else if (extracurriculars === "intensive") extraMonthly = 5;
-  const extraCostPerChild = extraMonthly * 144;
-
-  const phases: PhaseBreakdown[] = [
-    { label: "乳幼児期", ageRange: "0〜5歳", costPerChild: phase0to2 + phase3to5 },
-    { label: "小学期", ageRange: "6〜11歳", costPerChild: phase6to11 },
-    { label: "中高期", ageRange: "12〜17歳", costPerChild: phase12to14 + phase15to17 },
-    { label: "大学期", ageRange: "18〜21歳", costPerChild: univCost },
-  ];
-
-  const basePerChild = phases.reduce((sum, p) => sum + p.costPerChild, 0);
-  const totalPerChild = basePerChild + extraCostPerChild;
-  const grandTotal = totalPerChild * numChildren + birthCostTotal;
-  const monthlyBurden = Math.round(grandTotal / 264);
-  const monthsRemaining = Math.max(1, (22 - childCurrentAge) * 12);
-  const monthlyFromNow = Math.ceil(grandTotal / monthsRemaining);
-
-  return { phases, totalPerChild, grandTotal, monthlyBurden, monthlyFromNow, monthsRemaining, birthCostTotal, extraCostPerChild };
-}
+import {
+  calculateCosts,
+  calcSubsidies,
+  BIRTH_GROSS,
+  BIRTH_LUMP_SUM,
+  JUKEN_COST,
+  CHILD_ALLOWANCE_TOTAL,
+  HIGHSCHOOL_SUPPORT,
+  TOKYO_018_TOTAL,
+  type ChildInput,
+  type ChildResult,
+  type PhaseBreakdown,
+  type NumChildren,
+  type NurseryType,
+  type SchoolPolicy,
+  type UniversityType,
+  type ExtracurricularsLevel,
+  type BirthCost,
+  type JukenPlan,
+} from "@/lib/childCost";
 
 /* ───────────────────────────────────────────
    Diagnosis Comment
@@ -217,9 +148,14 @@ const SUBSIDY_DATA: SubsidyPhase[] = [
   { phase: "妊娠〜出産", items: [
     { name: "出産育児一時金", amount: "50万円/子", source: "国", note: "出産後に健保申請" },
     { name: "妊婦健診費補助", amount: "約10万円分/子（14回）", source: "区市町村", note: "母子手帳取得時" },
+    { name: "出産・子育て応援ギフト", amount: "計10万円/子（妊娠時5万＋出生時5万）", source: "国・区市町村", note: "面談・アンケート後に支給" },
+    { name: "出産手当金", amount: "標準報酬日額の2/3 × 産休98日", source: "健保", note: "会社経由で申請（会社員・公務員）" },
+    { name: "育児休業給付金", amount: "180日まで67%、以降50%", source: "雇用保険", note: "2025年から出生後休業支援給付の上乗せあり" },
+    { name: "医療費控除", amount: "出産費用は対象（無痛分娩含む）", source: "国", note: "確定申告で還付" },
   ]},
   { phase: "0〜2歳", items: [
     { name: "児童手当（0〜2歳）", amount: "月1.5万円/子", source: "国", note: "出生届後に市区町村申請" },
+    { name: "018サポート（東京都）", amount: "月5,000円/子（0〜18歳・所得制限なし）", source: "都", note: "年1回の申請制。18年で計108万円" },
     { name: "乳幼児医療費助成（マル乳）", amount: "医療費ほぼ無料", source: "都・区", note: "自動適用（区による）" },
     { name: "ベビーシッター補助（東京都）", amount: "月2.4万円まで", source: "都", note: "申請制" },
   ]},
@@ -249,12 +185,12 @@ const phaseColors: Record<string, { border: string; bg: string; badgeText: strin
   "大学（18〜22歳）": { border: "border-purple-500/40", bg: "bg-purple-500/10", badgeText: "text-purple-300" },
 };
 
-function SubsidySection({ result, numChildren }: { result: ChildResult | null; numChildren: NumChildren }) {
-  const birthSubsidy = 50 * numChildren;
-  const childAllowance = 246 * numChildren;
-  const highSchoolSupport = 35 * numChildren;
-  const totalSubsidy = birthSubsidy + childAllowance + highSchoolSupport;
-  const netCost = result ? Math.max(0, result.grandTotal - totalSubsidy) : null;
+function SubsidySection({ result, input }: { result: ChildResult | null; input: ChildInput }) {
+  const numChildren = input.numChildren;
+  const subsidy = result ? calcSubsidies(input, result.birth) : null;
+  // 出産一時金・給付は出産期の収支で相殺済みなので、ここでは育てる側の制度だけを差し引く
+  const raisingSupport = subsidy ? subsidy.childAllowance + subsidy.highSchoolSupport + subsidy.tokyo018 : 0;
+  const netCost = result ? Math.max(0, result.grandTotal - raisingSupport) : null;
 
   return (
     <section className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6 space-y-5">
@@ -287,31 +223,36 @@ function SubsidySection({ result, numChildren }: { result: ChildResult | null; n
         })}
       </div>
 
-      {result && (
+      {result && subsidy && (
         <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 space-y-3">
           <p className="text-xs font-bold text-emerald-400">子供の人数に応じた主要制度の合計概算（{numChildren}人）</p>
           <div className="space-y-1 text-xs text-emerald-300">
             <div className="flex justify-between">
-              <span>出産育児一時金（50万 × {numChildren}人）</span>
-              <span className="font-semibold">{birthSubsidy}万円</span>
+              <span>児童手当 0〜18歳合計（{CHILD_ALLOWANCE_TOTAL}万 × {numChildren}人）</span>
+              <span className="font-semibold">{subsidy.childAllowance.toLocaleString()}万円</span>
             </div>
             <div className="flex justify-between">
-              <span>児童手当 0〜18歳合計（246万 × {numChildren}人）</span>
-              <span className="font-semibold">{childAllowance}万円</span>
+              <span>018サポート（東京都・{TOKYO_018_TOTAL}万 × {numChildren}人）</span>
+              <span className="font-semibold">{subsidy.tokyo018.toLocaleString()}万円</span>
             </div>
             <div className="flex justify-between">
-              <span>高校就学支援金・都補助概算（35万 × {numChildren}人）</span>
-              <span className="font-semibold">{highSchoolSupport}万円</span>
+              <span>高校就学支援金・都補助概算（{HIGHSCHOOL_SUPPORT}万 × {numChildren}人）</span>
+              <span className="font-semibold">{subsidy.highSchoolSupport.toLocaleString()}万円</span>
             </div>
             <div className="flex justify-between border-t border-emerald-500/30 pt-1 mt-1">
-              <span className="font-bold text-emerald-300">補助金で軽減される概算額</span>
-              <span className="font-extrabold text-emerald-400 text-sm">{totalSubsidy}万円</span>
+              <span className="font-bold text-emerald-300">育てる期間に軽減される額</span>
+              <span className="font-extrabold text-emerald-400 text-sm">{raisingSupport.toLocaleString()}万円</span>
             </div>
           </div>
           <div className="rounded-lg bg-slate-800 border border-emerald-500/20 px-3 py-2 flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-300">実質負担額（総費用 − 補助金概算）</span>
             <span className="text-lg font-extrabold text-emerald-400">{netCost!.toLocaleString()}<span className="text-sm font-semibold ml-0.5 text-emerald-500">万円</span></span>
           </div>
+          {(subsidy.maternityAllowance > 0 || subsidy.parentalLeaveBenefit > 0) && (
+            <p className="text-xs text-emerald-400/80 leading-relaxed">
+              ※ 出産一時金・応援ギフト・出産手当金・育児休業給付（合計{(subsidy.birthLumpSum + subsidy.birthGifts + subsidy.maternityAllowance + subsidy.parentalLeaveBenefit).toLocaleString()}万円）は、出産期の収支ですでに差し引いています。
+            </p>
+          )}
         </div>
       )}
 
@@ -359,6 +300,8 @@ export default function ChildCostPage() {
     university: "private_arts",
     extracurriculars: "standard",
     birthCost: "standard",
+    juken: "none",
+    parentIncome: 0,
     childCurrentAge: 0,
   });
   const [result, setResult] = useState<ChildResult | null>(null);
@@ -510,12 +453,18 @@ export default function ChildCostPage() {
             <SelectField label="お子さんの現在の年齢" value={String(input.childCurrentAge)} onChange={(v) => update("childCurrentAge", Number(v))}
               hint="今から積み立てると月いくら必要かを計算します"
               options={Array.from({ length: 11 }, (_, i) => ({ value: String(i), label: `${i}歳` }))} />
-            <SelectField label="出産費用（実費）" value={input.birthCost} onChange={(v) => update("birthCost", v as BirthCost)}
-              hint="出産育児一時金50万円を差し引いた実費"
+            <SelectField label="出産費用（総額）" value={input.birthCost} onChange={(v) => update("birthCost", v as BirthCost)}
+              hint={`出産育児一時金${BIRTH_LUMP_SUM}万円は自動で差し引きます`}
               options={[
                 { value: "none", label: "含めない" },
-                { value: "standard", label: "普通分娩（実費 約10万円）" },
-                { value: "premium", label: "無痛分娩・高額産院（実費 約40万円）" },
+                { value: "standard", label: `正常分娩 — 総額 約${BIRTH_GROSS.standard}万円` },
+                { value: "premium", label: `無痛分娩・人気産院 — 総額 約${BIRTH_GROSS.premium}万円` },
+              ]} />
+            <SelectField label="産休・育休を取る方の年収" value={String(input.parentIncome)} onChange={(v) => update("parentIncome", Number(v))}
+              hint="出産手当金・育児休業給付金の概算に使います（入力しなくても試算できます）"
+              options={[
+                { value: "0", label: "計算しない" },
+                ...[300, 400, 500, 600, 700, 800].map((v) => ({ value: String(v), label: `${v}万円` })),
               ]} />
             <SelectField label="保育園（0〜2歳）" value={input.nursery} onChange={(v) => update("nursery", v as NurseryType)}
               hint="3〜5歳は幼保無償化対象（副食費等の実費のみ）"
@@ -528,6 +477,12 @@ export default function ChildCostPage() {
                 { value: "all_public", label: "全公立" },
                 { value: "junior_private", label: "中学から私立" },
                 { value: "elem_private", label: "小学校から私立" },
+              ]} />
+            <SelectField label="中学受験（小4〜小6の塾）" value={input.juken} onChange={(v) => update("juken", v as JukenPlan)}
+              hint={input.schoolPolicy === "elem_private" ? "小学校から私立の場合は計上しません" : "都内の大手進学塾は3年間で約300万円かかります"}
+              options={[
+                { value: "none", label: "受験しない" },
+                { value: "juken", label: `受験する — 約${JUKEN_COST}万円（小4〜6の3年間）` },
               ]} />
             <SelectField label="大学" value={input.university} onChange={(v) => update("university", v as UniversityType)}
               options={[
@@ -605,16 +560,51 @@ export default function ChildCostPage() {
                 </div>
               </div>
 
-              {result.birthCostTotal > 0 && (
-                <div className="rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 py-3 flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-bold text-pink-400">出産費用（実費）</p>
-                    <p className="text-xs text-slate-500">{input.numChildren}人分 — 出産育児一時金50万差し引き後</p>
+              {result.birth.grossCost > 0 && (
+                <div className="rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 py-3 space-y-2">
+                  <p className="text-xs font-bold text-pink-400">出産期の収支（{input.numChildren}人分）</p>
+                  <div className="space-y-1 text-xs text-slate-300">
+                    <div className="flex justify-between">
+                      <span>出産費用の総額</span>
+                      <span className="font-semibold text-slate-200">−{result.birth.grossCost.toLocaleString()}万円</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>出産育児一時金</span>
+                      <span className="font-semibold text-emerald-400">＋{result.birth.lumpSum}万円</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>応援ギフト・妊婦健診補助</span>
+                      <span className="font-semibold text-emerald-400">＋{result.birth.gifts}万円</span>
+                    </div>
+                    {result.birth.maternityAllowance > 0 && (
+                      <div className="flex justify-between">
+                        <span>出産手当金（産休98日）</span>
+                        <span className="font-semibold text-emerald-400">＋{result.birth.maternityAllowance.toLocaleString()}万円</span>
+                      </div>
+                    )}
+                    {result.birth.parentalLeaveBenefit > 0 && (
+                      <div className="flex justify-between">
+                        <span>育児休業給付金（約10ヶ月）</span>
+                        <span className="font-semibold text-emerald-400">＋{result.birth.parentalLeaveBenefit.toLocaleString()}万円</span>
+                      </div>
+                    )}
                   </div>
-                  <p className="text-lg font-extrabold text-pink-400">
-                    {result.birthCostTotal}
-                    <span className="text-sm font-semibold ml-0.5 text-pink-500">万円</span>
-                  </p>
+                  <div className="border-t border-pink-500/30 pt-2 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-200">差引（給付 − 費用）</span>
+                    <span className={`text-lg font-extrabold ${result.birth.netBalance >= 0 ? "text-emerald-400" : "text-pink-400"}`}>
+                      {result.birth.netBalance >= 0 ? "＋" : "−"}{Math.abs(result.birth.netBalance).toLocaleString()}
+                      <span className="text-sm font-semibold ml-0.5">万円</span>
+                    </span>
+                  </div>
+                  {result.birth.parentalLeaveBenefit > 0 ? (
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      ※ 出産手当金・育児休業給付金は<strong className="text-slate-400">休業中の収入の代わり</strong>に支給されるものです。働き続けた場合と比べれば減収になるため、この差引がそのまま貯金になるわけではありません。
+                    </p>
+                  ) : (
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      ※ 産休・育休を取る方の年収を入力すると、出産手当金・育児休業給付金も含めた収支が出ます。
+                    </p>
+                  )}
                 </div>
               )}
             </section>
@@ -757,7 +747,7 @@ export default function ChildCostPage() {
         </section>
 
         {/* ─── 補助金セクション ─── */}
-        <SubsidySection result={result} numChildren={input.numChildren} />
+        <SubsidySection result={result} input={input} />
 
         {/* ─── FAQ ─── */}
         <section className="bg-slate-800 rounded-2xl border border-slate-700 px-6 py-6">

@@ -10,6 +10,15 @@ export interface DiagnosisInput {
 
 export type DiagnosisLevel = "safe" | "caution" | "warning" | "danger" | "critical";
 
+/** 金利が上がったときに返済額がどうなるかの試算 */
+export interface RateStressCase {
+  rate: number;               // 想定金利（年率 %）
+  monthlyPayment: number;     // その金利での月返済額（万円）
+  diff: number;               // 現在の金利との月額差（万円）
+  burdenRate: number;         // その金利での住居費負担率（%）
+  level: DiagnosisLevel;
+}
+
 export interface DiagnosisResult {
   safePrice: number;          // 安全購入価格（万円）
   aggressivePrice: number;    // 背伸び購入価格（万円）
@@ -19,6 +28,9 @@ export interface DiagnosisResult {
   monthlyTotal: number;       // 月々の住居費合計（ローン+管理費）（万円）
   comment: string;            // 診断コメント
   level: DiagnosisLevel;
+  incomeMultiple: number;     // 安全購入価格が年収の何倍か
+  cappedByMultiple: boolean;  // 返済比率ではなく年収倍率の上限で決まったか
+  rateStress: RateStressCase[]; // 金利上昇時の試算（安全購入価格ベース）
 }
 
 export interface PriceMetrics {
