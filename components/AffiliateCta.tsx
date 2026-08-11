@@ -12,7 +12,7 @@ import { sendGAEvent } from "@next/third-parties/google";
  *  - A8 のインプレッション計測ピクセル
  */
 
-type ProgramKey = "mogecheck" | "kasaihoken" | "fpsoudan" | "gakushi";
+type ProgramKey = "mogecheck" | "kasaihoken" | "jidoshahoken" | "fpsoudan" | "gakushi";
 
 type Program = {
   /** A8 の a8mat パラメータ */
@@ -56,6 +56,20 @@ const PROGRAMS: Record<ProgramKey, Program> = {
       border: "border-orange-500/30",
       accent: "text-orange-400",
       button: "bg-orange-500 hover:bg-orange-600",
+    },
+  },
+  jidoshahoken: {
+    mat: "4AZO4O+FOEY9E+2PS+15OZHU",
+    pixelHost: "www16",
+    gaName: "自動車保険一括見積もり",
+    heading: "維持費のうち、保険料は今日から下げられる",
+    title: "自動車保険を無料で一括見積もりする",
+    note: "同じ補償内容でも保険会社によって年間数万円の差が出ます。車を持ち続けるなら、まず固定費から。",
+    cta: "無料で自動車保険を比較する →",
+    style: {
+      border: "border-sky-500/30",
+      accent: "text-sky-400",
+      button: "bg-sky-600 hover:bg-sky-500",
     },
   },
   fpsoudan: {

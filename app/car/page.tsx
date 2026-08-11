@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { sendGAEvent } from "@next/third-parties/google";
+import AffiliateCta from "@/components/AffiliateCta";
 
 /* ───────────────────────────────────────────
    型定義
@@ -499,6 +500,8 @@ export default function CarPage() {
                   ))}
               </ol>
             </section>
+
+            <AffiliateCta program="jidoshahoken" page="car" />
 
             <div className="rounded-2xl border border-teal-500/30 bg-teal-500/10 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex-1 space-y-1">
