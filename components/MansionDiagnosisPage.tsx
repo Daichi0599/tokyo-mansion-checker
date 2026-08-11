@@ -146,14 +146,16 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="max-w-2xl mx-auto px-4 py-10 space-y-10">
+      <div className="max-w-2xl mx-auto px-4 py-6 space-y-8">
 
-        {/* ─── 1. ヒーローセクション（ファーストビュー） ─── */}
-        <header className="text-center space-y-5">
+        {/* ─── 1. ヒーローセクション ───
+            モバイル(375px)で最初の入力欄が y=775px にあり、1画面スクロールしないと
+            診断を始められなかった。ヒーローを削って入力欄をファーストビューに入れている。 */}
+        <header className="text-center space-y-4">
 
           {/* ターゲットタグ */}
           <div className="flex flex-wrap justify-center gap-2">
-            {["共働き・20〜30代向け", "世帯年収1,000〜1,500万円帯", "新築・中古マンション対応"].map((tag) => (
+            {["20〜30代向け", "世帯年収600〜1,200万円帯", "新築・中古マンション対応"].map((tag) => (
               <span
                 key={tag}
                 className="text-xs font-semibold bg-blue-500/15 text-blue-300 px-3 py-1 rounded-full border border-blue-500/20"
@@ -170,29 +172,18 @@ export default function Home() {
               <span className="text-blue-400">「無理なく買える額」</span>がわかる<br />
               都内マンション購入診断
             </h1>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
+            <p className="text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
               世帯年収・頭金・生活費・管理費まで含めた<br className="hidden sm:block" />
               実質住居費で、安全購入価格を無料で算出します。
             </p>
           </div>
 
-          {/* 安心バッジ */}
+          {/* 安心バッジ。フォームが直下にあるためヒーローCTAは置いていない */}
           <div className="flex flex-wrap justify-center gap-2">
             <TrustBadge icon="✓" label="完全無料" />
-            <TrustBadge icon="✓" label="匿名OK" />
-            <TrustBadge icon="✓" label="約3分" />
+            <TrustBadge icon="✓" label="匿名OK・約3分" />
             <TrustBadge icon="✓" label="営業電話なし" />
-            <TrustBadge icon="✓" label="データ保存なし" />
           </div>
-
-          {/* CTAボタン */}
-          <a
-            href="#form"
-            onClick={() => sendGAEvent("event", "hero_cta_click", {})}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-colors text-base"
-          >
-            3分で安全購入価格をチェックする →
-          </a>
         </header>
 
         {/* ─── 2. 診断フォーム（ファーストビュー直後） ─── */}

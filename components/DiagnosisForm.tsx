@@ -10,7 +10,7 @@ interface Props {
 }
 
 const defaultValues: DiagnosisInput = {
-  annualIncome:   1200,
+  annualIncome:   800,
   age:            30,
   downPayment:    1000,
   interestRate:   0.7,
