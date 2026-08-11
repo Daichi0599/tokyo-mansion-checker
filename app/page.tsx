@@ -151,6 +151,7 @@ export default function HomePage() {
               { icon: "🔍", label: "物件チェック" },
               { icon: "🏦", label: "ローン計算" },
               { icon: "🚗", label: "車コスト比較" },
+              { icon: "🤰", label: "出産費用" },
               { icon: "👶", label: "子育て試算" },
             ].map((t) => (
               <span
@@ -163,13 +164,22 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* ソーシャルプルーフ */}
+          {/* 差別化ポイント。
+              以前は「累計1,200+件の診断完了」と件数を出していたが、GA4の実数は
+              175件で、しかも大半が開発中の自己テストだった。検証できない数字を
+              置くより、実際に他のツールがやっていないことを書くほうが誠実で強い。 */}
           <div
-            className="flex items-center justify-center gap-1.5 text-xs text-slate-500"
+            className="flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-300"
             style={{ animation: "fadeUp 0.45s ease-out 0.15s both" }}
           >
-            <span className="text-base">👥</span>
-            <span>累計 <strong className="text-slate-300">1,200+</strong> 件の診断完了</span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-base">📊</span>
+              管理費・修繕積立金まで含めた<strong className="text-white">実質住居費</strong>で計算
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-base">⚠️</span>
+              <strong className="text-white">金利上昇シミュレーション</strong>対応
+            </span>
           </div>
 
           {/* 主要CTA */}

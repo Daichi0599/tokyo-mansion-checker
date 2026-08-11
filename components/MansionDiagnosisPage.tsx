@@ -355,7 +355,7 @@ export default function Home() {
                         <span key={t} className="text-xs text-slate-400 font-semibold">✓ {t}</span>
                       ))}
                     </div>
-                    <p className="text-center text-xs text-slate-500">累計100万件超の診断実績 | 提携金融機関50行以上</p>
+                    <p className="text-center text-xs text-slate-500">モゲチェック：累計100万件超の診断実績・提携金融機関50行以上</p>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />

@@ -425,7 +425,7 @@ export default function JutakuLoanHendoKoteiPage() {
           page="jutaku-loan-hendokinri-koteikinri"
           heading="変動か固定かを選ぶ前に、まず「最安金利はいくらか」"
           title="複数銀行の金利を無料で一括比較"
-          note="金利タイプだけでなく、銀行によって金利は大きく異なります。累計100万件超の診断実績・提携金融機関50行以上。"
+          note="金利タイプだけでなく、銀行によって金利は大きく異なります。モゲチェックは累計100万件超の診断実績・提携金融機関50行以上。"
           cta="複数銀行の金利を無料で比較する →"
         />
 

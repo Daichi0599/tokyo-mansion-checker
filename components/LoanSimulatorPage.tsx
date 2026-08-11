@@ -331,7 +331,7 @@ export default function LoanSimulatorPage() {
           >
             ✨ 無料でローン金利を一括比較する →
           </a>
-          <p className="text-xs text-amber-500/70 text-center mt-2">累計100万件超の診断実績 | 提携金融機関50行以上</p>
+          <p className="text-xs text-amber-500/70 text-center mt-2">モゲチェック：累計100万件超の診断実績・提携金融機関50行以上</p>
           <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "none" }} />
         </div>
 
