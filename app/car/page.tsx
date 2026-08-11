@@ -508,7 +508,7 @@ export default function CarPage() {
               </div>
               <a
                 href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM"
-                rel="nofollow noopener"
+                rel="sponsored nofollow noopener"
                 target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "おかねと暮らし相談", page: "car" })}
                 className="shrink-0 inline-block bg-teal-600 hover:bg-teal-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"

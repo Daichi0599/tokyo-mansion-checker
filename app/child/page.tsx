@@ -680,7 +680,7 @@ export default function ChildCostPage() {
                 </p>
                 <p className="text-xs text-slate-400">お金のプロが家計全体を診断。子育て費用・積立プランを個別にアドバイス。</p>
               </div>
-              <a href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM" rel="nofollow noopener" target="_blank"
+              <a href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM" rel="sponsored nofollow noopener" target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "おかねと暮らし相談", page: "child" })}
                 className="shrink-0 inline-block bg-teal-600 hover:bg-teal-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors">
                 FPに無料で相談する →
@@ -712,7 +712,7 @@ export default function ChildCostPage() {
                 <p className="text-sm font-bold text-white">子育て中ママのための保険、見直していますか？</p>
                 <p className="text-xs text-slate-400">妊娠・出産・子育て期に合わせた保険プランをFPが無料で診断。20社以上から最適な保険を提案。</p>
               </div>
-              <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+79YQYA+503M+60H7M" rel="nofollow noopener" target="_blank"
+              <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+79YQYA+503M+60H7M" rel="sponsored nofollow noopener" target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "ベビープラネット", page: "child" })}
                 className="shrink-0 inline-block bg-pink-500 hover:bg-pink-400 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors">
                 無料で保険を相談する →
@@ -727,11 +727,12 @@ export default function ChildCostPage() {
                 <p className="text-sm font-bold text-white">学資保険で教育費を確実に準備しませんか？</p>
                 <p className="text-xs text-slate-400">元本保証＋返戻率110〜120%の学資保険。子どもが生まれたら早めに始めるほど有利。</p>
               </div>
-              <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+7AK6K2+4GN2+5ZEMP" rel="nofollow noopener" target="_blank"
+              <a href="https://px.a8.net/svt/ejp?a8mat=4AZLSJ+7AK6K2+4GN2+5ZEMP" rel="sponsored nofollow noopener" target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "ガーデン学資保険", page: "child" })}
                 className="shrink-0 inline-block bg-amber-500 hover:bg-amber-400 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors">
                 学資保険を無料で相談する →
               </a>
+              <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZLSJ+7AK6K2+4GN2+5ZEMP" alt="" style={{ display: "block" }} />
             </div>
           </div>
         )}

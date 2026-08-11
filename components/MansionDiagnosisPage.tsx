@@ -347,7 +347,7 @@ export default function Home() {
                     {/* メインCTAボタン（全幅） */}
                     <a
                       href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-                      rel="nofollow noopener"
+                      rel="sponsored nofollow noopener"
                       target="_blank"
                       onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", level: result.level })}
                       className="flex items-center justify-center w-full text-white font-extrabold text-lg py-5 rounded-xl text-center transition-all hover:-translate-y-0.5"
@@ -384,7 +384,7 @@ export default function Home() {
               </div>
               <a
                 href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
-                rel="nofollow noopener"
+                rel="sponsored nofollow noopener"
                 target="_blank"
                 onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "火災保険一括見積もり" })}
                 className="flex items-center justify-center w-full text-white font-extrabold text-base py-4 rounded-xl text-center transition-all hover:-translate-y-0.5"

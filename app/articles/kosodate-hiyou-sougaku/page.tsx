@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "子育て費用は総額いくら？0歳〜大学卒業までの目安【公立vs私立の早見表】｜30Lab",
@@ -189,6 +190,11 @@ export default function KosodateHiyouSougakuPage() {
             ))}
           </div>
         </section>
+
+        <AffiliateCta
+          program="gakushi"
+          page="kosodate-hiyou-sougaku"
+        />
 
         {/* ━━ 住宅ローンとの両立 ━━ */}
         <section className="mb-10">

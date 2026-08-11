@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "共働き夫婦の住宅ローン｜世帯年収別の購入可能額と注意すべきリスク｜30Lab",
@@ -120,6 +121,14 @@ export default function TomobatarakiJutakuLoanPage() {
           </div>
           <p className="text-xs text-slate-500">※金利1%・35年返済・元利均等・頭金ゼロの試算。実際の審査・金利により異なります。</p>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="tomobataraki-jutaku-loan"
+          heading="ペアローンか収入合算か、条件は銀行で変わる"
+          title="夫婦の年収で借りられる額を無料診断"
+          note="収入合算の可否や連帯債務の扱いは金融機関ごとに違います。個別に問い合わせるより、まとめて比較するのが早道です。"
+        />
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">

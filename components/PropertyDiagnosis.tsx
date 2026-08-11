@@ -444,7 +444,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
             </div>
             <a
               href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-              rel="nofollow noopener"
+              rel="sponsored nofollow noopener"
               target="_blank"
               onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", page: "check" })}
               className="shrink-0 inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl text-center transition-colors"

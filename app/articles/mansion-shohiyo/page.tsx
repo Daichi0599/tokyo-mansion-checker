@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンションの諸費用・維持費の完全ガイド｜購入時＋購入後にかかるお金の全額【2026年】｜30Lab",
@@ -235,6 +236,14 @@ export default function MansionShohiyoPage() {
           </p>
         </section>
 
+        <AffiliateCta
+          program="kasaihoken"
+          page="mansion-shohiyo"
+          heading="諸費用のうち、火災保険料だけは自分で下げられる"
+          title="一括見積もりで年間数千円〜1万円の差が出る"
+          note="登記費用や仲介手数料は値切れませんが、火災保険は比較するだけで下がります。不動産会社に勧められたまま入ると割高になりがちです。"
+        />
+
         {/* ━━ セクション4 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
@@ -387,6 +396,14 @@ export default function MansionShohiyoPage() {
             </p>
           </div>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-shohiyo"
+          heading="維持費まで含めた「本当に払える額」で考える"
+          title="住宅ローンは借入先で総返済額が数百万円変わる"
+          note="管理費・修繕積立金・固定資産税を加えた住居費全体で見るなら、ローン金利は1円でも低いほうが効きます。"
+        />
 
         {/* ━━ 統合：生涯コスト試算 ━━ */}
         <section className="mb-10">

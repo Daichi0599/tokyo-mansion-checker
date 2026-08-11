@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンション火災保険の相場はいくら？【2026年】広さ・プラン別の早見表付き｜30Lab",
@@ -186,22 +187,13 @@ export default function MansionKasaiHokenPage() {
           </div>
         </section>
 
-        {/* ━━ アフィリエイト インライン CTA ━━ */}
-        <div className="bg-slate-900 border border-orange-500/30 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-orange-400 mb-1">🔥 相場がわかったら、次は実際の見積もり比較</p>
-          <p className="text-sm font-black text-white mb-2">複数社を無料で一括見積もりして最安値を確認</p>
-          <p className="text-xs text-slate-400 mb-3">同じ補償内容でも保険会社によって年間数千円〜1万円以上の差が出ます。回答者全員にセブンプレミアムカフェラテをプレゼント中。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-            className="inline-block bg-orange-500 text-white font-black text-sm px-5 py-3 rounded-xl hover:bg-orange-600 transition-colors"
-          >
-            無料で火災保険を一括見積もりする →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="kasaihoken"
+          page="mansion-kasai-hoken"
+          heading="相場がわかったら、次は実際の見積もり比較"
+          title="複数社を無料で一括見積もりして最安値を確認"
+          note="同じ補償内容でも保険会社によって年間数千円〜1万円以上の差が出ます。回答者全員にセブンプレミアムカフェラテをプレゼント中。"
+        />
 
         {/* ━━ セクション3：計算例 ━━ */}
         <section className="mb-10">
@@ -343,22 +335,13 @@ export default function MansionKasaiHokenPage() {
           実際の加入判断は、保険会社・代理店・FPなどの専門家にご相談ください。
         </p>
 
-        {/* ━━ 火災保険CTA ━━ */}
-        <div className="border-2 border-emerald-500/40 bg-emerald-500/10 rounded-2xl p-5 mb-6 mt-8">
-          <p className="text-sm font-black text-emerald-300 mb-1">🏡 マンションの火災保険、一括見積もりで年間数千円〜1万円安くなることも</p>
-          <p className="text-xs text-slate-300 mb-3">複数の保険会社に同時見積もりを依頼できるサービスが無料で使えます。不動産会社に勧められた保険に入る前に必ず比較を。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2"
-            target="_blank"
-            rel="nofollow noopener noreferrer sponsored"
-            className="block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm px-6 py-3 rounded-xl transition-colors"
-          >
-            🎁 無料で火災保険を一括見積もりする →
-          </a>
-          <p className="text-xs text-emerald-400 text-center mt-2">無料・匿名・しつこい営業電話なし</p>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "none" }} />
-        </div>
+        <AffiliateCta
+          program="kasaihoken"
+          page="mansion-kasai-hoken"
+          heading="不動産会社に勧められた保険に入る前に"
+          title="一括見積もりで年間数千円〜1万円安くなることも"
+          note="複数の保険会社に同時見積もりを依頼できるサービスが無料で使えます。無料・匿名・しつこい営業電話なし。"
+        />
 
         {/* ━━ ツールCTA ━━ */}
         <div className="bg-blue-600 rounded-2xl p-6 text-center text-white mb-8">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "資産価値が落ちにくいマンションの条件とは？立地・築年数で解説｜30Lab",
@@ -135,6 +136,14 @@ export default function MansionBaibaiShisanKachiPage() {
           </div>
           <p className="text-xs text-slate-500">※概算の傾向。2020〜2025年の価格上昇期は従来比より価格が維持されているケースが多い。エリア・物件により大きく異なります。</p>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-baibai-shisan-kachi"
+          heading="資産価値は「買い方」でも変わる"
+          title="金利差は35年で数百万円の差になる"
+          note="同じ物件でも借入先次第で総支払額は変わります。売却時の手残りを増やしたいなら、まず金利から。"
+        />
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">

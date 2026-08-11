@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "買ってはいけないマンションの特徴10選【立地・建物・管理で後悔しない】｜30Lab",
@@ -143,22 +144,13 @@ export default function MansionKattewaIkenaiPage() {
           </div>
         </section>
 
-        {/* ━━ アフィリエイト CTA ━━ */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 物件を決める前に、住宅ローンも比較を</p>
-          <p className="text-sm font-black text-white mb-2">「モゲチェック」で金利・審査通過率を無料確認</p>
-          <p className="text-xs text-slate-400 mb-3">良い物件を見つけたら、次は金利比較。銀行によって0.3〜0.5%違うことも。50行以上から最安を自動提案。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
-          >
-            モゲチェックで無料診断する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-kattewa-ikenai-joken"
+          heading="物件を決める前に、住宅ローンも比較を"
+          title="「モゲチェック」で金利・審査通過率を無料確認"
+          note="良い物件を見つけたら、次は金利比較。銀行によって0.3〜0.5%違うことも。50行以上から最安を自動提案。"
+        />
 
         {/* ━━ セクション3：管理・修繕 ━━ */}
         <section className="mb-10">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 import { TOKYO_AREAS, calcAreaPrice } from "@/lib/areaData";
 
 export const metadata: Metadata = {
@@ -174,6 +175,14 @@ export default function JonanMansionPage() {
             </div>
           </div>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="jonan-mansion-takakute-kaenai"
+          heading="「あと数百万」が届かないときにできること"
+          title="金利を下げれば、同じ返済額でも借入額は増える"
+          note="金利が0.3%下がると、月々の返済額が同じでも借入可能額は200万円前後増えます。城南を諦める前に借入条件の見直しを。"
+        />
 
         {/* ━━ 診断ツールCTA ━━ */}
         <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-2xl p-5 mb-10">

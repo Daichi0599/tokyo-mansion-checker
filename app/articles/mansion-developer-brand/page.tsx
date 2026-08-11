@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンションデベロッパー大手のブランド比較｜三井・野村・東急・モリモト【2026年】｜30Lab",
@@ -211,6 +212,14 @@ export default function MansionDeveloperBrandPage() {
             おすすめの使い方は、<strong className="text-white">立地・予算で候補を絞ったあと、同条件ならブランドで比較する</strong>順番。ブランドを起点に予算を歪めるのではなく、価値を見極める一つの軸として活用しましょう。
           </p>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-developer-brand"
+          heading="気になる物件が見つかったら、資金の目処を"
+          title="年収から無理なく買える額と最安金利を確認"
+          note="デベロッパーで絞り込んだら次は予算です。借入条件を先に把握しておくと、モデルルームでの判断が早くなります。"
+        />
 
         {/* ━━ 気になる物件メモ ━━ */}
         <section className="mb-10">

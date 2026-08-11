@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "住宅ローン金利の完全ガイド｜変動vs固定・金融機関比較・団信・繰上返済【2026年】｜30Lab",
@@ -186,22 +187,10 @@ export default function JutakuLoanHendoKoteiPage() {
           </p>
         </section>
 
-        {/* ━━ アフィリエイト インライン CTA ━━ */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 住宅ローン、どこが一番お得？</p>
-          <p className="text-sm font-black text-white mb-2">無料で複数行を一括比較できる「モゲチェック」</p>
-          <p className="text-xs text-slate-400 mb-3">年収・物件価格を入力するだけで最適なローンを提案。審査通過率も確認できます。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
-          >
-            モゲチェックで無料診断する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="jutaku-loan-hendokinri-koteikinri"
+        />
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
@@ -431,21 +420,14 @@ export default function JutakuLoanHendoKoteiPage() {
           具体的な購入判断は、銀行・FP・不動産会社などの専門家にご相談ください。
         </p>
 
-        {/* ━━ モゲチェックCTA ━━ */}
-        <div className="border-2 border-amber-400 bg-amber-50 rounded-2xl p-5 mb-6">
-          <p className="text-sm font-black text-amber-800 mb-1">💡 変動 or 固定を選ぶ前に、まず「最安金利はいくらか」を確認しましょう</p>
-          <p className="text-xs text-amber-700 mb-3">金利タイプだけでなく、銀行によって金利は大きく異なります。複数行を比較してから決めるのがベスト。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="block text-center bg-amber-500 hover:bg-amber-600 text-white font-black text-sm px-6 py-3 rounded-xl transition-colors"
-          >
-            ✨ 複数銀行の金利を無料で一括比較する →
-          </a>
-          <p className="text-xs text-amber-600 text-center mt-2">累計100万件超の診断実績 | 提携金融機関50行以上</p>
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "none" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="jutaku-loan-hendokinri-koteikinri"
+          heading="変動か固定かを選ぶ前に、まず「最安金利はいくらか」"
+          title="複数銀行の金利を無料で一括比較"
+          note="金利タイプだけでなく、銀行によって金利は大きく異なります。累計100万件超の診断実績・提携金融機関50行以上。"
+          cta="複数銀行の金利を無料で比較する →"
+        />
 
         {/* ━━ CTA ━━ */}
         <div className="bg-blue-600 rounded-2xl p-6 text-center text-white mb-8">

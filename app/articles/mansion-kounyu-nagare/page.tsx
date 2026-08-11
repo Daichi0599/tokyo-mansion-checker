@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンション購入の流れと手順【2026年版・初めてでも迷わない完全ガイド】｜30Lab",
@@ -257,22 +258,13 @@ export default function MansionKounyuNagarePage() {
           </div>
         </section>
 
-        {/* ━━ アフィリエイト CTA ━━ */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 STEP04の住宅ローン比較はここから</p>
-          <p className="text-sm font-black text-white mb-2">「モゲチェック」で金利・審査通過率を無料確認</p>
-          <p className="text-xs text-slate-400 mb-3">50行以上を一括比較。年収・物件価格を入力するだけで最安金利候補と審査通過率が確認できます。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
-          >
-            モゲチェックで無料診断する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-kounyu-nagare"
+          heading="STEP04の住宅ローン比較はここから"
+          title="「モゲチェック」で金利・審査通過率を無料確認"
+          note="50行以上を一括比較。年収・物件価格を入力するだけで最安金利候補と審査通過率が確認できます。"
+        />
 
         {/* 著者情報 */}
         <div className="mt-12 border-t border-slate-700 pt-8">

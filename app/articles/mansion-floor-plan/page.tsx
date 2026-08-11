@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンションの間取り選び方｜1LDK・2LDK・3LDKの違いと資産価値を解説｜30Lab",
@@ -114,22 +115,13 @@ export default function MansionFloorPlanPage() {
           <p className="text-xs text-slate-500">※2025年時点の東京23区の参考相場。エリア・グレード・築年数により大きく異なります。</p>
         </section>
 
-        {/* ━━ モゲチェックCTA ━━ */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 希望の間取りに必要な資金計画を確認</p>
-          <p className="text-sm font-black text-white mb-2">「モゲチェック」で最適なローンを無料診断</p>
-          <p className="text-xs text-slate-400 mb-3">年収・希望借入額を入力するだけで、月々の返済負担が安全な範囲に収まるローンプランを提案。複数行の金利を一括比較できます。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
-          >
-            モゲチェックで無料診断する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-floor-plan"
+          heading="希望の間取りに必要な資金計画を確認"
+          title="「モゲチェック」で最適なローンを無料診断"
+          note="年収・希望借入額を入力するだけで、月々の返済負担が安全な範囲に収まるローンプランを提案。複数行の金利を一括比較できます。"
+        />
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">

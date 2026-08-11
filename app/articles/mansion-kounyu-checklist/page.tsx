@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンション購入チェックリスト｜契約前に必ず確認すべき15項目【保存版】｜30Lab",
@@ -286,24 +287,11 @@ export default function MansionChecklistPage() {
           </div>
         </section>
 
-        {/* モゲチェック アフィリエイト */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 住宅ローン、どこが一番お得？</p>
-          <p className="text-sm font-black text-white mb-2">無料で複数行を一括比較できる「モゲチェック」</p>
-          <p className="text-xs text-slate-400 mb-3">
-            チェックNo.13「複数行での事前審査」を最短3分で完了。銀行に個別に連絡する手間なし。
-          </p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors"
-          >
-            モゲチェックで無料診断する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-kounyu-checklist"
+          note="チェックNo.13「複数行での事前審査」を最短3分で完了。銀行に個別に連絡する手間はありません。"
+        />
 
         {/* 著者情報 */}
         <div className="mt-12 border-t border-slate-700 pt-8">

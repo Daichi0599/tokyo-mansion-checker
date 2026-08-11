@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "住宅ローン審査の完全ガイド｜年収基準・落ちる原因・収入合算・保証料【2026年】｜30Lab",
@@ -192,22 +193,14 @@ export default function JutakuLoanShinsaOchitaPage() {
           </div>
         </section>
 
-        {/* ━━ アフィリエイト CTA ━━ */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 審査通過率も確認できる「モゲチェック」</p>
-          <p className="text-sm font-black text-white mb-2">50行以上の銀行から、審査が通りやすいローンを提案</p>
-          <p className="text-xs text-slate-400 mb-3">他行で落ちても通過できる銀行がある場合も。年収・勤続年数・物件条件を入力するだけで最適な銀行候補を提案してくれます。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors shadow-sm"
-          >
-            モゲチェックで審査通過率を確認する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="jutaku-loan-shinsa-ochita"
+          heading="審査通過率も確認できる「モゲチェック」"
+          title="50行以上の銀行から、審査が通りやすいローンを提案"
+          note="他行で落ちても通過できる銀行がある場合も。年収・勤続年数・物件条件を入力するだけで最適な銀行候補を提案してくれます。"
+          cta="モゲチェックで審査通過率を確認する →"
+        />
 
         {/* ━━ セクション3：年収・返済比率 ━━ */}
         <section className="mb-10">

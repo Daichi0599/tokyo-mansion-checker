@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説｜30Lab",
@@ -159,6 +160,14 @@ export default function MansionKaidoki2025Page() {
             ))}
           </div>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="mansion-kaidoki-2025"
+          heading="金利上昇局面こそ、比較の価値が大きい"
+          title="今の最安金利を無料で確認する"
+          note="変動金利は上昇トレンドです。今の水準で各行がいくら提示するかを掴んでおくと、買い時の判断がぶれません。"
+        />
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">

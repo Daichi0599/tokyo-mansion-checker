@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 import { TOKYO_AREAS } from "@/lib/areaData";
 
 export const metadata: Metadata = {
@@ -188,6 +189,14 @@ export default function Tokyo23kuShisanKachiRankingPage() {
             ))}
           </div>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="tokyo-23ku-shisan-kachi-ranking"
+          heading="狙う区が決まったら、次は予算の詰め方"
+          title="借入可能額と最安金利を無料で確認する"
+          note="同じ年収でも銀行によって借りられる額と金利は変わります。エリアの相場と突き合わせて確認しておくと動きやすくなります。"
+        />
 
         {/* ━━ 診断ツールCTA（本体導線） ━━ */}
         <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-2xl p-5 mb-10">

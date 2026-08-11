@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "都内マンション、中古と新築どっちがいい？価格差・メリット・選び方を解説｜30Lab",
@@ -148,6 +149,14 @@ export default function TokyoMansionChukoVsShintikuPage() {
             ))}
           </div>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="tokyo-mansion-chuko-vs-shintiku"
+          heading="中古は金利・諸費用の条件が新築と違う"
+          title="物件タイプに合わせて最適なローンを無料診断"
+          note="中古は借入期間や事務手数料の条件で銀行差が出やすい領域です。物件を決める前に比較しておくと安心です。"
+        />
 
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">

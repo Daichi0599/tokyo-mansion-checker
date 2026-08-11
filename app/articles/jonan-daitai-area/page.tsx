@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 import { TOKYO_AREAS } from "@/lib/areaData";
 
 export const metadata: Metadata = {
@@ -226,6 +227,14 @@ export default function JonanDaitaiAreaPage() {
             ))}
           </div>
         </section>
+
+        <AffiliateCta
+          program="mogecheck"
+          page="jonan-daitai-area"
+          heading="エリアを決めたら、借入条件も比較を"
+          title="50行以上から最安金利を無料で診断"
+          note="エリアを妥協して抑えた予算も、金利が高ければ帳消しになります。物件探しと並行して比較しておくと安心です。"
+        />
 
         {/* ━━ 診断ツールCTA ━━ */}
         <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/30 rounded-2xl p-5 mb-10">

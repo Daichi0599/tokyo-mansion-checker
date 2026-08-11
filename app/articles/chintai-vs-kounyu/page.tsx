@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
   title: "賃貸 vs 購入、結局どっちが得？30代向けに費用・自由度・資産性を徹底比較｜30Lab",
@@ -291,22 +292,13 @@ export default function ChintaiVsKounyuPage() {
           </div>
         </section>
 
-        {/* モゲチェック アフィリエイト */}
-        <div className="bg-slate-900 border border-blue-500/25 rounded-2xl p-5 mb-10">
-          <p className="text-xs font-bold text-blue-400 mb-1">💡 購入するなら、金利比較で数百万円変わる</p>
-          <p className="text-sm font-black text-white mb-2">住宅ローンは「モゲチェック」で一括比較</p>
-          <p className="text-xs text-slate-400 mb-3">同じ借入額・返済年数でも、金利が0.3%違うだけで総返済額が数百万円変わります。複数行を無料で一括比較できます。</p>
-          <a
-            href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
-            target="_blank"
-            rel="nofollow noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-colors"
-          >
-            モゲチェックで無料診断する →
-          </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img width={1} height={1} src="https://www12.a8.net/0.gif?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE" alt="" style={{ display: "block" }} />
-        </div>
+        <AffiliateCta
+          program="mogecheck"
+          page="chintai-vs-kounyu"
+          heading="購入するなら、金利比較で数百万円変わる"
+          title="住宅ローンは「モゲチェック」で一括比較"
+          note="同じ借入額・返済年数でも、金利が0.3%違うだけで総返済額が数百万円変わります。複数行を無料で一括比較できます。"
+        />
 
         {/* 著者情報 */}
         <div className="mt-12 border-t border-slate-700 pt-8">
