@@ -98,7 +98,7 @@ export default function RootLayout({
               <a href="/car" aria-label="車コスト診断" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🚗 <span className="hidden sm:inline">車</span></a>
               <a href="/birth" aria-label="出産費用シミュレーター" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">🤰 <span className="hidden sm:inline">出産</span></a>
               <a href="/child" aria-label="子育て費用シミュレーター" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">👶 <span className="hidden sm:inline">子育て</span></a>
-              <a href="/articles" aria-label="コラム" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">📝 <span className="hidden sm:inline">コラム</span></a>
+              <a href="/articles" aria-label="30代の決断ノート" className="flex items-center gap-1 px-2 sm:px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">📝 <span className="hidden sm:inline">ノート</span></a>
             </div>
           </div>
         </nav>

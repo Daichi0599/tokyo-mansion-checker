@@ -22,74 +22,100 @@ export const metadata: Metadata = {
   },
 };
 
-const SUB_TOOLS = [
+/**
+ * 30代がぶつかる決断を、直面する順に並べる。
+ * 以前はマンション診断だけを Main Tool として大きく出し、残りを Other Tools と
+ * していたため、マンション×住宅ローンの専門サイトに見えていた。
+ * どれも同じ大きさの決断なので、並列に扱う。
+ */
+const TOOLS = [
   {
-    icon: "🏦",
-    title: "ローン返済計算",
-    desc: "借入額・金利・返済期間から月返済額を即計算",
-    href: "/loan",
-    color: "text-blue-400",
+    icon: "🏠",
+    question: "家、いくらまでなら買っていい？",
+    title: "マンション購入診断",
+    desc: "銀行の「借りられる額」ではなく、家計を崩さない価格を出します。金利上昇シミュレーションつき。",
+    href: "/mansion",
+    color: "text-blue-300",
     border: "hover:border-blue-500/60",
     glow: "bg-blue-500/10",
   },
   {
     icon: "🔍",
+    question: "この物件、高い？安い？",
     title: "物件診断",
-    desc: "坪単価・管理費・10年後売却価格を即チェック",
+    desc: "坪単価をエリア相場と比較し、管理費や10年後の売却価格まで即チェック。",
     href: "/check",
-    color: "text-indigo-400",
+    color: "text-indigo-300",
     border: "hover:border-indigo-500/60",
     glow: "bg-indigo-500/10",
   },
   {
-    icon: "🚗",
-    title: "車コスト診断",
-    desc: "購入・カーシェア・リースを10年総額で比較",
-    href: "/car",
-    color: "text-emerald-400",
-    border: "hover:border-emerald-500/60",
-    glow: "bg-emerald-500/10",
-  },
-  {
     icon: "🤰",
-    title: "出産費用試算",
-    desc: "無痛分娩も対応。もらえる給付金まで差引",
+    question: "出産って結局いくらかかる？",
+    title: "出産費用シミュレーター",
+    desc: "無痛分娩・帝王切開に対応。一時金や育休給付まで差し引いた実際の収支が出ます。",
     href: "/birth",
-    color: "text-pink-400",
+    color: "text-pink-300",
     border: "hover:border-pink-500/60",
     glow: "bg-pink-500/10",
   },
   {
     icon: "👶",
+    question: "子ども1人、育てるのにいくら？",
     title: "子育て費用試算",
-    desc: "0歳〜大学まで進路別にシミュレーション",
+    desc: "中学受験や進路別に0歳〜大学まで試算。児童手当・018サポートを引いた実質負担も。",
     href: "/child",
-    color: "text-amber-400",
+    color: "text-amber-300",
     border: "hover:border-amber-500/60",
     glow: "bg-amber-500/10",
   },
+  {
+    icon: "🚗",
+    question: "都内で車、持つべき？",
+    title: "車コスト診断",
+    desc: "カーシェア・中古車・新車を10年の総額で比較。駐車場代込みで判定します。",
+    href: "/car",
+    color: "text-emerald-300",
+    border: "hover:border-emerald-500/60",
+    glow: "bg-emerald-500/10",
+  },
+  {
+    icon: "🏦",
+    question: "毎月いくら返す？",
+    title: "ローン返済計算",
+    desc: "借入額・金利・返済期間から月返済額を即計算。",
+    href: "/loan",
+    color: "text-slate-300",
+    border: "hover:border-slate-500",
+    glow: "bg-slate-700",
+  },
 ];
 
+/**
+ * ピックアップはサイトの軸（エリア・資産価値／子育て／物件そのもの）から選ぶ。
+ * 以前は年収・金利・返済比率と金融一般論が3枠を占めていて、
+ * 住宅ローン解説サイトのように見えていた。
+ */
 const ARTICLES = [
   {
-    tag: "年収・購入可能額",
-    title: "年収別マンション購入可能額の目安【早見表付き】",
-    href: "/articles/nenshu-mansion-price",
+    tag: "エリア",
+    title: "城南エリアのマンションが高くて買えない人へ",
+    href: "/articles/jonan-mansion-takakute-kaenai",
   },
   {
-    tag: "金利",
-    title: "変動金利 vs 固定金利、どちらが得か？2026年版",
-    href: "/articles/jutaku-loan-hendokinri-koteikinri",
+    tag: "エリア",
+    title: "城南の代わりになる街は？代替候補5エリアを比較",
+    href: "/articles/jonan-daitai-area",
   },
   {
-    tag: "返済比率",
-    title: "住宅ローンの返済比率は何%が安全？年収別の目安を解説",
-    href: "/articles/nenshu-mansion-price",
+    tag: "子育て",
+    title: "子育て費用は総額いくら？0歳〜大学卒業までの目安",
+    href: "/articles/kosodate-hiyou-sougaku",
   },
   {
-    tag: "買い時",
-    title: "都内マンション、2025〜2026年は買い時か？",
-    href: "/articles/mansion-kaidoki-2025",
+    tag: "物件メモ",
+    title: "デベロッパー比較｜三井・野村・東急・モリモト",
+    href: "/articles/mansion-developer-brand",
   },
 ];
 
@@ -237,86 +263,46 @@ export default function HomePage() {
       <div className="max-w-5xl mx-auto px-4 pb-14 space-y-10">
 
         {/* ── メインツール ＋ サブツール（PC: 横並び） ── */}
-        <section className="space-y-3 lg:space-y-0 lg:grid lg:grid-cols-[3fr_2fr] lg:gap-6">
-
-          {/* メインツール */}
-          <AnimateIn className="flex flex-col">
-            <div className="flex flex-col flex-1 space-y-3">
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center lg:text-left">
-                Main Tool
+        <section className="space-y-3">
+          <AnimateIn>
+            <div>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Tools</p>
+              <h2 className="text-lg font-black text-white mt-1">30代がぶつかる決断</h2>
+              <p className="text-sm text-slate-300 leading-relaxed mt-1">
+                どれも数百万〜数千万円が動く話なのに、なんとなくで決めてしまいがちなものばかり。まず数字にしてみるところから。
               </p>
-              <Link
-                href="/mansion"
-                className="flex flex-col flex-1 rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500/70 hover:-translate-y-1 transition-all duration-200"
-                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}
-              >
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <span className="text-4xl">🏠</span>
-                    <div>
-                      <p className="text-white font-extrabold text-lg leading-tight">
-                        マンション購入診断
-                      </p>
-                      <p className="text-blue-200 text-sm mt-0.5">
-                        「無理なく買える価格」を3分で算出
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-white font-bold text-2xl shrink-0">→</span>
-                </div>
-                <div className="bg-slate-800 px-6 py-5 flex-1">
-                  <p className="text-sm text-slate-300 leading-relaxed mb-4">
-                    年収・生活費・管理費を入力するだけ。銀行の「借りられる額」ではなく、家計を崩さない安全な購入価格がわかります。
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["約3分で完了", "世帯年収対応", "負担率チェック", "金利シミュレーション"].map((b) => (
-                      <span
-                        key={b}
-                        className="text-xs font-semibold bg-blue-500/10 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20"
-                      >
-                        {b}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-slate-800/60 border-t border-slate-700 px-6 py-3">
-                  <p className="text-sm font-extrabold text-blue-400">今すぐ診断を始める →</p>
-                </div>
-              </Link>
             </div>
           </AnimateIn>
 
-          {/* サブツール（2×2グリッド） */}
-          <AnimateIn delay={100}>
-            <div className="space-y-3">
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center lg:text-left">
-                Other Tools
-              </p>
-              <div className="grid grid-cols-2 gap-3">
-                {SUB_TOOLS.map((tool, i) => (
-                  <Link
-                    key={tool.href}
-                    href={tool.href}
-                    className={`flex flex-col items-center text-center gap-2.5 rounded-xl border border-slate-700 bg-slate-800 px-3 py-5 transition-all duration-200 hover:-translate-y-1 ${tool.border}`}
-                  >
-                    <span className={`text-3xl p-2.5 rounded-xl ${tool.glow}`}>
-                      {tool.icon}
-                    </span>
-                    <p className={`text-sm font-extrabold leading-tight ${tool.color}`}>{tool.title}</p>
-                    <p className="text-xs text-slate-400 leading-relaxed">{tool.desc}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </AnimateIn>
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {TOOLS.map((tool, i) => (
+              <AnimateIn key={tool.href} delay={i * 60}>
+                <Link
+                  href={tool.href}
+                  className={`flex flex-col gap-2 h-full rounded-2xl border border-slate-700 bg-slate-800 px-5 py-4 transition-all duration-200 hover:-translate-y-1 ${tool.border}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={`text-2xl p-2 rounded-xl shrink-0 ${tool.glow}`}>{tool.icon}</span>
+                    <p className={`text-base font-black leading-snug ${tool.color}`}>
+                      {tool.question}
+                    </p>
+                  </div>
+                  <p className="text-sm text-slate-300 leading-relaxed flex-1">{tool.desc}</p>
+                  <p className="text-sm font-bold text-slate-200">{tool.title} →</p>
+                </Link>
+              </AnimateIn>
+            ))}
+          </div>
         </section>
 
-        {/* ── コラム記事ピックアップ ── */}
+        {/* ── 決断ノートのピックアップ ── */}
         <section className="space-y-3">
           <AnimateIn>
             <div className="flex items-center justify-between">
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Column</p>
+              <div>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Notes</p>
+                <p className="text-base font-black text-white mt-0.5">30代の決断ノート</p>
+              </div>
               <Link href="/articles" className="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors">
                 すべて見る →
               </Link>
