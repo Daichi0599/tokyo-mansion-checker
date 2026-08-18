@@ -5,7 +5,7 @@ import AffiliateCta from "@/components/AffiliateCta";
 export const metadata: Metadata = {
   title: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説｜30Lab",
   description:
-    "2026年のマンション購入タイミングを解説。価格は高止まりか下落か、金利上昇の影響、「今買うべき人・待つべき人」の判断基準と、無料診断ツールで自分の予算も確認できます。",
+    "2026年8月時点の金利（政策金利1.0%・変動1.08%・フラット35は3.29%）をもとに、マンションの買い時を整理。変動と固定で買える価格が1,300万円変わる現状と、「今買うべき人・待つべき人」の判断基準を解説します。",
   keywords: [
     "マンション 買い時 2026",
     "マンション 購入 タイミング",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 const FAQ_ITEMS = [
   {
     q: "2026年はマンションの買い時ですか？",
-    a: "市況だけで言えば「価格は高止まり・金利は上昇傾向」で、待てば安くなる保証はありません。買い時は市況ではなく個人の条件で決まります。返済比率が25%以内に収まり、10年以上住む予定があり、ライフイベントで住まいが必要なら、2026年でも買い時と言えます。",
+    a: "価格は高止まり、金利はすでに上がりました（2026年6月に政策金利1.0%、変動1.08%前後、フラット35は3.29%）。待てば金利が下がるという前提は、現時点では成り立っていません。買い時は市況ではなく個人の条件で決まります。返済比率が25%以内に収まり、10年以上住む予定があり、ライフイベントで住まいが必要なら、いま動く条件は揃っています。",
   },
   {
     q: "マンション価格は今後下がりますか？",
@@ -37,7 +37,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "金利が上がりそうなので急いで買うべきですか？",
-    a: "金利だけを理由に焦って買うのは危険です。ただし金利上昇は購入可能額を実質的に圧縮するため、「買うと決めている人」にとっては早い方が条件は有利になりやすいのは事実。まず返済比率25%以内で買える価格帯を確認し、その範囲で物件が見つかるなら動く、が正解です。",
+    a: "金利だけを理由に焦るのは危険ですが、「上がりそう」ではなく「すでに上がった」段階にある点は押さえておく必要があります。政策金利は1.0%で、日銀は引き上げ方針を維持しています。変動を選ぶなら、いまの返済額ではなく「金利が1%上がったときの返済額」で耐えられるかを先に確認してください。5年ルール・125%ルールは負担を先送りする仕組みで、免除されるわけではありません。",
   },
   {
     q: "買い時を判断する一番のポイントは何ですか？",
@@ -93,7 +93,7 @@ export default function MansionKaidoki2025Page() {
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
-          「今は高すぎる」「もっと下がるのを待つべき」——マンション購入を検討していると、必ずタイミングの話になります。しかし「完璧な買い時」は誰にもわかりません。この記事では2026年の市況を整理した上で、個人の状況に応じた判断基準を解説します。
+          「今は高すぎる」「もっと下がるのを待つべき」——マンション購入を検討していると、必ずタイミングの話になります。ただ2026年に入って状況が変わりました。<strong className="text-white">金利が「上がるかも」ではなく「すでに上がった」段階</strong>に移っています。この記事では2026年8月時点の実際の金利を並べたうえで、個人の状況に応じた判断基準を整理します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
@@ -111,8 +111,8 @@ export default function MansionKaidoki2025Page() {
               },
               {
                 icon: "📊",
-                title: "金利は上昇トレンドに転換",
-                body: "2024年の日銀利上げ以降、変動金利の基準となる短期金利は上昇傾向。今後2〜3年で0.5〜1%程度の追加上昇シナリオも想定される。金利上昇は購入可能額を実質的に圧縮する。",
+                title: "金利は「上がるかも」ではなく、すでに上がった",
+                body: "2026年6月に日銀が政策金利を1.0%へ引き上げ。31年ぶりの水準で、7月末の会合では据え置いたものの引き上げ方針は維持されている。変動金利は1.08%前後、フラット35は3.29%（2026年8月）。長期金利は1年で1.24ポイント上昇した。",
                 bg: "bg-orange-500/10 border-orange-500/30",
               },
               {
@@ -128,6 +128,82 @@ export default function MansionKaidoki2025Page() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* ━━ 金利の現在地 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            💹 金利はいまどこにいるか（2026年8月）
+          </h2>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">指標</th>
+                  <th className="text-right px-3 py-3 font-bold text-slate-200 border-b border-slate-700">現在</th>
+                  <th className="text-right px-3 py-3 font-bold text-slate-200 border-b border-slate-700">動き</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { k: "政策金利", v: "1.0%", d: "2026年6月に利上げ・31年ぶり水準" },
+                  { k: "変動金利", v: "1.08%前後", d: "9月に基準金利の見直しを控える銀行も" },
+                  { k: "長期金利（10年国債）", v: "2.80%", d: "1年で +1.24ポイント" },
+                  { k: "フラット35", v: "3.29%", d: "前月比 +0.15%" },
+                ].map((r, i) => (
+                  <tr key={r.k} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-bold text-white text-xs">{r.k}</td>
+                    <td className="px-3 py-3 text-right text-blue-400 font-bold text-xs">{r.v}</td>
+                    <td className="px-3 py-3 text-right text-slate-300 text-xs">{r.d}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 mb-4">
+            <p className="text-sm font-bold text-orange-300 mb-1">⚠️ 変動と固定の差が2.2ポイントまで開いている</p>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              変動1.08%に対して固定3.29%。この差は「市場がこれからの利上げを織り込んでいる」ということです。
+              変動が安く見えるのは、その分のリスクを自分で引き受けているからだと考えたほうが実態に近くなります。
+            </p>
+          </div>
+
+          <p className="text-sm text-slate-300 leading-relaxed mb-3">
+            金利タイプの選択だけで、買える価格はここまで変わります（年収800万円・頭金1,000万円・管理費3万円・35年・返済比率25%以内）。
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-700 mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-800">
+                  <th className="text-left px-3 py-3 font-bold text-slate-200 border-b border-slate-700">金利</th>
+                  <th className="text-right px-3 py-3 font-bold text-slate-200 border-b border-slate-700">買える価格</th>
+                  <th className="text-right px-3 py-3 font-bold text-slate-200 border-b border-slate-700">5,000万借りた場合の月返済</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { k: "0.7%（1年前の感覚）", v: "6,090万円", m: "13.4万円" },
+                  { k: "1.08%（いまの変動）", v: "5,776万円", m: "14.3万円" },
+                  { k: "2.0%（変動が上がった場合）", v: "5,126万円", m: "16.6万円" },
+                  { k: "3.29%（いまの固定）", v: "4,406万円", m: "20.1万円" },
+                ].map((r, i) => (
+                  <tr key={r.k} className={i % 2 === 0 ? "bg-slate-800" : "bg-slate-700/30"}>
+                    <td className="px-3 py-3 font-bold text-white text-xs">{r.k}</td>
+                    <td className="px-3 py-3 text-right text-blue-400 font-bold text-xs">{r.v}</td>
+                    <td className="px-3 py-3 text-right text-slate-300 text-xs">{r.m}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-xs text-slate-400 leading-relaxed">
+            同じ5,000万円でも、0.7%と3.29%では35年の総返済が約2,800万円変わります。
+            「いくらの物件を買うか」より先に「どの金利で借りるか」が効いてくる局面です。
+          </p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
@@ -146,7 +222,7 @@ export default function MansionKaidoki2025Page() {
               },
               {
                 title: "金利が上昇すると購入可能額が下がる",
-                body: "価格が5%下がっても、金利が0.5%上がれば月返済額はほぼ変わらない。「価格と金利のトータル」で判断する必要がある。",
+                body: "価格が5%下がっても、金利が0.5%上がれば月返済額はほぼ変わらない。政策金利は1.0%からさらに引き上げる方針が維持されているため、待っている間に金利側が動く可能性は小さくない。",
               },
               {
                 title: "下落タイミングは誰にもわからない",
