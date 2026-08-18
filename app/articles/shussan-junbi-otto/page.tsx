@@ -284,12 +284,20 @@ export default function ShussanJunbiOttoPage() {
           <p className="text-xs text-slate-300 leading-relaxed mb-3">
             分娩方法と育休の長さを入れると、出産期にいくら出ていき、給付でいくら戻るかが出ます。予算の当たりをつけてから動くと、産院選びの判断が早くなります。
           </p>
-          <Link
-            href="/birth"
-            className="inline-block bg-pink-600 hover:bg-pink-500 text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors"
-          >
-            🤰 出産費用シミュレーターを使う →
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/birth/checklist"
+              className="inline-block bg-pink-600 hover:bg-pink-500 text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors"
+            >
+              ✅ チェックリストで今週の分だけ見る →
+            </Link>
+            <Link
+              href="/birth"
+              className="inline-block bg-slate-700 hover:bg-slate-600 text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors"
+            >
+              🤰 費用を試算する
+            </Link>
+          </div>
         </div>
 
         {/* ━━ フェーズ別 ━━ */}
@@ -365,6 +373,7 @@ export default function ShussanJunbiOttoPage() {
           <h2 className="text-sm font-bold text-slate-200 mb-3">関連</h2>
           <div className="space-y-2">
             {[
+              { href: "/birth/checklist", label: "✅ 出産準備チェックリスト", desc: "予定日を入れると今週の分だけ出る" },
               { href: "/birth", label: "🤰 出産費用シミュレーター", desc: "給付まで差し引いた収支を試算" },
               { href: "/child", label: "👶 子育て費用シミュレーター", desc: "0歳〜大学卒業までの総額と実質負担" },
               { href: "/articles/kosodate-hiyou-sougaku", label: "📝 子育て費用は総額いくら？", desc: "公立vs私立の早見表と負担の山" },

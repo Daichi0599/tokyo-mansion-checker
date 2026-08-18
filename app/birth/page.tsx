@@ -346,12 +346,20 @@ export default function BirthCostPage() {
             とくに<strong className="text-white">夫が育休を取るかどうか</strong>で、給付は数十万円変わります。
             妊娠判明から1歳までにやることを、時系列で整理しました。
           </p>
-          <Link
-            href="/articles/shussan-junbi-otto"
-            className="inline-block bg-slate-700 hover:bg-slate-600 text-white font-bold text-base px-5 py-3 rounded-xl transition-colors"
-          >
-            📝 夫がやる出産準備ジャーニーを読む →
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/birth/checklist"
+              className="inline-block bg-pink-600 hover:bg-pink-500 text-white font-bold text-base px-5 py-3 rounded-xl transition-colors"
+            >
+              ✅ 出産準備チェックリストを開く →
+            </Link>
+            <Link
+              href="/articles/shussan-junbi-otto"
+              className="inline-block bg-slate-700 hover:bg-slate-600 text-white font-bold text-base px-5 py-3 rounded-xl transition-colors"
+            >
+              📝 背景を読む
+            </Link>
+          </div>
         </section>
 
         {/* FAQ */}
