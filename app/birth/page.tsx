@@ -337,6 +337,23 @@ export default function BirthCostPage() {
           </p>
         </section>
 
+        {/* 夫向けの導線。ツールは費用の話で完結するが、実際には
+            「いつ何を決めるか」のほうが金額を左右する */}
+        <section className="bg-slate-800 rounded-2xl border border-slate-700 p-5 space-y-3">
+          <p className="text-base font-bold text-white">お金は「いつ動くか」で変わります</p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            医療保険の加入、夫の育休、児童手当の申請期限——出産まわりには、あとから気づいても遡れないものがあります。
+            とくに<strong className="text-white">夫が育休を取るかどうか</strong>で、給付は数十万円変わります。
+            妊娠判明から1歳までにやることを、時系列で整理しました。
+          </p>
+          <Link
+            href="/articles/shussan-junbi-otto"
+            className="inline-block bg-slate-700 hover:bg-slate-600 text-white font-bold text-base px-5 py-3 rounded-xl transition-colors"
+          >
+            📝 夫がやる出産準備ジャーニーを読む →
+          </Link>
+        </section>
+
         {/* FAQ */}
         <section className="space-y-3">
           <h2 className="text-xl font-black text-white">よくある質問</h2>

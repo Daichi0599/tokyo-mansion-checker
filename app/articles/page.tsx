@@ -84,6 +84,14 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
     lead: "出産でいくら出ていき、いくら戻るのか。育てるのに何がかかるのか。住居費と並行して考える必要があるもの。",
     articles: [
       {
+        href: "/articles/shussan-junbi-otto",
+        emoji: "🤰",
+        title: "夫がやる出産準備ジャーニー｜妊娠判明から1歳まで、お金で先回りすること",
+        description:
+          "出産の情報はほぼ妊娠している側に向けて書かれている。体調に左右されない夫が引き取れる、お金と手続きの準備を時系列で整理しました。",
+        tag: "出産・準備",
+      },
+      {
         href: "/articles/kosodate-hiyou-sougaku",
         emoji: "👶",
         title: "子育て費用は総額いくら？0歳〜大学卒業までの目安【公立vs私立の早見表】",
