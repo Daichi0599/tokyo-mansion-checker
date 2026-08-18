@@ -13,10 +13,12 @@ const defaultValues: DiagnosisInput = {
   annualIncome:   800,
   age:            30,
   downPayment:    1000,
-  interestRate:   0.7,
+  interestRate:   1.1,
   repaymentYears: 35,
   monthlyLiving:  25,
   managementFee:  3,
+  currentRent:    0,
+  deductionLimit: 0,
 };
 
 const range = (start: number, end: number, step = 1): number[] => {
@@ -60,8 +62,8 @@ const fields: FieldConfig[] = [
     key:     "interestRate",
     label:   "金利（年率）",
     unit:    "%",
-    desc:    "変動金利は2025年現在0.3〜0.7%台が目安。将来の上昇も考慮を",
-    options: [0.1,0.3,0.5,0.7,1.0,1.2,1.5,2.0,2.5,3.0,3.5],
+    desc:    "2026年8月時点の目安は変動1.0〜1.1%台、フラット35で3.2〜3.3%台。政策金利は1.0%で上昇方向のため、変動なら余裕を見て",
+    options: [0.5,0.7,0.9,1.1,1.3,1.5,1.8,2.0,2.5,3.0,3.3,3.5],
   },
   {
     key:     "repaymentYears",
@@ -84,7 +86,32 @@ const fields: FieldConfig[] = [
     desc:    "ローン以外の毎月固定費。都内マンションは月2〜5万円が目安",
     options: [0,1,2,3,4,5,6,8,10],
   },
+  {
+    key:     "currentRent",
+    label:   "いまの家賃",
+    unit:    "万円/月",
+    desc:    "入れると「今の家賃と比べて実際いくら増えるか」を出します。管理費・固定資産税まで含めた比較です",
+    options: [0,8,10,12,14,16,18,20,22,25,30],
+  },
+  {
+    key:     "deductionLimit",
+    label:   "住宅ローン控除の対象枠",
+    unit:    "万円",
+    desc:    "物件の省エネ性能で上限が変わります。2026年からは基準を満たさない中古は対象外になる場合があります",
+    options: [0,2000,3000,4500],
+  },
 ];
+
+/** 選択肢の数値そのままだと意味が伝わらない項目のラベル */
+const OPTION_LABELS: Partial<Record<keyof DiagnosisInput, Record<number, string>>> = {
+  currentRent: { 0: "比較しない" },
+  deductionLimit: {
+    0: "見込まない",
+    2000: "2,000万（省エネ基準を満たさない中古）",
+    3000: "3,000万（一般的な省エネ適合）",
+    4500: "4,500万（ZEH水準・長期優良など）",
+  },
+};
 
 const selectCls = "w-full rounded-xl border border-slate-600 bg-slate-700 px-3 py-2.5 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer";
 
@@ -135,7 +162,7 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
               >
                 {options.map((opt) => (
                   <option key={opt} value={opt}>
-                    {opt} {unit}
+                    {OPTION_LABELS[key]?.[opt] ?? `${opt} ${unit}`}
                   </option>
                 ))}
               </select>

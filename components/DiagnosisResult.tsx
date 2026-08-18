@@ -85,7 +85,7 @@ function PriceCard({ title, subtitle, price, cardStyle, titleStyle, badge, badge
 }
 
 export default function DiagnosisResultCard({ result, input }: Props) {
-  const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, monthlyTotal, comment, level, incomeMultiple, cappedByMultiple, rateStress } = result;
+  const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, monthlyTotal, comment, level, incomeMultiple, cappedByMultiple, rateStress, rentComparison } = result;
   const config = levelConfig[level];
   const managementFee = input?.managementFee ?? 0;
 
@@ -241,6 +241,80 @@ export default function DiagnosisResultCard({ result, input }: Props) {
             <span></span>
           </div>
         </div>
+
+        {/* いまの家賃との比較。
+            「ローン返済＝家賃」で組むと、賃貸では大家が負担していた管理費・
+            修繕積立金・固定資産税がまるごと自分の支出になる。返済額だけを家賃と
+            並べても比較にならないので、実際に出ていく額まで足して見せる。 */}
+        {rentComparison && (
+          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 space-y-3">
+            <div>
+              <p className="text-sm font-bold text-emerald-300">🏠 いまの家賃（{rentComparison.rent}万円）と比べると</p>
+              <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                安全購入価格で買った場合の、毎月それだけ出ていく、という額です。
+              </p>
+            </div>
+
+            <div className="space-y-1 text-sm">
+              <div className="flex justify-between text-slate-300">
+                <span>ローン返済</span><span className="font-semibold text-slate-100">{rentComparison.loanPayment.toFixed(1)} 万円</span>
+              </div>
+              {rentComparison.managementFee > 0 && (
+                <div className="flex justify-between text-slate-300">
+                  <span>管理費・修繕積立金</span><span className="font-semibold text-slate-100">{rentComparison.managementFee.toFixed(1)} 万円</span>
+                </div>
+              )}
+              <div className="flex justify-between text-slate-300">
+                <span>固定資産税・都市計画税<span className="text-slate-400">（概算）</span></span>
+                <span className="font-semibold text-slate-100">{rentComparison.propertyTax.toFixed(1)} 万円</span>
+              </div>
+              <div className="flex justify-between border-t border-emerald-500/30 pt-1.5 mt-1.5">
+                <span className="font-bold text-slate-200">実際に出ていく額</span>
+                <span className="font-black text-white text-base">{rentComparison.grossMonthly.toFixed(1)} 万円</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-300">いまの家賃との差</span>
+                <span className={`font-bold ${rentComparison.diffGross > 0 ? "text-orange-400" : "text-emerald-400"}`}>
+                  {rentComparison.diffGross > 0 ? "+" : ""}{rentComparison.diffGross.toFixed(1)} 万円 / 月
+                </span>
+              </div>
+            </div>
+
+            {rentComparison.deduction > 0 && (
+              <div className="rounded-lg bg-slate-800 border border-emerald-500/20 px-3 py-2.5 space-y-1 text-sm">
+                <div className="flex justify-between text-slate-300">
+                  <span>住宅ローン控除（月割）</span>
+                  <span className="font-semibold text-emerald-400">−{rentComparison.deduction.toFixed(1)} 万円</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-bold text-slate-200">控除を引いた実質</span>
+                  <span className="font-black text-white">{rentComparison.netMonthly.toFixed(1)} 万円</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-300">家賃との差</span>
+                  <span className={`font-bold ${rentComparison.diffNet > 0 ? "text-orange-400" : "text-emerald-400"}`}>
+                    {rentComparison.diffNet > 0 ? "+" : ""}{rentComparison.diffNet.toFixed(1)} 万円 / 月
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed pt-1">
+                  ※ 控除は<strong className="text-slate-300">13年で終わります</strong>。また戻るのは納めた所得税・住民税までなので、納税額が少ないと満額は戻りません。
+                </p>
+              </div>
+            )}
+
+            <div className="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2.5 text-sm">
+              <p className="text-slate-300 leading-relaxed">
+                このうち月 <strong className="text-emerald-400">{rentComparison.principal.toFixed(1)}万円</strong> は元金の返済分で、資産として残ります。
+                本当に消えるのは <strong className="text-white">{rentComparison.disappearing.toFixed(1)}万円</strong>。
+                家賃{rentComparison.rent}万円は全額が消えるので、そこと比べるならこちらが実態に近い数字です。
+              </p>
+            </div>
+
+            <p className="text-xs text-slate-400 leading-relaxed">
+              ※ 固定資産税は物件価格からの概算です。大規模修繕の一時金、給湯器・エアコンの交換費用、修繕積立金の値上げは含んでいません（いずれも賃貸なら大家負担だったものです）。
+            </p>
+          </div>
+        )}
 
         {/* 金利上昇シミュレーション */}
         {input && rateStress.length > 0 && monthlyPayment > 0 && (

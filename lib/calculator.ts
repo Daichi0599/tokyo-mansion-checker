@@ -1,4 +1,4 @@
-import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics, RateStressCase } from "@/types";
+import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics, RateStressCase, RentComparison } from "@/types";
 
 /**
  * 年収倍率の上限。
@@ -11,6 +11,61 @@ const MAX_INCOME_MULTIPLE = 7;
 
 /** 金利上昇のストレステストで見る上げ幅（%ポイント） */
 const RATE_STRESS_STEPS = [0.5, 1.0];
+
+/**
+ * 固定資産税・都市計画税の年額を物件価格から概算する率。
+ * 土地の小規模住宅用地特例や建物の経年減価で実際は幅が出るため、
+ * 都内マンションでよく見る水準（7,000万円で年17万円前後）に寄せた目安。
+ */
+const PROPERTY_TAX_RATE = 0.0025;
+
+/** 住宅ローン控除の控除率。年末残高（限度額まで）に対して13年間 */
+const LOAN_DEDUCTION_RATE = 0.007;
+
+/**
+ * 「今の家賃と比べてどうか」を出す。
+ *
+ * 賃貸では大家が負担していた管理費・修繕積立金・固定資産税が、購入すると自分の
+ * 支出になる。「ローン返済＝家賃」で組むと月の実支出は家賃を数万円上回るため、
+ * 返済額だけを家賃と並べても比較にならない。
+ */
+function calcRentComparison(
+  input: DiagnosisInput,
+  price: number,
+  loanAmount: number,
+  monthlyPayment: number,
+): RentComparison | undefined {
+  const rent = input.currentRent ?? 0;
+  if (rent <= 0 || monthlyPayment <= 0) return undefined;
+
+  const fee = input.managementFee ?? 0;
+  const propertyTax = (price * PROPERTY_TAX_RATE) / 12;
+  const grossMonthly = monthlyPayment + fee + propertyTax;
+
+  // 控除は年末残高と限度額の小さいほうが対象。納税額が上限になる点は画面で注記する
+  const limit = input.deductionLimit ?? 0;
+  const deduction = limit > 0 ? (Math.min(loanAmount, limit) * LOAN_DEDUCTION_RATE) / 12 : 0;
+  const netMonthly = grossMonthly - deduction;
+
+  // 初月の元金部分。ここは資産として残るので「消えるお金」から除く
+  const interest = loanAmount * (input.interestRate / 100 / 12);
+  const principal = Math.max(0, monthlyPayment - interest);
+
+  const round = (v: number) => Math.round(v * 10) / 10;
+  return {
+    loanPayment: round(monthlyPayment),
+    managementFee: round(fee),
+    propertyTax: round(propertyTax),
+    grossMonthly: round(grossMonthly),
+    deduction: round(deduction),
+    netMonthly: round(netMonthly),
+    principal: round(principal),
+    disappearing: round(grossMonthly - principal),
+    rent: round(rent),
+    diffGross: round(grossMonthly - rent),
+    diffNet: round(netMonthly - rent),
+  };
+}
 
 /**
  * 元利均等返済で「月返済額」から「最大借入可能額」を逆算する
@@ -159,6 +214,7 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
     monthlyTotal:   Math.round(monthlyTotal   * 10) / 10,
     comment,
     level,
+    rentComparison: calcRentComparison(input, safePrice, loanForSafe, monthlyPayment),
     incomeMultiple: Math.round((safePrice / annualIncome) * 10) / 10,
     cappedByMultiple,
     rateStress,
