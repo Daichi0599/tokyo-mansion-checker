@@ -217,16 +217,54 @@ export const TASKS: Task[] = [
       "住所と産院を事前に登録しておくと、当日は連絡するだけで迎えに来てもらえます。深夜や破水時に配車がつかまらないリスクを消せるので、5分でできる保険としては効率がいい部類です。",
   },
   {
+    id: "baby-shiwake",
+    phase: "late",
+    fromWeek: 26,
+    toWeek: 36,
+    title: "ベビー用品を「買う・借りる・もらう」で仕分ける",
+    where: "夫婦で話す",
+    minutes: 60,
+    amount: "仕分けで 10〜20万円変わる",
+    detail:
+      "ベビーベッド・バウンサー・ハイローチェアは使う期間が数ヶ月と短く、レンタルのほうが安く済むことが多い項目です。逆に肌着やオムツのような消耗品は買う一択。まず全部を買う前提で考えるのをやめて、短期間しか使わないものを洗い出すところから始めると、総額がかなり変わります。お下がりやフリマで足りるものも同時に整理しておきます。",
+  },
+  {
+    id: "baby-sanzen",
+    hardDeadline: true,
+    phase: "late",
+    fromWeek: 32,
+    toWeek: 38,
+    title: "産前に要るものだけ先に揃える",
+    where: "店舗・ネット通販",
+    minutes: 90,
+    amount: "10〜15万円",
+    deadline: "退院日に無いと困るものがある",
+    detail:
+      "全部を先に買うと無駄が出ます。産前に要るのは、肌着・オムツ・おしりふき・退院時の服・寝具、そして車で退院するならチャイルドシート。チャイルドシートは退院当日に必須なので、これだけは期限があると思ってください。ベビーカーや離乳食まわりは産後に様子を見てからで間に合います。",
+  },
+  {
     id: "yosan-gaichu",
     phase: "late",
     fromWeek: 28,
     toWeek: 38,
-    title: "ベビー用品と、産後の外注予算を決める",
+    title: "産後の外注予算を決める",
     where: "夫婦で話す",
-    minutes: 60,
-    amount: "ベビー用品 50万円前後",
+    minutes: 30,
+    amount: "月2〜5万円",
     detail:
-      "ベビー用品は短期間に集中します。あわせて家事代行・宅配・ミールキットにいくらまで使うかも決めておくと、そのとき揉めません。ここを削ると別のところにコストが出ます。",
+      "家事代行・食材宅配・ミールキット・産後ケア施設。いくらまで使うかを先に決めておくと、いざ疲弊しているときに「使う・使わない」で揉めません。ここを削ると睡眠と機嫌が削れて、結局ほかのところにコストが出ます。自治体の産後ケア事業は補助が出ることが多いので、あわせて確認を。",
+  },
+  {
+    id: "ouen-gift-tsukaimichi",
+    phase: "afterBirth",
+    fromWeek: 40,
+    toWeek: 50,
+    title: "出産・子育て応援ギフトの使い道を決める",
+    where: "自治体の案内",
+    minutes: 20,
+    amount: "計10万円相当",
+    detail:
+      "妊娠時と出生時に5万円ずつ、計10万円相当。自治体によって現金・クーポン・カタログと形式が違い、クーポン型だと使える店や期限が決まっています。ベビー用品の買い足しをここに寄せると現金の持ち出しが減ります。期限切れで失効させるのがいちばんもったいない使い方です。",
   },
 
   // ───────── 出産直後 ─────────
@@ -320,29 +358,92 @@ export const TASKS: Task[] = [
 
   // ───────── 育休〜復職 ─────────
   {
-    id: "hokatsu-joho",
+    id: "hokatsu-gyakusan",
+    hardDeadline: true,
+    phase: "stable",
+    fromWeek: 20,
+    toWeek: 34,
+    title: "0歳4月入園に申し込めるか、予定日から逆算する",
+    where: "自治体サイト",
+    minutes: 20,
+    amount: "入れる年が1年変わる",
+    deadline: "生まれ月によっては申込が妊娠中に来る",
+    detail:
+      "4月入園の申し込みは前年の10〜12月です。つまり1〜3月生まれだと、申込の時期が妊娠中に来ます。ここを知らずにいると、気づいたときには次のチャンスが1年後になります。上に出ている「保活スケジュール」で自分の場合の申込時期を確認してください。",
+  },
+  {
+    id: "hokatsu-shisu",
+    phase: "late",
+    fromWeek: 28,
+    toWeek: 60,
+    title: "自治体の選考指数（点数表）を読む",
+    where: "自治体サイトの入園案内PDF",
+    minutes: 40,
+    amount: "入れるかどうかが決まる",
+    detail:
+      "認可保育園は先着順ではなく点数順です。両親の就労時間、認可外に預けた実績、きょうだいの在園、単身赴任など、加点の付き方は自治体ごとに違います。自分の点数が何点で、去年その園に入った人の最低点が何点だったか（公表している自治体が多い）を見れば、勝負になるかどうかが事前にわかります。ここを読まずに動くのがいちばんの遠回りです。",
+  },
+  {
+    id: "hokatsu-kengaku",
     phase: "leave",
     fromWeek: 44,
-    toWeek: 70,
-    title: "保活を始める（見学・優先順位づけ）",
-    where: "自治体サイト・園見学",
+    toWeek: 66,
+    title: "保育園を見学する",
+    where: "各園（要予約）",
     minutes: 180,
     detail:
-      "認可に入れるかどうかで月3万円前後変わるので、これは立派なお金の話です。見学は予約が要る園が多く、まとめて回れません。早めに動き始めるほど選択肢が残ります。",
+      "秋は見学希望が集中して予約が取れません。申込の3〜4ヶ月前から動き始めるのが現実的です。園庭の有無、給食かお弁当か、オムツの持ち帰りがあるか、延長保育の時間。通えるかどうかは通勤ルートとの相性で決まるので、実際に自宅から歩いてみるところまでやると判断が固まります。",
+  },
+  {
+    id: "hokatsu-ninkagai",
+    phase: "leave",
+    fromWeek: 50,
+    toWeek: 72,
+    title: "認可外・企業主導型も押さえておく",
+    where: "各園に直接",
+    minutes: 90,
+    amount: "認可外だと月5〜8万円",
+    detail:
+      "企業主導型保育所は自治体を通さず園に直接申し込む別ルートで、地域枠があれば従業員でなくても入れます。認証保育所や認可外を先に押さえておくと、認可に落ちたときの逃げ道になり、預けた実績が次の申込で加点されることもあります。申込金がかかる園もあるので、そこは事前に確認を。",
   },
   {
     id: "hokatsu-moushikomi",
     hardDeadline: true,
     phase: "leave",
-    fromWeek: 58,
+    fromWeek: 52,
     toWeek: 80,
     title: "保育園に申し込む",
     where: "区市町村の窓口",
     minutes: 60,
-    amount: "認可外との差 月3万円前後",
+    amount: "認可外との差 月5〜8万円",
     deadline: "4月入園は前年の10〜12月が締切",
     detail:
-      "生まれ月によって、0歳4月に申し込めるかどうかが決まります。締切を逃すと次のチャンスは1年後か、認可外に頼ることになります。",
+      "締切を逃すと次のチャンスは1年後か、認可外に頼ることになります。第一希望だけでなく、通える範囲の園を点数と照らして幅広く書くのが定石です。就労証明書は勤務先に書いてもらう必要があり、締切間際は総務が混み合うので早めに依頼してください。",
+  },
+  {
+    id: "hokatsu-kekka",
+    phase: "leave",
+    fromWeek: 62,
+    toWeek: 84,
+    title: "結果通知を受けて、落ちた場合の動きを決める",
+    where: "自治体からの通知",
+    minutes: 60,
+    deadline: "二次募集の締切は結果通知の直後",
+    detail:
+      "4月入園の結果は1〜2月に届きます。落ちた場合は二次募集に回るか、認可外を確保するか、育休を延長するかの3択です。育休を延長するには保育所に入れなかったことの証明が要るので、通知は捨てずに保管してください。二次募集の締切は通知からあまり日がないので、落ちたときの動きだけは先に決めておくと慌てません。",
+  },
+  {
+    id: "hoikuryo-mushouka",
+    phase: "afterBirth",
+    fromWeek: 40,
+    toWeek: 70,
+    title: "保育料の無償化対象になるか確認する",
+    where: "自治体サイト",
+    minutes: 15,
+    amount: "0〜2歳で月5〜8万円",
+    detail:
+      "3〜5歳は国の制度で全世帯が無償です。0〜2歳は原則有償ですが、東京都は2023年10月から第2子以降、2025年9月からは第1子も無償化しており、所得制限はありません。ただし対象は認可保育所などで、認可外は別扱いです。ここを知っているかどうかで、認可にこだわる理由の大きさが変わります。",
+    requires: "tokyo",
   },
   {
     id: "fukushoku-katachi",
@@ -379,4 +480,47 @@ export function calcWeek(dueDate: string, today = new Date()): number | null {
 
 export function visibleTasks(conditions: Conditions): Task[] {
   return TASKS.filter((t) => !t.requires || conditions[t.requires]);
+}
+
+/**
+ * 0歳4月入園の申し込み時期を、出産予定日から逆算する。
+ *
+ * チェックリスト本体は妊娠週数で動いているが、保活だけは暦（毎年10〜12月に申込・
+ * 翌4月入園）で決まるため週数では表現できない。1〜3月生まれだと申込が妊娠中に
+ * 来るという、いちばん見落とされる部分をここで可視化する。
+ */
+export interface HokatsuTiming {
+  /** 0歳4月入園を狙う場合の入園年 */
+  aprilYear: number;
+  /** その4月1日時点の月齢（概算） */
+  ageMonths: number;
+  /** 申し込み時期の表示用ラベル */
+  applyLabel: string;
+  /** 申し込みが出産前に来るか */
+  duringPregnancy: boolean;
+  /** 4月時点で生後57日に満たず、0歳4月入園に申し込めない可能性が高い */
+  tooYoung: boolean;
+}
+
+export function calcHokatsuTiming(dueDate: string): HokatsuTiming | null {
+  const due = new Date(dueDate + "T00:00:00");
+  if (Number.isNaN(due.getTime())) return null;
+
+  // 出産後に最初に来る4月1日（4月1日より前に生まれていればその年の4月）
+  const aprilYear = due.getMonth() < 3 ? due.getFullYear() : due.getFullYear() + 1;
+  const april = new Date(aprilYear, 3, 1);
+  const ageDays = Math.floor((april.getTime() - due.getTime()) / 86400000);
+  const ageMonths = Math.max(0, Math.floor(ageDays / 30));
+
+  // 申し込みは入園年の前年10〜12月
+  const applyYear = aprilYear - 1;
+  const applyEnd = new Date(applyYear, 11, 31);
+
+  return {
+    aprilYear,
+    ageMonths,
+    applyLabel: `${applyYear}年10〜12月ごろ`,
+    duringPregnancy: due.getTime() > applyEnd.getTime(),
+    tooYoung: ageDays < 57,
+  };
 }

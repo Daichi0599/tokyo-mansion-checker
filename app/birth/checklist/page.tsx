@@ -8,6 +8,7 @@ import {
   TASKS,
   PHASES,
   calcWeek,
+  calcHokatsuTiming,
   visibleTasks,
   type Conditions,
   type Task,
@@ -129,6 +130,8 @@ export default function BirthChecklistPage() {
   }, [loaded, dueDate, done, conditions]);
 
   const week = useMemo(() => (dueDate ? calcWeek(dueDate) : null), [dueDate]);
+  // 保活だけは暦で決まるので、週数とは別に予定日から逆算して出す
+  const hokatsu = useMemo(() => (dueDate ? calcHokatsuTiming(dueDate) : null), [dueDate]);
   const tasks = useMemo(() => visibleTasks(conditions), [conditions]);
 
   const grouped = useMemo(() => {
@@ -234,6 +237,34 @@ export default function BirthChecklistPage() {
             </div>
           </div>
         </section>
+
+        {/* 保活は毎年10〜12月申込・翌4月入園という暦で動くため、
+            妊娠週数ベースのリストでは表現できない。ここだけ別建てで出す。 */}
+        {hokatsu && (
+          <section className={`rounded-2xl border p-5 space-y-2 ${hokatsu.duringPregnancy ? "border-orange-500/40 bg-orange-500/10" : "border-slate-700 bg-slate-800"}`}>
+            <p className="text-base font-black text-white">🏫 あなたの保活スケジュール</p>
+            <p className="text-sm text-slate-200 leading-relaxed">
+              0歳4月入園を狙う場合、入園は <strong className="text-white">{hokatsu.aprilYear}年4月</strong>（そのとき生後 約{hokatsu.ageMonths}ヶ月）。
+              申し込みは <strong className="text-white">{hokatsu.applyLabel}</strong> です。
+            </p>
+
+            {hokatsu.duringPregnancy && (
+              <p className="text-sm font-bold text-orange-300 leading-relaxed">
+                ⚠️ 申し込みの時期が<strong className="text-white">出産より前</strong>に来ます。産まれてから考えると間に合いません。
+              </p>
+            )}
+
+            {hokatsu.tooYoung && (
+              <p className="text-sm font-bold text-orange-300 leading-relaxed">
+                ⚠️ 4月時点で生後57日に満たない可能性があります。多くの自治体で0歳4月入園の対象外になるため、1歳4月（{hokatsu.aprilYear + 1}年4月）を軸に考えたほうが現実的です。
+              </p>
+            )}
+
+            <p className="text-sm text-slate-400 leading-relaxed">
+              ※ 申込時期・受け入れ月齢は自治体によって前後します。お住まいの入園案内で必ずご確認ください。
+            </p>
+          </section>
+        )}
 
         {!dueDate && (
           <div className="rounded-2xl border border-slate-700 bg-slate-800 p-5">
