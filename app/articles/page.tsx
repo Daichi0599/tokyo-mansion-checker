@@ -80,6 +80,44 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
     ],
   },
   {
+    heading: "💑 世帯のお金をどう回すか",
+    lead: "結婚してから家を買うまでの間に決めることが集中する。分担の仕方、貯め方、借り方。ここが固まっていないと物件も決められない。",
+    articles: [
+      {
+        href: "/articles/kekkon-chochiku-30dai",
+        emoji: "💍",
+        title: "結婚費用と貯金、30代夫婦のリアルな平均額｜挙式・新生活・将来の住宅資金の目安",
+        description:
+          "結婚にかかる費用の平均相場と30代の貯蓄額の実態。挙式・新生活準備・新婚旅行の内訳から、結婚後にマンション購入資金をどう貯めるかまで。",
+        tag: "結婚・貯蓄",
+      },
+      {
+        href: "/articles/tomobataraki-kakei-buntan",
+        emoji: "👫",
+        title: "共働き夫婦の家計分担、みんなどうしてる？割合制・費目別・共同口座を比較",
+        description:
+          "折半・収入比例・費目別・共同口座それぞれのメリットとデメリット。揉めないためのルールの決め方を比較しました。",
+        tag: "家計・分担",
+      },
+      {
+        href: "/articles/shin-nisa-30dai-hajimekata",
+        emoji: "📈",
+        title: "新NISA、30代はいくらから始めるべき？住宅資金と両立させる考え方",
+        description:
+          "つみたて投資枠・成長投資枠の仕組みと、毎月いくらが目安か。住宅購入資金やライフイベントと両立させる積立額の考え方。",
+        tag: "資産形成",
+      },
+      {
+        href: "/articles/tomobataraki-jutaku-loan",
+        emoji: "🏦",
+        title: "共働き夫婦の住宅ローン｜世帯年収別の購入可能額と注意すべきリスク",
+        description:
+          "夫婦2人の年収を合算するとどこまで借りられる？収入合算・ペアローンの違いと、育休・転職を踏まえた現実的な試算。",
+        tag: "共働き・ペアローン",
+      },
+    ],
+  },
+  {
     heading: "👶 子どもとお金",
     lead: "出産でいくら出ていき、いくら戻るのか。育てるのに何がかかるのか。住居費と並行して考える必要があるもの。",
     articles: [
@@ -98,14 +136,6 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
         description:
           "子ども1人の総額は教育費＋養育費で2,000万〜4,000万円超。公立・私立別の早見表、家計負担の山が来る時期、住宅ローンとの両立の順番まで解説。",
         tag: "子育て・教育費",
-      },
-      {
-        href: "/articles/tomobataraki-jutaku-loan",
-        emoji: "👫",
-        title: "共働き夫婦の住宅ローン｜世帯年収別の購入可能額と注意すべきリスク",
-        description:
-          "夫婦2人の年収を合算するとどこまで借りられる？収入合算・ペアローンの違いと、育休・転職を踏まえた現実的な試算。",
-        tag: "共働き・ペアローン",
       },
     ],
   },
