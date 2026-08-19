@@ -180,8 +180,12 @@ export default function BirthChecklistPage() {
           </span>
           <h1 className="text-2xl font-black leading-tight">出産準備チェックリスト</h1>
           <p className="text-base text-slate-200 leading-relaxed">
-            出産予定日を入れると、<strong className="text-white">いまやることだけ</strong>が出ます。
-            チェックはこの端末に残るので、思い出したときに開き直せます。
+            調べる係が自分に回ってきた人向けに、自分用のメモとして作ったものです。
+            出産予定日を入れると、<strong className="text-white">いまの週で必要なものだけ</strong>が出ます。
+          </p>
+          <p className="text-base text-slate-300 leading-relaxed">
+            全部を今やる必要はありません。順番と期限だけ間違えなければ、だいたい間に合います。
+            チェックはこの端末に残るので、思い出したときに開き直してください。
           </p>
         </header>
 
