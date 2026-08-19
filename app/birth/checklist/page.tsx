@@ -101,6 +101,8 @@ export default function BirthChecklistPage() {
   const [dueDate, setDueDate] = useState("");
   const [done, setDone] = useState<string[]>([]);
   const [conditions, setConditions] = useState<Conditions>(DEFAULT_CONDITIONS);
+  // 手続きものに混ざると夫が動く項目が埋もれるので、絞り込めるようにしている
+  const [ottoOnly, setOttoOnly] = useState(false);
   // localStorage はサーバー側に無いので、読み込みが済むまで保存値を反映しない
   const [loaded, setLoaded] = useState(false);
 
@@ -132,7 +134,7 @@ export default function BirthChecklistPage() {
   const week = useMemo(() => (dueDate ? calcWeek(dueDate) : null), [dueDate]);
   // 保活だけは暦で決まるので、週数とは別に予定日から逆算して出す
   const hokatsu = useMemo(() => (dueDate ? calcHokatsuTiming(dueDate) : null), [dueDate]);
-  const tasks = useMemo(() => visibleTasks(conditions), [conditions]);
+  const tasks = useMemo(() => visibleTasks(conditions, ottoOnly), [conditions, ottoOnly]);
 
   const grouped = useMemo(() => {
     const g: Record<Bucket, Task[]> = { overdue: [], now: [], soon: [], later: [], done: [] };
@@ -224,6 +226,21 @@ export default function BirthChecklistPage() {
             <p className="text-sm text-slate-400 leading-relaxed">
               あてはまらないものを外すと、関係ない項目が消えます。
             </p>
+
+            <button
+              type="button"
+              onClick={() => setOttoOnly((v) => !v)}
+              className={`w-full text-left text-sm font-semibold px-3.5 py-3 rounded-xl border transition-colors ${
+                ottoOnly
+                  ? "bg-blue-500/20 border-blue-500/50 text-blue-200"
+                  : "bg-slate-700 border-slate-600 text-slate-300"
+              }`}
+            >
+              {ottoOnly ? "✓ " : ""}👨 夫が動くことだけ表示する
+              <span className="block font-normal text-slate-400 mt-0.5">
+                手続きを外して、当日の動きと産後の分担だけに絞ります。
+              </span>
+            </button>
           </div>
 
           {/* 進捗 */}

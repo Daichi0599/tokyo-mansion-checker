@@ -52,6 +52,11 @@ export interface Task {
   detail: string;
   /** この条件が true のときだけ表示する */
   requires?: keyof Conditions;
+  /**
+   * 夫が手を動かす前提のタスク。手続きものに混ざると埋もれるので、
+   * 「夫がやることだけ」で絞り込めるようにフラグで持つ。
+   */
+  otto?: true;
 }
 
 export const TASKS: Task[] = [
@@ -125,6 +130,7 @@ export const TASKS: Task[] = [
   // ───────── 安定期 ─────────
   {
     id: "ikukyu-kettei",
+    otto: true,
     hardDeadline: true,
     phase: "stable",
     fromWeek: 16,
@@ -140,6 +146,7 @@ export const TASKS: Task[] = [
   },
   {
     id: "ikukyu-moushide",
+    otto: true,
     hardDeadline: true,
     phase: "stable",
     fromWeek: 20,
@@ -457,6 +464,131 @@ export const TASKS: Task[] = [
     detail:
       "育休中の給付は最長でも1年前後で終わります。復職後の実際の手取りで家計を組み直しておかないと、給付が切れたところで急に苦しくなります。",
   },
+  // ───────── 夫の実務（手続きではなく、その場の動き） ─────────
+  {
+    id: "otto-tachiai-rule",
+    otto: true,
+    phase: "late",
+    fromWeek: 28,
+    toWeek: 36,
+    title: "立ち会いと面会のルールを、自分で病院に確認する",
+    where: "産院に電話（妻に聞かない）",
+    minutes: 10,
+    detail:
+      "立ち会えるか、何時から入れるか、上の子は入れるか、当日どこの入口から入るのか。ここは病院ごとにまったく違うし、感染症の流行状況で今も変わる。妻は健診のたびに説明を受けているぶん「知っている前提」で話が進むので、夫が知らないまま当日を迎えると、その場で置いていかれる。自分で一度電話して聞いておくと、当日の動きが全部変わる。",
+  },
+  {
+    id: "otto-jinstu-flow",
+    otto: true,
+    phase: "late",
+    fromWeek: 32,
+    toWeek: 38,
+    title: "陣痛が来たときの動きを、紙1枚にして貼る",
+    where: "自宅（冷蔵庫に貼る）",
+    minutes: 30,
+    deadline: "破水は予定日前でも起きる",
+    detail:
+      "産院の夜間の電話番号、陣痛タクシーの番号と登録者名、保険証と診察券と母子手帳の置き場所、家の鍵をどうするか。これを当日その場で探すことになる。スマホの中ではなく紙にして冷蔵庫に貼っておくと、自分が不在のときに妻ひとりでも動ける。深夜に始まることが多いので、寝ぼけていても読める粒度で書く。",
+  },
+  {
+    id: "otto-nyuin-bag",
+    otto: true,
+    phase: "late",
+    fromWeek: 34,
+    toWeek: 39,
+    title: "入院バッグに「夫用」を足す",
+    where: "自宅",
+    minutes: 20,
+    detail:
+      "入院の準備リストは妻の分しか載っていない。分娩は半日以上かかることもあって、その間ずっと院内にいることになる。院内の売店は夜閉まるし、支払いに小銭が要る自販機もまだある。モバイルバッテリー、飲み物、腹に入るもの、羽織るもの。自分の分を別の小さい袋にして玄関に置いておく。",
+  },
+  {
+    id: "otto-taiin-idou",
+    otto: true,
+    phase: "late",
+    fromWeek: 34,
+    toWeek: 39,
+    title: "退院日の移動手段を決める",
+    where: "自宅で調べる",
+    minutes: 20,
+    deadline: "退院日には必ず要る",
+    detail:
+      "自家用車で乗せて帰るならチャイルドシートが法律上必須で、6歳未満は例外なく要る。生まれてすぐ乗せるので、新生児対応のものかどうかを確認しておく。取り付けは思ったより手間なので、退院当日の朝にやると詰む。タクシーは義務の対象外だが、車種によっては断られることもある。どの手段で帰るかを先に決めて、必要なものを先に用意する。",
+  },
+  {
+    id: "otto-kaji-hikitsugi",
+    otto: true,
+    phase: "late",
+    fromWeek: 30,
+    toWeek: 39,
+    title: "家のことを、自分ひとりで回せる状態にする",
+    where: "自宅",
+    minutes: 60,
+    detail:
+      "ゴミの日、洗剤の詰め替えの場所、炊飯器の設定、電気とガスの引き落とし口座、宅配ボックスの暗証番号。妻が入院している1週間、これを全部LINEで聞くことになる。産後の妻に家の運用を聞くのがいちばん消耗させるので、聞かずに回る状態にしておく。1時間、家の中を一周して自分でメモを作れば済む。",
+  },
+  {
+    id: "otto-mokuyoku-renshu",
+    otto: true,
+    phase: "late",
+    fromWeek: 32,
+    toWeek: 39,
+    title: "沐浴とミルクを、生まれる前に手を動かして覚える",
+    where: "自治体の両親学級／動画",
+    minutes: 90,
+    detail:
+      "自治体の両親学級には人形を使った沐浴の実習があって、平日夜や土曜にやっていることが多い。定員があるので早めに予約する。動画で見るのと、実際に片手で首を支えるのは別物で、生まれてから初めてやると怖くて手が出せない。ここを先にやっておくと、産後すぐに戦力になれる数少ないポイントになる。",
+  },
+
+  // ───────── 産後、夫が知らないと踏む地雷 ─────────
+  {
+    id: "otto-sango-karada",
+    otto: true,
+    phase: "afterBirth",
+    fromWeek: 40,
+    toWeek: 42,
+    title: "産後の妻の体に何が起きているかを知っておく",
+    where: "自宅で読む",
+    minutes: 30,
+    detail:
+      "出産は終わりではなく、そこから数週間、体は出血と痛みが続く状態にある。悪露は数週間、後陣痛は子宮が戻るときの痛みで授乳のたびに来る。会陰を切ったり裂けたりしていれば座るのも痛い。乳腺炎は高熱が出る。これを知らないと「もう産んだんだから」という前提で話しかけてしまう。知っているだけで、何を代わるべきかが自然にわかる。",
+  },
+  {
+    id: "otto-nyuinchu",
+    otto: true,
+    phase: "afterBirth",
+    fromWeek: 40,
+    toWeek: 41,
+    title: "入院中の数日を、家の作業に割り当てる",
+    where: "自宅",
+    minutes: 30,
+    detail:
+      "妻が入院している数日が、産後でいちばん自由に動ける時間になる。ここで新生児の寝る場所を作り、洗濯物の導線を変え、まとめ買いをして、届いたベビー用品を開けて洗っておく。退院後は片手がふさがった状態が続くので、この数日を病院との往復だけで終えると、あとで全部きつくなる。",
+  },
+  {
+    id: "otto-yoru-buntan",
+    otto: true,
+    phase: "afterBirth",
+    fromWeek: 40,
+    toWeek: 43,
+    title: "新生児の1日を把握して、夜の分担を決める",
+    where: "夫婦で話す",
+    minutes: 30,
+    detail:
+      "新生児は2〜3時間おきに起きるので、まとまって眠れる時間がない。「気づいたほうがやる」にすると、母乳のぶん結局は妻が全部起きることになって、数週間で限界が来る。何時から何時までは自分が見る、と時間で切って決めておく。夜中に自分が起きる前提なら、その時間に飲ませるものをどうするかも先に決まる。",
+  },
+  {
+    id: "otto-sangoutsu",
+    otto: true,
+    phase: "afterBirth",
+    fromWeek: 41,
+    toWeek: 46,
+    title: "産後うつのサインを、自分が見る側として知っておく",
+    where: "自宅で読む",
+    minutes: 20,
+    detail:
+      "産後はホルモンの急変と睡眠不足が重なって、気分が落ちる時期が来る。数日で収まるものと、2週間以上続いて生活が回らなくなるものは別で、後者は本人には自覚しにくい。眠れているのに休めない、赤ちゃんをかわいいと思えないと口にする、食べない。近くにいる自分がいちばん先に気づける立場にいる。産後健診と、自治体の新生児訪問がその相談先になる。",
+  },
   {
     id: "loan-saiken",
     phase: "leave",
@@ -478,8 +610,10 @@ export function calcWeek(dueDate: string, today = new Date()): number | null {
   return 40 - Math.floor(days / 7);
 }
 
-export function visibleTasks(conditions: Conditions): Task[] {
-  return TASKS.filter((t) => !t.requires || conditions[t.requires]);
+export function visibleTasks(conditions: Conditions, ottoOnly = false): Task[] {
+  return TASKS.filter(
+    (t) => (!t.requires || conditions[t.requires]) && (!ottoOnly || t.otto),
+  );
 }
 
 /**
