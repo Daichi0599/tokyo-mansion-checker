@@ -112,6 +112,7 @@ export default function RootLayout({
               <nav className="flex items-center gap-4 text-xs text-slate-400">
                 <a href="/about" className="hover:text-white transition-colors">このサイトについて</a>
                 <a href="/privacy-policy" className="hover:text-white transition-colors">プライバシーポリシー</a>
+                <a href="https://note.com/30lab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">📝 note</a>
                 <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">𝕏 @30lab_jp</a>
               </nav>
             </div>
