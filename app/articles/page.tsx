@@ -140,6 +140,28 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
     ],
   },
   {
+    heading: "🚗 車を持つかどうか",
+    lead: "都内で車を持つと何にいくらかかるのか。EVの補助金は大きいが、駐車場代はもっと大きい。持たない選択も含めて数字で見る。",
+    articles: [
+      {
+        href: "/articles/tokyo-ev-hojokin",
+        emoji: "⚡",
+        title: "都内でEVを買うと実際いくらか｜補助金を引いた後の金額を車種別に並べた",
+        description:
+          "国のCEV補助金と東京都のZEV補助金で最大260万円。ただし車種によって額は3倍近く違う。サクラ・リーフ・テスラ・BYDの補助後価格と、保有義務や受付終了のリスクまで。",
+        tag: "車・EV補助金",
+      },
+      {
+        href: "/articles/tokyo-chushajo-sagashikata",
+        emoji: "🅿️",
+        title: "都内の駐車場代が高すぎる｜23区の相場と、少しでも安く探す方法",
+        description:
+          "都心で月4〜7万円、10年なら最大840万円。エリア別の相場と、ポータル・地場の不動産屋・マンションの空き区画という探し方の違い、そして持つべきかどうか。",
+        tag: "車・維持費",
+      },
+    ],
+  },
+  {
     heading: "🏠 買うか、借りるか",
     lead: "そもそも買うべきなのか。買うなら新築か中古か、どんな間取りか。決める前に一度整理しておきたいこと。",
     articles: [
