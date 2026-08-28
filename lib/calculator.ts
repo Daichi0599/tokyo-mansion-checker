@@ -17,7 +17,7 @@ const RATE_STRESS_STEPS = [0.5, 1.0];
  * 土地の小規模住宅用地特例や建物の経年減価で実際は幅が出るため、
  * 都内マンションでよく見る水準（7,000万円で年17万円前後）に寄せた目安。
  */
-const PROPERTY_TAX_RATE = 0.0025;
+export const PROPERTY_TAX_RATE = 0.0025;
 
 /** 住宅ローン控除の控除率。年末残高（限度額まで）に対して13年間 */
 const LOAN_DEDUCTION_RATE = 0.007;
