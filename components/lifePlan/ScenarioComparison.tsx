@@ -1,6 +1,5 @@
 import type { ScenarioSnapshot } from "@/lib/lifePlan/scenarios";
 import type { SafePlanResult } from "@/lib/lifePlan/safePlan";
-import ScenarioSnapshotCard from "./ScenarioSnapshotCard";
 
 interface Props {
   wishScenarios: ScenarioSnapshot[];
