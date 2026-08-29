@@ -39,6 +39,20 @@ export function trackPlanEvent<T extends PlanEventName>(name: T, params: PlanEve
   safeSendGAEvent(name, params as unknown as Record<string, string | number>);
 }
 
+/**
+ * 物件価格（万円）を、個人を特定しにくい価格帯カテゴリへ変換する。
+ * PropertyDiagnosis.tsx が具体の価格そのものをGA4へ送っていたのを、
+ * v2のGA4ルール（入力値そのものは送らない）に合わせて修正するために追加した。
+ */
+export function priceBand(priceMan: number): string {
+  if (priceMan < 3000) return "under_3000";
+  if (priceMan < 5000) return "3000_5000";
+  if (priceMan < 7000) return "5000_7000";
+  if (priceMan < 9000) return "7000_9000";
+  if (priceMan < 12000) return "9000_12000";
+  return "over_12000";
+}
+
 /** 車プランをGA4に送る際のラベル。個人を特定しない固定カテゴリ */
 export function carPlanLabel(plan: CarPlan): string {
   switch (plan) {
