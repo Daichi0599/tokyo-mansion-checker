@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import type { LifeProfile } from "@/types/lifePlan";
-import { loadLifeProfile, saveLifeProfile } from "@/lib/lifePlan";
+import { useLifeProfile, saveLifeProfile } from "@/lib/lifePlan";
 import { buildScenarios, findWorstScenario } from "@/lib/lifePlan/scenarios";
 import { buildRecommendations } from "@/lib/lifePlan/recommendations";
 import { buildSafePlan } from "@/lib/lifePlan/safePlan";
@@ -24,17 +24,11 @@ const DETAIL_TOOLS: { tool: "mansion" | "check" | "birth" | "child" | "car"; hre
 ];
 
 export default function PlanResultPage() {
-  const [profile, setProfile] = useState<LifeProfile | null | undefined>(undefined);
+  // useSyncExternalStore経由でlocalStorageを購読する。setStateをuseEffect内で
+  // 呼ばずに済むため react-hooks/set-state-in-effect を踏まず、かつ
+  // SSR/初回ハイドレーションでは常にundefined（読み込み中）を返すためハイドレーション不整合も起きない。
+  const profile = useLifeProfile();
   const completedRef = useRef(false);
-
-  // localStorage の読み込みはクライアントマウント後にしか行えない（SSRとの不整合を避けるため）。
-  // 同じ理由で本プロジェクトの他ページ（PropertyDiagnosis.tsx 等）も同じ形の
-  // useEffect+setState を使っており、react-hooks/set-state-in-effect のエラーは
-  // このコードベースで localStorage 初期化に採用している既存パターンと同種のもの
-  // （eslint-disable-next-line が効かない特殊ルールのため抑制できず、lint結果に残る）。
-  useEffect(() => {
-    setProfile(loadLifeProfile());
-  }, []);
 
   const scenarios = useMemo(() => (profile ? buildScenarios(profile) : null), [profile]);
   const worst = useMemo(() => (scenarios ? findWorstScenario(scenarios) : null), [scenarios]);
@@ -91,7 +85,8 @@ export default function PlanResultPage() {
   }
 
   const handleProfileChange = (next: LifeProfile, fieldGroup: "housing" | "family" | "car") => {
-    setProfile(next);
+    // saveLifeProfile が useLifeProfile の購読者に変更通知するため、
+    // ローカルstateを別途更新する必要はない
     saveLifeProfile(next);
     trackPlanEvent("scenario_change", { field_group: fieldGroup });
   };
@@ -145,7 +140,7 @@ export default function PlanResultPage() {
           </div>
         </section>
 
-        <CalculationNotes onCleared={() => setProfile(null)} />
+        <CalculationNotes />
       </div>
     </div>
   );

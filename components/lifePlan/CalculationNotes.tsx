@@ -2,11 +2,12 @@
 
 import { clearLifeProfile } from "@/lib/lifePlan";
 
-export default function CalculationNotes({ onCleared }: { onCleared: () => void }) {
+export default function CalculationNotes() {
   const handleClear = () => {
     if (typeof window !== "undefined" && !window.confirm("入力内容を削除します。よろしいですか？")) return;
+    // clearLifeProfile が useLifeProfile の購読者に変更通知するため、
+    // 呼び出し側で状態を更新する必要はない
     clearLifeProfile();
-    onCleared();
   };
 
   return (
