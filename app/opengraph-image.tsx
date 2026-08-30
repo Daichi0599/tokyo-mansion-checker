@@ -6,7 +6,7 @@ export const alt = "30Lab | 気になったら、まずここから。";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const CHARS = "気になったらまずここから30代の大きな決断を数字で整理するLab完全無料匿名データ保存なし営業電話マンション購入診断ローン返済シミュレーター物件車コスト子育て費用";
+const CHARS = "気になったらまずここから30代の大きな決断を数字で整理するLab完全無料匿名端末内にのみ保存営業電話マンション購入診断ローン返済シミュレーター物件車コスト子育て費用";
 
 export default async function OgImage() {
   const fontData = await loadNotoSansJP(CHARS);
@@ -95,7 +95,7 @@ export default async function OgImage() {
 
         {/* 安心バッジ */}
         <div style={{ display: "flex", gap: 10, marginTop: 28 }}>
-          {["完全無料", "匿名OK", "データ保存なし", "営業電話なし"].map((b) => (
+          {["完全無料", "匿名OK", "端末内にのみ保存", "営業電話なし"].map((b) => (
             <div key={b} style={{
               backgroundColor: "rgba(16,185,129,0.1)",
               border: "1px solid rgba(16,185,129,0.22)",

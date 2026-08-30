@@ -251,7 +251,7 @@ export default function CarPage() {
             {[
               { icon: "✓", label: "完全無料" },
               { icon: "✓", label: "約3分" },
-              { icon: "✓", label: "データ保存なし" },
+              { icon: "✓", label: "端末内にのみ保存" },
             ].map((b) => (
               <span key={b.label} className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
                 <span>{b.icon}</span>{b.label}

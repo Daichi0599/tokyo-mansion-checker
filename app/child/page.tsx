@@ -430,7 +430,7 @@ export default function ChildCostPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2 justify-center">
-            {["完全無料", "匿名OK", "データ保存なし", "約1分"].map((label) => (
+            {["完全無料", "匿名OK", "端末内にのみ保存", "約1分"].map((label) => (
               <span key={label} className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
                 ✓ {label}
               </span>
