@@ -20,8 +20,8 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-lg font-bold text-white mb-3">1. 基本方針</h2>
               <p>
                 30Lab（以下「当サイト」）は、ユーザーの個人情報の保護を重要事項と認識し、個人情報の保護に関する法律（個人情報保護法）および関連法令を遵守します。
-                当サイトが提供するマンション購入診断・物件診断・車コスト診断・子育て費用試算などのツールは、<strong>完全無料・匿名・データ保存なし</strong>で利用できます。
-                入力された診断データはサーバーに送信されず、お使いのブラウザ上のみで処理されます。
+                当サイトが提供するマンション購入診断・物件診断・車コスト診断・子育て費用試算・わが家のプラン（横断診断）などのツールは、<strong>完全無料・匿名・サーバー送信なし</strong>で利用できます。
+                入力された診断データはサーバーに送信されず、お使いのブラウザのlocalStorageを使って端末内にのみ保存されます。
               </p>
             </section>
 
@@ -29,7 +29,8 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-lg font-bold text-white mb-3">2. 収集する情報</h2>
               <h3 className="font-semibold text-slate-100 mb-2">（1）診断ツールへの入力情報</h3>
               <p>
-                当サイトの診断ツールに入力された年収・物件価格・家族構成などの情報は、<strong>お使いのブラウザ内でのみ処理</strong>され、当サイトのサーバーには一切送信・保存されません。
+                当サイトの診断ツールに入力された年収・物件価格・家族構成などの情報は、<strong>お使いのブラウザのlocalStorageを使って端末内にのみ保存</strong>され、当サイトのサーバーには一切送信されません。
+                また、これらの入力値そのもの（金額・年齢など）はGoogle Analytics（GA4）にも送信されません。GA4に送信するのはツールの利用状況を示す種別・カテゴリ情報（例：診断の種類、価格帯の区分）のみです。
               </p>
               <h3 className="font-semibold text-slate-100 mt-4 mb-2">（2）アクセス解析情報</h3>
               <p>

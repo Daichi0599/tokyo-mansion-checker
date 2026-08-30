@@ -134,7 +134,7 @@ export default function HomePage() {
 
           {/* 安心バッジ */}
           <div className="flex flex-wrap justify-center gap-2" style={{ animation: "fadeUp 0.45s ease-out 0.3s both" }}>
-            {["完全無料", "匿名OK", "データ保存なし", "営業電話なし"].map((b) => (
+            {["完全無料", "匿名OK", "端末内にのみ保存", "営業電話なし"].map((b) => (
               <span
                 key={b}
                 className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full"
