@@ -5,6 +5,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 import { TOKYO_AREAS, findArea } from "@/lib/areaData";
 import { calcPriceMetrics } from "@/lib/calculator";
 import { DiagnosisInput } from "@/types";
+import { priceBand } from "@/lib/analytics";
 
 type Signal = "ok" | "warn" | "ng" | "na";
 
@@ -101,7 +102,7 @@ export default function PropertyDiagnosis({ input, safePrice }: Props) {
       area:          form.area,
     });
 
-    sendGAEvent("event", "diagnosis_run", { tool: "property_diagnosis", area: form.area, price: priceNum });
+    sendGAEvent("event", "diagnosis_run", { tool: "property_diagnosis", area: form.area, price_band: priceBand(priceNum) });
   };
 
   const isDisabled = !form.price || !form.sqm;
