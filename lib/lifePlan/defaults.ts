@@ -46,7 +46,7 @@ export const DEFAULT_LIFE_PROFILE: LifeProfile = {
 };
 
 export function createDefaultProfile(entryIntent: EntryIntent = "all"): LifeProfile {
-  return {
+  const profile: LifeProfile = {
     ...DEFAULT_LIFE_PROFILE,
     entryIntent,
     household: { ...DEFAULT_LIFE_PROFILE.household },
@@ -54,4 +54,14 @@ export function createDefaultProfile(entryIntent: EntryIntent = "all"): LifeProf
     family: { ...DEFAULT_LIFE_PROFILE.family },
     car: { ...DEFAULT_LIFE_PROFILE.car },
   };
+
+  // The selected entry point is a promise about what will be calculated.
+  // Do not silently include unrelated default plans in the result.
+  if (entryIntent !== "all") {
+    if (entryIntent !== "housing") profile.housing.intent = "none";
+    if (entryIntent !== "family") profile.family.children = 0;
+    if (entryIntent !== "car") profile.car.plan = "none";
+  }
+
+  return profile;
 }

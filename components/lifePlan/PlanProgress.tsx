@@ -1,12 +1,20 @@
 const STEP_LABELS = ["わが家の現在", "住まい", "子ども・育休・教育", "車・確認"];
 
-export default function PlanProgress({ step }: { step: number }) {
-  const percent = Math.round((step / STEP_LABELS.length) * 100);
+export default function PlanProgress({
+  step,
+  totalSteps = STEP_LABELS.length,
+  label,
+}: {
+  step: number;
+  totalSteps?: number;
+  label?: string;
+}) {
+  const percent = Math.round((step / totalSteps) * 100);
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
         <span>
-          STEP {step} / {STEP_LABELS.length}：{STEP_LABELS[step - 1]}
+          STEP {step} / {totalSteps}：{label ?? STEP_LABELS[step - 1]}
         </span>
         <span>{percent}%</span>
       </div>

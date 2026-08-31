@@ -46,7 +46,7 @@ export default function PlanResultPage() {
     if (profile && scenarios && !completedRef.current) {
       completedRef.current = true;
       const includedTopics = [
-        "housing",
+        profile.housing.intent !== "none" ? "housing" : null,
         profile.family.children > 0 ? "family" : null,
         profile.car.plan !== "none" ? "car" : null,
       ]

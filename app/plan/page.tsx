@@ -13,7 +13,21 @@ import HousingStep from "@/components/lifePlan/HousingStep";
 import FamilyStep from "@/components/lifePlan/FamilyStep";
 import CarStep from "@/components/lifePlan/CarStep";
 
-const TOTAL_STEPS = 4;
+type StepId = "household" | "housing" | "family" | "car";
+
+const STEP_LABELS: Record<StepId, string> = {
+  household: "わが家の現在",
+  housing: "住まい",
+  family: "子ども・育休・教育",
+  car: "車・確認",
+};
+
+function stepsFor(intent: EntryIntent): StepId[] {
+  if (intent === "housing") return ["household", "housing"];
+  if (intent === "family") return ["household", "family"];
+  if (intent === "car") return ["household", "car"];
+  return ["household", "housing", "family", "car"];
+}
 
 function isEntryIntent(value: string | null): value is EntryIntent {
   return value === "housing" || value === "family" || value === "car" || value === "all";
@@ -24,7 +38,7 @@ function PlanPageInner() {
   const searchParams = useSearchParams();
 
   const [profile, setProfile] = useState<LifeProfile | null>(null);
-  const [step, setStep] = useState(1);
+  const [stepIndex, setStepIndex] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const startedRef = useRef(false);
 
@@ -33,7 +47,14 @@ function PlanPageInner() {
     const intentParam = searchParams.get("intent");
     const intent = isEntryIntent(intentParam) ? intentParam : "all";
     const restored = loadLifeProfile();
-    setProfile(restored ?? createDefaultProfile(intent));
+    // A situation link starts a focused calculation. Preserve only the shared
+    // household values; unrelated plans must not leak in from a previous run.
+    if (isEntryIntent(intentParam)) {
+      const focused = createDefaultProfile(intent);
+      setProfile(restored ? { ...focused, household: restored.household } : focused);
+    } else {
+      setProfile(restored ?? createDefaultProfile(intent));
+    }
 
     if (!startedRef.current) {
       startedRef.current = true;
@@ -55,12 +76,17 @@ function PlanPageInner() {
     );
   }
 
-  const goToStep = (next: number) => {
-    if (next > step) {
+  const steps = stepsFor(profile.entryIntent);
+  const currentStep = steps[stepIndex];
+  const step = stepIndex + 1;
+  const totalSteps = steps.length;
+
+  const goToStep = (nextIndex: number) => {
+    if (nextIndex > stepIndex) {
       // 前進する場合だけバリデーションする（戻る操作は入力を保持したまま自由に戻れる）
       let stepErrors: Record<string, string> = {};
-      if (step === 1) stepErrors = validateHousehold(profile.household);
-      if (step === 2) stepErrors = validateHousing(profile.housing);
+      if (currentStep === "household") stepErrors = validateHousehold(profile.household);
+      if (currentStep === "housing") stepErrors = validateHousing(profile.housing);
       if (hasErrors(stepErrors)) {
         setErrors(stepErrors);
         return;
@@ -68,7 +94,7 @@ function PlanPageInner() {
       trackPlanEvent("plan_step_complete", { step, entry_intent: profile.entryIntent });
     }
     setErrors({});
-    setStep(next);
+    setStepIndex(nextIndex);
   };
 
   const handleFinish = () => {
@@ -93,47 +119,47 @@ function PlanPageInner() {
           <span className="text-slate-200">わが家のプラン</span>
         </nav>
 
-        <PlanProgress step={step} />
+        <PlanProgress step={step} totalSteps={totalSteps} label={STEP_LABELS[currentStep]} />
 
         <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6">
-          {step === 1 && (
+          {currentStep === "household" && (
             <HouseholdStep
               household={profile.household}
               onChange={(household) => setProfile({ ...profile, household })}
               errors={errors}
             />
           )}
-          {step === 2 && (
+          {currentStep === "housing" && (
             <HousingStep
               housing={profile.housing}
               onChange={(housing) => setProfile({ ...profile, housing })}
               errors={errors}
             />
           )}
-          {step === 3 && (
+          {currentStep === "family" && (
             <FamilyStep
               family={profile.family}
               onChange={(family) => setProfile({ ...profile, family })}
               errors={errors}
             />
           )}
-          {step === 4 && <CarStep car={profile.car} onChange={(car) => setProfile({ ...profile, car })} />}
+          {currentStep === "car" && <CarStep car={profile.car} onChange={(car) => setProfile({ ...profile, car })} />}
         </div>
 
         <div className="flex items-center justify-between gap-3">
           <button
             type="button"
-            onClick={() => goToStep(Math.max(1, step - 1))}
-            disabled={step === 1}
+            onClick={() => goToStep(Math.max(0, stepIndex - 1))}
+            disabled={stepIndex === 0}
             className="px-5 py-3 rounded-xl text-sm font-bold text-slate-300 border border-slate-600 disabled:opacity-30 disabled:cursor-not-allowed hover:border-slate-500 transition-colors"
           >
             ← 戻る
           </button>
 
-          {step < TOTAL_STEPS ? (
+          {stepIndex < totalSteps - 1 ? (
             <button
               type="button"
-              onClick={() => goToStep(step + 1)}
+              onClick={() => goToStep(stepIndex + 1)}
               className="flex-1 sm:flex-none px-6 py-3 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white transition-colors"
             >
               次へ →

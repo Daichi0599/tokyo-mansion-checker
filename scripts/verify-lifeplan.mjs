@@ -33,6 +33,22 @@ function check(name, fn) {
   }
 }
 
+check("entry intent - unrelated default plans are excluded", () => {
+  const housing = createDefaultProfile("housing");
+  assert.equal(housing.housing.intent, "considering");
+  assert.equal(housing.family.children, 0);
+  assert.equal(housing.car.plan, "none");
+
+  const family = createDefaultProfile("family");
+  assert.equal(family.housing.intent, "none");
+  assert.equal(family.family.children, 1);
+  assert.equal(family.car.plan, "none");
+
+  const car = createDefaultProfile("car");
+  assert.equal(car.housing.intent, "none");
+  assert.equal(car.family.children, 0);
+});
+
 /* ケース1: 単身・住宅のみ */
 check("ケース1: 単身・住宅のみ - シナリオが5件返る", () => {
   const p = createDefaultProfile("housing");
