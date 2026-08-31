@@ -98,16 +98,18 @@ interface WatchItem {
   area: string;
   comment: string;
   url?: string;
+  noteUrl?: string;
 }
 
 const WATCHLIST: WatchItem[] = [
   {
     developer: "モリモト",
     name: "ディアナコート荏原町アトラス",
-    area: "品川区荏原町・東急大井町線「荏原町」徒歩6分（城南エリア）",
+    area: "大田区北馬込・東急大井町線「荏原町」徒歩6分（城南エリア）",
     comment:
-      "城南（品川区）のディアナコート。角住戸率約70％・内廊下設計の上質仕様で気になる存在。専有面積は43〜107㎡の全51邸。価格は未公表だが、品川区の相場＋ディアナコート割増を考えると、70㎡級のファミリータイプは1億円超えが濃厚そう…。43〜50㎡台のコンパクトプランが出れば、1億未満で射程に入るか要チェック。",
+      "第一期二次は53.17〜72.38㎡、1億690万円〜1億5,590万円。予想どおり1億円を超えた。割高と断じたいわけではなく、駅距離や仕様を考えれば理由のある価格だと思う。ただ、自分の予算では届かなかった。第三期の価格は未定なので引き続き確認する。",
     url: "https://www.morimoto-real.co.jp/shinchiku/dc-ebaramachi-atlas/index.html",
+    noteUrl: "https://note.com/30lab/n/nf2313fb7f7ee",
   },
 ];
 
@@ -240,6 +242,9 @@ export default function MansionDeveloperBrandPage() {
                 <p className="text-xs text-slate-300 leading-relaxed">{w.comment}</p>
                 {w.url && (
                   <a href={w.url} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 text-xs font-bold text-blue-400 hover:text-blue-300">公式情報を見る →</a>
+                )}
+                {w.noteUrl && (
+                  <a href={w.noteUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 ml-4 text-xs font-bold text-emerald-400 hover:text-emerald-300">運営者の予算目線メモ →</a>
                 )}
               </div>
             ))}
