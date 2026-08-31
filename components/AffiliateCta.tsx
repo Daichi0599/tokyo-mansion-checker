@@ -12,7 +12,7 @@ import { sendGAEvent } from "@next/third-parties/google";
  *  - A8 のインプレッション計測ピクセル
  */
 
-type ProgramKey = "mogecheck" | "kasaihoken" | "jidoshahoken" | "fpsoudan" | "gakushi";
+type ProgramKey = "mogecheck" | "kasaihoken" | "jidoshahoken" | "fpsoudan" | "gakushi" | "hikkoshi";
 
 type Program = {
   /** A8 の a8mat パラメータ */
@@ -98,6 +98,20 @@ const PROGRAMS: Record<ProgramKey, Program> = {
       border: "border-amber-500/30",
       accent: "text-amber-400",
       button: "bg-amber-500 hover:bg-amber-400",
+    },
+  },
+  hikkoshi: {
+    mat: "4BAITM+4Q9ZSI+ZXM+HYNBM",
+    pixelHost: "www14",
+    gaName: "引越し侍",
+    heading: "購入が決まったら、次は引っ越し業者選び",
+    title: "引越し侍で最大10社から無料一括見積もり",
+    note: "1社だけで決めると相場より高くなりがち。290社以上から最大10社を無料で比較でき、料金が最大50%安くなることもあります。",
+    cta: "無料で引っ越し業者を比較する →",
+    style: {
+      border: "border-emerald-500/30",
+      accent: "text-emerald-400",
+      button: "bg-emerald-600 hover:bg-emerald-500",
     },
   },
 };

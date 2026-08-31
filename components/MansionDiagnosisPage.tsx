@@ -7,6 +7,7 @@ import { MANSION_FAQ } from "@/lib/mansionFaq";
 import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
 import ResultTabs          from "@/components/ResultTabs";
+import AffiliateCta        from "@/components/AffiliateCta";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
 
@@ -391,6 +392,9 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img width={1} height={1} src="https://www18.a8.net/0.gif?a8mat=4AZGC3+FBBEYA+2PS+2NBPO2" alt="" style={{ display: "block" }} />
             </div>
+
+            {/* ②.6 引越し侍 */}
+            <AffiliateCta program="hikkoshi" page="mansion-result" />
 
             {/* ③ Step2バナー */}
             <a
