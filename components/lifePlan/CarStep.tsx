@@ -33,7 +33,7 @@ export default function CarStep({ car, onChange }: Props) {
 
       <PlanChoiceField label="車の持ち方" value={car.plan} options={CAR_OPTIONS} onChange={(v) => set("plan", v)} />
 
-      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5 transition-opacity ${disabled ? "opacity-50" : ""}`}>
+      {!disabled && <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
         <PlanNumberField
           label="駐車場代"
           unit="万円/月"
@@ -50,7 +50,7 @@ export default function CarStep({ car, onChange }: Props) {
           onChange={(v) => set("monthlyUseDays", v)}
           isDefault={disabled}
         />
-      </div>
+      </div>}
     </div>
   );
 }

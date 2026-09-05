@@ -52,7 +52,21 @@ export default function FamilyStep({ family, onChange, errors }: Props) {
         error={errors.children}
       />
 
-      <div className={`space-y-6 transition-opacity ${noChildren ? "opacity-50" : ""}`}>
+      {!noChildren && <div className="space-y-6">
+        <PlanChoiceField
+          label="出産の方針"
+          value={family.birthPlan}
+          options={BIRTH_OPTIONS}
+          onChange={(v) => set("birthPlan", v)}
+        />
+
+        <details className="group rounded-xl border border-slate-700 bg-slate-900/40 p-4">
+          <summary className="cursor-pointer list-none text-sm font-bold text-slate-300 flex items-center justify-between">
+            <span>育休・教育の条件を調整する</span>
+            <span className="text-slate-500 group-open:rotate-180 transition-transform">⌄</span>
+          </summary>
+          <p className="mt-2 text-xs text-slate-500">まだ決まっていなければ、目安のままで大丈夫です。</p>
+          <div className="mt-4 space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
           <PlanNumberField
             label="出産まで（または最初の子どもまで）"
@@ -80,13 +94,6 @@ export default function FamilyStep({ family, onChange, errors }: Props) {
             isDefault={noChildren}
           />
         </div>
-
-        <PlanChoiceField
-          label="出産の方針"
-          value={family.birthPlan}
-          options={BIRTH_OPTIONS}
-          onChange={(v) => set("birthPlan", v)}
-        />
         <PlanChoiceField
           label="教育方針"
           value={family.educationPolicy}
@@ -99,7 +106,9 @@ export default function FamilyStep({ family, onChange, errors }: Props) {
           options={UNIVERSITY_OPTIONS}
           onChange={(v) => set("university", v)}
         />
-      </div>
+          </div>
+        </details>
+      </div>}
     </div>
   );
 }

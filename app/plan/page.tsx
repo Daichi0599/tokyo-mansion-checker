@@ -41,6 +41,7 @@ function PlanPageInner() {
   const [stepIndex, setStepIndex] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const startedRef = useRef(false);
+  const viewedStepRef = useRef<string | null>(null);
 
   // 初回マウント時にlocalStorageから復元、無ければintentから初期値を作る（SSR中はwindowに触れない）
   useEffect(() => {
@@ -68,6 +69,25 @@ function PlanPageInner() {
     if (profile) saveLifeProfile(profile);
   }, [profile]);
 
+  const steps = profile ? stepsFor(profile.entryIntent) : [];
+  const currentStep = steps[stepIndex];
+  const step = stepIndex + 1;
+  const totalSteps = steps.length;
+
+  // どの画面で離脱したかを、個人入力値を含めずに確認する。
+  useEffect(() => {
+    if (!profile || !currentStep) return;
+    const viewKey = `${profile.entryIntent}:${currentStep}:${step}`;
+    if (viewedStepRef.current === viewKey) return;
+    viewedStepRef.current = viewKey;
+    trackPlanEvent("plan_step_view", {
+      step,
+      step_key: currentStep,
+      total_steps: totalSteps,
+      entry_intent: profile.entryIntent,
+    });
+  }, [currentStep, profile, step, totalSteps]);
+
   if (!profile) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
@@ -75,11 +95,6 @@ function PlanPageInner() {
       </div>
     );
   }
-
-  const steps = stepsFor(profile.entryIntent);
-  const currentStep = steps[stepIndex];
-  const step = stepIndex + 1;
-  const totalSteps = steps.length;
 
   const goToStep = (nextIndex: number) => {
     if (nextIndex > stepIndex) {
@@ -112,7 +127,7 @@ function PlanPageInner() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
-      <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+      <div className="max-w-2xl mx-auto px-4 py-8 pb-28 sm:pb-8 space-y-6">
         <nav className="flex items-center gap-1.5 text-sm text-slate-400">
           <Link href="/" className="hover:text-blue-300">ホーム</Link>
           <span>/</span>
@@ -121,7 +136,7 @@ function PlanPageInner() {
 
         <PlanProgress step={step} totalSteps={totalSteps} label={STEP_LABELS[currentStep]} />
 
-        <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6">
+        <div className="bg-slate-800 rounded-2xl border border-slate-700 p-4 sm:p-6">
           {currentStep === "household" && (
             <HouseholdStep
               household={profile.household}
@@ -146,7 +161,7 @@ function PlanPageInner() {
           {currentStep === "car" && <CarStep car={profile.car} onChange={(car) => setProfile({ ...profile, car })} />}
         </div>
 
-        <div className="flex items-center justify-between gap-3">
+        <div className="sticky bottom-3 z-20 flex items-center justify-between gap-3 rounded-2xl border border-slate-700 bg-slate-900/95 p-2 shadow-2xl shadow-black/30 backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
           <button
             type="button"
             onClick={() => goToStep(Math.max(0, stepIndex - 1))}
@@ -162,7 +177,7 @@ function PlanPageInner() {
               onClick={() => goToStep(stepIndex + 1)}
               className="flex-1 sm:flex-none px-6 py-3 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white transition-colors"
             >
-              次へ →
+              次は「{STEP_LABELS[steps[stepIndex + 1]]}」 →
             </button>
           ) : (
             <button
@@ -170,7 +185,7 @@ function PlanPageInner() {
               onClick={handleFinish}
               className="flex-1 sm:flex-none px-6 py-3 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white transition-colors"
             >
-              5つの時点で確認する →
+              結果を見る（約5秒） →
             </button>
           )}
         </div>

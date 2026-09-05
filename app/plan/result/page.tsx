@@ -14,6 +14,7 @@ import ScenarioComparison from "@/components/lifePlan/ScenarioComparison";
 import RecommendationList from "@/components/lifePlan/RecommendationList";
 import PlanEditPanel from "@/components/lifePlan/PlanEditPanel";
 import CalculationNotes from "@/components/lifePlan/CalculationNotes";
+import AffiliateCta from "@/components/AffiliateCta";
 
 const DETAIL_TOOLS: { tool: "mansion" | "check" | "birth" | "child" | "car"; href: string; icon: string; label: string }[] = [
   { tool: "mansion", href: "/mansion", icon: "🏠", label: "マンション購入診断" },
@@ -139,6 +140,19 @@ export default function PlanResultPage() {
             ))}
           </div>
         </section>
+
+        {profile.housing.intent !== "none" && (
+          <section className="pt-2">
+            <AffiliateCta
+              program="hikkoshi"
+              page="plan-result"
+              heading="購入が具体化したあとで大丈夫"
+              title="引っ越し費用も、1社だけで決めずに比べる"
+              note="物件が決まってから使うサービスです。今すぐ申し込む必要はありません。時期が来たら、最大10社の見積もりを同じ条件で比較できます。"
+              cta="引っ越し料金を無料で比較する →"
+            />
+          </section>
+        )}
 
         <CalculationNotes />
       </div>

@@ -19,19 +19,11 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
       <div>
         <h2 className="text-lg font-black text-white">わが家の現在</h2>
         <p className="text-sm text-slate-400 mt-1">
-          まずは今の状況から。年収・貯蓄・生活費は、これから先の5つの時点を比較するベースになります。
+          正確でなくても大丈夫です。まずは年収と家賃を近い数字で選んでください。
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
-        <PlanNumberField
-          label="ご本人の年齢"
-          unit="歳"
-          value={household.userAge}
-          options={range(18, 60)}
-          onChange={(v) => set("userAge", v)}
-          error={errors.userAge}
-        />
         <PlanNumberField
           label="ご本人の年収"
           unit="万円"
@@ -51,24 +43,6 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
           error={errors.partnerIncome}
         />
         <PlanNumberField
-          label="貯蓄"
-          unit="万円"
-          desc="頭金や一時的な出費に充てられる金融資産の合計"
-          value={household.savings}
-          options={[0, 100, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 5000]}
-          onChange={(v) => set("savings", v)}
-          error={errors.savings}
-        />
-        <PlanNumberField
-          label="月の生活費"
-          unit="万円"
-          desc="食費・光熱費・通信費・保険料など住居費以外の支出"
-          value={household.monthlyLivingCost}
-          options={[10, 15, 20, 25, 30, 35, 40, 50, 60]}
-          onChange={(v) => set("monthlyLivingCost", v)}
-          error={errors.monthlyLivingCost}
-        />
-        <PlanNumberField
           label="いまの家賃"
           unit="万円/月"
           desc="住宅を購入しない場合の「現在」の比較基準になります"
@@ -78,6 +52,45 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
           error={errors.currentRent}
         />
       </div>
+
+      <details className="group rounded-xl border border-slate-700 bg-slate-900/40 p-4">
+        <summary className="cursor-pointer list-none text-sm font-bold text-slate-300 flex items-center justify-between">
+          <span>もう少し正確にする（年齢・貯蓄・生活費）</span>
+          <span className="text-slate-500 group-open:rotate-180 transition-transform">⌄</span>
+        </summary>
+        <p className="mt-2 text-xs text-slate-500">開かなくても、表示中の目安で計算できます。</p>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
+          <PlanNumberField
+            label="ご本人の年齢"
+            unit="歳"
+            value={household.userAge}
+            options={range(18, 60)}
+            onChange={(v) => set("userAge", v)}
+            error={errors.userAge}
+            isDefault
+          />
+          <PlanNumberField
+            label="貯蓄"
+            unit="万円"
+            desc="頭金や一時的な出費に充てられる金融資産の合計"
+            value={household.savings}
+            options={[0, 100, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 5000]}
+            onChange={(v) => set("savings", v)}
+            error={errors.savings}
+            isDefault
+          />
+          <PlanNumberField
+            label="月の生活費"
+            unit="万円"
+            desc="住居費を除く、毎月のおおよその支出"
+            value={household.monthlyLivingCost}
+            options={[10, 15, 20, 25, 30, 35, 40, 50, 60]}
+            onChange={(v) => set("monthlyLivingCost", v)}
+            error={errors.monthlyLivingCost}
+            isDefault
+          />
+        </div>
+      </details>
     </div>
   );
 }

@@ -24,6 +24,9 @@ export default function PlanProgress({
           style={{ width: `${percent}%` }}
         />
       </div>
+      <p className="text-xs text-slate-500">
+        あと約{Math.max(1, totalSteps - step + 1)}分。迷う項目は目安のままで進められます。
+      </p>
     </div>
   );
 }

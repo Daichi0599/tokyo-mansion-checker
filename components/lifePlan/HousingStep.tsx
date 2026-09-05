@@ -38,7 +38,7 @@ export default function HousingStep({ housing, onChange, errors }: Props) {
         onChange={(v) => set("intent", v)}
       />
 
-      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5 transition-opacity ${disabled ? "opacity-50" : ""}`}>
+      {!disabled && <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
         <PlanNumberField
           label="希望する購入価格"
           unit="万円"
@@ -57,35 +57,20 @@ export default function HousingStep({ housing, onChange, errors }: Props) {
           error={errors.downPayment}
           isDefault={disabled}
         />
-        <PlanNumberField
-          label="金利（年率）"
-          unit="%"
-          desc="変動なら1.0%前後、フラット35なら3.2%前後が目安"
-          value={housing.interestRate}
-          options={[0.5, 0.7, 0.9, 1.0, 1.1, 1.3, 1.5, 1.8, 2.0, 2.5, 3.0, 3.3, 3.5]}
-          onChange={(v) => set("interestRate", v)}
-          error={errors.interestRate}
-          isDefault={disabled}
-        />
-        <PlanNumberField
-          label="返済年数"
-          unit="年"
-          value={housing.repaymentYears}
-          options={range(5, 50, 5)}
-          onChange={(v) => set("repaymentYears", v)}
-          error={errors.repaymentYears}
-          isDefault={disabled}
-        />
-        <PlanNumberField
-          label="管理費・修繕積立金"
-          unit="万円/月"
-          value={housing.managementFee}
-          options={[0, 1, 2, 3, 4, 5, 6, 8, 10]}
-          onChange={(v) => set("managementFee", v)}
-          error={errors.managementFee}
-          isDefault={disabled}
-        />
-      </div>
+      </div>}
+
+      {!disabled && <details className="group rounded-xl border border-slate-700 bg-slate-900/40 p-4">
+        <summary className="cursor-pointer list-none text-sm font-bold text-slate-300 flex items-center justify-between">
+          <span>ローン条件を調整する</span>
+          <span className="text-slate-500 group-open:rotate-180 transition-transform">⌄</span>
+        </summary>
+        <p className="mt-2 text-xs text-slate-500">未調整なら金利1.0%・35年・管理修繕費3万円の目安で計算します。</p>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
+          <PlanNumberField label="金利（年率）" unit="%" value={housing.interestRate} options={[0.5, 0.7, 0.9, 1.0, 1.1, 1.3, 1.5, 1.8, 2.0, 2.5, 3.0, 3.3, 3.5]} onChange={(v) => set("interestRate", v)} error={errors.interestRate} isDefault />
+          <PlanNumberField label="返済年数" unit="年" value={housing.repaymentYears} options={range(5, 50, 5)} onChange={(v) => set("repaymentYears", v)} error={errors.repaymentYears} isDefault />
+          <PlanNumberField label="管理費・修繕積立金" unit="万円/月" value={housing.managementFee} options={[0, 1, 2, 3, 4, 5, 6, 8, 10]} onChange={(v) => set("managementFee", v)} error={errors.managementFee} isDefault />
+        </div>
+      </details>}
     </div>
   );
 }
