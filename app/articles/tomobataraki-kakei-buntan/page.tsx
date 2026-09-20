@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
-  title: "共働き夫婦の家計分担、みんなどうしてる？割合制・費目別・共同口座を比較｜30Lab",
+  title: "共働き夫婦の生活費、負担割合はどうする？折半・収入比を具体例で比較｜30Lab",
   description:
-    "共働き夫婦の生活費の分担方法を徹底比較。折半・収入比例・費目別・共同口座それぞれのメリット・デメリットと、揉めないためのルールの決め方を解説。",
+    "共働き夫婦の生活費は半分ずつか、収入に応じて分けるか。手取り40万円・25万円、共通生活費30万円の具体例で負担額を比較し、転職や育休にも対応できる決め方を整理します。",
   keywords: [
     "共働き 家計 分担 割合",
     "夫婦 生活費 分担",
@@ -14,15 +13,15 @@ export const metadata: Metadata = {
     "生活費 折半 割合",
   ],
   openGraph: {
-    title: "共働き夫婦の家計分担、みんなどうしてる？",
-    description: "折半・収入比例・費目別・共同口座の違いと、揉めないルールの決め方を解説。",
+    title: "共働き夫婦の生活費、半分ずつでいい？",
+    description: "折半と収入比を具体的な金額で比べ、夫婦で決める順番を整理します。",
     locale: "ja_JP",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "共働き夫婦の家計分担、みんなどうしてる？",
-    description: "折半・収入比例・費目別・共同口座を比較。揉めないルールの決め方。",
+    title: "共働き夫婦の生活費、半分ずつでいい？",
+    description: "折半と収入比を具体的な金額で比較。転職・育休を見据えた決め方。",
   },
 };
 
@@ -48,73 +47,68 @@ export default function TomobatarakiKakeiBuntanPage() {
 
         {/* タイトル */}
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
-          共働き夫婦の家計分担、<br />
-          <span className="text-blue-400">みんなどうしてる？</span>
+          共働き夫婦の生活費、<br />
+          <span className="text-blue-400">半分ずつでいい？</span>
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
-          「生活費、折半でいいの？」「相手の給料を知らないまま結婚した」——共働き夫婦にとって家計分担は最初につまずきやすいポイントです。この記事では代表的な4つの分担方法と、それぞれの向き不向きを整理します。
+          家賃も食費も半分なら計算は楽です。でも、手取りに差があると、同じ15万円を出しても残るお金は同じではありません。逆に収入比で細かく割ると、昇給や転職のたびに計算し直すのもしんどい。どちらが正しいかではなく、<strong className="text-white">いまの2人が納得できて、状況が変わったら直せる分け方</strong>を具体的な金額で整理します。
         </p>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
-            📊 実際どうしてる？分担方法の実態
+            まず結論：収入差が小さければ折半、大きければ収入比
           </h2>
-          <div className="space-y-3 mb-4">
-            <div className="bg-slate-800 rounded-xl border border-slate-700 p-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-300">収入に応じた一部負担（比例制）</span>
-                <span className="text-lg font-black text-emerald-400">46.4%</span>
-              </div>
-            </div>
-            <div className="bg-slate-800 rounded-xl border border-slate-700 p-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-300">完全折半</span>
-                <span className="text-lg font-black text-emerald-400">37.3%</span>
-              </div>
-            </div>
-            <div className="bg-slate-800 rounded-xl border border-slate-700 p-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-300">お財布は別々（項目ごとに個別負担）</span>
-                <span className="text-lg font-black text-emerald-400">54.0%</span>
-              </div>
-              <p className="text-xs text-slate-400 mt-1">※ 新婚（令和婚）夫婦に限ると73.0%</p>
-            </div>
+          <div className="bg-slate-800 rounded-xl border border-slate-700 p-5 space-y-3 text-sm text-slate-300 leading-relaxed">
+            <p><strong className="text-white">折半</strong>は、収入差が小さく、家事負担も含めて2人が納得しているなら一番簡単です。</p>
+            <p><strong className="text-white">収入比</strong>は、収入差が大きい、片方が育休に入る、転職直後など収入が動く時期に向いています。</p>
+            <p>迷ったら、毎月の共通生活費だけを収入比で共同口座に入れ、残りは各自で持つ形から始めると話しやすいです。</p>
           </div>
-          <p className="text-xs text-slate-400">※ ゼクシィ「共働き夫婦の生活費」調査、オカネコ「夫婦のお財布事情」調査（2025年）をもとにした目安。複数の分担方法を併用しているケースもあります。</p>
         </section>
 
         {/* ━━ セクション2 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
-            ⚖️ 4つの分担方法を比較
+            手取り40万円・25万円なら、毎月いくら出す？
           </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            2人の手取りが合計65万円、家賃・食費・光熱費など共通の生活費が30万円だとします。
+          </p>
+          <div className="overflow-x-auto mb-5 rounded-xl border border-slate-700">
+            <table className="w-full min-w-[520px] text-sm">
+              <thead className="bg-slate-800 text-slate-200">
+                <tr><th className="p-3 text-left">分け方</th><th className="p-3 text-right">手取り40万円側</th><th className="p-3 text-right">手取り25万円側</th></tr>
+              </thead>
+              <tbody className="divide-y divide-slate-700 bg-slate-800/50 text-slate-300">
+                <tr><td className="p-3 font-bold text-white">半分ずつ</td><td className="p-3 text-right">15万円</td><td className="p-3 text-right">15万円</td></tr>
+                <tr><td className="p-3 font-bold text-white">手取りの比率</td><td className="p-3 text-right">約18.5万円</td><td className="p-3 text-right">約11.5万円</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-slate-400 leading-relaxed mb-6">
+            収入比は「40÷65」と「25÷65」で計算しています。折半では支払い後に25万円・10万円が残り、収入比では約21.5万円・13.5万円が残ります。自由に使える額を同じにする方法ではなく、負担率をそろえる方法です。
+          </p>
+          <h3 className="text-base font-black text-white mb-3">管理方法はこの3つで十分</h3>
           <div className="space-y-3">
             {[
               {
-                title: "①完全折半",
-                desc: "生活費を2分の1ずつ負担する、最もシンプルな方法。",
-                merit: "計算が簡単で不公平感が出にくい。",
-                demerit: "収入差が大きいと、収入が低い側の負担感が重くなる。",
+                title: "① 共同口座へ定額を入れる",
+                desc: "毎月決めた金額を2人が入れ、家賃や食費をそこから払う。折半にも収入比にも使えます。",
+                merit: "共通生活費だけが見え、個人のお金と混ざらない。",
+                demerit: "旅行や家具など臨時支出の扱いを決めておく必要がある。",
               },
               {
-                title: "②収入比例制",
-                desc: "「夫6：妻4」のように、収入の割合に応じて負担額を決める方法。",
-                merit: "収入差があっても負担感のバランスを取りやすい。",
-                demerit: "昇給・転職のたびに割合を見直す手間がかかる。",
+                title: "② 費目ごとに担当する",
+                desc: "家賃は夫、食費と光熱費は妻など、支払う項目を分ける。",
+                merit: "口座やカードを作り直さず、すぐ始められる。",
+                demerit: "値上がりで負担差が広がっても気づきにくい。",
               },
               {
-                title: "③費目別分担",
-                desc: "「家賃・光熱費は夫、食費・日用品は妻」のように項目ごとに担当を分ける方法。",
-                merit: "お互いの支出に口を出しにくく、精神的な自由度が高い。",
-                demerit: "全体の貯蓄額やお金の流れが見えにくくなりやすい。",
-              },
-              {
-                title: "④共同口座に一定額を入金",
-                desc: "毎月決まった額を共同口座に入れ、そこから生活費を引き落とす方法。",
-                merit: "家計の可視化がしやすく、貯蓄計画も立てやすい。データ上、共同口座を持つ夫婦は持たない夫婦より金融資産が平均550万円多いという調査結果もある。",
-                demerit: "個人の自由に使えるお金との線引きを最初に決めておく必要がある。",
+                title: "③ 共通費だけ精算する",
+                desc: "支払いは各自で行い、月末に共通費だけ集計して差額を精算する。",
+                merit: "今の口座やクレジットカードを変えずに試せる。",
+                demerit: "毎月の集計が面倒だと続きにくい。",
               },
             ].map((item, i) => (
               <div key={i} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
@@ -127,15 +121,6 @@ export default function TomobatarakiKakeiBuntanPage() {
           </div>
         </section>
 
-        {/* ━━ アフィリエイト CTA ━━ */}
-        <AffiliateCta
-          program="fpsoudan"
-          page="tomobataraki-kakei-buntan"
-          heading="分担ルールを決める前に、家計全体を可視化する"
-          title="2人の収支をお金のプロと一緒に整理する"
-          note="分担方法だけ決めても、貯蓄目標が曖昧だと結局揉めやすくなります。将来の住宅費・教育費まで含めて無料でオンライン相談できます。"
-        />
-
         {/* ━━ セクション3 ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
@@ -143,9 +128,9 @@ export default function TomobatarakiKakeiBuntanPage() {
           </h2>
           <div className="space-y-3 mb-4">
             {[
-              { title: "① 「貯蓄目標」を先に決めてから分担を決める", body: "分担割合の話し合いは「何にいくら払うか」から入ると揉めやすい。先に「毎月いくら貯めるか」を2人で合意してから、残りをどう分けるかを話すとスムーズ。" },
-              { title: "② 収入・支出をどこまで開示するか最初に決める", body: "「お財布は別々」派でも、住宅ローンを組む段階では世帯年収の開示が必須になる。将来のライフイベントを見据えて、開示範囲を早めに擦り合わせておく。" },
-              { title: "③ 半年〜1年に一度、割合を見直すタイミングを作る", body: "昇給・転職・産休育休などで収入バランスは変わる。「見直す日」をあらかじめ決めておくと、都度の言い出しにくさがなくなる。" },
+              { title: "① 共通生活費に含めるものを決める", body: "家賃と食費は共通でも、昼食代、服、美容、奨学金、実家への仕送りまで混ぜるかは家庭ごとに違います。割合を計算する前に、対象を1枚のメモに書き出します。" },
+              { title: "② 金額ではなく、支払い後に残る額も見る", body: "同じ金額を払う公平さと、同じ負担率にする公平さは別です。折半と収入比を一度両方計算して、支払い後の残額を見て決めます。" },
+              { title: "③ 見直す条件を先に決める", body: "半年ごとの定例見直しに加え、転職、昇給、育休、時短勤務の開始時は再計算する、と決めておきます。収入が変わった側から言い出す負担を減らせます。" },
             ].map((item, i) => (
               <div key={i} className="bg-slate-800 rounded-xl p-4 border border-slate-700">
                 <p className="text-sm font-bold text-white mb-1">{item.title}</p>
@@ -158,30 +143,30 @@ export default function TomobatarakiKakeiBuntanPage() {
         {/* ━━ セクション4 まとめ ━━ */}
         <section className="mb-10">
           <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
-            📌 まとめ：正解は一つじゃない、更新前提で決める
+            まとめ：最初から完璧に決めなくていい
           </h2>
           <div className="bg-blue-500/10 rounded-xl border border-blue-500/30 p-5 space-y-3 text-sm text-slate-300 leading-relaxed">
             <p>
-              分担方法は「収入比例制」と「折半」がほぼ拮抗しており（46.4% vs 37.3%）、<strong className="text-white">どれか一つが正解というわけではありません</strong>。
+              収入差が小さく、2人とも納得できるなら折半が簡単です。収入差が大きい、転職や育休が近いなら収入比のほうが無理を減らせます。
             </p>
             <p>
-              重要なのは分担割合そのものより、<strong className="text-white">貯蓄目標を先に共有していること</strong>と、<strong className="text-white">見直すタイミングを決めておくこと</strong>です。
+              大事なのは、世間の平均に合わせることではなく、<strong className="text-white">共通費の範囲と見直す条件を2人で言葉にすること</strong>です。
             </p>
             <p>
-              将来住宅購入を考えているなら、世帯年収から購入可能額を試算しておくと、分担ルールの話し合いにも具体的な目安が生まれます。
+              まず3か月だけ試して、面倒だった点や不満が出たところを直すくらいで十分です。
             </p>
           </div>
         </section>
 
         {/* 内部ツール誘導 */}
         <div className="bg-blue-600 rounded-2xl p-6 text-center text-white mb-8">
-          <p className="text-base font-black mb-1">世帯年収での購入可能額を試算してみる</p>
-          <p className="text-xs mb-4 opacity-90">2人分の年収・貯蓄ペースを入れるだけで、無理のない購入価格帯がわかります。</p>
+          <p className="text-base font-black mb-1">家・出産・車を一度に置いてみる</p>
+          <p className="text-xs mb-4 opacity-90">家計分担だけでなく、これから重なる大きな支出を入れて、どの時期が苦しくなるか確認できます。</p>
           <Link
-            href="/mansion"
+            href="/plan?intent=all"
             className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
-            無料マンション診断ツールを使う →
+            わが家のプランを作る →
           </Link>
         </div>
 
@@ -205,7 +190,7 @@ export default function TomobatarakiKakeiBuntanPage() {
 
         {/* 免責事項 */}
         <p className="text-xs text-slate-400 mt-4 leading-relaxed">
-          ※本記事は情報提供を目的としており、特定の金融商品・サービスの利用を推奨するものではありません。統計値はゼクシィ・オカネコ・スマートバンクの各種調査（2025〜2026年）を参照した目安であり、個々の状況により異なります。具体的な家計設計は専門家にご相談ください。
+          ※本記事は家計分担を話し合うための一般的な整理方法を紹介するものです。税金や社会保険料を含む実際の手取り額、必要な生活費は各家庭で異なります。
         </p>
 
         {/* 関連記事 */}
