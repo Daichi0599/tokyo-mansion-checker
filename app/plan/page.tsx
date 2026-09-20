@@ -33,6 +33,10 @@ function isEntryIntent(value: string | null): value is EntryIntent {
   return value === "housing" || value === "family" || value === "car" || value === "all";
 }
 
+function planEntrySource(value: string | null): "direct" | "shared_household_article" {
+  return value === "shared_household_article" ? value : "direct";
+}
+
 function PlanPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -59,7 +63,10 @@ function PlanPageInner() {
 
     if (!startedRef.current) {
       startedRef.current = true;
-      trackPlanEvent("plan_start", { entry_intent: intent });
+      trackPlanEvent("plan_start", {
+        entry_intent: intent,
+        source: planEntrySource(searchParams.get("source")),
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

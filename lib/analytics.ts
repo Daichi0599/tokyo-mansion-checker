@@ -13,7 +13,10 @@ import type { EntryIntent, CarPlan } from "@/types/lifePlan";
  */
 
 type PlanEventMap = {
-  plan_start: { entry_intent: EntryIntent };
+  plan_start: {
+    entry_intent: EntryIntent;
+    source: "direct" | "shared_household_article";
+  };
   plan_step_view: { step: number; step_key: "household" | "housing" | "family" | "car"; total_steps: number; entry_intent: EntryIntent };
   plan_step_complete: { step: number; entry_intent: EntryIntent };
   plan_complete: { entry_intent: EntryIntent; included_topics: string };

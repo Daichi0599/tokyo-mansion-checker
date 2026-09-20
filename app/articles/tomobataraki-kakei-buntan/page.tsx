@@ -163,7 +163,7 @@ export default function TomobatarakiKakeiBuntanPage() {
           <p className="text-base font-black mb-1">家・出産・車を一度に置いてみる</p>
           <p className="text-xs mb-4 opacity-90">家計分担だけでなく、これから重なる大きな支出を入れて、どの時期が苦しくなるか確認できます。</p>
           <Link
-            href="/plan?intent=all"
+            href="/plan?intent=all&source=shared_household_article"
             className="inline-block bg-slate-800 text-blue-300 font-black text-sm px-6 py-3 rounded-xl hover:bg-blue-500/10 transition-colors"
           >
             わが家のプランを作る →
