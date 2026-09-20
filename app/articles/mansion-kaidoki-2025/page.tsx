@@ -3,7 +3,7 @@ import Link from "next/link";
 import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
-  title: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説｜30Lab",
+  title: "マンションの買い時はいつ？相場予測より先に自分の限度額を無料診断【2026年】｜30Lab",
   description:
     "2026年8月時点の金利（政策金利1.0%・変動1.08%・フラット35は3.29%）をもとに、マンションの買い時を整理。変動と固定で買える価格が1,300万円変わる現状と、「今買うべき人・待つべき人」の判断基準を解説します。",
   keywords: [
@@ -14,14 +14,14 @@ export const metadata: Metadata = {
     "不動産 買い時 2026",
   ],
   openGraph: {
-    title: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説",
+    title: "マンションの買い時はいつ？相場予測より先に自分の限度額を無料診断",
     description: "2026年の不動産市況と「今買うべき人・待つべき人」の判断基準。無料診断ツールで予算確認も。",
     locale: "ja_JP",
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title: "マンションの買い時はいつ？2026年の相場予測と判断基準",
+    title: "マンションの買い時より先に、自分の限度額を無料診断",
     description: "価格高止まり×金利上昇の2026年、「今買うべき人・待つべき人」の判断基準を解説。",
   },
 };
@@ -48,7 +48,7 @@ const FAQ_ITEMS = [
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "マンションの買い時はいつ？2026年の相場予測と判断基準を解説",
+  headline: "マンションの買い時はいつ？相場予測より先に自分の限度額を無料診断",
   description: "2026年の市況（価格高止まり・金利上昇）を整理し、「今買うべき人・待つべき人」の判断基準を解説。",
   author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
   publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
@@ -88,8 +88,8 @@ export default function MansionKaidoki2025Page() {
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
-          マンションの<span className="text-blue-400">買い時はいつ？</span><br />
-          2026年の相場と判断基準を解説
+          マンションの<span className="text-blue-400">買い時より先に</span><br />
+          自分の限度額を無料診断【2026年】
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">

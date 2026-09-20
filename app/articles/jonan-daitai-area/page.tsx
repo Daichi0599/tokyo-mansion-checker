@@ -4,7 +4,7 @@ import AffiliateCta from "@/components/AffiliateCta";
 import { TOKYO_AREAS } from "@/lib/areaData";
 
 export const metadata: Metadata = {
-  title: "城南エリアの代わりになる街は？代替候補5エリアを比較【2026年】｜30Lab",
+  title: "城南が高くて買えない人へ。予算内で\"それっぽく\"住める代替5エリア｜30Lab",
   description:
     "品川・目黒・大田・世田谷の城南エリアが高くて買えない人向けに、代わりの候補となる5エリア（大田区・武蔵小杉・川崎・日吉綱島・品川区西部）を城南っぽさ・価格・都心アクセス・資産性で比較。予算内で城南的な暮らしを実現する現実解を解説します。",
   keywords: [
@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     "品川 アクセス 安い エリア マンション",
   ],
   openGraph: {
-    title: "城南エリアの代わりになる街は？代替候補5エリアを比較【2026年】",
+    title: "城南が高くて買えない人へ。予算内で\"それっぽく\"住める代替5エリア",
     description: "城南が高くて買えない人へ。代替候補5エリアを城南っぽさ・価格・アクセス・資産性で比較。",
     locale: "ja_JP",
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title: "城南エリアの代わりになる街は？代替候補5エリアを比較",
+    title: "城南が高くて買えない人へ。予算内で住める代替5エリア",
     description: "代替候補5エリアを城南っぽさ・価格・アクセス・資産性で比較。予算内で城南的な暮らしを。",
   },
 };
@@ -114,7 +114,7 @@ const FAQ_ITEMS = [
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "城南エリアの代わりになる街は？代替候補5エリアを比較【2026年】",
+  headline: "城南が高くて買えない人へ。予算内で\"それっぽく\"住める代替5エリア",
   description:
     "城南が高くて買えない人向けに、代替候補5エリアを城南っぽさ・価格・都心アクセス・資産性で比較。",
   author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
@@ -159,8 +159,8 @@ export default function JonanDaitaiAreaPage() {
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
-          <span className="text-blue-400">城南エリアの代わり</span>になる街は？<br />
-          代替候補5エリアを比較【2026年】
+          <span className="text-blue-400">城南が高くて買えない</span>人へ。<br />
+          予算内で&quot;それっぽく&quot;住める代替5エリア
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
