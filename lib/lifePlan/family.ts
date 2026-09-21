@@ -91,4 +91,23 @@ export function calcEducationPeakMonthly(profile: LifeProfile): { monthly: numbe
   return { monthly: Math.round(peak.monthly * 10) / 10, label: peak.label };
 }
 
+/**
+ * /birth の診断結果をLifeProfileへ書き戻す。
+ * /birthにはnumChildrenの入力欄が無い（常に1人分の試算）ため、人数はプロフィール側の
+ * 値をそのまま尊重し、0人（未設定）のときだけ1人に補正する。
+ * cesareanはLifeProfile側に対応するフィールドが無いため書き戻さない（/carのhoursPerUseと同じ扱い）。
+ */
+export function applyBirthResultToProfile(profile: LifeProfile, input: BirthInput): LifeProfile {
+  return {
+    ...profile,
+    family: {
+      ...profile.family,
+      children: Math.max(1, profile.family.children) as LifeProfile["family"]["children"],
+      birthPlan: input.birthCost,
+      leaveTakerIncome: input.parentIncome,
+      leaveMonths: input.leaveMonths ?? profile.family.leaveMonths,
+    },
+  };
+}
+
 export { JUKEN_COST };

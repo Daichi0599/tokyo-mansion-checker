@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sendGAEvent } from "@next/third-parties/google";
 
 import AffiliateCta from "@/components/AffiliateCta";
@@ -15,6 +16,18 @@ import {
   type BirthInput,
   type BirthCost,
 } from "@/lib/childCost";
+import { useLifeProfile, saveLifeProfile, createDefaultProfile, toBirthInput, applyBirthResultToProfile } from "@/lib/lifePlan";
+import { trackPlanEvent } from "@/lib/analytics";
+
+/** LifeProfile由来の値がこのツールの固定option一覧に無い場合、最も近い値に丸める */
+function snapNumber(value: number, options: number[]): number {
+  return options.reduce((closest, opt) => (Math.abs(opt - value) < Math.abs(closest - value) ? opt : closest), options[0]);
+}
+
+/** 列挙値版。一致するoptionが無ければ先頭（フォールバック）を返す */
+function snapEnum<T extends string>(value: T, options: T[]): T {
+  return options.includes(value) ? value : options[0];
+}
 
 /* ───────── 申請タイムライン ───────── */
 
@@ -137,23 +150,60 @@ function Row({ label, value, positive }: { label: string; value: string; positiv
   );
 }
 
-export default function BirthCostPage() {
-  const [input, setInput] = useState<BirthInput>({
-    birthCost: "standard",
-    numChildren: 1,
-    parentIncome: 0,
-    leaveMonths: 10,
-    cesarean: false,
-  });
+const DEFAULT_BIRTH_INPUT: BirthInput = {
+  birthCost: "standard",
+  numChildren: 1,
+  parentIncome: 0,
+  leaveMonths: 10,
+  cesarean: false,
+};
+
+const PARENT_INCOME_OPTIONS = [0, 300, 400, 500, 600, 700, 800];
+const LEAVE_MONTHS_OPTIONS = [0, 6, 10, 16];
+const BIRTH_COST_OPTIONS: BirthCost[] = ["standard", "premium"];
+
+function BirthCostPageInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const fromPlan = searchParams.get("from") === "plan";
+  const profile = useLifeProfile();
+
+  // ユーザーが一度でも入力を変更したらmanualInputに確定値が入り、以降は
+  // 「わが家のプラン」側の変更で上書きされない。未編集の間だけ初期値として表示する。
+  const [manualInput, setManualInput] = useState<BirthInput | null>(null);
+  const profileInput = profile ? toBirthInput(profile) : null;
+  const input: BirthInput = manualInput ?? {
+    ...DEFAULT_BIRTH_INPUT,
+    ...(profileInput
+      ? {
+          birthCost: snapEnum(profileInput.birthCost, BIRTH_COST_OPTIONS),
+          parentIncome: snapNumber(profileInput.parentIncome, PARENT_INCOME_OPTIONS),
+          leaveMonths: snapNumber(profileInput.leaveMonths ?? 10, LEAVE_MONTHS_OPTIONS),
+        }
+      : {}),
+  };
   const [result, setResult] = useState<ReturnType<typeof calcBirth> | null>(null);
 
   const update = <K extends keyof BirthInput>(k: K, v: BirthInput[K]) =>
-    setInput((p) => ({ ...p, [k]: v }));
+    setManualInput({ ...input, [k]: v });
 
   const run = () => {
-    setResult(calcBirth(input));
+    const diagnosis = calcBirth(input);
+    setResult(diagnosis);
     sendGAEvent("event", "diagnosis_run", { tool: "birth" });
+    if (fromPlan && profile) {
+      saveLifeProfile(applyBirthResultToProfile(profile, input));
+      trackPlanEvent("plan_sync_writeback", { tool: "birth" });
+    }
     setTimeout(() => document.getElementById("birth-result")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+  };
+
+  const handleBridgeToPlan = () => {
+    if (!result) return;
+    const base = profile ?? createDefaultProfile("all");
+    saveLifeProfile(applyBirthResultToProfile(base, input));
+    trackPlanEvent("detail_tool_bridge", { tool: "birth" });
+    router.push("/plan");
   };
 
   const grossPerChild = BIRTH_GROSS[input.birthCost] + (input.cesarean ? CESAREAN_EXTRA : 0);
@@ -169,6 +219,15 @@ export default function BirthCostPage() {
           <span>/</span>
           <span className="text-slate-200">出産費用シミュレーター</span>
         </nav>
+
+        {fromPlan && profile && (
+          <div className="flex items-center justify-between gap-3 bg-indigo-500/10 border border-indigo-500/30 rounded-xl px-4 py-2.5">
+            <p className="text-xs text-indigo-300">📋 『わが家のプラン』の内容を表示しています</p>
+            <Link href="/plan/result" className="text-xs font-bold text-indigo-300 hover:text-indigo-200 shrink-0 whitespace-nowrap">
+              プランに戻る →
+            </Link>
+          </div>
+        )}
 
         {/* ヒーロー：入力欄をすぐ触れるよう最小限に留める */}
         <header className="space-y-3">
@@ -285,6 +344,21 @@ export default function BirthCostPage() {
               )}
             </div>
 
+            {!fromPlan && (
+              <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 px-5 py-4 space-y-2">
+                <p className="text-sm font-bold text-white">住宅・車と合わせて見るとどうなる？</p>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  この試算結果を引き継いで、「わが家のプラン」で住宅・車の費用もまとめて確認できます。
+                </p>
+                <button
+                  onClick={handleBridgeToPlan}
+                  className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base px-5 py-3 rounded-xl transition-colors"
+                >
+                  わが家のプランで確認する →
+                </button>
+              </div>
+            )}
+
             <AffiliateCta
               program="fpsoudan"
               page="birth"
@@ -383,5 +457,19 @@ export default function BirthCostPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function BirthCostPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+          <p className="text-slate-400 text-sm">読み込み中…</p>
+        </div>
+      }
+    >
+      <BirthCostPageInner />
+    </Suspense>
   );
 }
