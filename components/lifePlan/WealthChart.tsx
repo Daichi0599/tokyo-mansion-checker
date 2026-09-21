@@ -15,8 +15,16 @@ const PAD_RIGHT = 12;
 const PAD_TOP = 20;
 const PAD_BOTTOM = 24;
 
+/**
+ * 単位込みの文字列を返す（呼び出し側で「万」を付け足さない）。
+ * 1億円未満は「○,○○○万」、1億円以上は「○.○億」に短縮する。
+ * 狭い画面では左端の軸ラベルが画面外にはみ出しやすいため、桁数を抑える目的もある。
+ */
 function formatMan(value: number): string {
-  return Math.round(value).toLocaleString();
+  if (Math.abs(value) >= 10000) {
+    return `${(value / 10000).toFixed(1)}億`;
+  }
+  return `${Math.round(value).toLocaleString()}万`;
 }
 
 /**
@@ -148,7 +156,7 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
           <span
             key={`purchase-${p.year}`}
             className="absolute -translate-x-1/2 text-[10px] leading-none text-sky-400 whitespace-nowrap"
-            style={{ left: `${xPct(p.year)}%`, top: 2 }}
+            style={{ left: `${xPct(p.year)}%`, top: 14 }}
           >
             住宅購入
           </span>
@@ -170,7 +178,7 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
             className="absolute -translate-x-1/2 -translate-y-full text-[10px] font-bold leading-none text-emerald-300 whitespace-nowrap bg-slate-800/90 px-1 py-0.5 rounded"
             style={{ left: `${xPct(i)}%`, top: `calc(${yPct(points[i].totalAssets)}% - 5px)` }}
           >
-            {formatMan(points[i].totalAssets)}万
+            {formatMan(points[i].totalAssets)}
           </span>
         ))}
       </div>
