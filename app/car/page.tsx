@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sendGAEvent } from "@next/third-parties/google";
 import AffiliateCta from "@/components/AffiliateCta";
 import { calculate, getDiagnosisComment, type CarInputs, type CostResult } from "@/lib/carCost";
+import { useLifeProfile, saveLifeProfile, createDefaultProfile, toCarInputs, applyCarResultToProfile } from "@/lib/lifePlan";
+import { trackPlanEvent } from "@/lib/analytics";
 
 /* ───────────────────────────────────────────
    サブコンポーネント
@@ -159,23 +162,29 @@ const carJsonLd = {
   ],
 };
 
-export default function CarPage() {
-  const [inputs, setInputs] = useState<CarInputs>({
-    usageDaysPerMonth: 4,
-    hoursPerUse: 3,
-    parkingFeeMan: 2,
-  });
+function CarPageInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const fromPlan = searchParams.get("from") === "plan";
+
+  const DEFAULT_CAR_INPUTS: CarInputs = { usageDaysPerMonth: 4, hoursPerUse: 3, parkingFeeMan: 2 };
+  // ユーザーが一度でも入力を変更したらmanualInputsに確定値が入り、以降はLifeProfile側の
+  // 変更で上書きされない。未編集の間は「わが家のプラン」保存済みの値を初期値として表示する
+  // （setStateをeffect内で呼ばずに導出するため、プロフィール読み込み前後で余計な再描画が起きない）。
+  const [manualInputs, setManualInputs] = useState<CarInputs | null>(null);
   const [results, setResults] = useState<CostResult[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const hasStarted = useRef(false);
   const [mansionIncome, setMansionIncome] = useState<number | null>(null);
+  const profile = useLifeProfile();
+  const inputs = manualInputs ?? (profile ? toCarInputs(profile) : DEFAULT_CAR_INPUTS);
 
   const handleInputChange = <K extends keyof CarInputs>(key: K, value: CarInputs[K]) => {
     if (!hasStarted.current) {
       hasStarted.current = true;
       sendGAEvent("event", "tool_start", { tool: "car_diagnosis" });
     }
-    setInputs((prev) => ({ ...prev, [key]: value }));
+    setManualInputs({ ...inputs, [key]: value });
   };
 
   useEffect(() => {
@@ -203,11 +212,27 @@ export default function CarPage() {
         parking_fee_man: inputs.parkingFeeMan,
         recommended: r.find((x) => x.isRecommended)?.label ?? "unknown",
       });
+      // 「わが家のプラン」経由で来た場合のみ、再診断結果を自動でプランへ書き戻す。
+      // それ以外（検索流入など）では、既存のプランを黙って上書きしない。
+      if (fromPlan && profile) {
+        const recommended = r.find((x) => x.isRecommended);
+        saveLifeProfile(applyCarResultToProfile(profile, inputs, recommended?.label));
+        trackPlanEvent("plan_sync_writeback", { tool: "car" });
+      }
       setIsLoading(false);
       setTimeout(() => {
         document.getElementById("car-result")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }, 500);
+  };
+
+  const handleBridgeToPlan = () => {
+    if (!results) return;
+    const recommended = results.find((r) => r.isRecommended);
+    const base = profile ?? createDefaultProfile("all");
+    saveLifeProfile(applyCarResultToProfile(base, inputs, recommended?.label));
+    trackPlanEvent("detail_tool_bridge", { tool: "car" });
+    router.push("/plan");
   };
 
   const comment = results ? getDiagnosisComment(results, inputs) : null;
@@ -224,6 +249,17 @@ export default function CarPage() {
           <span>車コスト診断</span>
         </div>
       </div>
+
+      {fromPlan && profile && (
+        <div className="max-w-2xl mx-auto px-4 pt-4">
+          <div className="flex items-center justify-between gap-3 bg-indigo-500/10 border border-indigo-500/30 rounded-xl px-4 py-2.5">
+            <p className="text-xs text-indigo-300">📋 『わが家のプラン』の内容を表示しています</p>
+            <Link href="/plan/result" className="text-xs font-bold text-indigo-300 hover:text-indigo-200 shrink-0 whitespace-nowrap">
+              プランに戻る →
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
 
@@ -429,6 +465,21 @@ export default function CarPage() {
               </ol>
             </section>
 
+            {!fromPlan && (
+              <section className="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 px-5 py-4 space-y-2">
+                <p className="text-sm font-bold text-white">教育費・住宅費と合わせて見るとどうなる？</p>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  この診断結果を引き継いで、「わが家のプラン」で住宅・子育て費用もまとめて確認できます。
+                </p>
+                <button
+                  onClick={handleBridgeToPlan}
+                  className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors"
+                >
+                  わが家のプランで確認する →
+                </button>
+              </section>
+            )}
+
             {/* 診断結果と広告を一致させる。
                 「車を持つ」判定なら維持費を下げる話（自動車保険）が続きになるが、
                 「持たない方が得」と出た人に保険を出しても意味がないので出し分ける。
@@ -525,5 +576,19 @@ export default function CarPage() {
       </div>
       </div>
     </>
+  );
+}
+
+export default function CarPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+          <p className="text-slate-400 text-sm">読み込み中…</p>
+        </div>
+      }
+    >
+      <CarPageInner />
+    </Suspense>
   );
 }

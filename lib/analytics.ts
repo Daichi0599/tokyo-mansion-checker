@@ -23,6 +23,8 @@ type PlanEventMap = {
   scenario_change: { field_group: "housing" | "family" | "car" };
   scenario_compare: { adjustment_type: "car" | "price" | "none" };
   detail_tool_open: { tool: "mansion" | "birth" | "child" | "car" | "check"; source: "plan_result" | "top" };
+  detail_tool_bridge: { tool: "mansion" | "birth" | "child" | "car" | "check" };
+  plan_sync_writeback: { tool: "mansion" | "birth" | "child" | "car" | "check" };
   case_open: { case_slug: string; category: "housing" | "family" | "car" | "combined" };
   case_to_plan: { case_slug: string };
   result_share: { platform: "x" | "line" | "copy" };
