@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import type { LifeProfile } from "@/types/lifePlan";
-import { useLifeProfile, saveLifeProfile } from "@/lib/lifePlan";
+import { useLifeProfile, saveLifeProfile, isLifeProfileCalculable } from "@/lib/lifePlan";
 import { buildScenarios, findWorstScenario, householdAnnualNetBonus } from "@/lib/lifePlan/scenarios";
 import { buildRecommendations } from "@/lib/lifePlan/recommendations";
 import { buildSafePlan } from "@/lib/lifePlan/safePlan";
@@ -16,6 +16,7 @@ import PlanEditPanel from "@/components/lifePlan/PlanEditPanel";
 import WealthProjectionSection from "@/components/lifePlan/WealthProjectionSection";
 import CalculationNotes from "@/components/lifePlan/CalculationNotes";
 import AffiliateCta from "@/components/AffiliateCta";
+import ResultSectionTracker from "@/components/lifePlan/ResultSectionTracker";
 
 const DETAIL_TOOLS: { tool: "mansion" | "check" | "birth" | "child" | "car"; href: string; icon: string; label: string }[] = [
   { tool: "mansion", href: "/mansion?from=plan", icon: "🏠", label: "マンション購入診断" },
@@ -32,13 +33,20 @@ export default function PlanResultPage() {
   const profile = useLifeProfile();
   const completedRef = useRef(false);
 
-  const scenarios = useMemo(() => (profile ? buildScenarios(profile) : null), [profile]);
+  const calculationsReady = profile ? isLifeProfileCalculable(profile) : false;
+  const scenarios = useMemo(
+    () => (profile && isLifeProfileCalculable(profile) ? buildScenarios(profile) : null),
+    [profile]
+  );
   const worst = useMemo(() => (scenarios ? findWorstScenario(scenarios) : null), [scenarios]);
   const recommendations = useMemo(
     () => (profile && scenarios ? buildRecommendations(profile, scenarios) : []),
     [profile, scenarios]
   );
-  const safePlan = useMemo(() => (profile ? buildSafePlan(profile) : null), [profile]);
+  const safePlan = useMemo(
+    () => (profile && isLifeProfileCalculable(profile) ? buildSafePlan(profile) : null),
+    [profile]
+  );
   const safeScenarios = useMemo(
     () => (safePlan ? buildScenarios(safePlan.profile) : null),
     [safePlan]
@@ -63,6 +71,22 @@ export default function PlanResultPage() {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
         <p className="text-slate-400 text-sm">読み込み中…</p>
+      </div>
+    );
+  }
+
+  if (profile && !calculationsReady) {
+    return (
+      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center px-4">
+        <div className="max-w-md text-center space-y-4">
+          <p className="text-lg font-black text-white">保存データを更新する必要があります</p>
+          <p className="text-sm text-slate-400">
+            古い入力データを安全に計算できませんでした。入力画面を開くと、不足項目を初期値で補って続けられます。
+          </p>
+          <Link href="/plan" className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl">
+            入力内容を確認する →
+          </Link>
+        </div>
       </div>
     );
   }
@@ -106,55 +130,71 @@ export default function PlanResultPage() {
 
         <ConclusionCard worst={worst} annualNetBonus={householdAnnualNetBonus(profile)} />
 
-        <section className="space-y-3">
-          <h2 className="text-lg font-black text-white">5つの時点で見る</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {scenarios.map((s) => (
-              <ScenarioSnapshotCard key={s.id} scenario={s} isWorst={s.id === worst.id} />
-            ))}
-          </div>
-        </section>
+        <ResultSectionTracker section="scenarios">
+          <section className="space-y-3">
+            <h2 className="text-lg font-black text-white">5つの時点で見る</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {scenarios.map((s) => (
+                <ScenarioSnapshotCard key={s.id} scenario={s} isWorst={s.id === worst.id} />
+              ))}
+            </div>
+          </section>
+        </ResultSectionTracker>
 
-        <ScenarioComparisonSection
-          wishScenarios={scenarios}
-          safePlan={safePlan}
-          safeScenarios={safeScenarios}
-        />
+        <ResultSectionTracker section="comparison">
+          <ScenarioComparisonSection wishScenarios={scenarios} safePlan={safePlan} safeScenarios={safeScenarios} />
+        </ResultSectionTracker>
 
-        <WealthProjectionSection profile={profile} safePlan={safePlan ?? undefined} />
+        <ResultSectionTracker section="wealth">
+          <WealthProjectionSection profile={profile} safePlan={safePlan ?? undefined} />
+        </ResultSectionTracker>
 
-        <RecommendationList recommendations={recommendations} />
+        <ResultSectionTracker section="recommendations">
+          <RecommendationList recommendations={recommendations} />
+        </ResultSectionTracker>
 
-        <PlanEditPanel profile={profile} onChange={handleProfileChange} />
+        <ResultSectionTracker section="edit">
+          <PlanEditPanel profile={profile} onChange={handleProfileChange} />
+        </ResultSectionTracker>
 
-        <section className="space-y-3">
-          <h2 className="text-lg font-black text-white">詳細な診断へ</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {DETAIL_TOOLS.map((t) => (
-              <Link
-                key={t.tool}
-                href={t.href}
-                onClick={() => trackPlanEvent("detail_tool_open", { tool: t.tool, source: "plan_result" })}
-                className="flex flex-col items-center gap-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-4 hover:border-slate-500 transition-colors"
-              >
-                <span className="text-2xl">{t.icon}</span>
-                <span className="text-xs font-semibold text-slate-300 text-center">{t.label}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <ResultSectionTracker section="detail_tools">
+          <section className="space-y-3">
+            <h2 className="text-lg font-black text-white">詳細な診断へ</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {DETAIL_TOOLS.filter((t) =>
+                (t.tool === "mansion" || t.tool === "check")
+                  ? profile.entryIntent === "housing" || profile.housing.intent !== "none"
+                  : (t.tool === "birth" || t.tool === "child")
+                    ? profile.entryIntent === "family" || profile.family.children > 0
+                    : profile.entryIntent === "car" || profile.car.plan !== "none"
+              ).map((t) => (
+                <Link
+                  key={t.tool}
+                  href={t.href}
+                  onClick={() => trackPlanEvent("detail_tool_open", { tool: t.tool, source: "plan_result" })}
+                  className="flex flex-col items-center gap-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-4 hover:border-slate-500 transition-colors"
+                >
+                  <span className="text-2xl">{t.icon}</span>
+                  <span className="text-xs font-semibold text-slate-300 text-center">{t.label}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </ResultSectionTracker>
 
         {profile.housing.intent !== "none" && (
-          <section className="pt-2">
-            <AffiliateCta
-              program="hikkoshi"
-              page="plan-result"
-              heading="購入が具体化したあとで大丈夫"
-              title="引っ越し費用も、1社だけで決めずに比べる"
-              note="物件が決まってから使うサービスです。今すぐ申し込む必要はありません。時期が来たら、最大10社の見積もりを同じ条件で比較できます。"
-              cta="引っ越し料金を無料で比較する →"
-            />
-          </section>
+          <ResultSectionTracker section="affiliate">
+            <section className="pt-2">
+              <AffiliateCta
+                program="hikkoshi"
+                page="plan-result"
+                heading="購入が具体化したあとで大丈夫"
+                title="引っ越し費用も、1社だけで決めずに比べる"
+                note="物件が決まってから使うサービスです。今すぐ申し込む必要はありません。時期が来たら、最大10社の見積もりを同じ条件で比較できます。"
+                cta="引っ越し料金を無料で比較する →"
+              />
+            </section>
+          </ResultSectionTracker>
         )}
 
         <CalculationNotes />

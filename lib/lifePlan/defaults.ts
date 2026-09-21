@@ -6,7 +6,7 @@ import type { LifeProfile, EntryIntent } from "@/types/lifePlan";
  * （例: 車を持たない = car.plan: "none"。car.parkingFee: 0 は「駐車場代がかからない」の意味になってしまうため）。
  */
 export const DEFAULT_LIFE_PROFILE: LifeProfile = {
-  version: 1,
+  version: 2,
   entryIntent: "all",
 
   household: {

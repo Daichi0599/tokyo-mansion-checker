@@ -14,7 +14,7 @@ export type EntryIntent = "housing" | "family" | "car" | "all";
 export type IncomeGrowthScenario = "flat" | "moderate" | "strong";
 
 export interface LifeProfile {
-  version: 1;
+  version: 2;
   entryIntent: EntryIntent;
 
   household: {

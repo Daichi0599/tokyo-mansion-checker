@@ -19,6 +19,8 @@ import { diagnose, calcPriceMetrics } from "../lib/calculator.ts";
 import { calcBirth, calculateCosts } from "../lib/childCost.ts";
 import { toDiagnosisInput, calcHousingMetrics } from "../lib/lifePlan/housing.ts";
 import { toBirthInput, calcFamilyBirth, toChildInput, calcFamilyCosts } from "../lib/lifePlan/family.ts";
+import { migrateLifeProfile, isLifeProfileCalculable } from "../lib/lifePlan/storage.ts";
+import { splitNetIncome } from "../lib/lifePlan/netIncome.ts";
 
 let passed = 0;
 function check(name, fn) {
@@ -49,6 +51,50 @@ check("entry intent - unrelated default plans are excluded", () => {
   assert.equal(car.family.children, 0);
 });
 
+check("v1 migration - 新項目を補完しNaNを発生させない", () => {
+  const current = createDefaultProfile("all");
+  const legacy = {
+    ...current,
+    version: 1,
+    household: {
+      userAge: 30,
+      userIncome: 500,
+      partnerIncome: 300,
+      savings: 500,
+      monthlyLivingCost: 20,
+      currentRent: 15,
+    },
+    housing: {
+      intent: "considering",
+      targetPrice: 6000,
+      downPayment: 500,
+      interestRate: 1,
+      repaymentYears: 35,
+      managementFee: 3,
+    },
+    family: {
+      children: 1,
+      firstChildInYears: 1,
+      leaveTakerIncome: 300,
+      leaveMonths: 10,
+      birthPlan: "standard",
+      educationPolicy: "all_public",
+      university: "national",
+    },
+  };
+  const migrated = migrateLifeProfile(legacy);
+  assert.ok(migrated);
+  assert.equal(migrated.version, 2);
+  assert.equal(migrated.household.userBonusAnnual, 0);
+  assert.equal(migrated.household.monthlyInvestment, 0);
+  assert.equal(migrated.housing.purchaseInYears, 0);
+  assert.equal(migrated.family.partnerLeaveMonths, 0);
+  assert.ok(isLifeProfileCalculable(migrated));
+  assert.ok(buildScenarios(migrated).every((scenario) =>
+    [scenario.monthlyIncome, scenario.monthlyExpenses, scenario.monthlyBalance].every(Number.isFinite)
+  ));
+});
+
 /* ケース1: 単身・住宅のみ */
 check("ケース1: 単身・住宅のみ - シナリオが5件返る", () => {
   const p = createDefaultProfile("housing");
@@ -72,7 +118,11 @@ check("ケース2: 共働き・住宅・子ども1人 - 現在シナリオの黒
   const scenarios = buildScenarios(p);
   const current = scenarios.find((s) => s.id === "current");
   assert.ok(current);
-  assert.equal(current.monthlyIncome, Math.round(((600 + 500) / 12) * 10) / 10);
+  const expectedNetMonthly = (
+    splitNetIncome(600, p.household.userBonusAnnual).netSalaryAnnual
+    + splitNetIncome(500, p.household.partnerBonusAnnual).netSalaryAnnual
+  ) / 12;
+  assert.equal(current.monthlyIncome, Math.round(expectedNetMonthly * 10) / 10);
   assert.equal(current.status === "deficit", current.monthlyBalance < 0);
 });
 
