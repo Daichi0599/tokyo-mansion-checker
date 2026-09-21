@@ -7,6 +7,7 @@ import { DiagnosisInput } from "@/types";
 interface Props {
   onSubmit: (input: DiagnosisInput) => void;
   isLoading?: boolean;
+  initialValues?: Partial<DiagnosisInput>;
 }
 
 const defaultValues: DiagnosisInput = {
@@ -115,8 +116,31 @@ const OPTION_LABELS: Partial<Record<keyof DiagnosisInput, Record<number, string>
 
 const selectCls = "w-full rounded-xl border border-slate-600 bg-slate-700 px-3 py-2.5 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer";
 
-export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
-  const [values, setValues] = useState<DiagnosisInput>(defaultValues);
+function snapToOptions(value: number, options: number[]): number {
+  return options.reduce((closest, opt) => (Math.abs(opt - value) < Math.abs(closest - value) ? opt : closest), options[0]);
+}
+
+/**
+ * 「わが家のプラン」由来の値は自由入力なので、この選択式フォームの固定option一覧に
+ * 完全一致するとは限らない（例: 金利1.0%だが選択肢は0.9/1.1%のみ）。一致しない値は
+ * <select>が意図せず別の値を表示してしまうため、最も近い選択肢に丸めてから使う。
+ */
+function snapToFieldOptions(input: DiagnosisInput): DiagnosisInput {
+  const snapped = { ...input };
+  for (const field of fields) {
+    const raw = input[field.key];
+    if (typeof raw === "number") {
+      (snapped[field.key] as number) = snapToOptions(raw, field.options);
+    }
+  }
+  return snapped;
+}
+
+export default function DiagnosisForm({ onSubmit, isLoading = false, initialValues }: Props) {
+  // ユーザーが一度でも入力を変更したらmanualValuesに確定値が入り、以降はinitialValues
+  // （「わが家のプラン」保存済みの値）の変化で上書きされない。未編集の間だけ初期値として表示する。
+  const [manualValues, setManualValues] = useState<DiagnosisInput | null>(null);
+  const values = manualValues ?? snapToFieldOptions({ ...defaultValues, ...initialValues });
   const hasStarted = useRef(false);
 
   const handleChange = (key: keyof DiagnosisInput, raw: string) => {
@@ -125,7 +149,7 @@ export default function DiagnosisForm({ onSubmit, isLoading = false }: Props) {
       sendGAEvent("event", "tool_start", { tool: "mansion_diagnosis" });
     }
     const num = parseFloat(raw);
-    setValues((prev) => ({ ...prev, [key]: isNaN(num) ? 0 : num }));
+    setManualValues({ ...values, [key]: isNaN(num) ? 0 : num });
   };
 
   const handleSubmit = (e: React.FormEvent) => {

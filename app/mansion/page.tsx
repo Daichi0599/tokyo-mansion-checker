@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import MansionDiagnosisPage from "@/components/MansionDiagnosisPage";
 import { MANSION_FAQ } from "@/lib/mansionFaq";
 
@@ -55,7 +56,15 @@ export default function MansionPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(mansionJsonLd) }}
       />
-      <MansionDiagnosisPage />
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+            <p className="text-slate-400 text-sm">読み込み中…</p>
+          </div>
+        }
+      >
+        <MansionDiagnosisPage />
+      </Suspense>
     </>
   );
 }

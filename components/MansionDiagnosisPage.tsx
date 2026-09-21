@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sendGAEvent } from "@next/third-parties/google";
 import { MANSION_FAQ } from "@/lib/mansionFaq";
 import DiagnosisForm       from "@/components/DiagnosisForm";
@@ -10,6 +11,8 @@ import ResultTabs          from "@/components/ResultTabs";
 import AffiliateCta        from "@/components/AffiliateCta";
 import { diagnose } from "@/lib/calculator";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
+import { useLifeProfile, saveLifeProfile, createDefaultProfile, toDiagnosisInput, applyMansionResultToProfile } from "@/lib/lifePlan";
+import { trackPlanEvent } from "@/lib/analytics";
 
 /* ───────────────────────────────────────────
    モゲチェックCTA：レベル別コピー
@@ -108,9 +111,14 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 ─────────────────────────────────────────── */
 
 export default function Home() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const fromPlan = searchParams.get("from") === "plan";
+
   const [result, setResult]                 = useState<DiagnosisResult | null>(null);
   const [diagnosisInput, setDiagnosisInput] = useState<DiagnosisInput | null>(null);
   const [isLoading, setIsLoading]           = useState(false);
+  const profile = useLifeProfile();
 
   const handleSubmit = (input: DiagnosisInput) => {
     setIsLoading(true);
@@ -119,11 +127,16 @@ export default function Home() {
       const diagnosis = diagnose(input);
       setResult(diagnosis);
       setDiagnosisInput(input);
-      // ④ 他ツールへの引き継ぎ用にlocalStorageへ保存
+      // ④ 他ツールへの引き継ぎ用にlocalStorageへ保存（レガシー。/child等がannualIncomeだけ読む）
       try {
         localStorage.setItem("30lab_diagnosis_input", JSON.stringify(input));
         localStorage.setItem("30lab_safe_price", String(diagnosis.safePrice));
       } catch (_) {}
+      // 「わが家のプラン」経由で来た場合のみ、再診断結果を自動でプランへ書き戻す
+      if (fromPlan && profile) {
+        saveLifeProfile(applyMansionResultToProfile(profile, input, diagnosis));
+        trackPlanEvent("plan_sync_writeback", { tool: "mansion" });
+      }
       setIsLoading(false);
       sendGAEvent("event", "diagnosis_run", {
         level:       diagnosis.level,
@@ -134,6 +147,14 @@ export default function Home() {
         document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }, 600);
+  };
+
+  const handleBridgeToPlan = () => {
+    if (!result || !diagnosisInput) return;
+    const base = profile ?? createDefaultProfile("all");
+    saveLifeProfile(applyMansionResultToProfile(base, diagnosisInput, result));
+    trackPlanEvent("detail_tool_bridge", { tool: "mansion" });
+    router.push("/plan");
   };
 
   return (
@@ -147,6 +168,17 @@ export default function Home() {
           <span className="text-slate-200">マンション購入診断</span>
         </div>
       </nav>
+
+      {fromPlan && profile && (
+        <div className="max-w-2xl mx-auto px-4 pt-4">
+          <div className="flex items-center justify-between gap-3 bg-indigo-500/10 border border-indigo-500/30 rounded-xl px-4 py-2.5">
+            <p className="text-xs text-indigo-300">📋 『わが家のプラン』の内容を表示しています</p>
+            <Link href="/plan/result" className="text-xs font-bold text-indigo-300 hover:text-indigo-200 shrink-0 whitespace-nowrap">
+              プランに戻る →
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-8">
 
@@ -189,7 +221,11 @@ export default function Home() {
         </header>
 
         {/* ─── 2. 診断フォーム（ファーストビュー直後） ─── */}
-        <DiagnosisForm onSubmit={handleSubmit} isLoading={isLoading} />
+        <DiagnosisForm
+          onSubmit={handleSubmit}
+          isLoading={isLoading}
+          initialValues={profile ? toDiagnosisInput(profile) : undefined}
+        />
 
         {/* ─── 3. この診断でわかること（フォームの下） ─── */}
         <details className="group">
@@ -287,6 +323,21 @@ export default function Home() {
 
             {/* ① 診断結果カード */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
+
+            {!fromPlan && (
+              <section className="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 px-5 py-4 space-y-2">
+                <p className="text-sm font-bold text-white">教育費・車と合わせて見るとどうなる？</p>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  この診断結果を引き継いで、「わが家のプラン」で子育て・車の費用もまとめて確認できます。
+                </p>
+                <button
+                  onClick={handleBridgeToPlan}
+                  className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors"
+                >
+                  わが家のプランで確認する →
+                </button>
+              </section>
+            )}
 
             {/* ② モゲチェック（メインアフィリエイト） — 結果直後・最高温度のタイミング */}
             {(() => {
