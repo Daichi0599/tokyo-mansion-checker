@@ -3,19 +3,20 @@ import Link from "next/link";
 import AffiliateCta from "@/components/AffiliateCta";
 
 export const metadata: Metadata = {
-  title: "資産価値が落ちにくいマンションの条件とは？立地・築年数で解説｜30Lab",
+  title: "資産価値が落ちにくいマンションの条件とは？中古vs新築・立地・築年数で解説｜30Lab",
   description:
-    "リセールバリューが高いマンションの条件（駅徒歩5分以内・大規模・都心エリア）と築年数による価格推移を解説。売ることも視野に入れたマンション選びのポイントをまとめました。",
+    "リセールバリューが高いマンションの条件（駅徒歩5分以内・大規模・都心エリア）と築年数による価格推移を解説。中古と新築どちらが資産価値の面で有利かも比較しています。",
   keywords: [
     "マンション 資産価値 落ちにくい",
     "マンション リセールバリュー",
     "マンション 築年数 価格 推移",
     "資産価値 高い マンション 条件",
     "マンション 売却 資産価値",
+    "マンション 中古 新築 どっち",
   ],
   openGraph: {
-    title: "資産価値が落ちにくいマンションの条件とは？立地・築年数で解説",
-    description: "リセールバリューが高いマンションの条件と築年数別価格推移を解説。",
+    title: "資産価値が落ちにくいマンションの条件とは？中古vs新築・立地・築年数で解説",
+    description: "リセールバリューが高いマンションの条件と築年数別価格推移、中古と新築の比較を解説。",
   },
 };
 
@@ -137,6 +138,25 @@ export default function MansionBaibaiShisanKachiPage() {
           <p className="text-xs text-slate-400">※概算の傾向。2020〜2025年の価格上昇期は従来比より価格が維持されているケースが多い。エリア・物件により大きく異なります。</p>
         </section>
 
+        {/* ━━ 中古vs新築 ━━ */}
+        <section className="mb-10">
+          <h2 className="text-lg font-black text-white mb-4 pb-2 border-b-2 border-blue-500/20">
+            🆚 資産価値の面では、中古と新築どちらが有利？
+          </h2>
+          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+            上の表の通り、価格は新築が最も高く、引き渡し直後に「新築プレミアム」が剥がれて10〜20%ほど下がります。つまり資産価値の下落だけを見れば、そのプレミアムを最初から払わない中古の方が有利です。一方で新築には住宅ローン控除の控除期間（新築13年・中古10年）が長い、瑕疵担保責任が10年間あるといった中古にはない利点もあります。
+          </p>
+          <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20">
+            <p className="text-sm font-bold text-blue-300 mb-2">選ぶときの目安</p>
+            <ul className="text-sm text-slate-200 space-y-2">
+              <li className="flex items-start gap-2"><span className="text-blue-400 font-black mt-0.5">・</span><span>資産価値の下落幅を抑えたい・同じ予算で立地を上げたいなら中古</span></li>
+              <li className="flex items-start gap-2"><span className="text-blue-400 font-black mt-0.5">・</span><span>住宅ローン控除を長く受けたい・修繕リスクを抑えたいなら新築</span></li>
+              <li className="flex items-start gap-2"><span className="text-blue-400 font-black mt-0.5">・</span><span>中古を選ぶ場合は「1981年以降（新耐震基準）・築15年以内」が設備・修繕実績の両面で無難な目安</span></li>
+              <li className="flex items-start gap-2"><span className="text-blue-400 font-black mt-0.5">・</span><span>中古は仲介手数料（物件価格の最大3%+6万円）が別途かかる点も予算に織り込む</span></li>
+            </ul>
+          </div>
+        </section>
+
         <AffiliateCta
           program="mogecheck"
           page="mansion-baibai-shisan-kachi"
@@ -198,8 +218,7 @@ export default function MansionBaibaiShisanKachiPage() {
               <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
               <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
               <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
-                複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
+                「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作しています。
               </p>
               <div className="flex gap-3 mt-2">
                 <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
@@ -231,10 +250,6 @@ export default function MansionBaibaiShisanKachiPage() {
         <section>
           <h2 className="text-sm font-bold text-slate-200 mb-3">関連記事</h2>
           <div className="space-y-2">
-            <Link href="/articles/tokyo-mansion-chuko-vs-shintiku" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
-              <span className="text-xl">🆚</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">都内マンション、中古と新築どっちがいい？価格差・選び方を解説</span>
-            </Link>
             <Link href="/articles/mansion-kaidoki-2025" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">📅</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">マンションの買い時はいつ？2026年の相場予測と判断基準を解説</span>

@@ -22,6 +22,8 @@ const MERGE_REDIRECTS: { from: string; to: string }[] = [
   { from: "/articles/mansion-uriage-timing", to: "/articles/mansion-baibai-shisan-kachi" },
   { from: "/articles/jutaku-loan-karikaee", to: "/articles/jutaku-loan-hendokinri-koteikinri" },
   { from: "/articles/jutaku-loan-koujyo", to: "/articles/mansion-shohiyo" },
+  // 2026-09 統合：一般論寄りで差別化されていなかった記事を資産価値ガイドへ集約
+  { from: "/articles/tokyo-mansion-chuko-vs-shintiku", to: "/articles/mansion-baibai-shisan-kachi" },
 ];
 
 const nextConfig: NextConfig = {

@@ -511,9 +511,9 @@ export default function MansionShohiyoPage() {
               <span className="text-xl">📋</span>
               <span className="text-sm text-slate-200 group-hover:text-blue-400">マンション購入の流れと手順【2026年版・初めてでも迷わない完全ガイド】</span>
             </Link>
-            <Link href="/articles/tokyo-mansion-chuko-vs-shintiku" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
+            <Link href="/articles/mansion-baibai-shisan-kachi" className="flex items-center gap-3 bg-slate-800 rounded-xl p-3 border border-slate-700 hover:border-blue-500/40 transition-colors group">
               <span className="text-xl">🆚</span>
-              <span className="text-sm text-slate-200 group-hover:text-blue-400">都内マンション、中古と新築どっちがいい？価格差・選び方を解説</span>
+              <span className="text-sm text-slate-200 group-hover:text-blue-400">資産価値が落ちにくいマンションの条件とは？立地・築年数で解説</span>
             </Link>
           </div>
         </section>

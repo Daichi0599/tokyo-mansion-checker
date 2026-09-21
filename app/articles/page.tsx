@@ -174,14 +174,6 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
         tag: "賃貸・購入比較",
       },
       {
-        href: "/articles/tokyo-mansion-chuko-vs-shintiku",
-        emoji: "🏢",
-        title: "都内マンション、中古と新築どっちがいい？価格差・メリット・選び方",
-        description:
-          "都内の新築と中古の価格差、それぞれのメリット・デメリット、資産性の違いを比較。予算内で満足度を上げる選び方を解説。",
-        tag: "新築・中古比較",
-      },
-      {
         href: "/articles/mansion-floor-plan",
         emoji: "📐",
         title: "マンションの間取り選び方｜1LDK・2LDK・3LDKの違いと資産価値",
