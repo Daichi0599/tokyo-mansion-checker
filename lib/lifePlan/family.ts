@@ -110,4 +110,23 @@ export function applyBirthResultToProfile(profile: LifeProfile, input: BirthInpu
   };
 }
 
+/**
+ * /child の診断結果をLifeProfileへ書き戻す。
+ * nursery・extracurriculars・childCurrentAge・jukenはLifeProfile側に対応するフィールドが
+ * 無いため書き戻さない（/carのhoursPerUseと同じ扱い）。
+ */
+export function applyChildResultToProfile(profile: LifeProfile, input: ChildInput): LifeProfile {
+  return {
+    ...profile,
+    family: {
+      ...profile.family,
+      children: input.numChildren as LifeProfile["family"]["children"],
+      birthPlan: input.birthCost,
+      educationPolicy: input.schoolPolicy,
+      university: input.university,
+      leaveTakerIncome: input.parentIncome,
+    },
+  };
+}
+
 export { JUKEN_COST };

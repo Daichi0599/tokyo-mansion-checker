@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { sendGAEvent } from "@next/third-parties/google";
 
+import { useLifeProfile, saveLifeProfile, createDefaultProfile, toChildInput, applyChildResultToProfile } from "@/lib/lifePlan";
+import { trackPlanEvent } from "@/lib/analytics";
 import {
   calculateCosts,
   calcSubsidies,
@@ -323,18 +326,40 @@ const childJsonLd = {
   ],
 };
 
-export default function ChildCostPage() {
-  const [input, setInput] = useState<ChildInput>({
-    numChildren: 2,
-    nursery: "hoiku_public",
-    schoolPolicy: "all_public",
-    university: "private_arts",
-    extracurriculars: "standard",
-    birthCost: "standard",
-    juken: "none",
-    parentIncome: 0,
-    childCurrentAge: 0,
-  });
+const DEFAULT_CHILD_INPUT: ChildInput = {
+  numChildren: 2,
+  nursery: "hoiku_public",
+  schoolPolicy: "all_public",
+  university: "private_arts",
+  extracurriculars: "standard",
+  birthCost: "standard",
+  juken: "none",
+  parentIncome: 0,
+  childCurrentAge: 0,
+};
+
+const PARENT_INCOME_OPTIONS = [0, 300, 400, 500, 600, 700, 800];
+
+function snapNumber(value: number, options: number[]): number {
+  return options.reduce((closest, opt) => (Math.abs(opt - value) < Math.abs(closest - value) ? opt : closest), options[0]);
+}
+
+function ChildCostPageInner() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const fromPlan = searchParams.get("from") === "plan";
+  const profile = useLifeProfile();
+
+  // ユーザーが一度でも入力を変更したらmanualInputに確定値が入り、以降は
+  // 「わが家のプラン」側の変更で上書きされない。未編集の間だけ初期値として表示する。
+  const [manualInput, setManualInput] = useState<ChildInput | null>(null);
+  const profileInput = profile ? toChildInput(profile) : null;
+  const input: ChildInput = manualInput ?? {
+    ...DEFAULT_CHILD_INPUT,
+    ...(profileInput
+      ? { ...profileInput, parentIncome: snapNumber(profileInput.parentIncome, PARENT_INCOME_OPTIONS) }
+      : {}),
+  };
   const [result, setResult] = useState<ChildResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [mansionIncome, setMansionIncome] = useState<number | null>(null);
@@ -364,11 +389,23 @@ export default function ChildCostPage() {
         extracurriculars: input.extracurriculars,
         grand_total_man: r.grandTotal,
       });
+      if (fromPlan && profile) {
+        saveLifeProfile(applyChildResultToProfile(profile, input));
+        trackPlanEvent("plan_sync_writeback", { tool: "child" });
+      }
       setIsLoading(false);
       setTimeout(() => {
         document.getElementById("child-result")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }, 500);
+  };
+
+  const handleBridgeToPlan = () => {
+    if (!result) return;
+    const base = profile ?? createDefaultProfile("all");
+    saveLifeProfile(applyChildResultToProfile(base, input));
+    trackPlanEvent("detail_tool_bridge", { tool: "child" });
+    router.push("/plan");
   };
 
   const hasStarted = useRef(false);
@@ -377,7 +414,7 @@ export default function ChildCostPage() {
       hasStarted.current = true;
       sendGAEvent("event", "tool_start", { tool: "child_diagnosis" });
     }
-    setInput((prev) => ({ ...prev, [key]: value }));
+    setManualInput({ ...input, [key]: value });
     setResult(null);
   };
 
@@ -410,6 +447,17 @@ export default function ChildCostPage() {
           <span>子育て費用試算</span>
         </div>
       </div>
+
+      {fromPlan && profile && (
+        <div className="max-w-2xl mx-auto px-4 pt-4">
+          <div className="flex items-center justify-between gap-3 bg-indigo-500/10 border border-indigo-500/30 rounded-xl px-4 py-2.5">
+            <p className="text-xs text-indigo-300">📋 『わが家のプラン』の内容を表示しています</p>
+            <Link href="/plan/result" className="text-xs font-bold text-indigo-300 hover:text-indigo-200 shrink-0 whitespace-nowrap">
+              プランに戻る →
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-8">
 
@@ -711,6 +759,21 @@ export default function ChildCostPage() {
               <img width={1} height={1} src="https://www10.a8.net/0.gif?a8mat=4AZGC3+FAPZCI+5UJQ+5YJRM" alt="" style={{ display: "block" }} />
             </div>
 
+            {!fromPlan && (
+              <section className="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 px-5 py-4 space-y-2">
+                <p className="text-sm font-bold text-white">住宅・車と合わせて見るとどうなる？</p>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  この試算結果を引き継いで、「わが家のプラン」で住宅・車の費用もまとめて確認できます。
+                </p>
+                <button
+                  onClick={handleBridgeToPlan}
+                  className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors"
+                >
+                  わが家のプランで確認する →
+                </button>
+              </section>
+            )}
+
             {/* マンション診断CTA */}
             <section className="rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 px-5 py-5">
               <div className="space-y-3">
@@ -803,5 +866,19 @@ export default function ChildCostPage() {
       </div>
       </div>
     </>
+  );
+}
+
+export default function ChildCostPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+          <p className="text-slate-400 text-sm">読み込み中…</p>
+        </div>
+      }
+    >
+      <ChildCostPageInner />
+    </Suspense>
   );
 }

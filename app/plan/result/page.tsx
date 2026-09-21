@@ -21,7 +21,7 @@ const DETAIL_TOOLS: { tool: "mansion" | "check" | "birth" | "child" | "car"; hre
   { tool: "mansion", href: "/mansion?from=plan", icon: "🏠", label: "マンション購入診断" },
   { tool: "check", href: "/check", icon: "🔍", label: "物件診断" },
   { tool: "birth", href: "/birth?from=plan", icon: "🤰", label: "出産費用シミュレーター" },
-  { tool: "child", href: "/child", icon: "👶", label: "子育て費用試算" },
+  { tool: "child", href: "/child?from=plan", icon: "👶", label: "子育て費用試算" },
   { tool: "car", href: "/car?from=plan", icon: "🚗", label: "車コスト診断" },
 ];
 
