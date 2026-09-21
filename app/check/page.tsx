@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import CheckPageTabs from "@/components/CheckPageTabs";
+import { CheckPlanBanner, CheckPlanBridgeCta } from "@/components/CheckPlanBridge";
 
 export const metadata: Metadata = {
   title: "物件診断 | 坪単価・管理費・10年後まで即チェック — 30Lab",
@@ -35,6 +37,10 @@ export default function CheckPage() {
 
       <div className="max-w-2xl mx-auto px-4 py-10 space-y-6">
 
+        <Suspense fallback={null}>
+          <CheckPlanBanner />
+        </Suspense>
+
         {/* ヒーロー */}
         <header className="text-center space-y-3">
           <span className="inline-flex items-center gap-1.5 bg-blue-500/15 text-blue-300 text-xs font-bold px-3 py-1.5 rounded-full border border-blue-500/20">
@@ -67,6 +73,10 @@ export default function CheckPage() {
 
         {/* 物件診断 / 物件比較タブ */}
         <CheckPageTabs />
+
+        <Suspense fallback={null}>
+          <CheckPlanBridgeCta />
+        </Suspense>
 
         {/* フッター */}
         <footer className="text-center text-xs text-slate-400 pb-4 space-y-1">
