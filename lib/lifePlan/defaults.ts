@@ -14,6 +14,8 @@ export const DEFAULT_LIFE_PROFILE: LifeProfile = {
     partnerAge: undefined,
     userIncome: 500,
     partnerIncome: 300,
+    userBonusAnnual: 100,
+    partnerBonusAnnual: 60,
     savings: 500,
     monthlyLivingCost: 20,
     currentRent: 15,

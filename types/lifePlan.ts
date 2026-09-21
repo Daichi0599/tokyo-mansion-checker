@@ -19,8 +19,13 @@ export interface LifeProfile {
   household: {
     userAge: number;
     partnerAge?: number;
+    /** 額面年収（賞与込みの合計）。住宅ローンの返済負担率など、既存の年収ベース計算はこの合計値を使う */
     userIncome: number;
     partnerIncome: number;
+    /** userIncome/partnerIncomeのうち賞与が占める額面年間分。月次収支の計算では月給部分と切り離し、
+     *  賞与は頭金・特別支出用の別枠（年間の手取り目安）として扱う */
+    userBonusAnnual: number;
+    partnerBonusAnnual: number;
     savings: number;
     monthlyLivingCost: number;
     currentRent: number;

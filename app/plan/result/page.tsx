@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import type { LifeProfile } from "@/types/lifePlan";
 import { useLifeProfile, saveLifeProfile } from "@/lib/lifePlan";
-import { buildScenarios, findWorstScenario } from "@/lib/lifePlan/scenarios";
+import { buildScenarios, findWorstScenario, householdAnnualNetBonus } from "@/lib/lifePlan/scenarios";
 import { buildRecommendations } from "@/lib/lifePlan/recommendations";
 import { buildSafePlan } from "@/lib/lifePlan/safePlan";
 import { trackPlanEvent } from "@/lib/analytics";
@@ -103,7 +103,7 @@ export default function PlanResultPage() {
           <span className="text-slate-200">結果</span>
         </nav>
 
-        <ConclusionCard worst={worst} />
+        <ConclusionCard worst={worst} annualNetBonus={householdAnnualNetBonus(profile)} />
 
         <section className="space-y-3">
           <h2 className="text-lg font-black text-white">5つの時点で見る</h2>

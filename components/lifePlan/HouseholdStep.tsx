@@ -55,7 +55,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
 
       <details className="group rounded-xl border border-slate-700 bg-slate-900/40 p-4">
         <summary className="cursor-pointer list-none text-sm font-bold text-slate-300 flex items-center justify-between">
-          <span>もう少し正確にする（年齢・貯蓄・生活費）</span>
+          <span>もう少し正確にする（年齢・賞与・貯蓄・生活費）</span>
           <span className="text-slate-500 group-open:rotate-180 transition-transform">⌄</span>
         </summary>
         <p className="mt-2 text-xs text-slate-500">開かなくても、表示中の目安で計算できます。</p>
@@ -67,6 +67,26 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
             options={range(18, 60)}
             onChange={(v) => set("userAge", v)}
             error={errors.userAge}
+            isDefault
+          />
+          <PlanNumberField
+            label="ご本人の年間賞与"
+            unit="万円"
+            desc="年収に含まれる賞与部分（月給とは別に、賞与は年間の別枠として計算します）"
+            value={household.userBonusAnnual}
+            options={[0, 30, 50, 80, 100, 150, 200, 300, 400]}
+            onChange={(v) => set("userBonusAnnual", v)}
+            error={errors.userBonusAnnual}
+            isDefault
+          />
+          <PlanNumberField
+            label="パートナーの年間賞与"
+            unit="万円"
+            desc="単身、または賞与が無い場合は0のまま"
+            value={household.partnerBonusAnnual}
+            options={[0, 30, 50, 80, 100, 150, 200, 300]}
+            onChange={(v) => set("partnerBonusAnnual", v)}
+            error={errors.partnerBonusAnnual}
             isDefault
           />
           <PlanNumberField

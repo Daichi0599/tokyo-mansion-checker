@@ -3,6 +3,7 @@ export * from "./storage";
 export * from "./housing";
 export * from "./family";
 export * from "./car";
+export * from "./netIncome";
 export * from "./scenarios";
 export * from "./recommendations";
 export * from "./safePlan";

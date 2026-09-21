@@ -6,6 +6,7 @@ import {
 } from "./housing";
 import { calcFamilyBirth, calcMonthlyParentalLeaveBenefit, calcEducationPeakMonthly } from "./family";
 import { calcCarMonthlyCostMan } from "@/lib/carCost";
+import { estimateNetAnnualIncome, splitNetIncome } from "./netIncome";
 
 export type ScenarioStatus = "comfortable" | "tight" | "deficit";
 export type ScenarioId = "current" | "after_purchase" | "parental_leave" | "education_peak" | "rate_rise";
@@ -33,8 +34,25 @@ function topCosts(entries: Array<{ label: string; amount: number }>, n = 3) {
   return [...entries].sort((a, b) => b.amount - a.amount).slice(0, n);
 }
 
+/**
+ * 世帯の「月給部分」の手取り月収（賞与を除く）。
+ * 賞与は月割りせず、毎月の資金繰りには含まれない別枠（頭金・特別支出用）として扱う。
+ * 額面のまま月割りすると税・社保が引かれる前の金額になり実感と大きくズレるため、
+ * lib/lifePlan/netIncome.ts の概算手取り率をかけている。
+ */
 function householdMonthlyIncome(profile: LifeProfile): number {
-  return (profile.household.userIncome + profile.household.partnerIncome) / 12;
+  const { household } = profile;
+  const user = splitNetIncome(household.userIncome, household.userBonusAnnual);
+  const partner = splitNetIncome(household.partnerIncome, household.partnerBonusAnnual);
+  return (user.netSalaryAnnual + partner.netSalaryAnnual) / 12;
+}
+
+/** 世帯の年間ボーナス手取り目安。月次収支には含めず、頭金・特別支出用の別枠として表示する */
+export function householdAnnualNetBonus(profile: LifeProfile): number {
+  const { household } = profile;
+  const user = splitNetIncome(household.userIncome, household.userBonusAnnual);
+  const partner = splitNetIncome(household.partnerIncome, household.partnerBonusAnnual);
+  return Math.round((user.netBonusAnnual + partner.netBonusAnnual) * 10) / 10;
 }
 
 function carMonthly(profile: LifeProfile): number {
@@ -97,7 +115,9 @@ function buildAfterPurchaseScenario(profile: LifeProfile): ScenarioSnapshot {
 /** C. 育休中: 育休取得者の収入を除外し、育児休業給付金の月平均を加算。出産の一時支出は notes で別掲する */
 function buildParentalLeaveScenario(profile: LifeProfile): ScenarioSnapshot {
   const householdIncomeMonthly = householdMonthlyIncome(profile);
-  const leaveTakerMonthly = profile.family.leaveTakerIncome / 12;
+  // leaveTakerIncomeは賞与込みの額面年収だが、育休取得者の賞与内訳までは入力させていないため、
+  // 全額を月給相当とみなして手取り換算する（実際より少し高めに引かれる可能性がある簡易概算）
+  const leaveTakerMonthly = estimateNetAnnualIncome(profile.family.leaveTakerIncome) / 12;
   const benefit = calcMonthlyParentalLeaveBenefit(profile);
   const income = Math.max(0, householdIncomeMonthly - leaveTakerMonthly) + benefit;
 

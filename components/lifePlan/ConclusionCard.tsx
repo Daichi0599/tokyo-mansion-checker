@@ -6,7 +6,13 @@ const STATUS_LABEL: Record<ScenarioSnapshot["status"], string> = {
   deficit: "赤字",
 };
 
-export default function ConclusionCard({ worst }: { worst: ScenarioSnapshot }) {
+export default function ConclusionCard({
+  worst,
+  annualNetBonus,
+}: {
+  worst: ScenarioSnapshot;
+  annualNetBonus: number;
+}) {
   return (
     <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6 space-y-3">
       <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">結論</p>
@@ -28,8 +34,13 @@ export default function ConclusionCard({ worst }: { worst: ScenarioSnapshot }) {
         </span>
         ）です。この時点を基準に計画すると、他の時点はより余裕を持って迎えられます。
       </p>
+      {annualNetBonus > 0 && (
+        <p className="text-xs text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 rounded-lg px-3 py-2">
+          年間ボーナス手取り目安：約{annualNetBonus}万円（頭金・特別支出用の別枠です。上の月間余力には含めていません）
+        </p>
+      )}
       <p className="text-xs text-slate-500">
-        額面年収ベースの簡易試算です。手取りベースではないため、実際の余力はこれより少なくなる場合があります。
+        月々の給与部分から、年収帯に応じた概算の手取り率で試算しています（詳細な税額計算ではありません）。
       </p>
     </div>
   );

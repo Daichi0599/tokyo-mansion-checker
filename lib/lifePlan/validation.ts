@@ -16,6 +16,8 @@ export function validateHousehold(household: LifeProfile["household"]): Validati
   push("userAge", inRange(household.userAge, 18, 60, "年齢"));
   push("userIncome", inRange(household.userIncome, 0, 5000, "年収"));
   push("partnerIncome", inRange(household.partnerIncome, 0, 5000, "パートナーの年収"));
+  // 賞与が年収を上回るケース（例: 年収の選択肢を後から減らした場合）は、
+  // 計算側(lib/lifePlan/netIncome.ts)で年収を上限にクランプするため、ここではブロックしない。
   push("savings", inRange(household.savings, 0, 30000, "貯蓄"));
   push("monthlyLivingCost", inRange(household.monthlyLivingCost, 0, 300, "月の生活費"));
   push("currentRent", inRange(household.currentRent, 0, 300, "いまの家賃"));
