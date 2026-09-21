@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import type { WealthYearPoint } from "@/lib/lifePlan/wealthProjection";
 
 interface Props {
@@ -34,6 +35,9 @@ function formatMan(value: number): string {
  * rem/px基準でスケールされないため、画面幅によらず一定の可読サイズを保てる。
  */
 export default function WealthChart({ points, comparisonPoints }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+
   if (points.length < 2) return null;
 
   const plotWidth = WIDTH - PAD_LEFT - PAD_RIGHT;
@@ -74,9 +78,29 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
   const birthPoints = points.filter((p) => p.events.includes("出産"));
   const purchasePoints = points.filter((p) => p.events.includes("住宅購入"));
 
+  const handlePointer = (clientX: number) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect || rect.width === 0) return;
+    const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    setHoverIndex(Math.round(fraction * (points.length - 1)));
+  };
+  const hovered = hoverIndex !== null ? points[hoverIndex] : null;
+  const hoveredComparison = hoverIndex !== null ? comparisonPoints?.[hoverIndex] : undefined;
+  // ツールチップが画面端で切れないよう、左右の端に寄っている時だけ表示位置を内側にずらす
+  const tooltipAnchor = hoverIndex === null ? 50 : Math.min(85, Math.max(15, xPct(hoverIndex)));
+
   return (
     <div className="space-y-2">
-      <div className="relative w-full" style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}>
+      <div
+        ref={containerRef}
+        className="relative w-full cursor-crosshair"
+        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
+        onMouseMove={(e) => handlePointer(e.clientX)}
+        onMouseLeave={() => setHoverIndex(null)}
+        onTouchStart={(e) => handlePointer(e.touches[0].clientX)}
+        onTouchMove={(e) => handlePointer(e.touches[0].clientX)}
+        onTouchEnd={() => setHoverIndex(null)}
+      >
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full h-full" role="img" aria-label="資産推移シミュレーション">
           {yTicks.map((v, i) => (
             <line
@@ -130,6 +154,24 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
           {xTickIndexes.map((i) => (
             <circle key={`dot-${i}`} cx={xAt(i)} cy={yAt(points[i].totalAssets)} r={3} fill="#34d399" />
           ))}
+
+          {hovered && (
+            <>
+              <line
+                x1={xAt(hoverIndex as number)}
+                y1={PAD_TOP}
+                x2={xAt(hoverIndex as number)}
+                y2={HEIGHT - PAD_BOTTOM}
+                stroke="#e2e8f0"
+                strokeWidth={1}
+              />
+              <circle cx={xAt(hoverIndex as number)} cy={yAt(hovered.totalAssets)} r={4} fill="#34d399" stroke="#0f172a" strokeWidth={1.5} />
+              <circle cx={xAt(hoverIndex as number)} cy={yAt(hovered.cashSavings)} r={4} fill="#818cf8" stroke="#0f172a" strokeWidth={1.5} />
+              {hoveredComparison && (
+                <circle cx={xAt(hoverIndex as number)} cy={yAt(hoveredComparison.totalAssets)} r={4} fill="#cbd5e1" stroke="#0f172a" strokeWidth={1.5} />
+              )}
+            </>
+          )}
         </svg>
 
         {yTicks.map((v, i) => (
@@ -181,7 +223,26 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
             {formatMan(points[i].totalAssets)}
           </span>
         ))}
+
+        {hovered && (
+          <div
+            className="absolute -translate-x-1/2 top-1 bg-slate-900 border border-slate-600 rounded-lg px-2.5 py-2 text-[11px] leading-tight whitespace-nowrap shadow-lg pointer-events-none space-y-0.5"
+            style={{ left: `${tooltipAnchor}%` }}
+          >
+            <p className="font-bold text-white">
+              {hovered.year === 0 ? "今" : `${hovered.year}年後`}（{hovered.age}歳）
+            </p>
+            <p className="text-emerald-300">資産合計 {formatMan(hovered.totalAssets)}</p>
+            <p className="text-indigo-300">現金 {formatMan(hovered.cashSavings)}</p>
+            <p className="text-emerald-400/80">投資元本 {formatMan(hovered.investmentPrincipal)}</p>
+            {hoveredComparison && (
+              <p className="text-slate-300">安全プラン {formatMan(hoveredComparison.totalAssets)}</p>
+            )}
+          </div>
+        )}
       </div>
+
+      <p className="text-xs text-slate-500">グラフを指でなぞる（PCはマウスを乗せる）と、その時点の内訳が見られます。</p>
 
       <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400">
         <span className="inline-flex items-center gap-1.5">
