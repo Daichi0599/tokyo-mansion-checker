@@ -4,6 +4,7 @@ export * from "./housing";
 export * from "./family";
 export * from "./car";
 export * from "./netIncome";
+export * from "./wealthProjection";
 export * from "./scenarios";
 export * from "./recommendations";
 export * from "./safePlan";

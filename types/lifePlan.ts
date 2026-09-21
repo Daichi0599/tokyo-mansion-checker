@@ -11,6 +11,7 @@ export type BirthPlan = "none" | "standard" | "premium";
 export type EducationPolicy = "all_public" | "junior_private" | "elem_private";
 export type UniversityType = "national" | "private_arts" | "private_science";
 export type EntryIntent = "housing" | "family" | "car" | "all";
+export type IncomeGrowthScenario = "flat" | "moderate" | "strong";
 
 export interface LifeProfile {
   version: 1;
@@ -29,6 +30,10 @@ export interface LifeProfile {
     savings: number;
     monthlyLivingCost: number;
     currentRent: number;
+    /** 昇給の見込み。年間の収入成長率シナリオとして選ばせる（自由入力の予測は精度を装いすぎるため避ける） */
+    incomeGrowthScenario: IncomeGrowthScenario;
+    /** NISA・株など金融資産への毎月の積立額。運用リターンは見込まず、元本の積み上げのみを追跡する */
+    monthlyInvestment: number;
   };
 
   housing: {

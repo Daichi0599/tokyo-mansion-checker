@@ -13,6 +13,7 @@ import ScenarioSnapshotCard from "@/components/lifePlan/ScenarioSnapshotCard";
 import ScenarioComparison from "@/components/lifePlan/ScenarioComparison";
 import RecommendationList from "@/components/lifePlan/RecommendationList";
 import PlanEditPanel from "@/components/lifePlan/PlanEditPanel";
+import WealthProjectionSection from "@/components/lifePlan/WealthProjectionSection";
 import CalculationNotes from "@/components/lifePlan/CalculationNotes";
 import AffiliateCta from "@/components/AffiliateCta";
 
@@ -119,6 +120,8 @@ export default function PlanResultPage() {
           safePlan={safePlan}
           safeScenarios={safeScenarios}
         />
+
+        <WealthProjectionSection profile={profile} />
 
         <RecommendationList recommendations={recommendations} />
 

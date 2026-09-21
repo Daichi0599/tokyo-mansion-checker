@@ -1,7 +1,14 @@
 "use client";
 
-import type { LifeProfile } from "@/types/lifePlan";
-import { PlanNumberField, range } from "./PlanField";
+import type { LifeProfile, IncomeGrowthScenario } from "@/types/lifePlan";
+import { INCOME_GROWTH_LABEL } from "@/lib/lifePlan/wealthProjection";
+import { PlanNumberField, PlanChoiceField, range } from "./PlanField";
+
+const INCOME_GROWTH_OPTIONS: { value: IncomeGrowthScenario; label: string }[] = [
+  { value: "flat", label: INCOME_GROWTH_LABEL.flat },
+  { value: "moderate", label: INCOME_GROWTH_LABEL.moderate },
+  { value: "strong", label: INCOME_GROWTH_LABEL.strong },
+];
 
 interface Props {
   household: LifeProfile["household"];
@@ -102,12 +109,31 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
           <PlanNumberField
             label="月の生活費"
             unit="万円"
-            desc="住居費を除く、毎月のおおよその支出"
+            desc="住居費を除く、毎月のおおよその支出（NISA・投資への積立額は下の項目とは別に、生活費に含めないでください）"
             value={household.monthlyLivingCost}
             options={[10, 15, 20, 25, 30, 35, 40, 50, 60]}
             onChange={(v) => set("monthlyLivingCost", v)}
             error={errors.monthlyLivingCost}
             isDefault
+          />
+          <PlanNumberField
+            label="NISA・株などへの毎月の積立額"
+            unit="万円"
+            desc="運用リターンは見込まず、積み立てた元本だけを資産推移に反映します"
+            value={household.monthlyInvestment}
+            options={[0, 3, 5, 8, 10, 15, 20, 30, 40]}
+            onChange={(v) => set("monthlyInvestment", v)}
+            error={errors.monthlyInvestment}
+            isDefault
+          />
+        </div>
+        <div className="mt-4">
+          <PlanChoiceField
+            label="今後の昇給の見込み"
+            desc="資産推移シミュレーションの収入成長率に使います（目安）"
+            value={household.incomeGrowthScenario}
+            options={INCOME_GROWTH_OPTIONS}
+            onChange={(v) => set("incomeGrowthScenario", v)}
           />
         </div>
       </details>

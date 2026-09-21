@@ -20,6 +20,7 @@ export function validateHousehold(household: LifeProfile["household"]): Validati
   // 計算側(lib/lifePlan/netIncome.ts)で年収を上限にクランプするため、ここではブロックしない。
   push("savings", inRange(household.savings, 0, 30000, "貯蓄"));
   push("monthlyLivingCost", inRange(household.monthlyLivingCost, 0, 300, "月の生活費"));
+  push("monthlyInvestment", inRange(household.monthlyInvestment, 0, 200, "NISA・株などへの毎月の積立額"));
   push("currentRent", inRange(household.currentRent, 0, 300, "いまの家賃"));
 
   return errors;

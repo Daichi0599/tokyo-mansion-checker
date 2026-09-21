@@ -19,6 +19,8 @@ export const DEFAULT_LIFE_PROFILE: LifeProfile = {
     savings: 500,
     monthlyLivingCost: 20,
     currentRent: 15,
+    incomeGrowthScenario: "moderate",
+    monthlyInvestment: 5,
   },
 
   housing: {
