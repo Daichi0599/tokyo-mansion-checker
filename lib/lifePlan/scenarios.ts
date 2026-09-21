@@ -59,14 +59,25 @@ function carMonthly(profile: LifeProfile): number {
   return calcCarMonthlyCostMan(profile.car.plan, profile.car.parkingFee);
 }
 
+/**
+ * NISA・株などへの積立額を、月間余力を計算する上での「支出」の1つとして扱う。
+ * こうしないと月間余力＝NISA拠出前の残額になってしまい、「結局いくら手元に残るのか」
+ * という実感と合わなくなる（積立額は生活費と同様に毎月出ていくお金のため）。
+ */
+function investmentMonthly(profile: LifeProfile): number {
+  return profile.household.monthlyInvestment;
+}
+
 /** A. 現在: 家賃ベースの現状の月間収支 */
 function buildCurrentScenario(profile: LifeProfile): ScenarioSnapshot {
   const income = householdMonthlyIncome(profile);
   const car = carMonthly(profile);
+  const investment = investmentMonthly(profile);
   const costs = [
     { label: "家賃", amount: profile.household.currentRent },
     { label: "生活費", amount: profile.household.monthlyLivingCost },
     ...(car > 0 ? [{ label: "車", amount: car }] : []),
+    ...(investment > 0 ? [{ label: "NISA・株などの積立", amount: investment }] : []),
   ];
   const expenses = costs.reduce((s, c) => s + c.amount, 0);
   const balance = income - expenses;
@@ -88,12 +99,14 @@ function buildAfterPurchaseScenario(profile: LifeProfile): ScenarioSnapshot {
   const metrics = calcHousingMetrics(profile);
   const propertyTax = estimateMonthlyPropertyTax(profile.housing.targetPrice);
   const car = carMonthly(profile);
+  const investment = investmentMonthly(profile);
   const costs = [
     { label: "ローン返済", amount: metrics.monthlyPayment },
     { label: "管理費・修繕積立金", amount: profile.housing.managementFee },
     { label: "固定資産税(月割概算)", amount: propertyTax },
     { label: "生活費", amount: profile.household.monthlyLivingCost },
     ...(car > 0 ? [{ label: "車", amount: car }] : []),
+    ...(investment > 0 ? [{ label: "NISA・株などの積立", amount: investment }] : []),
   ];
   const expenses = costs.reduce((s, c) => s + c.amount, 0);
   const balance = income - expenses;
@@ -134,11 +147,13 @@ function buildParentalLeaveScenario(profile: LifeProfile): ScenarioSnapshot {
   const car = carMonthly(profile);
   const housingCost =
     profile.housing.intent === "none" ? 0 : metrics.monthlyPayment + profile.housing.managementFee + propertyTax;
+  const investment = investmentMonthly(profile);
 
   const costs = [
     ...(housingCost > 0 ? [{ label: "住宅費", amount: Math.round(housingCost * 10) / 10 }] : []),
     { label: "生活費", amount: profile.household.monthlyLivingCost },
     ...(car > 0 ? [{ label: "車", amount: car }] : []),
+    ...(investment > 0 ? [{ label: "NISA・株などの積立", amount: investment }] : []),
   ];
   const expenses = costs.reduce((s, c) => s + c.amount, 0);
   const balance = income - expenses;
@@ -173,12 +188,14 @@ function buildEducationPeakScenario(profile: LifeProfile): ScenarioSnapshot {
   const peak = calcEducationPeakMonthly(profile);
   const housingCost =
     profile.housing.intent === "none" ? 0 : metrics.monthlyPayment + profile.housing.managementFee + propertyTax;
+  const investment = investmentMonthly(profile);
 
   const costs = [
     ...(housingCost > 0 ? [{ label: "住宅費", amount: Math.round(housingCost * 10) / 10 }] : []),
     { label: "生活費", amount: profile.household.monthlyLivingCost },
     { label: `教育費(${peak.label})`, amount: peak.monthly },
     ...(car > 0 ? [{ label: "車", amount: car }] : []),
+    ...(investment > 0 ? [{ label: "NISA・株などの積立", amount: investment }] : []),
   ];
   const expenses = costs.reduce((s, c) => s + c.amount, 0);
   const balance = income - expenses;
@@ -203,6 +220,7 @@ function buildRateRiseScenario(profile: LifeProfile): ScenarioSnapshot {
   const risenMetrics = calcHousingMetricsAtRate(profile, risenRate);
   const propertyTax = estimateMonthlyPropertyTax(profile.housing.targetPrice);
   const car = carMonthly(profile);
+  const investment = investmentMonthly(profile);
 
   const costs = [
     { label: "ローン返済(金利上昇後)", amount: risenMetrics.monthlyPayment },
@@ -210,6 +228,7 @@ function buildRateRiseScenario(profile: LifeProfile): ScenarioSnapshot {
     { label: "固定資産税(月割概算)", amount: propertyTax },
     { label: "生活費", amount: profile.household.monthlyLivingCost },
     ...(car > 0 ? [{ label: "車", amount: car }] : []),
+    ...(investment > 0 ? [{ label: "NISA・株などの積立", amount: investment }] : []),
   ];
   const expenses = costs.reduce((s, c) => s + c.amount, 0);
   const balance = income - expenses;

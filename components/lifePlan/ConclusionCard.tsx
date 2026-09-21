@@ -21,7 +21,7 @@ export default function ConclusionCard({
         この計画で最も家計が厳しくなるのは、{worst.label}です。
       </p>
       <p className="text-sm text-slate-300 leading-relaxed">
-        月間余力は約{worst.monthlyBalance}万円（
+        月々の手取りから、住居費・生活費・車・NISA積立などを全て払った後に手元に残る額（月間余力）は約{worst.monthlyBalance}万円（
         <span
           className={
             worst.status === "deficit"
@@ -41,7 +41,7 @@ export default function ConclusionCard({
         </p>
       )}
       <p className="text-xs text-slate-500">
-        月々の給与部分から、年収帯に応じた概算の手取り率で試算しています（詳細な税額計算ではありません）。
+        月間余力＝手取り月収 −（住居費＋生活費＋車＋NISA積立などの支出）。この額がそのまま、毎月現金として積み上がっていくお金のイメージです。手取りは年収帯に応じた概算の手取り率で試算しています（詳細な税額計算ではありません）。
       </p>
       <Link
         href="#wealth-projection"

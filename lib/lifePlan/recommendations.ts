@@ -74,9 +74,11 @@ export function buildRecommendations(profile: LifeProfile, scenarios: ScenarioSn
 
   if (recs.length === 0) {
     const worst = scenarios.reduce((w, s) => (s.monthlyBalance < w.monthlyBalance ? s : w), scenarios[0]);
-    recs.push({
-      message: `すべての時点で黒字ですが、最も厳しいのは「${worst.label}」で月間余力は約${worst.monthlyBalance}万円です。この時期を基準に計画すると安全です。`,
-    });
+    const message =
+      worst.status === "deficit"
+        ? `「${worst.label}」で月間余力が約${worst.monthlyBalance}万円の赤字です。この時期に向けて支出の見直しが必要です。`
+        : `すべての時点で黒字です。最も厳しいのは「${worst.label}」で月間余力は約${worst.monthlyBalance}万円です。この時期を基準に計画すると安全です。`;
+    recs.push({ message });
   }
 
   return recs.slice(0, 3);
