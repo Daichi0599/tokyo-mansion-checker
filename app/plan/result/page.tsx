@@ -86,7 +86,7 @@ export default function PlanResultPage() {
     );
   }
 
-  const handleProfileChange = (next: LifeProfile, fieldGroup: "housing" | "family" | "car") => {
+  const handleProfileChange = (next: LifeProfile, fieldGroup: "household" | "housing" | "family" | "car") => {
     // saveLifeProfile が useLifeProfile の購読者に変更通知するため、
     // ローカルstateを別途更新する必要はない
     saveLifeProfile(next);

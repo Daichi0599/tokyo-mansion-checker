@@ -20,7 +20,7 @@ type PlanEventMap = {
   plan_step_view: { step: number; step_key: "household" | "housing" | "family" | "car"; total_steps: number; entry_intent: EntryIntent };
   plan_step_complete: { step: number; entry_intent: EntryIntent };
   plan_complete: { entry_intent: EntryIntent; included_topics: string };
-  scenario_change: { field_group: "housing" | "family" | "car" };
+  scenario_change: { field_group: "household" | "housing" | "family" | "car" };
   scenario_compare: { adjustment_type: "car" | "price" | "none" };
   detail_tool_open: { tool: "mansion" | "birth" | "child" | "car" | "check"; source: "plan_result" | "top" };
   detail_tool_bridge: { tool: "mansion" | "birth" | "child" | "car" | "check" };

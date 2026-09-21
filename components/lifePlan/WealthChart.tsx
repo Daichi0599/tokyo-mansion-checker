@@ -10,13 +10,19 @@ const WIDTH = 640;
 const HEIGHT = 260;
 const PAD_LEFT = 52;
 const PAD_RIGHT = 12;
-const PAD_TOP = 16;
-const PAD_BOTTOM = 28;
+const PAD_TOP = 20;
+const PAD_BOTTOM = 24;
 
 function formatMan(value: number): string {
   return Math.round(value).toLocaleString();
 }
 
+/**
+ * ラベル文字はSVG内には置かず、同じ座標を%換算したHTML要素として重ねている。
+ * SVGはviewBoxで縮小表示されるため、内部に<text>を置くとコンテナ幅が狭いスマホで
+ * 文字も一緒に縮んでしまい（実測で5px相当まで縮小）読めなくなる。HTML側のテキストは
+ * rem/px基準でスケールされないため、画面幅によらず一定の可読サイズを保てる。
+ */
 export default function WealthChart({ points }: Props) {
   if (points.length < 2) return null;
 
@@ -32,6 +38,8 @@ export default function WealthChart({ points }: Props) {
 
   const xAt = (i: number) => PAD_LEFT + (i / (points.length - 1)) * plotWidth;
   const yAt = (v: number) => PAD_TOP + (1 - (v - yMin) / (yMax - yMin)) * plotHeight;
+  const xPct = (i: number) => (xAt(i) / WIDTH) * 100;
+  const yPct = (v: number) => (yAt(v) / HEIGHT) * 100;
 
   const cashLine = points.map((p, i) => `${xAt(i)},${yAt(p.cashSavings)}`).join(" ");
   const totalLine = points.map((p, i) => `${xAt(i)},${yAt(p.totalAssets)}`).join(" ");
@@ -45,48 +53,83 @@ export default function WealthChart({ points }: Props) {
     .join(" ")}`;
 
   const zeroY = yAt(0);
-  const yTicks = [yMin, (yMin + yMax) / 2, yMax];
-  const xTickEvery = Math.max(1, Math.round(points.length / 6));
+  const yTicks = [yMax, (yMin + yMax) / 2, yMin];
+  const xTickEvery = Math.max(1, Math.round(points.length / 5));
+  const xTickIndexes = points
+    .map((_, i) => i)
+    .filter((i) => i % xTickEvery === 0 || i === points.length - 1);
 
   const birthPoints = points.filter((p) => p.events.includes("出産"));
 
   return (
     <div className="space-y-2">
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full h-auto" role="img" aria-label="資産推移シミュレーション">
+      <div className="relative w-full" style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}>
+        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full h-full" role="img" aria-label="資産推移シミュレーション">
+          {yTicks.map((v, i) => (
+            <line
+              key={i}
+              x1={PAD_LEFT}
+              y1={yAt(v)}
+              x2={WIDTH - PAD_RIGHT}
+              y2={yAt(v)}
+              stroke="#334155"
+              strokeWidth={1}
+              strokeDasharray={v === 0 ? undefined : "3 3"}
+            />
+          ))}
+
+          {yMin < 0 && <line x1={PAD_LEFT} y1={zeroY} x2={WIDTH - PAD_RIGHT} y2={zeroY} stroke="#f87171" strokeWidth={1} />}
+
+          <polygon points={cashArea} fill="#6366f1" fillOpacity={0.35} />
+          <polygon points={investmentArea} fill="#10b981" fillOpacity={0.35} />
+
+          <polyline points={cashLine} fill="none" stroke="#818cf8" strokeWidth={2} />
+          <polyline points={totalLine} fill="none" stroke="#34d399" strokeWidth={2} />
+
+          {birthPoints.map((p) => (
+            <line
+              key={p.year}
+              x1={xAt(p.year)}
+              y1={PAD_TOP}
+              x2={xAt(p.year)}
+              y2={HEIGHT - PAD_BOTTOM}
+              stroke="#fbbf24"
+              strokeWidth={1}
+              strokeDasharray="2 2"
+            />
+          ))}
+        </svg>
+
         {yTicks.map((v, i) => (
-          <g key={i}>
-            <line x1={PAD_LEFT} y1={yAt(v)} x2={WIDTH - PAD_RIGHT} y2={yAt(v)} stroke="#334155" strokeWidth={1} strokeDasharray={v === 0 ? undefined : "3 3"} />
-            <text x={PAD_LEFT - 6} y={yAt(v) + 3} textAnchor="end" fontSize={10} fill="#94a3b8">
-              {formatMan(v)}
-            </text>
-          </g>
+          <span
+            key={i}
+            className="absolute -translate-y-1/2 text-[10px] leading-none text-slate-400 text-right pr-1.5 whitespace-nowrap"
+            style={{ left: 0, width: `${(PAD_LEFT / WIDTH) * 100}%`, top: `${yPct(v)}%` }}
+          >
+            {formatMan(v)}
+          </span>
         ))}
-
-        {yMin < 0 && <line x1={PAD_LEFT} y1={zeroY} x2={WIDTH - PAD_RIGHT} y2={zeroY} stroke="#f87171" strokeWidth={1} />}
-
-        <polygon points={cashArea} fill="#6366f1" fillOpacity={0.35} />
-        <polygon points={investmentArea} fill="#10b981" fillOpacity={0.35} />
-
-        <polyline points={cashLine} fill="none" stroke="#818cf8" strokeWidth={2} />
-        <polyline points={totalLine} fill="none" stroke="#34d399" strokeWidth={2} />
 
         {birthPoints.map((p) => (
-          <g key={p.year}>
-            <line x1={xAt(p.year)} y1={PAD_TOP} x2={xAt(p.year)} y2={HEIGHT - PAD_BOTTOM} stroke="#fbbf24" strokeWidth={1} strokeDasharray="2 2" />
-            <text x={xAt(p.year)} y={PAD_TOP - 4} textAnchor="middle" fontSize={9} fill="#fbbf24">
-              出産
-            </text>
-          </g>
+          <span
+            key={p.year}
+            className="absolute -translate-x-1/2 text-[10px] leading-none text-amber-400 whitespace-nowrap"
+            style={{ left: `${xPct(p.year)}%`, top: 2 }}
+          >
+            出産
+          </span>
         ))}
 
-        {points.map((p, i) =>
-          i % xTickEvery === 0 || i === points.length - 1 ? (
-            <text key={i} x={xAt(i)} y={HEIGHT - PAD_BOTTOM + 16} textAnchor="middle" fontSize={10} fill="#94a3b8">
-              {p.age}歳
-            </text>
-          ) : null
-        )}
-      </svg>
+        {xTickIndexes.map((i) => (
+          <span
+            key={i}
+            className="absolute -translate-x-1/2 text-[10px] leading-none text-slate-400 whitespace-nowrap"
+            style={{ left: `${xPct(i)}%`, bottom: 2 }}
+          >
+            {points[i].age}歳
+          </span>
+        ))}
+      </div>
 
       <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400">
         <span className="inline-flex items-center gap-1.5">

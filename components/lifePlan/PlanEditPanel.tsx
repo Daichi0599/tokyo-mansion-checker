@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import type { LifeProfile, EducationPolicy, CarPlan } from "@/types/lifePlan";
+import type { LifeProfile, EducationPolicy, CarPlan, IncomeGrowthScenario } from "@/types/lifePlan";
+import { INCOME_GROWTH_LABEL } from "@/lib/lifePlan/wealthProjection";
 import { PlanNumberField, PlanChoiceField, range } from "./PlanField";
 
 interface Props {
   profile: LifeProfile;
-  onChange: (profile: LifeProfile, fieldGroup: "housing" | "family" | "car") => void;
+  onChange: (profile: LifeProfile, fieldGroup: "household" | "housing" | "family" | "car") => void;
 }
 
 const EDUCATION_OPTIONS: { value: EducationPolicy; label: string }[] = [
@@ -20,6 +21,12 @@ const CAR_OPTIONS: { value: CarPlan; label: string }[] = [
   { value: "carshare", label: "カーシェア" },
   { value: "used", label: "中古車" },
   { value: "new", label: "新車" },
+];
+
+const INCOME_GROWTH_OPTIONS: { value: IncomeGrowthScenario; label: string }[] = [
+  { value: "flat", label: INCOME_GROWTH_LABEL.flat },
+  { value: "moderate", label: INCOME_GROWTH_LABEL.moderate },
+  { value: "strong", label: INCOME_GROWTH_LABEL.strong },
 ];
 
 /** 結果画面から住宅価格・金利・育休期間・教育方針・車プランを直接変更できるパネル。変更時は再計算のみ行いページ遷移しない */
@@ -82,6 +89,27 @@ export default function PlanEditPanel({ profile, onChange }: Props) {
             options={CAR_OPTIONS}
             onChange={(v) => onChange({ ...profile, car: { ...profile.car, plan: v } }, "car")}
           />
+
+          <div className="border-t border-slate-700 pt-4 space-y-4">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wide">資産推移シミュレーションの前提</p>
+            <PlanChoiceField
+              label="今後の昇給の見込み"
+              value={profile.household.incomeGrowthScenario}
+              options={INCOME_GROWTH_OPTIONS}
+              onChange={(v) =>
+                onChange({ ...profile, household: { ...profile.household, incomeGrowthScenario: v } }, "household")
+              }
+            />
+            <PlanNumberField
+              label="NISA・株などへの毎月の積立額"
+              unit="万円"
+              value={profile.household.monthlyInvestment}
+              options={[0, 3, 5, 8, 10, 15, 20, 30, 40]}
+              onChange={(v) =>
+                onChange({ ...profile, household: { ...profile.household, monthlyInvestment: v } }, "household")
+              }
+            />
+          </div>
         </div>
       )}
     </div>
