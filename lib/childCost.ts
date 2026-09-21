@@ -82,6 +82,16 @@ export interface BirthResult {
   netBalance: number;
 }
 
+/**
+ * 育児休業給付金：最初180日は67%、以降50%。/birthと/plan（本人・パートナー双方の育休）の
+ * 両方から使えるよう、月収→給付額の変換だけを独立した関数として切り出している。
+ */
+export function calcParentalLeaveBenefitTotal(monthlyIncome: number, leaveMonths: number, numChildren: number): number {
+  const first = Math.min(monthlyIncome * 0.67, IKUKYU_CAP_67) * Math.min(leaveMonths, 6);
+  const later = Math.min(monthlyIncome * 0.5, IKUKYU_CAP_50) * Math.max(0, leaveMonths - 6);
+  return Math.round((first + later) * numChildren);
+}
+
 export function calcBirth(input: BirthInput): BirthResult {
   const { birthCost, numChildren, parentIncome, leaveMonths = 10, cesarean = false } = input;
 
@@ -98,10 +108,7 @@ export function calcBirth(input: BirthInput): BirthResult {
     const monthly = parentIncome / 12;
     // 出産手当金：標準報酬日額の2/3 × 98日 ≒ 月給 × 2.18
     maternityAllowance = Math.round(monthly * (2 / 3) * (98 / 30) * numChildren);
-    // 育児休業給付金：最初180日は67%、以降50%
-    const first = Math.min(monthly * 0.67, IKUKYU_CAP_67) * Math.min(leaveMonths, 6);
-    const later = Math.min(monthly * 0.5, IKUKYU_CAP_50) * Math.max(0, leaveMonths - 6);
-    parentalLeaveBenefit = Math.round((first + later) * numChildren);
+    parentalLeaveBenefit = calcParentalLeaveBenefitTotal(monthly, leaveMonths, numChildren);
   }
 
   const netBalance = lumpSum + gifts + maternityAllowance + parentalLeaveBenefit - grossCost;

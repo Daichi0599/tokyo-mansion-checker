@@ -50,8 +50,11 @@ export interface LifeProfile {
   family: {
     children: 0 | 1 | 2 | 3;
     firstChildInYears: number;
+    /** 育休を取る方（本人側）の年収。household.userIncomeとは別入力（本人以外が取るケースもあるため） */
     leaveTakerIncome: number;
     leaveMonths: number;
+    /** パートナー側の育休期間。0なら取らない前提。年収はhousehold.partnerIncomeを使う */
+    partnerLeaveMonths: number;
     birthPlan: BirthPlan;
     educationPolicy: EducationPolicy;
     university: UniversityType;

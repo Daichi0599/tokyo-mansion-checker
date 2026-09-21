@@ -38,6 +38,7 @@ export const DEFAULT_LIFE_PROFILE: LifeProfile = {
     firstChildInYears: 1,
     leaveTakerIncome: 300,
     leaveMonths: 10,
+    partnerLeaveMonths: 0,
     birthPlan: "standard",
     educationPolicy: "all_public",
     university: "national",

@@ -86,11 +86,20 @@ export default function FamilyStep({ family, onChange, errors }: Props) {
             isDefault={noChildren}
           />
           <PlanNumberField
-            label="育休の期間"
+            label="育休の期間（本人）"
             unit="ヶ月"
             value={family.leaveMonths}
             options={[0, 3, 6, 10, 12, 18, 24]}
             onChange={(v) => set("leaveMonths", v)}
+            isDefault={noChildren}
+          />
+          <PlanNumberField
+            label="育休の期間（パートナー）"
+            unit="ヶ月"
+            desc="パートナーも取る場合の期間。年収は「わが家の現在」で入力したパートナーの年収を使います"
+            value={family.partnerLeaveMonths}
+            options={[0, 1, 2, 3, 6, 10, 12]}
+            onChange={(v) => set("partnerLeaveMonths", v)}
             isDefault={noChildren}
           />
         </div>

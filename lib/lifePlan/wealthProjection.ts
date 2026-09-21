@@ -1,7 +1,7 @@
 import type { LifeProfile, IncomeGrowthScenario } from "@/types/lifePlan";
 import { splitNetIncome, estimateNetAnnualIncome } from "./netIncome";
 import { calcHousingMetrics, estimateMonthlyPropertyTax } from "./housing";
-import { calcFamilyBirth, calcMonthlyParentalLeaveBenefit, calcFamilyCosts } from "./family";
+import { calcFamilyBirth, calcMonthlyParentalLeaveBenefit, calcPartnerMonthlyParentalLeaveBenefit, calcFamilyCosts } from "./family";
 import { calcCarMonthlyCostMan } from "@/lib/carCost";
 
 /**
@@ -81,6 +81,8 @@ export function buildWealthProjection(profile: LifeProfile, horizonYears?: numbe
   const birth = numChildren > 0 ? calcFamilyBirth(profile) : null;
   const monthlyBenefit = numChildren > 0 ? calcMonthlyParentalLeaveBenefit(profile) : 0;
   const leaveTakerNetMonthly = estimateNetAnnualIncome(family.leaveTakerIncome) / 12;
+  const partnerMonthlyBenefit = numChildren > 0 ? calcPartnerMonthlyParentalLeaveBenefit(profile) : 0;
+  const partnerLeaveNetMonthly = estimateNetAnnualIncome(household.partnerIncome) / 12;
 
   let cash = household.savings;
   let investment = 0;
@@ -111,6 +113,19 @@ export function buildWealthProjection(profile: LifeProfile, horizonYears?: numbe
         salaryNet -= leaveTakerNetMonthly * monthsThisYear;
         salaryNet += monthlyBenefit * monthsThisYear;
         events.push("育休中");
+      }
+
+      // パートナー側の育休も、本人側と同じく誕生年の年始から始まる前提で扱う
+      const partnerMonthsThisYear =
+        year === family.firstChildInYears
+          ? Math.min(family.partnerLeaveMonths, 12)
+          : year === family.firstChildInYears + 1
+            ? Math.max(0, family.partnerLeaveMonths - 12)
+            : 0;
+      if (partnerMonthsThisYear > 0) {
+        salaryNet -= partnerLeaveNetMonthly * partnerMonthsThisYear;
+        salaryNet += partnerMonthlyBenefit * partnerMonthsThisYear;
+        if (!events.includes("育休中")) events.push("育休中");
       }
     }
 

@@ -1,6 +1,6 @@
 import type { LifeProfile, BirthPlan } from "@/types/lifePlan";
 import type { NumChildren, ChildInput, BirthInput, BirthResult, ChildResult } from "@/lib/childCost";
-import { calcBirth, calculateCosts, JUKEN_COST } from "@/lib/childCost";
+import { calcBirth, calculateCosts, calcParentalLeaveBenefitTotal, JUKEN_COST } from "@/lib/childCost";
 
 /** LifeProfile.family.birthPlan は childCost.ts の BirthCost と語彙が同じなので、そのまま渡せる */
 function toBirthCost(plan: BirthPlan) {
@@ -54,6 +54,18 @@ export function calcMonthlyParentalLeaveBenefit(profile: LifeProfile): number {
   const birth = calcFamilyBirth(profile);
   const months = Math.max(1, profile.family.leaveMonths);
   return Math.round((birth.parentalLeaveBenefit / months) * 10) / 10;
+}
+
+/**
+ * パートナー側の育児休業給付金（月平均）。出産手当金は出産する側だけの給付のため、
+ * パートナー側には計上しない。年収はhousehold.partnerIncomeをそのまま使う
+ * （本人側のleaveTakerIncomeのような別入力は設けていない）。
+ */
+export function calcPartnerMonthlyParentalLeaveBenefit(profile: LifeProfile): number {
+  const months = Math.max(1, profile.family.partnerLeaveMonths);
+  const numChildren = Math.min(3, Math.max(1, profile.family.children || 1));
+  const total = calcParentalLeaveBenefitTotal(profile.household.partnerIncome / 12, profile.family.partnerLeaveMonths, numChildren);
+  return Math.round((total / months) * 10) / 10;
 }
 
 /**

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ScenarioSnapshot } from "@/lib/lifePlan/scenarios";
 
 const STATUS_LABEL: Record<ScenarioSnapshot["status"], string> = {
@@ -42,6 +43,12 @@ export default function ConclusionCard({
       <p className="text-xs text-slate-500">
         月々の給与部分から、年収帯に応じた概算の手取り率で試算しています（詳細な税額計算ではありません）。
       </p>
+      <Link
+        href="#wealth-projection"
+        className="inline-flex items-center gap-1 text-xs font-bold text-indigo-300 hover:text-indigo-200"
+      >
+        10年後・20年後の資産推移を見る ↓
+      </Link>
     </div>
   );
 }

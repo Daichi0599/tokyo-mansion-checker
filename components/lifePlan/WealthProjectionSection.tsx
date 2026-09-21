@@ -25,7 +25,7 @@ export default function WealthProjectionSection({
   const comparisonLast = comparisonPoints?.[comparisonPoints.length - 1];
 
   return (
-    <section className="bg-slate-800 rounded-2xl border border-slate-700 p-5 space-y-4">
+    <section id="wealth-projection" className="bg-slate-800 rounded-2xl border border-slate-700 p-5 space-y-4 scroll-mt-4">
       <div>
         <h2 className="text-lg font-black text-white">資産推移シミュレーション</h2>
         <p className="text-xs text-slate-400 mt-1">

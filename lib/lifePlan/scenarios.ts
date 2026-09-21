@@ -4,7 +4,7 @@ import {
   calcHousingMetricsAtRate,
   estimateMonthlyPropertyTax,
 } from "./housing";
-import { calcFamilyBirth, calcMonthlyParentalLeaveBenefit, calcEducationPeakMonthly } from "./family";
+import { calcFamilyBirth, calcMonthlyParentalLeaveBenefit, calcPartnerMonthlyParentalLeaveBenefit, calcEducationPeakMonthly } from "./family";
 import { calcCarMonthlyCostMan } from "@/lib/carCost";
 import { estimateNetAnnualIncome, splitNetIncome } from "./netIncome";
 
@@ -112,14 +112,22 @@ function buildAfterPurchaseScenario(profile: LifeProfile): ScenarioSnapshot {
   };
 }
 
-/** C. 育休中: 育休取得者の収入を除外し、育児休業給付金の月平均を加算。出産の一時支出は notes で別掲する */
+/**
+ * C. 育休中: 育休取得者（本人側）の収入を除外し育児休業給付金を加算。
+ * パートナーも同時に育休を取る場合（family.partnerLeaveMonths > 0）は、パートナー側の
+ * 収入減・給付も合わせて反映する。出産の一時支出は notes で別掲する。
+ */
 function buildParentalLeaveScenario(profile: LifeProfile): ScenarioSnapshot {
   const householdIncomeMonthly = householdMonthlyIncome(profile);
   // leaveTakerIncomeは賞与込みの額面年収だが、育休取得者の賞与内訳までは入力させていないため、
   // 全額を月給相当とみなして手取り換算する（実際より少し高めに引かれる可能性がある簡易概算）
   const leaveTakerMonthly = estimateNetAnnualIncome(profile.family.leaveTakerIncome) / 12;
   const benefit = calcMonthlyParentalLeaveBenefit(profile);
-  const income = Math.max(0, householdIncomeMonthly - leaveTakerMonthly) + benefit;
+  const partnerMonthly =
+    profile.family.partnerLeaveMonths > 0 ? estimateNetAnnualIncome(profile.household.partnerIncome) / 12 : 0;
+  const partnerBenefit =
+    profile.family.partnerLeaveMonths > 0 ? calcPartnerMonthlyParentalLeaveBenefit(profile) : 0;
+  const income = Math.max(0, householdIncomeMonthly - leaveTakerMonthly - partnerMonthly) + benefit + partnerBenefit;
 
   const metrics = calcHousingMetrics(profile);
   const propertyTax = estimateMonthlyPropertyTax(profile.housing.targetPrice);
