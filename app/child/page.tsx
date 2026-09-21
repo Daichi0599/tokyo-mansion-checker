@@ -541,8 +541,8 @@ function ChildCostPageInner() {
                 { value: "standard", label: `正常分娩 — 総額 約${BIRTH_GROSS.standard}万円` },
                 { value: "premium", label: `無痛分娩・人気産院 — 総額 約${BIRTH_GROSS.premium}万円` },
               ]} />
-            <SelectField label="産休・育休を取る方の年収" value={String(input.parentIncome)} onChange={(v) => update("parentIncome", Number(v))}
-              hint="出産手当金・育児休業給付金の概算に使います（入力しなくても試算できます）"
+            <SelectField label="産休・育休を取る方の年収（月給×12）" value={String(input.parentIncome)} onChange={(v) => update("parentIncome", Number(v))}
+              hint="賞与を除いた額面月給の12ヶ月分。給付金の概算に使います（入力しなくても試算できます）"
               options={[
                 { value: "0", label: "計算しない" },
                 ...[300, 400, 500, 600, 700, 800].map((v) => ({ value: String(v), label: `${v}万円` })),

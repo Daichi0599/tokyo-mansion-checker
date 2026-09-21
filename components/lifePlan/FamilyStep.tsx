@@ -77,9 +77,9 @@ export default function FamilyStep({ family, onChange, errors }: Props) {
             isDefault={noChildren}
           />
           <PlanNumberField
-            label="育休中の年収（あなた）"
+            label="育休を取る方の年収（月給×12）"
             unit="万円"
-            desc="育休中の収支計算に使います"
+            desc="賞与を除いた額面月給の12ヶ月分。給付金の概算に使います"
             value={family.leaveTakerIncome}
             options={[0, 200, 300, 400, 500, 600, 700, 800]}
             onChange={(v) => set("leaveTakerIncome", v)}
@@ -96,7 +96,7 @@ export default function FamilyStep({ family, onChange, errors }: Props) {
           <PlanNumberField
             label="育休の期間（パートナー）"
             unit="ヶ月"
-            desc="パートナーも取る場合の期間。年収は「わが家の現在」で入力したパートナーの年収を使います"
+            desc="パートナーも取る場合の期間。賞与を除いた月給部分から給付金を概算します"
             value={family.partnerLeaveMonths}
             options={[0, 1, 2, 3, 6, 10, 12]}
             onChange={(v) => set("partnerLeaveMonths", v)}

@@ -58,13 +58,14 @@ export function calcMonthlyParentalLeaveBenefit(profile: LifeProfile): number {
 
 /**
  * パートナー側の育児休業給付金（月平均）。出産手当金は出産する側だけの給付のため、
- * パートナー側には計上しない。年収はhousehold.partnerIncomeをそのまま使う
- * （本人側のleaveTakerIncomeのような別入力は設けていない）。
+ * パートナー側には計上しない。育児休業給付金の算定に賞与は含まれないため、
+ * household.partnerIncomeからpartnerBonusAnnualを除いた月給部分を使う。
  */
 export function calcPartnerMonthlyParentalLeaveBenefit(profile: LifeProfile): number {
   const months = Math.max(1, profile.family.partnerLeaveMonths);
   const numChildren = Math.min(3, Math.max(1, profile.family.children || 1));
-  const total = calcParentalLeaveBenefitTotal(profile.household.partnerIncome / 12, profile.family.partnerLeaveMonths, numChildren);
+  const partnerSalaryAnnual = Math.max(0, profile.household.partnerIncome - profile.household.partnerBonusAnnual);
+  const total = calcParentalLeaveBenefitTotal(partnerSalaryAnnual / 12, profile.family.partnerLeaveMonths, numChildren);
   return Math.round((total / months) * 10) / 10;
 }
 

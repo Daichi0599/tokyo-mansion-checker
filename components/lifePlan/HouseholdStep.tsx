@@ -34,7 +34,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
         <PlanNumberField
           label="あなたの年収"
           unit="万円"
-          desc="額面ベースの年間収入"
+          desc="賞与を含む額面年収。源泉徴収票なら「支払金額」"
           value={household.userIncome}
           options={[0, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1500, 2000]}
           onChange={(v) => set("userIncome", v)}
@@ -43,7 +43,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
         <PlanNumberField
           label="パートナーの年収"
           unit="万円"
-          desc="単身の場合は0のまま"
+          desc="賞与を含む額面年収。単身の場合は0のまま"
           value={household.partnerIncome}
           options={[0, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]}
           onChange={(v) => set("partnerIncome", v)}

@@ -196,7 +196,7 @@ export default function LoanSimulatorPage() {
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="text-sm font-bold text-slate-300">
-                年収 <span className="text-xs font-normal text-slate-400">（返済比率の計算に使用・任意）</span>
+                年収 <span className="text-xs font-normal text-slate-400">（賞与込みの額面・返済比率の計算に使用・任意）</span>
               </label>
               <span className="text-base font-black text-slate-300">
                 {incomeMan > 0 ? `${fmt(incomeMan)}万円` : "未入力"}

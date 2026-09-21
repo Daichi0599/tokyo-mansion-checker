@@ -265,8 +265,8 @@ function BirthCostPageInner() {
             ]}
           />
           <Field
-            label="産休・育休を取る方の年収"
-            hint="出産手当金と育児休業給付金の概算に使います"
+            label="産休・育休を取る方の年収（月給×12）"
+            hint="賞与を除いた額面月給の12ヶ月分。出産手当金と育児休業給付金の概算に使います"
             value={String(input.parentIncome)}
             onChange={(v) => update("parentIncome", Number(v))}
             options={[
