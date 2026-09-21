@@ -104,7 +104,7 @@ export default function PlanEditPanel({ profile, onChange }: Props) {
             <SectionLabel>世帯</SectionLabel>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
               <PlanNumberField
-                label="ご本人の年収"
+                label="あなたの年収"
                 unit="万円"
                 value={current.household.userIncome}
                 options={[0, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1500, 2000]}
@@ -118,7 +118,7 @@ export default function PlanEditPanel({ profile, onChange }: Props) {
                 onChange={(v) => setHousehold("partnerIncome", v)}
               />
               <PlanNumberField
-                label="ご本人の年間賞与"
+                label="あなたの年間賞与"
                 unit="万円"
                 value={current.household.userBonusAnnual}
                 options={[0, 30, 50, 80, 100, 150, 200, 300, 400]}
@@ -226,14 +226,14 @@ export default function PlanEditPanel({ profile, onChange }: Props) {
                     onChange={(v) => setFamily("firstChildInYears", v)}
                   />
                   <PlanNumberField
-                    label="育休を取る方の年収（本人）"
+                    label="育休を取る場合の年収（あなた）"
                     unit="万円"
                     value={current.family.leaveTakerIncome}
                     options={[0, 200, 300, 400, 500, 600, 700, 800]}
                     onChange={(v) => setFamily("leaveTakerIncome", v)}
                   />
                   <PlanNumberField
-                    label="育休の期間（本人）"
+                    label="育休の期間（あなた）"
                     unit="ヶ月"
                     value={current.family.leaveMonths}
                     options={range(0, 24, 3)}

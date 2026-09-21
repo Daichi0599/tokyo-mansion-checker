@@ -32,7 +32,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
         <PlanNumberField
-          label="ご本人の年収"
+          label="あなたの年収"
           unit="万円"
           desc="額面ベースの年間収入"
           value={household.userIncome}
@@ -68,7 +68,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
         <p className="mt-2 text-xs text-slate-500">開かなくても、表示中の目安で計算できます。</p>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
           <PlanNumberField
-            label="ご本人の年齢"
+            label="あなたの年齢"
             unit="歳"
             value={household.userAge}
             options={range(18, 60)}
@@ -77,7 +77,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
             isDefault
           />
           <PlanNumberField
-            label="ご本人の年間賞与"
+            label="あなたの年間賞与"
             unit="万円"
             desc="年収に含まれる賞与部分（月給とは別に、賞与は年間の別枠として計算します）"
             value={household.userBonusAnnual}

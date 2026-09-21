@@ -57,7 +57,7 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
     .join(" ")}`;
 
   const zeroY = yAt(0);
-  const yTicks = [yMax, (yMin + yMax) / 2, yMin];
+  const yTicks = [yMax, yMin + (yMax - yMin) * 0.75, yMin + (yMax - yMin) * 0.5, yMin + (yMax - yMin) * 0.25, yMin];
   const xTickEvery = Math.max(1, Math.round(points.length / 5));
   const xTickIndexes = points
     .map((_, i) => i)
@@ -118,6 +118,10 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
               strokeDasharray="2 2"
             />
           ))}
+
+          {xTickIndexes.map((i) => (
+            <circle key={`dot-${i}`} cx={xAt(i)} cy={yAt(points[i].totalAssets)} r={3} fill="#34d399" />
+          ))}
         </svg>
 
         {yTicks.map((v, i) => (
@@ -152,11 +156,21 @@ export default function WealthChart({ points, comparisonPoints }: Props) {
 
         {xTickIndexes.map((i) => (
           <span
-            key={i}
+            key={`age-${i}`}
             className="absolute -translate-x-1/2 text-[10px] leading-none text-slate-400 whitespace-nowrap"
             style={{ left: `${xPct(i)}%`, bottom: 2 }}
           >
-            {points[i].age}歳
+            {points[i].year === 0 ? "今" : `${points[i].year}年後`}
+          </span>
+        ))}
+
+        {xTickIndexes.map((i) => (
+          <span
+            key={`val-${i}`}
+            className="absolute -translate-x-1/2 -translate-y-full text-[10px] font-bold leading-none text-emerald-300 whitespace-nowrap bg-slate-800/90 px-1 py-0.5 rounded"
+            style={{ left: `${xPct(i)}%`, top: `calc(${yPct(points[i].totalAssets)}% - 5px)` }}
+          >
+            {formatMan(points[i].totalAssets)}万
           </span>
         ))}
       </div>

@@ -6,7 +6,7 @@ import { buildWealthProjection } from "@/lib/lifePlan/wealthProjection";
 import WealthChart from "./WealthChart";
 
 /** 節目として提示する年数（プロジェクションの長さが足りない場合はスキップする） */
-const MILESTONE_YEARS = [10, 20];
+const MILESTONE_YEARS = [5, 10, 15, 20, 25, 30];
 
 export default function WealthProjectionSection({
   profile,
@@ -35,22 +35,20 @@ export default function WealthProjectionSection({
 
       <WealthChart points={points} comparisonPoints={comparisonPoints} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         {MILESTONE_YEARS.filter((y) => y <= points[points.length - 1].year).map((y) => {
           const p = points[y];
           return (
-            <div key={y} className="rounded-xl bg-slate-900/50 border border-slate-700 px-3 py-2.5">
+            <div key={y} className="rounded-xl bg-slate-900/50 border border-slate-700 px-2.5 py-2">
               <p className="text-xs text-slate-400">{y}年後（{p.age}歳）</p>
-              <p className="text-sm font-bold text-white">
-                資産合計 約{p.totalAssets.toLocaleString()}万円
-              </p>
-              <p className="text-xs text-slate-500">
-                現金{p.cashSavings.toLocaleString()}万円＋投資元本{p.investmentPrincipal.toLocaleString()}万円
-              </p>
+              <p className="text-sm font-bold text-white">約{p.totalAssets.toLocaleString()}万円</p>
             </div>
           );
         })}
       </div>
+      <p className="text-xs text-slate-600">
+        グラフの緑の点に、その時点の資産合計をそのまま表示しています。現金と投資の内訳は上の凡例（紫＝現金、緑＝投資元本）で確認できます。
+      </p>
 
       {hasDeficitYear && (
         <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
