@@ -268,8 +268,7 @@ export default function MansionKattewaIkenaiPage() {
               <p className="font-bold text-white text-sm">たろう｜都内マンション研究中</p>
               <p className="text-xs text-slate-400 mt-0.5">大企業勤務・アラサー・東京都在住</p>
               <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作。
-                複数の不動産会社・銀行・FPへのヒアリングをもとにコンテンツを作成しています。
+                「年収はある程度あるが、都内マンションを本当に買っていいか判断できない」という自身の経験からこのサイトを制作しています。
               </p>
               <div className="flex gap-3 mt-2">
                 <a href="https://x.com/30lab_jp" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline">𝕏 @30lab_jp</a>
