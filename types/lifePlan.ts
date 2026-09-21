@@ -43,6 +43,8 @@ export interface LifeProfile {
     interestRate: number;
     repaymentYears: number;
     managementFee: number;
+    /** 購入までの年数。0=今すぐ。資産推移シミュレーションで、この年までは家賃・以降はローンを計上する */
+    purchaseInYears: number;
   };
 
   family: {

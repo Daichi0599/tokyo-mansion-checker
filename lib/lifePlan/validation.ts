@@ -30,6 +30,7 @@ export function validateHousing(housing: LifeProfile["housing"]): ValidationErro
   const errors: ValidationErrors = {};
   const push = (key: string, err: string | null) => { if (err) errors[key] = err; };
 
+  push("purchaseInYears", inRange(housing.purchaseInYears, 0, 30, "購入する時期"));
   push("targetPrice", inRange(housing.targetPrice, 0, 30000, "購入価格"));
   push("downPayment", inRange(housing.downPayment, 0, 30000, "頭金"));
   push("interestRate", inRange(housing.interestRate, 0, 10, "金利"));

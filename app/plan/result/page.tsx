@@ -121,7 +121,7 @@ export default function PlanResultPage() {
           safeScenarios={safeScenarios}
         />
 
-        <WealthProjectionSection profile={profile} />
+        <WealthProjectionSection profile={profile} safePlan={safePlan ?? undefined} />
 
         <RecommendationList recommendations={recommendations} />
 

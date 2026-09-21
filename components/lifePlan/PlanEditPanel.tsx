@@ -48,6 +48,16 @@ export default function PlanEditPanel({ profile, onChange }: Props) {
         <div className="px-5 pb-5 space-y-5 border-t border-slate-700 pt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
             <PlanNumberField
+              label="購入する時期"
+              unit="年後"
+              value={profile.housing.purchaseInYears}
+              options={[0, 1, 2, 3, 5, 7, 10]}
+              optionLabels={{ 0: "今すぐ" }}
+              onChange={(v) =>
+                onChange({ ...profile, housing: { ...profile.housing, purchaseInYears: v } }, "housing")
+              }
+            />
+            <PlanNumberField
               label="住宅価格"
               unit="万円"
               value={profile.housing.targetPrice}

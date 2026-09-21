@@ -30,6 +30,7 @@ export const DEFAULT_LIFE_PROFILE: LifeProfile = {
     interestRate: 1.0,
     repaymentYears: 35,
     managementFee: 3,
+    purchaseInYears: 0,
   },
 
   family: {

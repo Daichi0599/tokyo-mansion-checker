@@ -55,8 +55,10 @@ function annualChildCostPerChild(
 
 /**
  * 現在から一定年数先までの資産推移（現金＋投資元本）を年単位で概算する。
- * 「物価が変わらない」前提の名目値シミュレーションで、住宅購入・車の持ち方は
- * 現時点の内容がそのまま続く前提（既存の5時点スナップショットと同じ簡略化）。
+ * 「物価が変わらない」前提の名目値シミュレーション。車の持ち方は現時点の内容が
+ * そのまま続く前提（既存の5時点スナップショットと同じ簡略化）。
+ * 住宅は`housing.purchaseInYears`の年から頭金を一括で取り崩し、以降はローン＋管理費、
+ * それより前は現在の家賃を計上する（intentが"none"なら常に家賃のまま）。
  * 複数人の子どもは全員が同じ年に生まれ、同じ年齢で進級していく前提で扱う
  * （lib/childCost.ts の numChildren倍という既存の簡略化に合わせている）。
  */
@@ -66,13 +68,13 @@ export function buildWealthProjection(profile: LifeProfile, horizonYears?: numbe
   const growthRate = INCOME_GROWTH_RATE[household.incomeGrowthScenario];
 
   const carMonthly = calcCarMonthlyCostMan(profile.car.plan, profile.car.parkingFee);
-  const housingMonthly =
-    profile.housing.intent === "none"
-      ? household.currentRent
-      : (() => {
-          const metrics = calcHousingMetrics(profile);
-          return metrics.monthlyPayment + profile.housing.managementFee + estimateMonthlyPropertyTax(profile.housing.targetPrice);
-        })();
+  const willPurchase = profile.housing.intent !== "none";
+  const postPurchaseMonthly = willPurchase
+    ? (() => {
+        const metrics = calcHousingMetrics(profile);
+        return metrics.monthlyPayment + profile.housing.managementFee + estimateMonthlyPropertyTax(profile.housing.targetPrice);
+      })()
+    : null;
 
   const numChildren = family.children;
   const childResult = numChildren > 0 ? calcFamilyCosts(profile) : null;
@@ -118,6 +120,12 @@ export function buildWealthProjection(profile: LifeProfile, horizonYears?: numbe
         ? annualChildCostPerChild(childAge, childResult.phases, childResult.extraCostPerChild) * numChildren
         : 0;
 
+    const hasPurchased = willPurchase && postPurchaseMonthly !== null && year >= profile.housing.purchaseInYears;
+    if (hasPurchased && year === profile.housing.purchaseInYears) {
+      cash -= profile.housing.downPayment;
+      events.push("住宅購入");
+    }
+    const housingMonthly = hasPurchased ? (postPurchaseMonthly as number) : household.currentRent;
     const housingAnnual = housingMonthly * 12;
     const carAnnual = carMonthly * 12;
     const livingAnnual = household.monthlyLivingCost * 12;

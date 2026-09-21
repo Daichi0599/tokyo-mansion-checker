@@ -4,6 +4,8 @@ import type { WealthYearPoint } from "@/lib/lifePlan/wealthProjection";
 
 interface Props {
   points: WealthYearPoint[];
+  /** 安全プランの資産推移。渡すと総資産の比較線を重ねて表示する */
+  comparisonPoints?: WealthYearPoint[];
 }
 
 const WIDTH = 640;
@@ -23,7 +25,7 @@ function formatMan(value: number): string {
  * 文字も一緒に縮んでしまい（実測で5px相当まで縮小）読めなくなる。HTML側のテキストは
  * rem/px基準でスケールされないため、画面幅によらず一定の可読サイズを保てる。
  */
-export default function WealthChart({ points }: Props) {
+export default function WealthChart({ points, comparisonPoints }: Props) {
   if (points.length < 2) return null;
 
   const plotWidth = WIDTH - PAD_LEFT - PAD_RIGHT;
@@ -31,8 +33,9 @@ export default function WealthChart({ points }: Props) {
 
   const totals = points.map((p) => p.totalAssets);
   const cashes = points.map((p) => p.cashSavings);
-  const yMax = Math.max(...totals, 1) * 1.15;
-  const yMin = Math.min(0, ...cashes, ...totals);
+  const comparisonTotals = comparisonPoints?.map((p) => p.totalAssets) ?? [];
+  const yMax = Math.max(...totals, ...comparisonTotals, 1) * 1.15;
+  const yMin = Math.min(0, ...cashes, ...totals, ...comparisonTotals);
   // yMax===yMinは全期間の資産が0で動きが無いなど極端なケース。0除算でNaNになるのを避ける
   if (!Number.isFinite(yMax) || !Number.isFinite(yMin) || yMax === yMin) return null;
 
@@ -43,6 +46,7 @@ export default function WealthChart({ points }: Props) {
 
   const cashLine = points.map((p, i) => `${xAt(i)},${yAt(p.cashSavings)}`).join(" ");
   const totalLine = points.map((p, i) => `${xAt(i)},${yAt(p.totalAssets)}`).join(" ");
+  const comparisonLine = comparisonPoints?.map((p, i) => `${xAt(i)},${yAt(p.totalAssets)}`).join(" ");
 
   const cashArea = `${xAt(0)},${yAt(0)} ${cashLine} ${xAt(points.length - 1)},${yAt(0)}`;
   const investmentArea = `${points
@@ -60,6 +64,7 @@ export default function WealthChart({ points }: Props) {
     .filter((i) => i % xTickEvery === 0 || i === points.length - 1);
 
   const birthPoints = points.filter((p) => p.events.includes("出産"));
+  const purchasePoints = points.filter((p) => p.events.includes("住宅購入"));
 
   return (
     <div className="space-y-2">
@@ -85,15 +90,30 @@ export default function WealthChart({ points }: Props) {
 
           <polyline points={cashLine} fill="none" stroke="#818cf8" strokeWidth={2} />
           <polyline points={totalLine} fill="none" stroke="#34d399" strokeWidth={2} />
+          {comparisonLine && (
+            <polyline points={comparisonLine} fill="none" stroke="#cbd5e1" strokeWidth={2} strokeDasharray="5 3" />
+          )}
 
           {birthPoints.map((p) => (
             <line
-              key={p.year}
+              key={`birth-${p.year}`}
               x1={xAt(p.year)}
               y1={PAD_TOP}
               x2={xAt(p.year)}
               y2={HEIGHT - PAD_BOTTOM}
               stroke="#fbbf24"
+              strokeWidth={1}
+              strokeDasharray="2 2"
+            />
+          ))}
+          {purchasePoints.map((p) => (
+            <line
+              key={`purchase-${p.year}`}
+              x1={xAt(p.year)}
+              y1={PAD_TOP}
+              x2={xAt(p.year)}
+              y2={HEIGHT - PAD_BOTTOM}
+              stroke="#38bdf8"
               strokeWidth={1}
               strokeDasharray="2 2"
             />
@@ -112,11 +132,21 @@ export default function WealthChart({ points }: Props) {
 
         {birthPoints.map((p) => (
           <span
-            key={p.year}
+            key={`birth-${p.year}`}
             className="absolute -translate-x-1/2 text-[10px] leading-none text-amber-400 whitespace-nowrap"
             style={{ left: `${xPct(p.year)}%`, top: 2 }}
           >
             出産
+          </span>
+        ))}
+
+        {purchasePoints.map((p) => (
+          <span
+            key={`purchase-${p.year}`}
+            className="absolute -translate-x-1/2 text-[10px] leading-none text-sky-400 whitespace-nowrap"
+            style={{ left: `${xPct(p.year)}%`, top: 2 }}
+          >
+            住宅購入
           </span>
         ))}
 
@@ -144,6 +174,18 @@ export default function WealthChart({ points }: Props) {
           <span className="inline-flex items-center gap-1.5">
             <span className="inline-block w-2.5 h-2.5 rounded-sm bg-amber-400" />
             出産のタイミング
+          </span>
+        )}
+        {purchasePoints.length > 0 && (
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-block w-2.5 h-2.5 rounded-sm bg-sky-400" />
+            住宅購入のタイミング
+          </span>
+        )}
+        {comparisonLine && (
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-block w-2.5 h-2.5 rounded-sm bg-slate-300" />
+            安全プランの資産合計
           </span>
         )}
       </div>

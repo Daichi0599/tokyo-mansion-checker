@@ -15,6 +15,9 @@ const INTENT_OPTIONS: { value: HousingIntent; label: string }[] = [
   { value: "planned", label: "購入予定がある" },
 ];
 
+const PURCHASE_TIMING_OPTIONS = [0, 1, 2, 3, 5, 7, 10];
+const PURCHASE_TIMING_LABELS: Record<number, string> = { 0: "今すぐ" };
+
 export default function HousingStep({ housing, onChange, errors }: Props) {
   const set = <K extends keyof LifeProfile["housing"]>(key: K, value: LifeProfile["housing"][K]) => {
     onChange({ ...housing, [key]: value });
@@ -39,6 +42,16 @@ export default function HousingStep({ housing, onChange, errors }: Props) {
       />
 
       {!disabled && <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
+        <PlanNumberField
+          label="購入する時期"
+          unit="年後"
+          desc="資産推移シミュレーションで、この時期までは家賃・以降はローン返済として計算します"
+          value={housing.purchaseInYears}
+          options={PURCHASE_TIMING_OPTIONS}
+          optionLabels={PURCHASE_TIMING_LABELS}
+          onChange={(v) => set("purchaseInYears", v)}
+          error={errors.purchaseInYears}
+        />
         <PlanNumberField
           label="希望する購入価格"
           unit="万円"
