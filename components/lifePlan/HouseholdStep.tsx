@@ -62,7 +62,7 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
 
       <details className="group rounded-xl border border-slate-700 bg-slate-900/40 p-4">
         <summary className="cursor-pointer list-none text-sm font-bold text-slate-300 flex items-center justify-between">
-          <span>もう少し正確にする（年齢・賞与・貯蓄・生活費）</span>
+          <span>もう少し正確にする（年齢・賞与・貯蓄・生活費・昇給/NISA）</span>
           <span className="text-slate-500 group-open:rotate-180 transition-transform">⌄</span>
         </summary>
         <p className="mt-2 text-xs text-slate-500">開かなくても、表示中の目安で計算できます。</p>
@@ -116,6 +116,17 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
             error={errors.monthlyLivingCost}
             isDefault
           />
+        </div>
+
+        <div className="mt-5 pt-4 border-t border-slate-700 space-y-4">
+          <p className="text-xs font-bold text-indigo-400 uppercase tracking-wide">資産推移シミュレーションの前提</p>
+          <PlanChoiceField
+            label="今後の昇給の見込み"
+            desc="結果画面のグラフで、収入成長率として使います（目安）"
+            value={household.incomeGrowthScenario}
+            options={INCOME_GROWTH_OPTIONS}
+            onChange={(v) => set("incomeGrowthScenario", v)}
+          />
           <PlanNumberField
             label="NISA・株などへの毎月の積立額"
             unit="万円"
@@ -125,15 +136,6 @@ export default function HouseholdStep({ household, onChange, errors }: Props) {
             onChange={(v) => set("monthlyInvestment", v)}
             error={errors.monthlyInvestment}
             isDefault
-          />
-        </div>
-        <div className="mt-4">
-          <PlanChoiceField
-            label="今後の昇給の見込み"
-            desc="資産推移シミュレーションの収入成長率に使います（目安）"
-            value={household.incomeGrowthScenario}
-            options={INCOME_GROWTH_OPTIONS}
-            onChange={(v) => set("incomeGrowthScenario", v)}
           />
         </div>
       </details>
