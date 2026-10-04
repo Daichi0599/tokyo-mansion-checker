@@ -234,6 +234,20 @@ check("family.ts - calcFamilyBirth が calcBirth と同じ結果を返す", () =
   assert.deepEqual(viaAdapter, direct, "アダプターは lib/childCost.ts の calcBirth を複製せず同じ関数を呼んでいる");
 });
 
+check("calcBirth - 東京都の無痛分娩助成は無痛分娩（premium）で選んだときだけ、後日入金として差引に加わる", () => {
+  const base = { numChildren: 1, parentIncome: 0, leaveMonths: 10 };
+  const without = calcBirth({ ...base, birthCost: "premium" });
+  const withSubsidy = calcBirth({ ...base, birthCost: "premium", epiduralSubsidy: true });
+  assert.equal(without.epiduralSubsidy, 0, "既定では見込まない");
+  assert.equal(withSubsidy.epiduralSubsidy, 10);
+  assert.equal(withSubsidy.netBalance - without.netBalance, 10);
+  assert.equal(withSubsidy.netCost, without.netCost, "窓口で払う額は助成で変わらない（後日入金のため）");
+  const standard = calcBirth({ ...base, birthCost: "standard", epiduralSubsidy: true });
+  assert.equal(standard.epiduralSubsidy, 0, "正常分娩では助成の対象外");
+  const twins = calcBirth({ ...base, numChildren: 2, birthCost: "premium", epiduralSubsidy: true });
+  assert.equal(twins.epiduralSubsidy, 10, "多胎でも1回分のみ");
+});
+
 check("family.ts - calcFamilyCosts が calculateCosts と同じ結果を返す（同一教育方針）", () => {
   const p = createDefaultProfile("family");
   p.family.educationPolicy = "junior_private";

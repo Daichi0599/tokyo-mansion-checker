@@ -13,6 +13,7 @@ import {
   BIRTH_GIFT,
   CHECKUP_SUBSIDY,
   CESAREAN_EXTRA,
+  EPIDURAL_SUBSIDY_TOKYO,
   type BirthInput,
   type BirthCost,
 } from "@/lib/childCost";
@@ -42,6 +43,7 @@ const TIMELINE = [
   {
     when: "産前（出産予定日の6週前〜）",
     items: [
+      { name: "無痛分娩をするなら、産院が助成の対象か確認", detail: "東京都の助成は、都が公表する「対象医療機関」で出産した場合だけです。産院選びの段階で一覧を確認しておかないと、あとから対象外とわかっても取り返せません", money: "最大10万円に関わる" },
       { name: "出産手当金の申請準備", detail: "産前42日・産後56日の計98日が対象。勤務先経由で健保に申請します", money: "標準報酬日額の2/3" },
       { name: "出産育児一時金の直接支払制度", detail: "産院で手続きすると50万円が病院に直接支払われ、窓口では差額だけ払えば済みます", money: "＋50万円" },
     ],
@@ -52,6 +54,7 @@ const TIMELINE = [
       { name: "出生届・児童手当・健康保険の加入", detail: "児童手当は申請月の翌月分から。遅れるとその分もらえません", money: "月1〜1.5万円" },
       { name: "出産・子育て応援ギフト（出生届出時）", detail: "5万円相当。妊娠時とは別に申請が必要です", money: "＋5万円" },
       { name: "018サポート（東京都）", detail: "0〜18歳に月5,000円。所得制限なし。年1回の申請が必要です", money: "18年で108万円" },
+      { name: "無痛分娩費用の助成（東京都）", detail: "対象医療機関で無痛分娩をした都民が、出産日の翌日から1年以内に電子申請（郵送不可）。領収書・明細に「無痛分娩費用」の金額が必要で、窓口では差し引かれず後日の振込です", money: "最大10万円" },
     ],
   },
   {
@@ -72,7 +75,15 @@ const TIMELINE = [
 const FAQ = [
   {
     q: "東京で出産するといくらかかりますか？",
-    a: "正常分娩で総額60〜70万円、無痛分娩や人気の産院だと130〜150万円が目安です。出産育児一時金50万円が直接支払われるため、窓口での自己負担は正常分娩なら10〜20万円、無痛分娩なら80〜100万円程度になります。",
+    a: "正常分娩で総額60〜70万円、無痛分娩や人気の産院だと130〜150万円が目安です。出産育児一時金50万円が直接支払われるため、窓口での自己負担は正常分娩なら10〜20万円、無痛分娩なら80〜100万円程度になります（東京都の無痛分娩助成を使える場合は、後日さらに最大10万円が戻ります）。",
+  },
+  {
+    q: "東京都の無痛分娩の助成は、いくら・誰がもらえますか？",
+    a: "2025年10月1日以降に出産した都民が対象で、助成額は最大10万円です。条件は、①東京都が公表する「対象医療機関」で出産したこと、②硬膜外麻酔などによる無痛分娩であること、③都内の自治体で妊娠届出をして母子健康手帳の交付を受け、申請日まで都内に住民登録があることです。申請は出産日の翌日から1年以内に電子申請（郵送不可）で、領収書・明細書に「無痛分娩費用」の金額が必要です。室料差額や食事代は対象外で、窓口では差し引かれず後日の振込になります。",
+  },
+  {
+    q: "出産費用の無償化や、一時金の「75万円」はもう決まったのですか？",
+    a: "決まっていません。2026年に正常分娩を公的医療保険の対象にする改正法が成立し、公布から2年以内に施行されます。全国一律の価格（基本単価）は厚生労働省が検討中で、施行日も未確定です。日本産婦人科医会は標準的な分娩の給付水準を「75万円以上」にするよう求めていますが、あくまで要望の段階です。決まった内容は、このツールにも反映します（2026年10月時点）。",
   },
   {
     q: "無痛分娩は追加でいくらかかりますか？",
@@ -156,6 +167,7 @@ const DEFAULT_BIRTH_INPUT: BirthInput = {
   parentIncome: 0,
   leaveMonths: 10,
   cesarean: false,
+  epiduralSubsidy: false,
 };
 
 const PARENT_INCOME_OPTIONS = [0, 300, 400, 500, 600, 700, 800];
@@ -254,6 +266,18 @@ function BirthCostPageInner() {
               { value: "premium", label: `無痛分娩・人気の産院 — 総額 約${BIRTH_GROSS.premium}万円` },
             ]}
           />
+          {input.birthCost === "premium" && (
+            <Field
+              label="東京都の無痛分娩助成"
+              hint={`最大${EPIDURAL_SUBSIDY_TOKYO}万円。都の「対象医療機関」で出産し、都内で妊娠届出をした方が対象です。窓口では差し引かれず、出産後に申請して後日の振込になります`}
+              value={input.epiduralSubsidy ? "yes" : "no"}
+              onChange={(v) => update("epiduralSubsidy", v === "yes")}
+              options={[
+                { value: "no", label: "見込まない（対象かどうか未確認）" },
+                { value: "yes", label: `受けられる前提で計算する（＋${EPIDURAL_SUBSIDY_TOKYO}万円）` },
+              ]}
+            />
+          )}
           <Field
             label="帝王切開になる可能性"
             hint="手術は健康保険が使え、高額療養費も効くため自己負担は大きく増えません"
@@ -317,6 +341,9 @@ function BirthCostPageInner() {
                 <Row label="出産費用の総額" value={`−${result.grossCost.toLocaleString()}万円`} />
                 <Row label={`出産育児一時金`} value={`＋${result.lumpSum}万円`} positive />
                 <Row label="応援ギフト・妊婦健診補助" value={`＋${result.gifts}万円`} positive />
+                {result.epiduralSubsidy > 0 && (
+                  <Row label="東京都の無痛分娩助成（後日振込）" value={`＋${result.epiduralSubsidy}万円`} positive />
+                )}
                 {result.maternityAllowance > 0 && (
                   <Row label="出産手当金（産休98日）" value={`＋${result.maternityAllowance.toLocaleString()}万円`} positive />
                 )}
@@ -332,6 +359,24 @@ function BirthCostPageInner() {
                   <span className="text-base font-bold ml-0.5">万円</span>
                 </span>
               </div>
+
+              {input.birthCost === "premium" && (
+                <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 px-4 py-3 space-y-1.5">
+                  <p className="text-sm font-bold text-sky-300">無痛分娩なら、東京都の助成を忘れずに</p>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    最大{EPIDURAL_SUBSIDY_TOKYO}万円。ただし<strong className="text-white">都が公表する「対象医療機関」で出産した場合だけ</strong>です。産院選びの段階で一覧を確認し、出産後は
+                    <strong className="text-white">1年以内に電子申請</strong>します。窓口で払う額は変わらず、振込は後日になるので、いったん全額を立て替える前提で資金を見ておくと安全です。
+                  </p>
+                  <a
+                    href="https://www.fukushi.metro.tokyo.lg.jp/kodomo/shussan/mutsubunben/subsidy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-sm font-bold text-sky-300 underline underline-offset-2 hover:text-sky-200"
+                  >
+                    東京都福祉局「無痛分娩費用の助成」（公式） ↗
+                  </a>
+                </div>
+              )}
 
               {result.parentalLeaveBenefit > 0 ? (
                 <p className="text-sm text-slate-300 leading-relaxed">
@@ -381,6 +426,31 @@ function BirthCostPageInner() {
             </div>
           </section>
         )}
+
+        {/* 制度の動き。決定事項と要望・検討中を混ぜないため、断定できる事実だけを書く */}
+        <section className="rounded-2xl border border-slate-700 bg-slate-800 p-5 space-y-3">
+          <div>
+            <p className="text-xs font-bold text-amber-300">制度の動き（2026年10月時点）</p>
+            <h2 className="text-xl font-black text-white mt-1">一時金50万円は、これから変わるかもしれません</h2>
+          </div>
+          <ul className="space-y-3 text-sm text-slate-300 leading-relaxed">
+            <li>
+              <strong className="text-white">いま：</strong>
+              出産育児一時金は2023年4月に42万円から50万円へ上がりました。それでも厚生労働省によると、2024年度の全国の平均出産費用は52万円で、都市部では実費が一時金を上回って自己負担が出ています。
+            </li>
+            <li>
+              <strong className="text-white">これから：</strong>
+              2026年に、正常分娩を公的医療保険の対象にする改正法が成立しました。公布から2年以内に施行され、全国一律の価格（基本単価）を厚生労働省が検討しています。施行日も価格も、まだ決まっていません。
+            </li>
+            <li>
+              <strong className="text-white">争点：</strong>
+              日本産婦人科医会は、標準的な分娩の給付水準を「75万円以上」にするよう求めています（現行一時金の1.5倍）。これは要望であって、決定ではありません。
+            </li>
+          </ul>
+          <p className="text-sm text-slate-400 leading-relaxed">
+            このツールは現行制度（一時金50万円）で計算しています。新しい制度の内容が決まったら更新します。対象範囲（無痛分娩や個室などをどう扱うか）の詳細も、今後の検討次第です。
+          </p>
+        </section>
 
         {/* 申請タイムライン */}
         <section className="space-y-4">

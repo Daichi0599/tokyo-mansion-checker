@@ -41,6 +41,12 @@ export const BIRTH_GROSS: Record<BirthCost, number> = {
 
 /** 出産育児一時金（国・健保）。2023年4月から50万円 */
 export const BIRTH_LUMP_SUM = 50;
+/**
+ * 東京都の無痛分娩費用助成の上限（2025年10月1日以降の出産が対象）。
+ * 対象医療機関で出産・都内での妊娠届出が条件で、出産後に電子申請 → 審査後に振込（窓口では差し引かれない）。
+ * 無痛分娩1回につき1度のみで、多胎でも増えない。出典: 東京都福祉局「無痛分娩費用の助成」
+ */
+export const EPIDURAL_SUBSIDY_TOKYO = 10;
 /** 出産・子育て応援ギフト（妊娠時5万＋出生時5万） */
 export const BIRTH_GIFT = 10;
 /** 妊婦健診費補助（14回分の券）*/
@@ -60,6 +66,11 @@ export interface BirthInput {
   leaveMonths?: number;
   /** 帝王切開など保険適用の分娩。高額療養費が効くぶん自己負担は増えにくい */
   cesarean?: boolean;
+  /**
+   * 東京都の無痛分娩助成を受ける前提で計算するか。対象医療機関・都内での妊娠届出など条件があるため、
+   * 既定はfalse（見込まない）。birthCostが"premium"（無痛分娩想定）のときだけ効く。
+   */
+  epiduralSubsidy?: boolean;
 }
 
 /** 帝王切開の場合の追加自己負担（高額療養費適用後・入院延長分を含む概算） */
@@ -76,8 +87,10 @@ export interface BirthResult {
   maternityAllowance: number;
   /** 育児休業給付金（育休10ヶ月）の概算 */
   parentalLeaveBenefit: number;
-  /** 出産費用 − 一時金。マイナスにはしない（実際の自己負担） */
+  /** 出産費用 − 一時金。マイナスにはしない（窓口で実際に払う額。後日入金の助成は差し引かない） */
   netCost: number;
+  /** 東京都の無痛分娩助成（後日入金）。見込まない場合は0 */
+  epiduralSubsidy: number;
   /** 給付まで含めた収支。プラスなら手元に残る */
   netBalance: number;
 }
@@ -111,9 +124,10 @@ export function calcBirth(input: BirthInput): BirthResult {
     parentalLeaveBenefit = calcParentalLeaveBenefitTotal(monthly, leaveMonths, numChildren);
   }
 
-  const netBalance = lumpSum + gifts + maternityAllowance + parentalLeaveBenefit - grossCost;
+  const epiduralSubsidy = birthCost === "premium" && input.epiduralSubsidy ? EPIDURAL_SUBSIDY_TOKYO : 0;
+  const netBalance = lumpSum + gifts + maternityAllowance + parentalLeaveBenefit + epiduralSubsidy - grossCost;
 
-  return { grossCost, lumpSum, gifts, maternityAllowance, parentalLeaveBenefit, netCost, netBalance };
+  return { grossCost, lumpSum, gifts, maternityAllowance, parentalLeaveBenefit, netCost, epiduralSubsidy, netBalance };
 }
 
 /* ───────── 育てる（1人あたり・万円） ───────── */
