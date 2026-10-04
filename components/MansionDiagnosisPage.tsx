@@ -7,6 +7,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 import { MANSION_FAQ } from "@/lib/mansionFaq";
 import DiagnosisForm       from "@/components/DiagnosisForm";
 import DiagnosisResultCard from "@/components/DiagnosisResult";
+import LiveAdjust          from "@/components/LiveAdjust";
 import ResultTabs          from "@/components/ResultTabs";
 import AffiliateCta        from "@/components/AffiliateCta";
 import { diagnose } from "@/lib/calculator";
@@ -120,23 +121,34 @@ export default function Home() {
   const [isLoading, setIsLoading]           = useState(false);
   const profile = useLifeProfile();
 
+  /** 診断結果の確定。他ツールへの引き継ぎ保存と、プラン経由なら書き戻しもここで行う */
+  const commitDiagnosis = (input: DiagnosisInput) => {
+    const diagnosis = diagnose(input);
+    setResult(diagnosis);
+    setDiagnosisInput(input);
+    // ④ 他ツールへの引き継ぎ用にlocalStorageへ保存（レガシー。/child等がannualIncomeだけ読む）
+    try {
+      localStorage.setItem("30lab_diagnosis_input", JSON.stringify(input));
+      localStorage.setItem("30lab_safe_price", String(diagnosis.safePrice));
+    } catch (_) {}
+    // 「わが家のプラン」経由で来た場合のみ、再診断結果を自動でプランへ書き戻す
+    if (fromPlan && profile) {
+      saveLifeProfile(applyMansionResultToProfile(profile, input, diagnosis));
+      trackPlanEvent("plan_sync_writeback", { tool: "mansion" });
+    }
+    return diagnosis;
+  };
+
+  const handleLiveApply = (input: DiagnosisInput) => {
+    commitDiagnosis(input);
+    sendGAEvent("event", "live_adjust_apply", { tool: "mansion_diagnosis" });
+  };
+
   const handleSubmit = (input: DiagnosisInput) => {
     setIsLoading(true);
     setResult(null);
     setTimeout(() => {
-      const diagnosis = diagnose(input);
-      setResult(diagnosis);
-      setDiagnosisInput(input);
-      // ④ 他ツールへの引き継ぎ用にlocalStorageへ保存（レガシー。/child等がannualIncomeだけ読む）
-      try {
-        localStorage.setItem("30lab_diagnosis_input", JSON.stringify(input));
-        localStorage.setItem("30lab_safe_price", String(diagnosis.safePrice));
-      } catch (_) {}
-      // 「わが家のプラン」経由で来た場合のみ、再診断結果を自動でプランへ書き戻す
-      if (fromPlan && profile) {
-        saveLifeProfile(applyMansionResultToProfile(profile, input, diagnosis));
-        trackPlanEvent("plan_sync_writeback", { tool: "mansion" });
-      }
+      const diagnosis = commitDiagnosis(input);
       setIsLoading(false);
       sendGAEvent("event", "diagnosis_run", {
         level:       diagnosis.level,
@@ -323,6 +335,13 @@ export default function Home() {
 
             {/* ① 診断結果カード */}
             <DiagnosisResultCard result={result} input={diagnosisInput} />
+
+            <LiveAdjust
+              key={JSON.stringify(diagnosisInput)}
+              input={diagnosisInput}
+              result={result}
+              onApply={handleLiveApply}
+            />
 
             {!fromPlan && (
               <section className="rounded-2xl border border-indigo-500/30 bg-indigo-500/10 px-5 py-4 space-y-2">
