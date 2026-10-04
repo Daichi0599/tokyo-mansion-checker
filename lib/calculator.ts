@@ -7,7 +7,10 @@ import { DiagnosisInput, DiagnosisLevel, DiagnosisResult, PriceMetrics, RateStre
  * 膨らむため、金利0.7%・35年では負担率25%でも年収7.7倍が「安全」として出てしまう。
  * 低金利が続く前提が結果に埋め込まれてしまうので、倍率側からも上限をかける。
  */
-const MAX_INCOME_MULTIPLE = 7;
+export const DEFAULT_MAX_INCOME_MULTIPLE = 7;
+
+/** 安全ラインの住居費負担率（年収比 %）の標準値。背伸び圏は+5pt、注意圏は+10pt */
+export const DEFAULT_SAFE_RATIO = 25;
 
 /** 金利上昇のストレステストで見る上げ幅（%ポイント） */
 const RATE_STRESS_STEPS = [0.5, 1.0];
@@ -97,27 +100,29 @@ function getComment(
   burdenRate: number,
   age: number,
   safePrice: number,
+  safeRatio: number,
 ): { level: DiagnosisResult["level"]; comment: string } {
   const ageNote = age >= 35
     ? " なお、年齢的に返済期間を長く取りにくいため、早めの資金計画がより重要です。"
     : "";
 
-  if (burdenRate < 20) {
+  const t = (offset: number) => safeRatio + offset;
+  if (burdenRate < t(-5)) {
     return {
       level: "safe",
       comment: `住居費の月負担が収入の${burdenRate.toFixed(1)}%と、理想的な水準です。老後資金・教育費・緊急予備費を確保しながら資産形成も続けやすく、金利上昇や収入変動にも対応できる余裕があります。${ageNote}`,
     };
-  } else if (burdenRate < 25) {
+  } else if (burdenRate < t(0)) {
     return {
       level: "caution",
       comment: `住居費負担${burdenRate.toFixed(1)}%は安全圏です。共働き継続を前提にした、無理のない計画といえます。育児休業など収入が一時的に下がる場合に備えて、6ヶ月分の生活費を手元に確保しておくと安心です。${ageNote}`,
     };
-  } else if (burdenRate < 30) {
+  } else if (burdenRate < t(5)) {
     return {
       level: "warning",
       comment: `住居費負担${burdenRate.toFixed(1)}%はやや背伸びした水準です。現在の収入が安定していれば対応できますが、金利上昇・教育費増加・育休などが重なると家計が圧迫されやすくなります。頭金の上乗せや、安全購入価格（${safePrice.toLocaleString()}万円）を目安に再検討してみましょう。${ageNote}`,
     };
-  } else if (burdenRate < 35) {
+  } else if (burdenRate < t(10)) {
     return {
       level: "danger",
       comment: `住居費負担${burdenRate.toFixed(1)}%は要注意の水準です。万一の収入減や金利上昇で家計が回らなくなるリスクがあります。安全購入価格（${safePrice.toLocaleString()}万円）を目安に、頭金を増やすか購入価格を引き下げることをお勧めします。${ageNote}`,
@@ -130,11 +135,12 @@ function getComment(
   }
 }
 
-function getBurdenLevel(burdenRate: number): DiagnosisLevel {
-  if (burdenRate < 20) return "safe";
-  if (burdenRate < 25) return "caution";
-  if (burdenRate < 30) return "warning";
-  if (burdenRate < 35) return "danger";
+/** 区分の境目は安全ラインを基準に -5 / 0 / +5 / +10pt。標準の25%なら 20/25/30/35% */
+function getBurdenLevel(burdenRate: number, safeRatio: number = DEFAULT_SAFE_RATIO): DiagnosisLevel {
+  if (burdenRate < safeRatio - 5) return "safe";
+  if (burdenRate < safeRatio) return "caution";
+  if (burdenRate < safeRatio + 5) return "warning";
+  if (burdenRate < safeRatio + 10) return "danger";
   return "critical";
 }
 
@@ -152,18 +158,20 @@ export function calcPriceMetrics(price: number, input: DiagnosisInput): PriceMet
     loanAmount,
     monthlyPayment,
     burdenRate,
-    level: getBurdenLevel(burdenRate),
+    level: getBurdenLevel(burdenRate, input.safeRatio ?? DEFAULT_SAFE_RATIO),
   };
 }
 
 export function diagnose(input: DiagnosisInput): DiagnosisResult {
   const { annualIncome, age, downPayment, interestRate, repaymentYears, managementFee } = input;
   const fee = managementFee ?? 0;
+  const safeRatio = input.safeRatio ?? DEFAULT_SAFE_RATIO;
+  const maxMultiple = input.maxIncomeMultiple ?? DEFAULT_MAX_INCOME_MULTIPLE;
 
   // 各閾値の月間住居費上限（万円）から管理費を差し引いた、ローン返済に充てられる上限
-  const safeMonthlyLoanLimit       = annualIncome * 0.25 / 12 - fee;
-  const aggressiveMonthlyLoanLimit = annualIncome * 0.30 / 12 - fee;
-  const dangerMonthlyLoanLimit     = annualIncome * 0.35 / 12 - fee;
+  const safeMonthlyLoanLimit       = annualIncome * (safeRatio / 100) / 12 - fee;
+  const aggressiveMonthlyLoanLimit = annualIncome * ((safeRatio + 5) / 100) / 12 - fee;
+  const dangerMonthlyLoanLimit     = annualIncome * ((safeRatio + 10) / 100) / 12 - fee;
 
   // 最大借入額（万円）
   const safeLoan       = calcMaxLoan(Math.max(0, safeMonthlyLoanLimit),       interestRate, repaymentYears);
@@ -176,7 +184,7 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
   const dangerPrice     = Math.floor(dangerLoan + downPayment);
 
   // 返済比率と年収倍率の両方を満たす額を採用する（小さいほう）
-  const safeByMultiple  = Math.floor(annualIncome * MAX_INCOME_MULTIPLE);
+  const safeByMultiple  = Math.floor(annualIncome * maxMultiple);
   const safePrice       = Math.min(safeByBurden, safeByMultiple);
   const cappedByMultiple = safeByMultiple < safeByBurden;
 
@@ -186,9 +194,9 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
   const monthlyTotal   = monthlyPayment + fee;
   const burdenRate     = (monthlyTotal * 12 / annualIncome) * 100;
 
-  const { level, comment: baseComment } = getComment(burdenRate, age, safePrice);
+  const { level, comment: baseComment } = getComment(burdenRate, age, safePrice, safeRatio);
   const comment = cappedByMultiple
-    ? `${baseComment} なお今回は、月々の返済比率よりも先に「年収の${MAX_INCOME_MULTIPLE}倍」の上限に達したため、そちらを安全購入価格としています。低金利では返済比率だけを見ると借入額が膨らみやすいためです。`
+    ? `${baseComment} なお今回は、月々の返済比率よりも先に「年収の${maxMultiple}倍」の上限に達したため、そちらを安全購入価格としています。低金利では返済比率だけを見ると借入額が膨らみやすいためです。`
     : baseComment;
 
   // 金利が上がった場合、同じ借入額で返済額がどう変わるか
@@ -201,7 +209,7 @@ export function diagnose(input: DiagnosisInput): DiagnosisResult {
       monthlyPayment: Math.round(m * 10) / 10,
       diff: Math.round((m - monthlyPayment) * 10) / 10,
       burdenRate: (total * 12 / annualIncome) * 100,
-      level: getBurdenLevel((total * 12 / annualIncome) * 100),
+      level: getBurdenLevel((total * 12 / annualIncome) * 100, safeRatio),
     };
   });
 

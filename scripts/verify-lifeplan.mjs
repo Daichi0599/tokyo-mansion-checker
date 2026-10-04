@@ -261,3 +261,29 @@ if (process.exitCode) {
   console.error("Some checks failed.");
   process.exit(1);
 }
+
+check("diagnose - 安全ラインの負担率と年収倍率上限は未指定なら従来値（25%・7倍）、指定で価格とレベル境界が動く", () => {
+  const base = { annualIncome: 800, age: 30, downPayment: 1000, interestRate: 1.1, repaymentYears: 35, monthlyLiving: 25, managementFee: 3 };
+  const std = diagnose(base);
+  const explicit = diagnose({ ...base, safeRatio: 25, maxIncomeMultiple: 7 });
+  assert.equal(std.safePrice, explicit.safePrice);
+  assert.equal(std.level, explicit.level);
+  // 負担率を上げると価格は増え、下げると減る
+  // （標準の条件は7倍上限に当たるので、倍率上限を外して比べる）
+  const open = { ...base, maxIncomeMultiple: 10 };
+  const openStd = diagnose(open);
+  assert.ok(diagnose({ ...open, safeRatio: 30 }).safePrice > openStd.safePrice);
+  assert.ok(diagnose({ ...open, safeRatio: 20 }).safePrice < openStd.safePrice);
+  // 倍率上限が効くケース（低金利・高負担率）
+  const capped = diagnose({ ...base, interestRate: 0.5, safeRatio: 35, maxIncomeMultiple: 5 });
+  assert.equal(capped.safePrice, 800 * 5);
+  assert.equal(capped.cappedByMultiple, true);
+  // 安全価格での負担率は、指定した安全ライン以下に収まる
+  const r = diagnose({ ...open, safeRatio: 30 });
+  assert.ok(r.burdenRate <= 30.05, `burden ${r.burdenRate}`);
+  // レベル境界は安全ラインに連動する（同じ負担率でも安全ラインが高ければ判定が緩む）
+  const m = calcPriceMetrics(5600, { ...base });
+  const mLoose = calcPriceMetrics(5600, { ...base, safeRatio: 30 });
+  assert.ok(["safe", "caution"].includes(mLoose.level));
+  assert.notEqual(m.level === "critical", true);
+});

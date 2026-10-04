@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import type { DiagnosisInput } from "@/types";
+import { DEFAULT_MAX_INCOME_MULTIPLE, DEFAULT_SAFE_RATIO } from "@/lib/calculator";
 
 interface Props {
   onSubmit: (input: DiagnosisInput) => void;
@@ -20,6 +21,8 @@ const defaultValues: DiagnosisInput = {
   managementFee: 3,
   currentRent: 0,
   deductionLimit: 0,
+  safeRatio: DEFAULT_SAFE_RATIO,
+  maxIncomeMultiple: DEFAULT_MAX_INCOME_MULTIPLE,
 };
 
 interface FieldConfig {
@@ -115,6 +118,26 @@ const FIELDS: Record<keyof DiagnosisInput, FieldConfig> = {
     min: 0,
     max: 10000,
     step: 100,
+    optional: true,
+  },
+  safeRatio: {
+    key: "safeRatio",
+    label: "安全ラインの住居費負担率",
+    unit: "%",
+    desc: "ローン＋管理費が世帯年収の何%までなら安全とみなすか。標準は25%。背伸び圏は+5%、注意圏は+10%",
+    min: 15,
+    max: 35,
+    step: 0.5,
+    optional: true,
+  },
+  maxIncomeMultiple: {
+    key: "maxIncomeMultiple",
+    label: "年収倍率の上限",
+    unit: "倍",
+    desc: "安全購入価格を年収の何倍までに抑えるか。標準は7倍。低金利で借入額が膨らみすぎるのを防ぐ上限",
+    min: 4,
+    max: 10,
+    step: 0.5,
     optional: true,
   },
 };
@@ -270,6 +293,29 @@ export default function DiagnosisForm({ onSubmit, isLoading = false, initialValu
               field={FIELDS.deductionLimit}
               value={values.deductionLimit ?? 0}
               onChange={(value) => handleChange("deductionLimit", value)}
+            />
+          </div>
+        </details>
+
+        <details className="group rounded-xl border border-slate-700 bg-slate-900/35 p-4">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-bold text-slate-200">
+            <span>診断の前提を変える（詳細設定）</span>
+            <span className="text-slate-500 transition-transform group-open:rotate-180">⌄</span>
+          </summary>
+          <p className="mt-2 text-xs leading-relaxed text-slate-400">
+            標準では「負担率25%・年収の7倍」を安全の目安にしています。家計の状況に合わせて変えられます。
+            高くするほど購入価格は大きく出ますが、そのぶん余裕は小さくなります。
+          </p>
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <PreciseNumberField
+              field={FIELDS.safeRatio}
+              value={values.safeRatio ?? DEFAULT_SAFE_RATIO}
+              onChange={(value) => handleChange("safeRatio", value)}
+            />
+            <PreciseNumberField
+              field={FIELDS.maxIncomeMultiple}
+              value={values.maxIncomeMultiple ?? DEFAULT_MAX_INCOME_MULTIPLE}
+              onChange={(value) => handleChange("maxIncomeMultiple", value)}
             />
           </div>
         </details>

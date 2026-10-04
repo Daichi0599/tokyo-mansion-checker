@@ -9,6 +9,10 @@ export interface DiagnosisInput {
   currentRent?: number;   // 現在の家賃（月額、万円）。0 なら比較しない
   /** 住宅ローン控除の借入限度額（万円）。物件の省エネ性能で決まる。0 なら控除を見込まない */
   deductionLimit?: number;
+  /** 安全ラインとみなす住居費負担率（年収比 %）。未指定は25。背伸び圏は+5pt、注意圏は+10pt */
+  safeRatio?: number;
+  /** 安全購入価格の上限とする年収倍率。未指定は7 */
+  maxIncomeMultiple?: number;
 }
 
 /** 「今の家賃と比べてどうか」を出すための内訳（安全購入価格ベース・月額・万円） */

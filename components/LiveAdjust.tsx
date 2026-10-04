@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { diagnose } from "@/lib/calculator";
+import { DEFAULT_MAX_INCOME_MULTIPLE, DEFAULT_SAFE_RATIO, diagnose } from "@/lib/calculator";
 import type { DiagnosisInput, DiagnosisResult } from "@/types";
 
 interface Props {
@@ -10,7 +10,18 @@ interface Props {
   onApply: (input: DiagnosisInput) => void;
 }
 
-type AdjustKey = "downPayment" | "interestRate" | "repaymentYears" | "managementFee";
+type AdjustKey =
+  | "downPayment"
+  | "interestRate"
+  | "repaymentYears"
+  | "managementFee"
+  | "safeRatio"
+  | "maxIncomeMultiple";
+
+const DEFAULTS: Partial<DiagnosisInput> = {
+  safeRatio: DEFAULT_SAFE_RATIO,
+  maxIncomeMultiple: DEFAULT_MAX_INCOME_MULTIPLE,
+};
 
 interface AdjustConfig {
   key: AdjustKey;
@@ -26,6 +37,8 @@ const ADJUSTS: AdjustConfig[] = [
   { key: "interestRate", label: "金利（年率）", unit: "%", min: 0, max: 4, step: 0.05 },
   { key: "repaymentYears", label: "返済年数", unit: "年", min: 10, max: 50, step: 1 },
   { key: "managementFee", label: "管理費・修繕積立金", unit: "万円/月", min: 0, max: 10, step: 0.1 },
+  { key: "safeRatio", label: "安全ラインの負担率", unit: "%", min: 15, max: 35, step: 0.5 },
+  { key: "maxIncomeMultiple", label: "年収倍率の上限", unit: "倍", min: 4, max: 10, step: 0.5 },
 ];
 
 const decimalsOf = (step: number) => (String(step).split(".")[1] ?? "").length;
@@ -41,10 +54,11 @@ const fmtDiff = (diff: number, unit: string, digits = 0) => {
  * フォームに戻って入れ直さなくていいように、結果の直下に置く。
  */
 export default function LiveAdjust({ input, result, onApply }: Props) {
-  const [draft, setDraft] = useState<DiagnosisInput>(input);
+  const base0 = { ...DEFAULTS, ...input } as DiagnosisInput;
+  const [draft, setDraft] = useState<DiagnosisInput>(base0);
   const adjusted = diagnose(draft);
 
-  const changed = ADJUSTS.some((a) => draft[a.key] !== input[a.key]);
+  const changed = ADJUSTS.some((a) => draft[a.key] !== base0[a.key]);
 
   const set = (cfg: AdjustConfig, raw: number) => {
     if (!Number.isFinite(raw)) return;
@@ -64,7 +78,7 @@ export default function LiveAdjust({ input, result, onApply }: Props) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {ADJUSTS.map((cfg) => {
           const value = draft[cfg.key] ?? 0;
-          const base = input[cfg.key] ?? 0;
+          const base = base0[cfg.key] ?? 0;
           return (
             <div key={cfg.key} className="space-y-2">
               <div className="flex items-center justify-between gap-2">
@@ -144,7 +158,7 @@ export default function LiveAdjust({ input, result, onApply }: Props) {
         <button
           type="button"
           disabled={!changed}
-          onClick={() => setDraft(input)}
+          onClick={() => setDraft(base0)}
           className="text-xs font-bold text-slate-400 hover:text-slate-200 disabled:opacity-40"
         >
           診断時の値に戻す

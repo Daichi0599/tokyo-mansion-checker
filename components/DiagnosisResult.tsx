@@ -2,6 +2,7 @@
 
 import { sendGAEvent } from "@next/third-parties/google";
 import { DiagnosisInput, DiagnosisResult } from "@/types";
+import { DEFAULT_SAFE_RATIO } from "@/lib/calculator";
 
 interface Props {
   result: DiagnosisResult;
@@ -88,6 +89,8 @@ export default function DiagnosisResultCard({ result, input }: Props) {
   const { safePrice, aggressivePrice, dangerPrice, burdenRate, monthlyPayment, monthlyTotal, comment, level, incomeMultiple, cappedByMultiple, rateStress, rentComparison } = result;
   const config = levelConfig[level];
   const managementFee = input?.managementFee ?? 0;
+  const safeRatio = input?.safeRatio ?? DEFAULT_SAFE_RATIO;
+  const ratioMarks = [safeRatio, safeRatio + 5, safeRatio + 10];
 
   // ゲージの幅：負担率 0% → 0%, 50%以上 → 100% でクリップ
   const gaugeWidth = Math.min((burdenRate / 50) * 100, 100);
@@ -168,8 +171,8 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           <div className="rounded-xl bg-slate-700/50 border border-slate-600 px-4 py-3">
             <p className="text-xs font-bold text-slate-400 mb-1.5">💡 計算根拠（安全価格）</p>
             <p className="text-xs text-slate-300 leading-relaxed">
-              年収 <strong className="text-slate-100">{input.annualIncome.toLocaleString()}万円</strong> × 25% ÷ 12 ＝ 月
-              <strong className="text-slate-100">{Math.round(input.annualIncome * 0.25 / 12 * 10) / 10}万円</strong>が住居費上限
+              年収 <strong className="text-slate-100">{input.annualIncome.toLocaleString()}万円</strong> × {safeRatio}% ÷ 12 ＝ 月
+              <strong className="text-slate-100">{Math.round(input.annualIncome * (safeRatio / 100) / 12 * 10) / 10}万円</strong>が住居費上限
               　→　借入 <strong className="text-slate-100">{(safePrice - input.downPayment).toLocaleString()}万円</strong> ＋ 頭金 <strong className="text-slate-100">{input.downPayment.toLocaleString()}万円</strong> ＝ <strong className="text-slate-100">{safePrice.toLocaleString()}万円</strong>
             </p>
           </div>
@@ -214,7 +217,7 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           </div>
           <div className="relative h-4 bg-slate-700 rounded-full overflow-hidden">
             {/* 区切り線：25%, 30%, 35% */}
-            {[25, 30, 35].map((pct) => (
+            {ratioMarks.map((pct) => (
               <div
                 key={pct}
                 className="absolute top-0 bottom-0 w-px bg-white/20 z-10"
@@ -228,9 +231,9 @@ export default function DiagnosisResultCard({ result, input }: Props) {
           </div>
           <div className="flex justify-between text-xs text-slate-400">
             <span>0%</span>
-            <span>25%</span>
-            <span>30%</span>
-            <span>35%</span>
+            {ratioMarks.map((pct) => (
+              <span key={pct}>{pct}%</span>
+            ))}
             <span>50%+</span>
           </div>
           <div className="flex justify-between text-xs text-slate-400">
