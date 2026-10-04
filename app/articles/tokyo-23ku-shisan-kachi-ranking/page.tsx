@@ -69,7 +69,7 @@ const articleJsonLd = {
   author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
   publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
   datePublished: "2026-06-12",
-  dateModified: "2026-06-12",
+  dateModified: "2026-10-04",
   mainEntityOfPage: "https://30lab.vercel.app/articles/tokyo-23ku-shisan-kachi-ranking",
 };
 
@@ -102,7 +102,7 @@ export default function Tokyo23kuShisanKachiRankingPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">エリア・資産価値</span>
-          <span className="text-xs text-slate-400">2026年6月</span>
+          <span className="text-xs text-slate-400">2026年10月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -113,6 +113,14 @@ export default function Tokyo23kuShisanKachiRankingPage() {
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
           マンション購入で「無理なく買えるか」と並んで重要なのが「<strong className="text-white">買った後に価値が落ちないか</strong>」。この記事では東京23区を坪単価・資産性グレード（S〜D）・価格トレンドで一覧ランキングし、値下がりしにくい区の共通条件を整理します。表のデータは当サイトの診断ツールと同じものを使っているので、記事で目星をつけたら、そのまま<strong className="text-white">自分の予算で買えるエリア</strong>を診断で確認できます。
         </p>
+
+        <div className="mb-10 rounded-2xl border border-slate-600 bg-slate-800 p-5">
+          <p className="text-sm font-black text-white mb-2">この表だけで物件は決めない</p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            これは区ごとの相場感をつかむ入口です。同じ区でも駅、徒歩分数、築年数、管理状態で売りやすさは大きく変わります。
+            上位の区を無理して買うより、返せる予算の中で駅距離と管理を物件単位で見るために使ってください。
+          </p>
+        </div>
 
         {/* ━━ ランキング表 ━━ */}
         <section className="mb-10">

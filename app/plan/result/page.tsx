@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import type { LifeProfile } from "@/types/lifePlan";
-import { useLifeProfile, saveLifeProfile, isLifeProfileCalculable } from "@/lib/lifePlan";
+import { consumePlanCompletionPending, useLifeProfile, saveLifeProfile, isLifeProfileCalculable } from "@/lib/lifePlan";
 import { buildScenarios, findWorstScenario, householdAnnualNetBonus } from "@/lib/lifePlan/scenarios";
 import { buildRecommendations } from "@/lib/lifePlan/recommendations";
 import { buildSafePlan } from "@/lib/lifePlan/safePlan";
@@ -31,7 +31,6 @@ export default function PlanResultPage() {
   // 呼ばずに済むため react-hooks/set-state-in-effect を踏まず、かつ
   // SSR/初回ハイドレーションでは常にundefined（読み込み中）を返すためハイドレーション不整合も起きない。
   const profile = useLifeProfile();
-  const completedRef = useRef(false);
 
   const calculationsReady = profile ? isLifeProfileCalculable(profile) : false;
   const scenarios = useMemo(
@@ -53,8 +52,7 @@ export default function PlanResultPage() {
   );
 
   useEffect(() => {
-    if (profile && scenarios && !completedRef.current) {
-      completedRef.current = true;
+    if (profile && scenarios && consumePlanCompletionPending()) {
       const includedTopics = [
         profile.housing.intent !== "none" ? "housing" : null,
         profile.family.children > 0 ? "family" : null,
@@ -142,7 +140,7 @@ export default function PlanResultPage() {
         </ResultSectionTracker>
 
         <ResultSectionTracker section="comparison">
-          <ScenarioComparisonSection wishScenarios={scenarios} safePlan={safePlan} safeScenarios={safeScenarios} />
+          <ScenarioComparison wishScenarios={scenarios} safePlan={safePlan} safeScenarios={safeScenarios} />
         </ResultSectionTracker>
 
         <ResultSectionTracker section="wealth">
@@ -201,17 +199,4 @@ export default function PlanResultPage() {
       </div>
     </div>
   );
-}
-
-/** scenario_compare は比較セクションが表示された時点で1回だけ発火する */
-function ScenarioComparisonSection(props: Parameters<typeof ScenarioComparison>[0]) {
-  const firedRef = useRef(false);
-  useEffect(() => {
-    if (!firedRef.current) {
-      firedRef.current = true;
-      trackPlanEvent("scenario_compare", { adjustment_type: props.safePlan.adjustmentType });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return <ScenarioComparison {...props} />;
 }

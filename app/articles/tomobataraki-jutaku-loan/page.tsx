@@ -19,9 +19,22 @@ export const metadata: Metadata = {
   },
 };
 
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "共働き夫婦の住宅ローン｜世帯年収別の購入可能額と注意すべきリスク",
+  description: "収入合算・ペアローンの違いと、育休や転職で片方の収入が下がる時期を踏まえた借り方を整理します。",
+  author: { "@type": "Person", name: "たろう｜30Lab", url: "https://note.com/30lab" },
+  publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
+  datePublished: "2026-05-01",
+  dateModified: "2026-10-04",
+  mainEntityOfPage: "https://30lab.vercel.app/articles/tomobataraki-jutaku-loan",
+};
+
 export default function TomobatarakiJutakuLoanPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <div className="max-w-2xl mx-auto px-4 py-10">
 
         <nav className="text-xs text-slate-400 mb-6 flex items-center gap-1">
@@ -34,7 +47,7 @@ export default function TomobatarakiJutakuLoanPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full">共働き・ペアローン</span>
-          <span className="text-xs text-slate-400">2025年最新</span>
+          <span className="text-xs text-slate-400">2026年10月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -45,6 +58,17 @@ export default function TomobatarakiJutakuLoanPage() {
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
           「2人の収入を合わせれば、もっと高いマンションに手が届くかも」——共働き夫婦ならではの強みがある一方、育休・転職・病気などで収入が下がったときのリスクも考える必要があります。この記事では共働きでの住宅ローンの仕組みと、購入可能額の目安、リスクへの備え方を解説します。
         </p>
+
+        <div className="mb-10 rounded-2xl border border-blue-500/30 bg-blue-500/10 p-5">
+          <p className="text-sm font-black text-blue-200 mb-2">転職と妊娠が重なるなら、審査額より「片方の収入で何か月持つか」</p>
+          <p className="text-sm text-slate-200 leading-relaxed mb-3">
+            共働きの年収を満額で足すと、買える価格は一気に上がります。でも転職直後は審査条件が変わり、妊娠・育休・時短では手取りも変わります。
+            まず今の世帯年収で上限を見るのではなく、片方の給与だけでも生活費と返済を回せる期間を確認してから、単独・収入合算・ペアローンを選びます。
+          </p>
+          <Link href="/plan?intent=housing" className="text-sm font-bold text-blue-200 hover:underline">
+            育休・車も含めて家計の時点変化を見る →
+          </Link>
+        </div>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">

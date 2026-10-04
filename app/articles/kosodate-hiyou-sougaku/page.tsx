@@ -54,7 +54,7 @@ const articleJsonLd = {
   author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
   publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
   datePublished: "2026-07-09",
-  dateModified: "2026-07-09",
+  dateModified: "2026-10-04",
   mainEntityOfPage: "https://30lab.vercel.app/articles/kosodate-hiyou-sougaku",
 };
 
@@ -85,7 +85,7 @@ export default function KosodateHiyouSougakuPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-amber-500/10 text-amber-300 font-semibold px-2 py-0.5 rounded-full border border-amber-500/20">子育て・教育費</span>
-          <span className="text-xs text-slate-400">2026年7月</span>
+          <span className="text-xs text-slate-400">2026年10月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -96,6 +96,18 @@ export default function KosodateHiyouSougakuPage() {
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
           「子ども1人にいくらかかるのか」——結論から言うと、教育費と養育費を合わせて<strong className="text-white">オール公立で約2,000万〜2,500万円、私立中心なら4,000万円超</strong>が一般的な目安です。ただし総額の数字だけ見ても計画は立ちません。大事なのは「いつ・どのフェーズで山が来るか」。この記事では公立・私立別の早見表と、家計負担の山の乗り越え方を整理します。
         </p>
+
+        <div className="mb-10 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5">
+          <p className="text-sm font-black text-amber-200 mb-2">総額より先に、夫婦で決めるのは2つだけ</p>
+          <p className="text-sm text-slate-200 leading-relaxed mb-3">
+            子どもの人数と、中学受験を考えるかどうか。この2つで費用の山は大きく変わります。
+            まだ答えが出ないなら、両方のケースを残したまま試算すれば十分です。住宅費を先に限界まで上げず、教育費の山と重ねて見るための記事です。
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/child" className="text-sm font-bold text-amber-200 hover:underline">人数・進路で試算する →</Link>
+            <Link href="/articles/shussan-junbi-otto" className="text-sm font-bold text-pink-300 hover:underline">出産前に夫が調べること →</Link>
+          </div>
+        </div>
 
         {/* ━━ 総額の内訳 ━━ */}
         <section className="mb-10">

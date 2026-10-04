@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import type { LifeProfile, EntryIntent } from "@/types/lifePlan";
-import { createDefaultProfile, loadLifeProfile, saveLifeProfile } from "@/lib/lifePlan";
+import { createDefaultProfile, loadLifeProfile, markPlanCompletionPending, saveLifeProfile } from "@/lib/lifePlan";
 import { validateHousehold, validateHousing, hasErrors } from "@/lib/lifePlan/validation";
 import { trackPlanEvent } from "@/lib/analytics";
 import PlanProgress from "@/components/lifePlan/PlanProgress";
@@ -129,6 +129,7 @@ function PlanPageInner() {
     }
     trackPlanEvent("plan_step_complete", { step, entry_intent: profile.entryIntent });
     saveLifeProfile(profile);
+    markPlanCompletionPending();
     router.push("/plan/result");
   };
 

@@ -59,7 +59,7 @@ const articleJsonLd = {
   author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
   publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
   datePublished: "2026-08-18",
-  dateModified: "2026-08-18",
+  dateModified: "2026-10-04",
   mainEntityOfPage: "https://30lab.vercel.app/articles/shussan-junbi-otto",
 };
 
@@ -232,7 +232,7 @@ export default function ShussanJunbiOttoPage() {
           <span className="text-xs bg-pink-500/10 text-pink-200 font-semibold px-2 py-0.5 rounded-full border border-pink-500/20">
             出産・子育て
           </span>
-          <span className="text-xs text-slate-400">2026年8月</span>
+          <span className="text-xs text-slate-400">2026年10月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -254,6 +254,23 @@ export default function ShussanJunbiOttoPage() {
           <strong className="text-white">夫が育休を取るかどうか</strong>
           です。金額にして数十万円が、夫の判断ひとつで出たり消えたりします。
         </p>
+
+        <aside className="mb-10 rounded-2xl border border-pink-500/30 bg-pink-500/10 p-5">
+          <p className="text-sm font-black text-pink-200 mb-2">東京都で無痛分娩を選ぶなら、病院を決める前に確認</p>
+          <p className="text-sm text-slate-200 leading-relaxed mb-3">
+            2025年10月以降の出産は、条件を満たすと無痛分娩費用が<strong className="text-white">最大10万円</strong>助成されます。
+            ただし、都が公表する対象医療機関での出産、都内での妊娠届と継続した住民登録などが条件です。
+            「無痛を扱っている病院」なら全部対象、ではありません。候補を見学する前に一覧を確認しておくと、費用だけで決め直す手間を減らせます。
+          </p>
+          <a
+            href="https://www.fukushi.metro.tokyo.lg.jp/kodomo/shussan/mutsubunben/subsidy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-bold text-pink-300 hover:underline"
+          >
+            東京都の対象条件・医療機関を確認する →
+          </a>
+        </aside>
 
         {/* ━━ 落とすと戻らないもの ━━ */}
         <section className="mb-10">
@@ -392,7 +409,7 @@ export default function ShussanJunbiOttoPage() {
         </section>
 
         <p className="text-sm text-slate-400 leading-relaxed pb-4">
-          制度の内容・金額は2026年8月時点の一般的なものです。健康保険組合の付加給付や自治体の独自制度は、加入先・お住まいによって異なります。実際の手続きの前に、勤務先の健保と市区町村の窓口でご確認ください。
+          制度の内容・金額は2026年10月4日時点で確認しています。健康保険組合の付加給付や自治体の独自制度は、加入先・お住まいによって異なります。実際の手続きの前に、勤務先の健保と市区町村の窓口でご確認ください。
         </p>
       </div>
     </main>

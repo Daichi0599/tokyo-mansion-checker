@@ -276,6 +276,15 @@ const TOOLS = [
   { href: "/car", emoji: "🚗", label: "車コスト診断", desc: "持つ・持たないを10年で比較" },
 ];
 
+const CURRENT_DECISIONS = [
+  { href: "/articles/shussan-junbi-otto", emoji: "🤰", title: "出産前、夫が先に調べること" },
+  { href: "/articles/kosodate-hiyou-sougaku", emoji: "👶", title: "子どもの人数と進路で、いつお金が要るか" },
+  { href: "/articles/tomobataraki-jutaku-loan", emoji: "💑", title: "転職・育休が重なるときの住宅ローン" },
+  { href: "/articles/jonan-mansion-takakute-kaenai", emoji: "🏙️", title: "城南に住みたいけれど予算が届かない" },
+  { href: "/articles/tokyo-23ku-shisan-kachi-ranking", emoji: "🗺️", title: "予算内で、どの区から探すか" },
+  { href: "/articles/tokyo-ev-hojokin", emoji: "⚡", title: "都内でEVを持つ前に、駐車場まで見る" },
+];
+
 export default function ArticlesIndexPage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
@@ -313,6 +322,23 @@ export default function ArticlesIndexPage() {
             </Link>
           ))}
         </div>
+
+        <section className="mb-10 rounded-2xl border border-blue-500/20 bg-slate-800 p-5">
+          <p className="text-xs font-bold text-blue-300 mb-1">いま迷っている人へ</p>
+          <h2 className="text-lg font-black text-white mb-4">決める順番から読める6本</h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {CURRENT_DECISIONS.map((article) => (
+              <Link
+                key={article.href}
+                href={article.href}
+                className="flex items-center gap-3 rounded-xl border border-slate-700 bg-slate-900/60 p-3 text-sm font-bold text-slate-200 hover:border-blue-500/40 hover:text-white transition-colors"
+              >
+                <span className="text-xl" aria-hidden="true">{article.emoji}</span>
+                <span>{article.title}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <div className="space-y-10">
           {GROUPS.map((group) => (

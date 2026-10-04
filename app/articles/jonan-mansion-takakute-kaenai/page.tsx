@@ -55,7 +55,7 @@ const articleJsonLd = {
   author: { "@type": "Person", name: "たろう｜都内マンション研究中", url: "https://x.com/30lab_jp" },
   publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
   datePublished: "2026-06-12",
-  dateModified: "2026-06-12",
+  dateModified: "2026-10-04",
   mainEntityOfPage: "https://30lab.vercel.app/articles/jonan-mansion-takakute-kaenai",
 };
 
@@ -94,7 +94,7 @@ export default function JonanMansionPage() {
 
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs bg-blue-500/10 text-blue-300 font-semibold px-2 py-0.5 rounded-full border border-blue-500/20">エリア・資産価値</span>
-          <span className="text-xs text-slate-400">2026年6月</span>
+          <span className="text-xs text-slate-400">2026年10月更新</span>
         </div>
 
         <h1 className="text-2xl font-black text-white leading-tight mb-4">
@@ -103,8 +103,16 @@ export default function JonanMansionPage() {
         </h1>
 
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
-          品川・目黒・大田・世田谷——いわゆる城南エリアは、住環境もブランド力も申し分なく、「ここに住めたら」と憧れる人は多いはずです。私もその一人。でも実際に価格を調べると、70㎡で1億円超えがゴロゴロ。正直「これは無理だ」と一度は諦めかけました。ただ、調べていくうちに分かったのは、<strong className="text-white">城南は"区"でひとくくりにすると見誤る</strong>ということ。同じ城南でも、狙い方次第で現実的な選択肢は残っています。
+          品川・目黒・大田・世田谷——いわゆる城南エリアは、住環境もブランド力も申し分なく、「ここに住めたら」と憧れる人は多いはずです。私もその一人。でも実際に価格を調べると、70㎡で1億円超えがゴロゴロ。正直「これは無理だ」と一度は諦めかけました。ただ、調べていくうちに分かったのは、<strong className="text-white">城南は「区」でひとくくりにすると見誤る</strong>ということ。同じ城南でも、狙い方次第で現実的な選択肢は残っています。
         </p>
+
+        <div className="mb-10 rounded-2xl border border-blue-500/30 bg-blue-500/10 p-5">
+          <p className="text-sm font-black text-blue-200 mb-2">区を変える前に、何を残したいかを1つ決める</p>
+          <p className="text-sm text-slate-200 leading-relaxed">
+            城南に住みたい理由が、実家への近さなのか、通勤なのか、街の雰囲気なのかで代替先は変わります。
+            全部を残したまま価格だけ下げるのは難しいので、まず予算を出し、その次に「これだけは残す」を1つ決める。この順番で候補を見直します。
+          </p>
+        </div>
 
         {/* ━━ 城南の価格現実 ━━ */}
         <section className="mb-10">

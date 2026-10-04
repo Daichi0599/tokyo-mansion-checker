@@ -59,7 +59,7 @@ const articleJsonLd = {
   author: { "@type": "Person", name: "たろう｜30Lab", url: "https://x.com/30lab_jp" },
   publisher: { "@type": "Organization", name: "30Lab", url: "https://30lab.vercel.app" },
   datePublished: "2026-08-26",
-  dateModified: "2026-08-26",
+  dateModified: "2026-10-04",
   mainEntityOfPage: "https://30lab.vercel.app/articles/tokyo-ev-hojokin",
 };
 
@@ -155,13 +155,20 @@ export default function TokyoEvHojokinPage() {
           <h1 className="text-2xl font-black leading-tight">
             都内でEVを買うと実際いくらか。補助金を引いた後の金額を車種別に並べた
           </h1>
-          <p className="text-sm text-slate-400">2026年8月26日</p>
+          <p className="text-sm text-slate-400">2026年10月4日更新</p>
           <p className="text-base text-slate-200 leading-relaxed">
             車を持つかどうかを考えていて、EVの補助金がやたら大きいという話を聞いた。調べてみたら本当に大きくて、
             国と都を合わせると<strong className="text-white">上限で260万円</strong>になる。
             ただ、その「上限」に届く車はごく一部で、車種によって額が3倍近く違った。
           </p>
         </header>
+
+        <aside className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5">
+          <p className="text-sm font-black text-amber-200 mb-2">先に駐車場を探してから、補助金を見る</p>
+          <p className="text-sm text-slate-200 leading-relaxed">
+            都内では、補助金より駐車場代のほうが10年で大きくなることがあります。車種を決める前に、自宅周辺で現実に借りられる区画と充電環境を確認し、その月額を含めて持つかどうかを決める順番が安全です。
+          </p>
+        </aside>
 
         <section className="space-y-4">
           <h2 className="text-xl font-black text-white">国と都、両方から出る</h2>
@@ -290,7 +297,7 @@ export default function TokyoEvHojokinPage() {
 
         <footer className="pt-6 border-t border-slate-700 space-y-3">
           <p className="text-sm text-slate-400 leading-relaxed">
-            補助金の額・条件・受付期間は変更されます。この記事は2026年8月時点で調べた内容で、
+            補助金の額・条件・受付期間は変更されます。この記事は2026年10月4日時点で確認した内容で、
             購入の判断は必ず公式情報と販売店で確認してください。金額はグレードや装備によって変わります。
           </p>
           <Link href="/articles" className="text-sm text-blue-400 hover:underline">← 30代の決断ノートに戻る</Link>

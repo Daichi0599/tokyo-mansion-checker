@@ -7,6 +7,7 @@ import { createDefaultProfile } from "./defaults";
 
 const STORAGE_KEY = "30lab:life-profile:v2";
 const LEGACY_STORAGE_KEY = "30lab:life-profile:v1";
+const COMPLETION_PENDING_KEY = "30lab:plan-completion-pending";
 type UnknownRecord = Record<string, unknown>;
 
 function record(value: unknown): UnknownRecord {
@@ -131,6 +132,23 @@ export function clearLifeProfile(): void {
 
 export function loadOrCreateLifeProfile(): LifeProfile {
   return loadLifeProfile() ?? createDefaultProfile();
+}
+
+/** 結果ページへの通常遷移だけを完了として数えるため、同一タブ内に一度だけ印を付ける。 */
+export function markPlanCompletionPending(): void {
+  if (!hasWindow()) return;
+  try { window.sessionStorage.setItem(COMPLETION_PENDING_KEY, "1"); }
+  catch { /* 計測できなくても診断は継続する */ }
+}
+
+/** 完了印を読み取ると同時に削除する。再読み込み・再訪では完了イベントを送らない。 */
+export function consumePlanCompletionPending(): boolean {
+  if (!hasWindow()) return false;
+  try {
+    const pending = window.sessionStorage.getItem(COMPLETION_PENDING_KEY) === "1";
+    window.sessionStorage.removeItem(COMPLETION_PENDING_KEY);
+    return pending;
+  } catch { return false; }
 }
 
 type Listener = () => void;
