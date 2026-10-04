@@ -131,6 +131,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8547173454903621"
         />
+        {/* 運営者自身・開発中のアクセスをGA4から除外する。
+            ?internal=1 を付けて開いた端末はlocalStorageに印を残して以後送信しない（?internal=0で解除）。
+            localhostも常に除外。GA本体より先に実行する必要があるためbeforeInteractiveにしている。 */}
+        <Script id="ga-internal-guard" strategy="beforeInteractive">
+          {`(function(){try{var id='G-MVF8CEE9X9';var q=new URLSearchParams(location.search).get('internal');if(q==='1')localStorage.setItem('30lab:internal','1');if(q==='0')localStorage.removeItem('30lab:internal');var h=location.hostname;if(localStorage.getItem('30lab:internal')==='1'||h==='localhost'||h==='127.0.0.1'){window['ga-disable-'+id]=true;}}catch(e){}})();`}
+        </Script>
       </body>
       <GoogleAnalytics gaId="G-MVF8CEE9X9" />
       <Analytics />
