@@ -19,26 +19,26 @@ function getArticleSlugs(): string[] {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // 更新日を正確に管理できないため lastModified は送らない。
+  // デプロイ日を全URLの更新日として送ると、Googleが変更検知のシグナルとして信頼できなくなる。
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${BASE_URL}/plan`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/mansion`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/loan`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/check`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE_URL}/articles`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE_URL}/car`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/child`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/birth`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/birth/checklist`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE_URL}/privacy-policy`, lastModified: now, changeFrequency: "monthly", priority: 0.3 },
+    { url: BASE_URL, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/plan`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/mansion`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/loan`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/check`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/articles`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/car`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/child`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/birth`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/birth/checklist`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/privacy-policy`, changeFrequency: "monthly", priority: 0.3 },
   ];
 
   const articlePages: MetadataRoute.Sitemap = getArticleSlugs().map((slug) => ({
     url: `${BASE_URL}/articles/${slug}`,
-    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
