@@ -270,6 +270,9 @@ export default function ShussanJunbiOttoPage() {
           >
             東京都の対象条件・医療機関を確認する →
           </a>
+          <p className="mt-3 text-xs text-slate-300">
+            条件と申請の段取りは<Link href="/articles/tokyo-mutsubunben-joseikin" className="font-bold text-pink-300 hover:underline">別記事にまとめました</Link>。
+          </p>
         </aside>
 
         {/* ━━ 落とすと戻らないもの ━━ */}

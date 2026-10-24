@@ -375,6 +375,9 @@ function BirthCostPageInner() {
                   >
                     東京都福祉局「無痛分娩費用の助成」（公式） ↗
                   </a>
+                  <p className="text-xs text-slate-400">
+                    <Link href="/articles/tokyo-mutsubunben-joseikin" className="font-bold text-sky-300 underline underline-offset-2 hover:text-sky-200">条件と申請の段取りを整理した記事</Link>
+                  </p>
                 </div>
               )}
 

@@ -130,6 +130,14 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
         tag: "出産・準備",
       },
       {
+        href: "/articles/tokyo-mutsubunben-joseikin",
+        emoji: "💉",
+        title: "東京都の無痛分娩助成（最大10万円）｜産院を決める前に確認したい条件と段取り",
+        description:
+          "対象医療機関、都内での妊娠届と住民登録、電子申請のみ・出産翌日から1年以内、後日振込。使うために落としやすい条件を、夫の備忘メモとして整理。一時金75万円は要望の段階である点も。",
+        tag: "出産・助成",
+      },
+      {
         href: "/articles/kosodate-hiyou-sougaku",
         emoji: "👶",
         title: "子育て費用は総額いくら？0歳〜大学卒業までの目安【公立vs私立の早見表】",
