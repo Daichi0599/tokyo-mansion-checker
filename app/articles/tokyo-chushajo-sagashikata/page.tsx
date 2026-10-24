@@ -208,6 +208,16 @@ export default function TokyoChushajoPage() {
               車両を安くする話と、駐車場を払い続ける話は、桁が同じで期間が違う。
             </p>
           </div>
+
+          <div className="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-5">
+            <p className="text-sm font-bold text-blue-200">自分の駐車場代で、10年総額を比べる</p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-300">
+              車両価格だけでは判断できないので、駐車場代を入れて「買う・カーシェア・持たない」を並べて見られるようにしました。
+            </p>
+            <Link href="/car?source=parking_article" className="mt-4 inline-flex items-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-500">
+              車コストを比較する →
+            </Link>
+          </div>
         </section>
 
         <section className="space-y-4">

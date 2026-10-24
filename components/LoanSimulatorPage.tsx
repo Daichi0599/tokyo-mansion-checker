@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 function calcMonthly(loan: number, ratePercent: number, years: number): number {
   if (ratePercent === 0) return loan / (years * 12);
@@ -24,6 +25,13 @@ export default function LoanSimulatorPage() {
   const [rate, setRate] = useState(0.5); // %
   const [years, setYears] = useState(35);
   const [incomeMan, setIncomeMan] = useState(0); // 万円/年 (任意)
+  const startedRef = useRef(false);
+
+  const markStarted = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    sendGAEvent("event", "tool_start", { tool: "loan_simulator" });
+  };
 
   const loanYen = loanMan * 10000;
 
@@ -109,7 +117,10 @@ export default function LoanSimulatorPage() {
               max={15000}
               step={100}
               value={loanMan}
-              onChange={(e) => setLoanMan(Number(e.target.value))}
+              onChange={(e) => {
+                markStarted();
+                setLoanMan(Number(e.target.value));
+              }}
               className="w-full accent-blue-500"
             />
             <div className="flex justify-between text-xs text-slate-400 mt-1">
@@ -120,7 +131,10 @@ export default function LoanSimulatorPage() {
               {[1000, 2000, 3000, 4000, 5000, 6000].map((v) => (
                 <button
                   key={v}
-                  onClick={() => setLoanMan(v)}
+                  onClick={() => {
+                    markStarted();
+                    setLoanMan(v);
+                  }}
                   className={`text-xs px-3 py-1 rounded-full border transition-colors ${
                     loanMan === v
                       ? "bg-blue-600 text-white border-blue-600"
@@ -145,7 +159,10 @@ export default function LoanSimulatorPage() {
               max={4.0}
               step={0.05}
               value={rate}
-              onChange={(e) => setRate(Number(e.target.value))}
+              onChange={(e) => {
+                markStarted();
+                setRate(Number(e.target.value));
+              }}
               className="w-full accent-blue-500"
             />
             <div className="flex justify-between text-xs text-slate-400 mt-1">
@@ -156,7 +173,10 @@ export default function LoanSimulatorPage() {
               {[0.5, 0.7, 1.0, 1.5, 2.0, 3.0].map((v) => (
                 <button
                   key={v}
-                  onClick={() => setRate(v)}
+                  onClick={() => {
+                    markStarted();
+                    setRate(v);
+                  }}
                   className={`text-xs px-3 py-1 rounded-full border transition-colors ${
                     rate === v
                       ? "bg-blue-600 text-white border-blue-600"
@@ -179,7 +199,10 @@ export default function LoanSimulatorPage() {
               {[10, 15, 20, 25, 30, 35].map((y) => (
                 <button
                   key={y}
-                  onClick={() => setYears(y)}
+                  onClick={() => {
+                    markStarted();
+                    setYears(y);
+                  }}
                   className={`flex-1 min-w-[52px] text-sm py-2 rounded-xl border transition-colors font-bold ${
                     years === y
                       ? "bg-blue-600 text-white border-blue-600"
@@ -208,7 +231,10 @@ export default function LoanSimulatorPage() {
               max={2000}
               step={50}
               value={incomeMan}
-              onChange={(e) => setIncomeMan(Number(e.target.value))}
+              onChange={(e) => {
+                markStarted();
+                setIncomeMan(Number(e.target.value));
+              }}
               className="w-full accent-blue-500"
             />
             <div className="flex justify-between text-xs text-slate-400 mt-1">
@@ -327,6 +353,7 @@ export default function LoanSimulatorPage() {
             href="https://px.a8.net/svt/ejp?a8mat=4AZGC3+F9J44Y+3SUE+15RCDE"
             target="_blank"
             rel="noopener noreferrer sponsored"
+            onClick={() => sendGAEvent("event", "affiliate_click", { link_name: "モゲチェック", page: "loan" })}
             className="block text-center bg-amber-500 hover:bg-amber-400 text-white font-black text-sm px-6 py-3 rounded-xl transition-colors"
           >
             ✨ 無料でローン金利を一括比較する →

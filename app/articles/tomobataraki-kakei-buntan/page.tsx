@@ -89,6 +89,15 @@ export default function TomobatarakiKakeiBuntanPage() {
           <p className="text-xs text-slate-400 leading-relaxed mb-6">
             収入比は「40÷65」と「25÷65」で計算しています。折半では支払い後に25万円・10万円が残り、収入比では約21.5万円・13.5万円が残ります。自由に使える額を同じにする方法ではなく、負担率をそろえる方法です。
           </p>
+          <div className="mb-6 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+            <p className="text-sm font-bold text-blue-200">割合を決める前に、これから増える支出も置いてみる</p>
+            <p className="mt-1 text-xs leading-relaxed text-slate-300">
+              育休で収入が減る時期や、住宅・車の支払いが重なると、今ちょうどよい割合も変わります。家計分担の答えを固定する前に、数年先まで一度まとめて確認できます。
+            </p>
+            <Link href="/plan?intent=all&source=shared_household_article" className="mt-3 inline-flex items-center rounded-lg bg-blue-600 px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-blue-500">
+              わが家の支出が重なる時期を見る →
+            </Link>
+          </div>
           <h3 className="text-base font-black text-white mb-3">管理方法はこの3つで十分</h3>
           <div className="space-y-3">
             {[
