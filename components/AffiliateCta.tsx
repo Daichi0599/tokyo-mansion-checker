@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 
 /**
@@ -156,9 +157,29 @@ type Props = {
 
 export default function AffiliateCta({ program, page, heading, title, note, cta }: Props) {
   const p = PROGRAMS[program];
+  const rootRef = useRef<HTMLDivElement>(null);
+  const viewedRef = useRef(false);
+
+  useEffect(() => {
+    const element = rootRef.current;
+    if (!element || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || viewedRef.current) return;
+        viewedRef.current = true;
+        sendGAEvent("event", "affiliate_view", { link_name: p.gaName, page });
+        observer.disconnect();
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [p.gaName, page]);
 
   return (
-    <div className={`bg-slate-800 border ${p.style.border} rounded-2xl p-5 mb-10`}>
+    <div ref={rootRef} className={`bg-slate-800 border ${p.style.border} rounded-2xl p-5 mb-10`}>
       <div className="flex items-center gap-2 mb-1.5">
         <span className="text-[10px] font-bold text-slate-400 border border-slate-600 rounded px-1.5 py-0.5 tracking-wide">
           PR

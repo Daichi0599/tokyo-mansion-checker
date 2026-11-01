@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AffiliateCta from "@/components/AffiliateCta";
+import ContentBridgeCta from "@/components/ContentBridgeCta";
 
 export const metadata: Metadata = {
   title: "マンション維持費はいくら？管理費・修繕積立金・固定資産税の目安｜30Lab",
@@ -95,6 +96,18 @@ export default function MansionShohiyoPage() {
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
           マンションのお金は「物件価格」だけではありません。買うときにかかる<strong className="text-white">諸費用（物件価格の5〜10%）</strong>と、買ったあと毎年かかり続ける<strong className="text-white">維持費（管理費・修繕積立金・固定資産税）</strong>——この2つを合わせて見ないと、資金計画は必ずズレます。この記事では購入時と購入後のコストを一本にまとめ、生涯コストの試算例まで示します。
         </p>
+
+        <div className="mb-10">
+          <ContentBridgeCta
+            href="/mansion?source=maintenance_article"
+            source="maintenance_article"
+            destination="mansion"
+            eyebrow="維持費を読んだあとに"
+            title="ローン返済だけでなく、購入後の固定費まで入れて確認する"
+            body="管理費・修繕積立金・固定資産税を足したとき、今の家賃と比べて毎月いくら増えるかを試算できます。"
+            cta="維持費込みの購入予算を診断する →"
+          />
+        </div>
 
         {/* ━━ 目次 ━━ */}
         <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 mb-10">

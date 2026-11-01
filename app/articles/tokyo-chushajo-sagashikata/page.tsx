@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AffiliateCta from "@/components/AffiliateCta";
+import ContentBridgeCta from "@/components/ContentBridgeCta";
 
 export const metadata: Metadata = {
   title: "都内の駐車場代が高すぎる｜23区の相場と、少しでも安く探す方法｜30Lab",
@@ -209,15 +210,15 @@ export default function TokyoChushajoPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-5">
-            <p className="text-sm font-bold text-blue-200">自分の駐車場代で、10年総額を比べる</p>
-            <p className="mt-1 text-sm leading-relaxed text-slate-300">
-              車両価格だけでは判断できないので、駐車場代を入れて「買う・カーシェア・持たない」を並べて見られるようにしました。
-            </p>
-            <Link href="/car?source=parking_article" className="mt-4 inline-flex items-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-500">
-              車コストを比較する →
-            </Link>
-          </div>
+          <ContentBridgeCta
+            href="/car?source=parking_article"
+            source="parking_article"
+            destination="car"
+            eyebrow="相場が分かったら、次は自分の条件で"
+            title="駐車場代を入れて、持つ・借りる・持たないを比べる"
+            body="車両価格だけでは判断できません。月の駐車場代と利用頻度を入れると、購入とカーシェアの10年差額を確認できます。"
+            cta="自分の条件で車コストを比べる →"
+          />
         </section>
 
         <section className="space-y-4">

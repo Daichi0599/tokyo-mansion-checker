@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AffiliateCta from "@/components/AffiliateCta";
+import ContentBridgeCta from "@/components/ContentBridgeCta";
 
 export const metadata: Metadata = {
   title: "マンション購入は年収いくらなら可能？年収500万〜1000万の予算早見表｜30Lab",
@@ -108,6 +109,18 @@ export default function NenshuMansionPricePage() {
         <p className="text-sm text-slate-300 leading-relaxed mb-8">
           「自分の年収でマンションを買うとしたら、いくらまでなら大丈夫？」——この記事では、年収500万〜1000万の方が住宅ローンを組む場合の購入可能額を、返済比率（負担率）別に早見表でまとめました。計算方法と注意点もあわせて解説します。
         </p>
+
+        <div className="mb-10">
+          <ContentBridgeCta
+            href="/mansion?source=income_article"
+            source="income_article"
+            destination="mansion"
+            eyebrow="早見表は入口です"
+            title="同じ年収でも、家賃・頭金・子どもの予定で安全額は変わる"
+            body="年収倍率だけで決めず、管理費や固定資産税、金利上昇まで含めた毎月負担を自分の条件で確認できます。"
+            cta="無理なく買える価格を診断する →"
+          />
+        </div>
 
         {/* ━━ セクション1 ━━ */}
         <section className="mb-10">
