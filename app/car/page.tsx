@@ -483,7 +483,7 @@ function CarPageInner() {
             {/* 診断結果と広告を一致させる。
                 「車を持つ」判定なら維持費を下げる話（自動車保険）が続きになるが、
                 「持たない方が得」と出た人に保険を出しても意味がないので出し分ける。
-                車買取の提携が下りたら、持たない判定側にそちらを追加する。 */}
+                「持たない」判定側には、手放す人向けに車買取（カーネクスト・ソコカラ）を出す。 */}
             {results.find((r) => r.isRecommended)?.label !== "カーシェア" ? (
               <AffiliateCta program="jidoshahoken" page="car-keep" />
             ) : (
@@ -500,6 +500,12 @@ function CarPageInner() {
                 <p className="text-sm text-slate-400 leading-relaxed">
                   駐車場代が月{inputs.parkingFeeMan}万円かかる前提での試算です。手放す前に、駐車場を解約できるかと、週末の移動をカーシェアで回せるかを確認してみてください。
                 </p>
+              </div>
+            )}
+            {results.find((r) => r.isRecommended)?.label === "カーシェア" && (
+              <div className="space-y-4">
+                <AffiliateCta program="carnext" page="car-share" />
+                <AffiliateCta program="socokara" page="car-share" />
               </div>
             )}
 

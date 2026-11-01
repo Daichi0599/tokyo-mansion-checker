@@ -12,7 +12,7 @@ import { sendGAEvent } from "@next/third-parties/google";
  *  - A8 のインプレッション計測ピクセル
  */
 
-type ProgramKey = "mogecheck" | "kasaihoken" | "jidoshahoken" | "fpsoudan" | "gakushi" | "hikkoshi";
+type ProgramKey = "mogecheck" | "kasaihoken" | "jidoshahoken" | "fpsoudan" | "gakushi" | "hikkoshi" | "carnext" | "socokara";
 
 type Program = {
   /** A8 の a8mat パラメータ */
@@ -98,6 +98,34 @@ const PROGRAMS: Record<ProgramKey, Program> = {
       border: "border-amber-500/30",
       accent: "text-amber-400",
       button: "bg-amber-500 hover:bg-amber-400",
+    },
+  },
+  carnext: {
+    mat: "4BCGFM+3257OY+32YG+HV7V6",
+    pixelHost: "www16",
+    gaName: "カーネクスト",
+    heading: "手放すなら、査定額は知っておく",
+    title: "電話1本で査定が完了する「カーネクスト」",
+    note: "来店や実車の持ち込みは不要で、電話で査定からやり取りできます。手放すと決める前に、いくらで売れそうかだけ確認しておくと判断しやすくなります。",
+    cta: "カーネクストで無料査定する →",
+    style: {
+      border: "border-sky-500/30",
+      accent: "text-sky-400",
+      button: "bg-sky-600 hover:bg-sky-500",
+    },
+  },
+  socokara: {
+    mat: "4BAEXE+1DEZZM+5TUQ+5YZ75",
+    pixelHost: "www15",
+    gaName: "車買取ソコカラ",
+    heading: "1社だけで決めないために",
+    title: "もう1社の査定も取って比べる「ソコカラ」",
+    note: "買取額は業者によって差が出ます。1社の提示額だけで決めず、別の業者の査定とも並べて見ておくと安心です。",
+    cta: "ソコカラで無料査定する →",
+    style: {
+      border: "border-slate-500/30",
+      accent: "text-slate-300",
+      button: "bg-slate-600 hover:bg-slate-500",
     },
   },
   hikkoshi: {
