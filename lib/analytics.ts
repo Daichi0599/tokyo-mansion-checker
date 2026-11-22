@@ -26,12 +26,12 @@ type PlanEventMap = {
   detail_tool_open: { tool: "mansion" | "birth" | "child" | "car" | "check"; source: "plan_result" | "top" };
   detail_tool_bridge: { tool: "mansion" | "birth" | "child" | "car" | "check" };
   content_bridge_view: {
-    source: "parking_article" | "income_article" | "maintenance_article";
-    destination: "car" | "mansion" | "loan";
+    source: "parking_article" | "income_article" | "maintenance_article" | "life_order_article";
+    destination: "car" | "mansion" | "loan" | "plan" | "birth";
   };
   content_bridge_click: {
-    source: "parking_article" | "income_article" | "maintenance_article";
-    destination: "car" | "mansion" | "loan";
+    source: "parking_article" | "income_article" | "maintenance_article" | "life_order_article";
+    destination: "car" | "mansion" | "loan" | "plan" | "birth";
   };
   plan_sync_writeback: { tool: "mansion" | "birth" | "child" | "car" | "check" };
   case_open: { case_slug: string; category: "housing" | "family" | "car" | "combined" };

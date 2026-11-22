@@ -130,6 +130,14 @@ const GROUPS: { heading: string; lead: string; articles: Article[] }[] = [
         tag: "出産・準備",
       },
       {
+        href: "/articles/ie-kau-mae-ni-kodomo",
+        emoji: "🧭",
+        title: "家を買う前に、子どもが生まれることになった｜お金の順番を並べ直したメモ",
+        description:
+          "転職でローンが通りにくく、同じ時期に妊娠がわかった。家が先か子どもが先か、出産費用・育休中の収入減・住宅ローンを並べて、調べた順番と判断が変わった場所を残した備忘メモ。",
+        tag: "出産×住宅",
+      },
+      {
         href: "/articles/tokyo-mutsubunben-joseikin",
         emoji: "💉",
         title: "東京都の無痛分娩助成（最大10万円）｜産院を決める前に確認したい条件と段取り",

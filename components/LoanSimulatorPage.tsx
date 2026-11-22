@@ -98,7 +98,7 @@ export default function LoanSimulatorPage() {
             住宅ローン返済シミュレーター
           </h1>
           <p className="text-sm text-slate-400">
-            借入額・金利・返済期間を入力して、月返済額と総返済額を即計算
+            借入額・金利・返済期間を入れると、月々の返済額と総返済額が出ます。金利が上がったときの変化も並べて見られます。
           </p>
         </div>
 

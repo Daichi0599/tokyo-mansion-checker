@@ -97,6 +97,10 @@ export default function MansionShohiyoPage() {
           マンションのお金は「物件価格」だけではありません。買うときにかかる<strong className="text-white">諸費用（物件価格の5〜10%）</strong>と、買ったあと毎年かかり続ける<strong className="text-white">維持費（管理費・修繕積立金・固定資産税）</strong>——この2つを合わせて見ないと、資金計画は必ずズレます。この記事では購入時と購入後のコストを一本にまとめ、生涯コストの試算例まで示します。
         </p>
 
+        <p className="text-sm text-slate-300 leading-relaxed mb-8">
+          自分で診断ツールを作っていて気づいたのは、いまの家賃とローン返済額をそのまま並べても、比べたことにならないということでした。賃貸のときは大家さんが持ってくれていた管理費・修繕積立金・固定資産税が、買うと全部自分の支出になるので、返済額が家賃と同じでも、実際の月の持ち出しは数万円ほど上に出ます。なのでツールでは、返済額に管理費と固定資産税を足したうえで家賃と比べるようにしました。調べる側に回ると、物件価格より先にこの「毎月勝手に出ていくお金」のほうが気になってきます。
+        </p>
+
         <div className="mb-10">
           <ContentBridgeCta
             href="/mansion?source=maintenance_article"

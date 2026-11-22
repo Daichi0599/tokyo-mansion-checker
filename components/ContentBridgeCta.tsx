@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { trackPlanEvent } from "@/lib/analytics";
 
-type Source = "parking_article" | "income_article" | "maintenance_article";
-type Destination = "car" | "mansion" | "loan";
+type Source = "parking_article" | "income_article" | "maintenance_article" | "life_order_article";
+type Destination = "car" | "mansion" | "loan" | "plan" | "birth";
 
 type Props = {
   href: string;
